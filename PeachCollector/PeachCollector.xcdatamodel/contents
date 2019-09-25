@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="14903" systemVersion="18G95" minimumToolsVersion="Automatic" sourceLanguage="Objective-C" userDefinedModelVersionIdentifier="">
+    <entity name="PeachCollectorEvent" representedClassName="PeachCollectorEvent" syncable="YES" codeGenerationType="class" coreSpotlightDisplayNameExpression="PeachCollectorEvent">
+        <attribute name="context" optional="YES" attributeType="Transformable" valueTransformerName="NSSecureUnarchiveFromData" customClassName="NSDictionary"/>
+        <attribute name="creationDate" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="eventID" attributeType="String"/>
+        <attribute name="metadata" optional="YES" attributeType="Transformable" valueTransformerName="NSSecureUnarchiveFromData" customClassName="NSDictionary"/>
+        <attribute name="pageStartDate" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="props" optional="YES" attributeType="Transformable" valueTransformerName="NSSecureUnarchiveFromData" customClassName="NSDictionary"/>
+        <attribute name="type" attributeType="String"/>
+        <relationship name="eventStatuses" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="PeachCollectorPublisherEventStatus" inverseName="event" inverseEntity="PeachCollectorPublisherEventStatus"/>
+    </entity>
+    <entity name="PeachCollectorPublisherEventStatus" representedClassName="PeachCollectorPublisherEventStatus" syncable="YES" codeGenerationType="class" coreSpotlightDisplayNameExpression="PeachCollectorPublisherEventStatus">
+        <attribute name="publisherName" optional="YES" attributeType="String"/>
+        <attribute name="status" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <relationship name="event" optional="YES" maxCount="1" deletionRule="Cascade" destinationEntity="PeachCollectorEvent" inverseName="eventStatuses" inverseEntity="PeachCollectorEvent"/>
+    </entity>
+    <elements>
+        <element name="PeachCollectorEvent" positionX="-63" positionY="-18" width="128" height="163"/>
+        <element name="PeachCollectorPublisherEventStatus" positionX="-54" positionY="36" width="128" height="88"/>
+    </elements>
+</model>

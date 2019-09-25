@@ -10,6 +10,40 @@
 		953546DA233A15BD0096AE60 /* PeachCollector.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 953546D0233A15BD0096AE60 /* PeachCollector.framework */; };
 		953546DF233A15BD0096AE60 /* PeachCollectorTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 953546DE233A15BD0096AE60 /* PeachCollectorTests.m */; };
 		953546E1233A15BD0096AE60 /* PeachCollector.h in Headers */ = {isa = PBXBuildFile; fileRef = 953546D3233A15BD0096AE60 /* PeachCollector.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		953546FF233A16790096AE60 /* NSDictionary+Peach.h in Headers */ = {isa = PBXBuildFile; fileRef = 953546EA233A16770096AE60 /* NSDictionary+Peach.h */; };
+		95354700233A16790096AE60 /* PeachCollectorPublisherEventStatus.h in Headers */ = {isa = PBXBuildFile; fileRef = 953546EB233A16770096AE60 /* PeachCollectorPublisherEventStatus.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		95354701233A16790096AE60 /* PeachCollectorContextComponent.h in Headers */ = {isa = PBXBuildFile; fileRef = 953546EC233A16780096AE60 /* PeachCollectorContextComponent.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		95354702233A16790096AE60 /* PeachCollectorProperties.h in Headers */ = {isa = PBXBuildFile; fileRef = 953546ED233A16780096AE60 /* PeachCollectorProperties.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		95354703233A16790096AE60 /* PeachCollectorPublisher.h in Headers */ = {isa = PBXBuildFile; fileRef = 953546EE233A16780096AE60 /* PeachCollectorPublisher.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		95354704233A16790096AE60 /* PeachCollectorDataFormat.h in Headers */ = {isa = PBXBuildFile; fileRef = 953546EF233A16780096AE60 /* PeachCollectorDataFormat.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		95354705233A16790096AE60 /* PeachCollectorEvent.h in Headers */ = {isa = PBXBuildFile; fileRef = 953546F0233A16780096AE60 /* PeachCollectorEvent.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		95354706233A16790096AE60 /* PeachCollectorContext.m in Sources */ = {isa = PBXBuildFile; fileRef = 953546F1233A16780096AE60 /* PeachCollectorContext.m */; };
+		95354707233A16790096AE60 /* PeachCollectorConfiguration.m in Sources */ = {isa = PBXBuildFile; fileRef = 953546F2233A16780096AE60 /* PeachCollectorConfiguration.m */; };
+		95354708233A16790096AE60 /* PeachCollectorQueue.m in Sources */ = {isa = PBXBuildFile; fileRef = 953546F3233A16780096AE60 /* PeachCollectorQueue.m */; };
+		95354709233A16790096AE60 /* PeachCollectorQueue.h in Headers */ = {isa = PBXBuildFile; fileRef = 953546F4233A16780096AE60 /* PeachCollectorQueue.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		9535470A233A16790096AE60 /* NSDictionary+Peach.m in Sources */ = {isa = PBXBuildFile; fileRef = 953546F5233A16780096AE60 /* NSDictionary+Peach.m */; };
+		9535470B233A16790096AE60 /* PeachCollector.m in Sources */ = {isa = PBXBuildFile; fileRef = 953546F6233A16780096AE60 /* PeachCollector.m */; };
+		9535470C233A16790096AE60 /* PeachCollectorPublisherEventStatus.m in Sources */ = {isa = PBXBuildFile; fileRef = 953546F7233A16790096AE60 /* PeachCollectorPublisherEventStatus.m */; };
+		9535470D233A16790096AE60 /* PeachCollectorDataFormat.m in Sources */ = {isa = PBXBuildFile; fileRef = 953546F8233A16790096AE60 /* PeachCollectorDataFormat.m */; };
+		9535470E233A16790096AE60 /* PeachCollectorEvent.m in Sources */ = {isa = PBXBuildFile; fileRef = 953546F9233A16790096AE60 /* PeachCollectorEvent.m */; };
+		9535470F233A16790096AE60 /* PeachCollectorContextComponent.m in Sources */ = {isa = PBXBuildFile; fileRef = 953546FA233A16790096AE60 /* PeachCollectorContextComponent.m */; };
+		95354710233A16790096AE60 /* PeachCollectorContext.h in Headers */ = {isa = PBXBuildFile; fileRef = 953546FB233A16790096AE60 /* PeachCollectorContext.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		95354711233A16790096AE60 /* PeachCollectorProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = 953546FC233A16790096AE60 /* PeachCollectorProperties.m */; };
+		95354712233A16790096AE60 /* PeachCollectorPublisher.m in Sources */ = {isa = PBXBuildFile; fileRef = 953546FD233A16790096AE60 /* PeachCollectorPublisher.m */; };
+		95354713233A16790096AE60 /* PeachCollectorConfiguration.h in Headers */ = {isa = PBXBuildFile; fileRef = 953546FE233A16790096AE60 /* PeachCollectorConfiguration.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		95354715233A194A0096AE60 /* PeachCollector.xcdatamodel in Sources */ = {isa = PBXBuildFile; fileRef = 95354714233A194A0096AE60 /* PeachCollector.xcdatamodel */; };
+		95354718233A1FCB0096AE60 /* PeachPersistentContainer.h in Headers */ = {isa = PBXBuildFile; fileRef = 95354716233A1FCB0096AE60 /* PeachPersistentContainer.h */; };
+		95354719233A1FCB0096AE60 /* PeachPersistentContainer.m in Sources */ = {isa = PBXBuildFile; fileRef = 95354717233A1FCB0096AE60 /* PeachPersistentContainer.m */; };
+		9535475E233B67AA0096AE60 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 9535475D233B67AA0096AE60 /* AppDelegate.m */; };
+		95354761233B67AA0096AE60 /* SceneDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 95354760233B67AA0096AE60 /* SceneDelegate.m */; };
+		95354764233B67AA0096AE60 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 95354763233B67AA0096AE60 /* ViewController.m */; };
+		95354767233B67AA0096AE60 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 95354765233B67AA0096AE60 /* Main.storyboard */; };
+		9535476A233B67AA0096AE60 /* PeachCollectorDemo.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 95354768233B67AA0096AE60 /* PeachCollectorDemo.xcdatamodeld */; };
+		9535476C233B67AB0096AE60 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9535476B233B67AB0096AE60 /* Assets.xcassets */; };
+		9535476F233B67AB0096AE60 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9535476D233B67AB0096AE60 /* LaunchScreen.storyboard */; };
+		95354772233B67AB0096AE60 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 95354771233B67AB0096AE60 /* main.m */; };
+		95354779233B68EE0096AE60 /* PeachCollector.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 953546D0233A15BD0096AE60 /* PeachCollector.framework */; };
+		9535477A233B68EE0096AE60 /* PeachCollector.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 953546D0233A15BD0096AE60 /* PeachCollector.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -20,7 +54,35 @@
 			remoteGlobalIDString = 953546CF233A15BD0096AE60;
 			remoteInfo = PeachCollector;
 		};
+		95354776233B67CF0096AE60 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 953546C7233A15BD0096AE60 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 953546CF233A15BD0096AE60;
+			remoteInfo = PeachCollector;
+		};
+		9535477B233B68EE0096AE60 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 953546C7233A15BD0096AE60 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 953546CF233A15BD0096AE60;
+			remoteInfo = PeachCollector;
+		};
 /* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		9535477D233B68EF0096AE60 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				9535477A233B68EE0096AE60 /* PeachCollector.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		953546D0233A15BD0096AE60 /* PeachCollector.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = PeachCollector.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -29,6 +91,43 @@
 		953546D9233A15BD0096AE60 /* PeachCollectorTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PeachCollectorTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		953546DE233A15BD0096AE60 /* PeachCollectorTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PeachCollectorTests.m; sourceTree = "<group>"; };
 		953546E0233A15BD0096AE60 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		953546EA233A16770096AE60 /* NSDictionary+Peach.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDictionary+Peach.h"; sourceTree = "<group>"; };
+		953546EB233A16770096AE60 /* PeachCollectorPublisherEventStatus.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PeachCollectorPublisherEventStatus.h; sourceTree = "<group>"; };
+		953546EC233A16780096AE60 /* PeachCollectorContextComponent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PeachCollectorContextComponent.h; sourceTree = "<group>"; };
+		953546ED233A16780096AE60 /* PeachCollectorProperties.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PeachCollectorProperties.h; sourceTree = "<group>"; };
+		953546EE233A16780096AE60 /* PeachCollectorPublisher.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PeachCollectorPublisher.h; sourceTree = "<group>"; };
+		953546EF233A16780096AE60 /* PeachCollectorDataFormat.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PeachCollectorDataFormat.h; sourceTree = "<group>"; };
+		953546F0233A16780096AE60 /* PeachCollectorEvent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PeachCollectorEvent.h; sourceTree = "<group>"; };
+		953546F1233A16780096AE60 /* PeachCollectorContext.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PeachCollectorContext.m; sourceTree = "<group>"; };
+		953546F2233A16780096AE60 /* PeachCollectorConfiguration.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PeachCollectorConfiguration.m; sourceTree = "<group>"; };
+		953546F3233A16780096AE60 /* PeachCollectorQueue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PeachCollectorQueue.m; sourceTree = "<group>"; };
+		953546F4233A16780096AE60 /* PeachCollectorQueue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PeachCollectorQueue.h; sourceTree = "<group>"; };
+		953546F5233A16780096AE60 /* NSDictionary+Peach.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDictionary+Peach.m"; sourceTree = "<group>"; };
+		953546F6233A16780096AE60 /* PeachCollector.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PeachCollector.m; sourceTree = "<group>"; };
+		953546F7233A16790096AE60 /* PeachCollectorPublisherEventStatus.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PeachCollectorPublisherEventStatus.m; sourceTree = "<group>"; };
+		953546F8233A16790096AE60 /* PeachCollectorDataFormat.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PeachCollectorDataFormat.m; sourceTree = "<group>"; };
+		953546F9233A16790096AE60 /* PeachCollectorEvent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PeachCollectorEvent.m; sourceTree = "<group>"; };
+		953546FA233A16790096AE60 /* PeachCollectorContextComponent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PeachCollectorContextComponent.m; sourceTree = "<group>"; };
+		953546FB233A16790096AE60 /* PeachCollectorContext.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PeachCollectorContext.h; sourceTree = "<group>"; };
+		953546FC233A16790096AE60 /* PeachCollectorProperties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PeachCollectorProperties.m; sourceTree = "<group>"; };
+		953546FD233A16790096AE60 /* PeachCollectorPublisher.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PeachCollectorPublisher.m; sourceTree = "<group>"; };
+		953546FE233A16790096AE60 /* PeachCollectorConfiguration.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PeachCollectorConfiguration.h; sourceTree = "<group>"; };
+		95354714233A194A0096AE60 /* PeachCollector.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = PeachCollector.xcdatamodel; sourceTree = "<group>"; };
+		95354716233A1FCB0096AE60 /* PeachPersistentContainer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PeachPersistentContainer.h; sourceTree = "<group>"; };
+		95354717233A1FCB0096AE60 /* PeachPersistentContainer.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PeachPersistentContainer.m; sourceTree = "<group>"; };
+		9535475A233B67AA0096AE60 /* PeachCollectorDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PeachCollectorDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		9535475C233B67AA0096AE60 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		9535475D233B67AA0096AE60 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		9535475F233B67AA0096AE60 /* SceneDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SceneDelegate.h; sourceTree = "<group>"; };
+		95354760233B67AA0096AE60 /* SceneDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SceneDelegate.m; sourceTree = "<group>"; };
+		95354762233B67AA0096AE60 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
+		95354763233B67AA0096AE60 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		95354766233B67AA0096AE60 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		95354769233B67AA0096AE60 /* PeachCollectorDemo.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = PeachCollectorDemo.xcdatamodel; sourceTree = "<group>"; };
+		9535476B233B67AB0096AE60 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		9535476E233B67AB0096AE60 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		95354770233B67AB0096AE60 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		95354771233B67AB0096AE60 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -47,6 +146,14 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		95354757233B67AA0096AE60 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				95354779233B68EE0096AE60 /* PeachCollector.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -55,7 +162,9 @@
 			children = (
 				953546D2233A15BD0096AE60 /* PeachCollector */,
 				953546DD233A15BD0096AE60 /* PeachCollectorTests */,
+				9535475B233B67AA0096AE60 /* PeachCollectorDemo */,
 				953546D1233A15BD0096AE60 /* Products */,
+				95354778233B68EE0096AE60 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -64,6 +173,7 @@
 			children = (
 				953546D0233A15BD0096AE60 /* PeachCollector.framework */,
 				953546D9233A15BD0096AE60 /* PeachCollectorTests.xctest */,
+				9535475A233B67AA0096AE60 /* PeachCollectorDemo.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -72,7 +182,21 @@
 			isa = PBXGroup;
 			children = (
 				953546D3233A15BD0096AE60 /* PeachCollector.h */,
+				953546F6233A16780096AE60 /* PeachCollector.m */,
+				953546EF233A16780096AE60 /* PeachCollectorDataFormat.h */,
+				953546F8233A16790096AE60 /* PeachCollectorDataFormat.m */,
+				953546FE233A16790096AE60 /* PeachCollectorConfiguration.h */,
+				953546F2233A16780096AE60 /* PeachCollectorConfiguration.m */,
+				9535471A233A20EA0096AE60 /* Event */,
+				9535471B233A21610096AE60 /* Publisher */,
+				953546F4233A16780096AE60 /* PeachCollectorQueue.h */,
+				953546F3233A16780096AE60 /* PeachCollectorQueue.m */,
+				953546EA233A16770096AE60 /* NSDictionary+Peach.h */,
+				953546F5233A16780096AE60 /* NSDictionary+Peach.m */,
 				953546D4233A15BD0096AE60 /* Info.plist */,
+				95354714233A194A0096AE60 /* PeachCollector.xcdatamodel */,
+				95354716233A1FCB0096AE60 /* PeachPersistentContainer.h */,
+				95354717233A1FCB0096AE60 /* PeachPersistentContainer.m */,
 			);
 			path = PeachCollector;
 			sourceTree = "<group>";
@@ -86,6 +210,58 @@
 			path = PeachCollectorTests;
 			sourceTree = "<group>";
 		};
+		9535471A233A20EA0096AE60 /* Event */ = {
+			isa = PBXGroup;
+			children = (
+				953546FB233A16790096AE60 /* PeachCollectorContext.h */,
+				953546F1233A16780096AE60 /* PeachCollectorContext.m */,
+				953546EC233A16780096AE60 /* PeachCollectorContextComponent.h */,
+				953546FA233A16790096AE60 /* PeachCollectorContextComponent.m */,
+				953546ED233A16780096AE60 /* PeachCollectorProperties.h */,
+				953546FC233A16790096AE60 /* PeachCollectorProperties.m */,
+				953546F0233A16780096AE60 /* PeachCollectorEvent.h */,
+				953546F9233A16790096AE60 /* PeachCollectorEvent.m */,
+			);
+			path = Event;
+			sourceTree = "<group>";
+		};
+		9535471B233A21610096AE60 /* Publisher */ = {
+			isa = PBXGroup;
+			children = (
+				953546EE233A16780096AE60 /* PeachCollectorPublisher.h */,
+				953546FD233A16790096AE60 /* PeachCollectorPublisher.m */,
+				953546EB233A16770096AE60 /* PeachCollectorPublisherEventStatus.h */,
+				953546F7233A16790096AE60 /* PeachCollectorPublisherEventStatus.m */,
+			);
+			path = Publisher;
+			sourceTree = "<group>";
+		};
+		9535475B233B67AA0096AE60 /* PeachCollectorDemo */ = {
+			isa = PBXGroup;
+			children = (
+				9535475C233B67AA0096AE60 /* AppDelegate.h */,
+				9535475D233B67AA0096AE60 /* AppDelegate.m */,
+				9535475F233B67AA0096AE60 /* SceneDelegate.h */,
+				95354760233B67AA0096AE60 /* SceneDelegate.m */,
+				95354762233B67AA0096AE60 /* ViewController.h */,
+				95354763233B67AA0096AE60 /* ViewController.m */,
+				95354765233B67AA0096AE60 /* Main.storyboard */,
+				9535476B233B67AB0096AE60 /* Assets.xcassets */,
+				9535476D233B67AB0096AE60 /* LaunchScreen.storyboard */,
+				95354770233B67AB0096AE60 /* Info.plist */,
+				95354771233B67AB0096AE60 /* main.m */,
+				95354768233B67AA0096AE60 /* PeachCollectorDemo.xcdatamodeld */,
+			);
+			path = PeachCollectorDemo;
+			sourceTree = "<group>";
+		};
+		95354778233B68EE0096AE60 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
@@ -93,7 +269,18 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				95354701233A16790096AE60 /* PeachCollectorContextComponent.h in Headers */,
 				953546E1233A15BD0096AE60 /* PeachCollector.h in Headers */,
+				95354709233A16790096AE60 /* PeachCollectorQueue.h in Headers */,
+				95354713233A16790096AE60 /* PeachCollectorConfiguration.h in Headers */,
+				95354700233A16790096AE60 /* PeachCollectorPublisherEventStatus.h in Headers */,
+				95354718233A1FCB0096AE60 /* PeachPersistentContainer.h in Headers */,
+				95354703233A16790096AE60 /* PeachCollectorPublisher.h in Headers */,
+				95354704233A16790096AE60 /* PeachCollectorDataFormat.h in Headers */,
+				95354705233A16790096AE60 /* PeachCollectorEvent.h in Headers */,
+				95354702233A16790096AE60 /* PeachCollectorProperties.h in Headers */,
+				95354710233A16790096AE60 /* PeachCollectorContext.h in Headers */,
+				953546FF233A16790096AE60 /* NSDictionary+Peach.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -108,6 +295,7 @@
 				953546CC233A15BD0096AE60 /* Sources */,
 				953546CD233A15BD0096AE60 /* Frameworks */,
 				953546CE233A15BD0096AE60 /* Resources */,
+				95354754233A45620096AE60 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -136,6 +324,26 @@
 			productReference = 953546D9233A15BD0096AE60 /* PeachCollectorTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
+		95354759233B67AA0096AE60 /* PeachCollectorDemo */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 95354775233B67AB0096AE60 /* Build configuration list for PBXNativeTarget "PeachCollectorDemo" */;
+			buildPhases = (
+				95354756233B67AA0096AE60 /* Sources */,
+				95354757233B67AA0096AE60 /* Frameworks */,
+				95354758233B67AA0096AE60 /* Resources */,
+				9535477D233B68EF0096AE60 /* Embed Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				95354777233B67CF0096AE60 /* PBXTargetDependency */,
+				9535477C233B68EE0096AE60 /* PBXTargetDependency */,
+			);
+			name = PeachCollectorDemo;
+			productName = PeachCollectorDemo;
+			productReference = 9535475A233B67AA0096AE60 /* PeachCollectorDemo.app */;
+			productType = "com.apple.product-type.application";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -149,6 +357,9 @@
 						CreatedOnToolsVersion = 11.0;
 					};
 					953546D8233A15BD0096AE60 = {
+						CreatedOnToolsVersion = 11.0;
+					};
+					95354759233B67AA0096AE60 = {
 						CreatedOnToolsVersion = 11.0;
 					};
 				};
@@ -168,6 +379,7 @@
 			targets = (
 				953546CF233A15BD0096AE60 /* PeachCollector */,
 				953546D8233A15BD0096AE60 /* PeachCollectorTests */,
+				95354759233B67AA0096AE60 /* PeachCollectorDemo */,
 			);
 		};
 /* End PBXProject section */
@@ -187,13 +399,56 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		95354758233B67AA0096AE60 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				9535476F233B67AB0096AE60 /* LaunchScreen.storyboard in Resources */,
+				9535476C233B67AB0096AE60 /* Assets.xcassets in Resources */,
+				95354767233B67AA0096AE60 /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		95354754233A45620096AE60 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "#set -o xtrace\nfind \"${DERIVED_SOURCES_DIR}/CoreDataGenerated/PeachCollector\" -type f -name \"*.h\" -exec cp {} \"${BUILT_PRODUCTS_DIR}/${PUBLIC_HEADERS_FOLDER_PATH}\" \\;\n\n";
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		953546CC233A15BD0096AE60 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				95354707233A16790096AE60 /* PeachCollectorConfiguration.m in Sources */,
+				9535470D233A16790096AE60 /* PeachCollectorDataFormat.m in Sources */,
+				95354719233A1FCB0096AE60 /* PeachPersistentContainer.m in Sources */,
+				95354715233A194A0096AE60 /* PeachCollector.xcdatamodel in Sources */,
+				9535470E233A16790096AE60 /* PeachCollectorEvent.m in Sources */,
+				9535470B233A16790096AE60 /* PeachCollector.m in Sources */,
+				9535470F233A16790096AE60 /* PeachCollectorContextComponent.m in Sources */,
+				95354706233A16790096AE60 /* PeachCollectorContext.m in Sources */,
+				9535470A233A16790096AE60 /* NSDictionary+Peach.m in Sources */,
+				95354708233A16790096AE60 /* PeachCollectorQueue.m in Sources */,
+				95354712233A16790096AE60 /* PeachCollectorPublisher.m in Sources */,
+				95354711233A16790096AE60 /* PeachCollectorProperties.m in Sources */,
+				9535470C233A16790096AE60 /* PeachCollectorPublisherEventStatus.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -205,6 +460,18 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		95354756233B67AA0096AE60 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				95354772233B67AB0096AE60 /* main.m in Sources */,
+				9535476A233B67AA0096AE60 /* PeachCollectorDemo.xcdatamodeld in Sources */,
+				95354764233B67AA0096AE60 /* ViewController.m in Sources */,
+				9535475E233B67AA0096AE60 /* AppDelegate.m in Sources */,
+				95354761233B67AA0096AE60 /* SceneDelegate.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
@@ -213,7 +480,36 @@
 			target = 953546CF233A15BD0096AE60 /* PeachCollector */;
 			targetProxy = 953546DB233A15BD0096AE60 /* PBXContainerItemProxy */;
 		};
+		95354777233B67CF0096AE60 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 953546CF233A15BD0096AE60 /* PeachCollector */;
+			targetProxy = 95354776233B67CF0096AE60 /* PBXContainerItemProxy */;
+		};
+		9535477C233B68EE0096AE60 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 953546CF233A15BD0096AE60 /* PeachCollector */;
+			targetProxy = 9535477B233B68EE0096AE60 /* PBXContainerItemProxy */;
+		};
 /* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		95354765233B67AA0096AE60 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				95354766233B67AA0096AE60 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		9535476D233B67AB0096AE60 /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				9535476E233B67AB0096AE60 /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
 		953546E2233A15BD0096AE60 /* Debug */ = {
@@ -342,6 +638,7 @@
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				INFOPLIST_FILE = PeachCollector/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -364,6 +661,7 @@
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				INFOPLIST_FILE = PeachCollector/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -408,6 +706,38 @@
 			};
 			name = Release;
 		};
+		95354773233B67AB0096AE60 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				INFOPLIST_FILE = PeachCollectorDemo/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = ch.ebu.PeachCollectorDemo;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		95354774233B67AB0096AE60 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				INFOPLIST_FILE = PeachCollectorDemo/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = ch.ebu.PeachCollectorDemo;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -438,7 +768,29 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
+		95354775233B67AB0096AE60 /* Build configuration list for PBXNativeTarget "PeachCollectorDemo" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				95354773233B67AB0096AE60 /* Debug */,
+				95354774233B67AB0096AE60 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		95354768233B67AA0096AE60 /* PeachCollectorDemo.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				95354769233B67AA0096AE60 /* PeachCollectorDemo.xcdatamodel */,
+			);
+			currentVersion = 95354769233B67AA0096AE60 /* PeachCollectorDemo.xcdatamodel */;
+			path = PeachCollectorDemo.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = 953546C7233A15BD0096AE60 /* Project object */;
 }
