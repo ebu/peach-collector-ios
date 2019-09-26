@@ -44,6 +44,13 @@
 		95354772233B67AB0096AE60 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 95354771233B67AB0096AE60 /* main.m */; };
 		95354779233B68EE0096AE60 /* PeachCollector.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 953546D0233A15BD0096AE60 /* PeachCollector.framework */; };
 		9535477A233B68EE0096AE60 /* PeachCollector.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 953546D0233A15BD0096AE60 /* PeachCollector.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		9535478F233B8A5E0096AE60 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9535478E233B8A5E0096AE60 /* AppDelegate.swift */; };
+		95354791233B8A5E0096AE60 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95354790233B8A5E0096AE60 /* SceneDelegate.swift */; };
+		95354793233B8A5E0096AE60 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95354792233B8A5E0096AE60 /* ViewController.swift */; };
+		95354796233B8A5E0096AE60 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 95354794233B8A5E0096AE60 /* Main.storyboard */; };
+		95354799233B8A5E0096AE60 /* PeachCollectorSwiftDemo.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 95354797233B8A5E0096AE60 /* PeachCollectorSwiftDemo.xcdatamodeld */; };
+		9535479B233B8A5F0096AE60 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9535479A233B8A5F0096AE60 /* Assets.xcassets */; };
+		9535479E233B8A5F0096AE60 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9535479C233B8A5F0096AE60 /* LaunchScreen.storyboard */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -128,6 +135,15 @@
 		9535476E233B67AB0096AE60 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		95354770233B67AB0096AE60 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		95354771233B67AB0096AE60 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		9535478C233B8A5E0096AE60 /* PeachCollectorSwiftDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PeachCollectorSwiftDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		9535478E233B8A5E0096AE60 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		95354790233B8A5E0096AE60 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
+		95354792233B8A5E0096AE60 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		95354795233B8A5E0096AE60 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		95354798233B8A5E0096AE60 /* PeachCollectorSwiftDemo.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = PeachCollectorSwiftDemo.xcdatamodel; sourceTree = "<group>"; };
+		9535479A233B8A5F0096AE60 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		9535479D233B8A5F0096AE60 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		9535479F233B8A5F0096AE60 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -154,6 +170,13 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		95354789233B8A5E0096AE60 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -163,6 +186,7 @@
 				953546D2233A15BD0096AE60 /* PeachCollector */,
 				953546DD233A15BD0096AE60 /* PeachCollectorTests */,
 				9535475B233B67AA0096AE60 /* PeachCollectorDemo */,
+				9535478D233B8A5E0096AE60 /* PeachCollectorSwiftDemo */,
 				953546D1233A15BD0096AE60 /* Products */,
 				95354778233B68EE0096AE60 /* Frameworks */,
 			);
@@ -174,6 +198,7 @@
 				953546D0233A15BD0096AE60 /* PeachCollector.framework */,
 				953546D9233A15BD0096AE60 /* PeachCollectorTests.xctest */,
 				9535475A233B67AA0096AE60 /* PeachCollectorDemo.app */,
+				9535478C233B8A5E0096AE60 /* PeachCollectorSwiftDemo.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -262,6 +287,21 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		9535478D233B8A5E0096AE60 /* PeachCollectorSwiftDemo */ = {
+			isa = PBXGroup;
+			children = (
+				9535478E233B8A5E0096AE60 /* AppDelegate.swift */,
+				95354790233B8A5E0096AE60 /* SceneDelegate.swift */,
+				95354792233B8A5E0096AE60 /* ViewController.swift */,
+				95354794233B8A5E0096AE60 /* Main.storyboard */,
+				9535479A233B8A5F0096AE60 /* Assets.xcassets */,
+				9535479C233B8A5F0096AE60 /* LaunchScreen.storyboard */,
+				9535479F233B8A5F0096AE60 /* Info.plist */,
+				95354797233B8A5E0096AE60 /* PeachCollectorSwiftDemo.xcdatamodeld */,
+			);
+			path = PeachCollectorSwiftDemo;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
@@ -344,22 +384,44 @@
 			productReference = 9535475A233B67AA0096AE60 /* PeachCollectorDemo.app */;
 			productType = "com.apple.product-type.application";
 		};
+		9535478B233B8A5E0096AE60 /* PeachCollectorSwiftDemo */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 953547A0233B8A5F0096AE60 /* Build configuration list for PBXNativeTarget "PeachCollectorSwiftDemo" */;
+			buildPhases = (
+				95354788233B8A5E0096AE60 /* Sources */,
+				95354789233B8A5E0096AE60 /* Frameworks */,
+				9535478A233B8A5E0096AE60 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = PeachCollectorSwiftDemo;
+			productName = PeachCollectorSwiftDemo;
+			productReference = 9535478C233B8A5E0096AE60 /* PeachCollectorSwiftDemo.app */;
+			productType = "com.apple.product-type.application";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
 		953546C7233A15BD0096AE60 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				LastSwiftUpdateCheck = 1100;
 				LastUpgradeCheck = 1100;
 				ORGANIZATIONNAME = "European Broadcasting Union";
 				TargetAttributes = {
 					953546CF233A15BD0096AE60 = {
 						CreatedOnToolsVersion = 11.0;
+						LastSwiftMigration = 1100;
 					};
 					953546D8233A15BD0096AE60 = {
 						CreatedOnToolsVersion = 11.0;
 					};
 					95354759233B67AA0096AE60 = {
+						CreatedOnToolsVersion = 11.0;
+					};
+					9535478B233B8A5E0096AE60 = {
 						CreatedOnToolsVersion = 11.0;
 					};
 				};
@@ -380,6 +442,7 @@
 				953546CF233A15BD0096AE60 /* PeachCollector */,
 				953546D8233A15BD0096AE60 /* PeachCollectorTests */,
 				95354759233B67AA0096AE60 /* PeachCollectorDemo */,
+				9535478B233B8A5E0096AE60 /* PeachCollectorSwiftDemo */,
 			);
 		};
 /* End PBXProject section */
@@ -406,6 +469,16 @@
 				9535476F233B67AB0096AE60 /* LaunchScreen.storyboard in Resources */,
 				9535476C233B67AB0096AE60 /* Assets.xcassets in Resources */,
 				95354767233B67AA0096AE60 /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		9535478A233B8A5E0096AE60 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				9535479E233B8A5F0096AE60 /* LaunchScreen.storyboard in Resources */,
+				9535479B233B8A5F0096AE60 /* Assets.xcassets in Resources */,
+				95354796233B8A5E0096AE60 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -472,6 +545,17 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		95354788233B8A5E0096AE60 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				95354793233B8A5E0096AE60 /* ViewController.swift in Sources */,
+				9535478F233B8A5E0096AE60 /* AppDelegate.swift in Sources */,
+				95354799233B8A5E0096AE60 /* PeachCollectorSwiftDemo.xcdatamodeld in Sources */,
+				95354791233B8A5E0096AE60 /* SceneDelegate.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
@@ -505,6 +589,22 @@
 			isa = PBXVariantGroup;
 			children = (
 				9535476E233B67AB0096AE60 /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+		95354794233B8A5E0096AE60 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				95354795233B8A5E0096AE60 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		9535479C233B8A5F0096AE60 /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				9535479D233B8A5F0096AE60 /* Base */,
 			);
 			name = LaunchScreen.storyboard;
 			sourceTree = "<group>";
@@ -631,6 +731,7 @@
 		953546E5233A15BD0096AE60 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEFINES_MODULE = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
@@ -649,6 +750,8 @@
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
 				SUPPORTS_MACCATALYST = NO;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -656,6 +759,7 @@
 		953546E6233A15BD0096AE60 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEFINES_MODULE = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
@@ -674,6 +778,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
 				SUPPORTS_MACCATALYST = NO;
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
@@ -742,6 +847,44 @@
 			};
 			name = Release;
 		};
+		953547A1233B8A5F0096AE60 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				INFOPLIST_FILE = PeachCollectorSwiftDemo/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = ch.ebu.PeachCollectorSwiftDemo;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		953547A2233B8A5F0096AE60 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				INFOPLIST_FILE = PeachCollectorSwiftDemo/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = ch.ebu.PeachCollectorSwiftDemo;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -781,6 +924,15 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
+		953547A0233B8A5F0096AE60 /* Build configuration list for PBXNativeTarget "PeachCollectorSwiftDemo" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				953547A1233B8A5F0096AE60 /* Debug */,
+				953547A2233B8A5F0096AE60 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 /* End XCConfigurationList section */
 
 /* Begin XCVersionGroup section */
@@ -791,6 +943,16 @@
 			);
 			currentVersion = 95354769233B67AA0096AE60 /* PeachCollectorDemo.xcdatamodel */;
 			path = PeachCollectorDemo.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+		95354797233B8A5E0096AE60 /* PeachCollectorSwiftDemo.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				95354798233B8A5E0096AE60 /* PeachCollectorSwiftDemo.xcdatamodel */,
+			);
+			currentVersion = 95354798233B8A5E0096AE60 /* PeachCollectorSwiftDemo.xcdatamodel */;
+			path = PeachCollectorSwiftDemo.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;
 		};
