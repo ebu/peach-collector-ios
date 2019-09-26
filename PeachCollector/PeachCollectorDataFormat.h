@@ -61,9 +61,15 @@ OBJC_EXPORT PCEventType const PCEventTypeMediaPlay;
 OBJC_EXPORT PCEventType const PCEventTypeMediaPause;
 OBJC_EXPORT PCEventType const PCEventTypeMediaStop;
 OBJC_EXPORT PCEventType const PCEventTypeMediaSeek;
+OBJC_EXPORT PCEventType const PCEventTypeMediaVideoModeChanged;
+OBJC_EXPORT PCEventType const PCEventTypeMediaAudioChanged;
 OBJC_EXPORT PCEventType const PCEventTypeMediaHeartbeat;
+OBJC_EXPORT PCEventType const PCEventTypeRecommendationLoaded;
 OBJC_EXPORT PCEventType const PCEventTypeRecommendationHit;
 OBJC_EXPORT PCEventType const PCEventTypeRecommendationDisplayed;
+OBJC_EXPORT PCEventType const PCEventTypeArticleStart;
+OBJC_EXPORT PCEventType const PCEventTypeArticleEnd;
+OBJC_EXPORT PCEventType const PCEventTypeReadMore;
 
 typedef NS_ENUM(NSInteger, PCEventStatus) {
     PCEventStatusPlublicationFailed = -1,

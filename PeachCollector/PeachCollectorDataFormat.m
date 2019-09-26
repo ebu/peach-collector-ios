@@ -41,13 +41,19 @@ PCMediaMetadataFormat const PCMediaMetadataFormatLive = @"live";
 PCMediaMetadataFormat const PCMediaMetadataFormatDVR = @"dvr";
 
 
-PCEventType const PCEventTypeMediaPlay = @"media_play";
+PCEventType const PCEventTypeMediaPlay = @"media_play"; // MEDIA
 PCEventType const PCEventTypeMediaPause = @"media_pause";
 PCEventType const PCEventTypeMediaStop = @"media_stop";
 PCEventType const PCEventTypeMediaSeek = @"media_seek";
+PCEventType const PCEventTypeMediaVideoModeChanged = @"media_video_mode_changed";
+PCEventType const PCEventTypeMediaAudioChanged = @"media_audio_changed";
 PCEventType const PCEventTypeMediaHeartbeat = @"media_heartbeat";
+PCEventType const PCEventTypeRecommendationLoaded = @"recommendation_loaded"; // RECOMMENDATION
 PCEventType const PCEventTypeRecommendationHit = @"recommendation_hit";
 PCEventType const PCEventTypeRecommendationDisplayed = @"recommendation_displayed";
+PCEventType const PCEventTypeArticleStart = @"article_start"; // ARTICLE
+PCEventType const PCEventTypeArticleEnd = @"article_end";
+PCEventType const PCEventTypeReadMore = @"read_more";
 
 NSString * const PeachCollectorNotification = @"PeachCollectorNotification";
 NSString * const PeachCollectorNotificationLogKey = @"PeachCollectorNotificationLogKey";
