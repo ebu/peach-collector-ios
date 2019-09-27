@@ -7,6 +7,7 @@
 //
 
 #import "PeachCollectorContextComponent.h"
+#import "PeachCollectorDataFormat.h"
 
 @implementation PeachCollectorContextComponent
 
@@ -26,9 +27,9 @@
 - (NSDictionary *)dictionaryDescription
 {
     NSMutableDictionary *mutableDescription = [NSMutableDictionary new];
-    if (self.type) [mutableDescription setObject:self.type forKey:@"type"];
-    if (self.name) [mutableDescription setObject:self.name forKey:@"name"];
-    if (self.version) [mutableDescription setObject:self.version forKey:@"version"];
+    if (self.type) [mutableDescription setObject:self.type forKey:PCContextComponentTypeKey];
+    if (self.name) [mutableDescription setObject:self.name forKey:PCContextComponentNameKey];
+    if (self.version) [mutableDescription setObject:self.version forKey:PCContextComponentVersionKey];
     if ([mutableDescription count] == 0) return nil;
     return [mutableDescription copy];
 }

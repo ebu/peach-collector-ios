@@ -40,7 +40,6 @@ PCMediaMetadataFormat const PCMediaMetadataFormatOnDemand = @"ondemand";
 PCMediaMetadataFormat const PCMediaMetadataFormatLive = @"live";
 PCMediaMetadataFormat const PCMediaMetadataFormatDVR = @"dvr";
 
-
 PCEventType const PCEventTypeMediaPlay = @"media_play"; // MEDIA
 PCEventType const PCEventTypeMediaPause = @"media_pause";
 PCEventType const PCEventTypeMediaStop = @"media_stop";
@@ -59,11 +58,59 @@ NSString * const PeachCollectorNotification = @"PeachCollectorNotification";
 NSString * const PeachCollectorNotificationLogKey = @"PeachCollectorNotificationLogKey";
 NSString * const PeachCollectorNotificationQueuedEventsKey = @"PeachCollectorNotificationQueuedEventsKey";
 
+NSString * const PCMediaPlaybackPositionKey = @"playback_position_s";
+NSString * const PCMediaPreviousPlaybackPositionKey = @"previous_playback_position_s";
+NSString * const PCMediaVideoModeKey = @"video_mode";
+NSString * const PCMediaAudioModeKey = @"audio_mode";
+NSString * const PCMediaStartModeKey = @"start_mode";
+NSString * const PCMediaPreviousIDKey = @"previous_id";
+NSString * const PCMediaPlaybackRateKey = @"playback_rate";
+NSString * const PCMediaVolumeKey = @"volume";
+
+NSString * const PCContextIDKey = @"id";
+NSString * const PCContextItemsKey = @"items";
+NSString * const PCContextItemsDisplayedKey = @"items_displayed";
+NSString * const PCContextHitIndexKey = @"hit_index";
+NSString * const PCContextPageURIKey = @"page_uri";
+NSString * const PCContextSourceKey = @"source";
+NSString * const PCContextComponentKey = @"component";
+NSString * const PCContextComponentTypeKey = @"type";
+NSString * const PCContextComponentNameKey = @"name";
+NSString * const PCContextComponentVersionKey = @"version";
+
+NSString * const PCPeachSchemaVersionKey = @"peach_schema_version";
+NSString * const PCPeachImplementationVersionKey = @"peach_implementation_version";
+NSString * const PCSentTimestampKey = @"sent_timestamp";
+
+NSString * const PCEventsKey = @"events";
+NSString * const PCEventTypeKey = @"type";
+NSString * const PCEventIDKey = @"id";
+NSString * const PCEventTimestampKey = @"event_timestamp";
+NSString * const PCEventContextKey = @"context";
+NSString * const PCEventPropertiesKey = @"props";
+NSString * const PCEventMetadataKey = @"metadata";
+
+NSString * const PCClientKey = @"client";
+NSString * const PCClientIDKey = @"id";
+NSString * const PCClientTypeKey = @"type";
+NSString * const PCClientAppIDKey = @"app_id";
+NSString * const PCClientAppNameKey = @"name";
+NSString * const PCClientAppVersionKey = @"version";
+NSString * const PCClientDeviceKey = @"device";
+NSString * const PCClientDeviceTypeKey = @"type";
+NSString * const PCClientDeviceVendorKey = @"vendor";
+NSString * const PCClientDeviceModelKey = @"model";
+NSString * const PCClientDeviceScreenSizeKey = @"screen_size";
+NSString * const PCClientDeviceLanguageKey = @"language";
+NSString * const PCClientDeviceTimezoneKey = @"timezone";
+NSString * const PCClientOSKey = @"os";
+NSString * const PCClientOSNameKey = @"name";
+NSString * const PCClientOSVersionKey = @"version";
+
+NSString * const PCClientUserIDKey = @"user_id";
+
+
 NSString * const PeachCollectorDefaultPublisherName = @"Peach Publisher";
-
-NSString * const PeachCollectorPlaybackPositionKey = @"playback_position_s";
-
-
 NSInteger const PeachCollectorDefaultPublisherMaxEvents = 20;
 NSInteger const PeachCollectorDefaultPublisherInterval = 30;
 PCPublisherGotBackOnlinePolicy const PeachCollectorDefaultPublisherPolicy = PCPublisherGotBackOnlinePolicySendAll;

@@ -47,27 +47,27 @@
     }
     
     NSMutableDictionary *data = [NSMutableDictionary new];
-    [data setObject:@"1.0.3" forKey:@"peach_schema_version"];
-    [data setObject:@"A.B.3" forKey:@"peach_implementation_version"];
-    [data setObject:@((int)[[NSDate date] timeIntervalSince1970]) forKey:@"sent_timestamp"];
+    [data setObject:@"1.0.3" forKey:PCPeachSchemaVersionKey];
+    [data setObject:@"A.B.3" forKey:PCPeachImplementationVersionKey];
+    [data setObject:@((int)[[NSDate date] timeIntervalSince1970]) forKey:PCSentTimestampKey];
     
-    [data setObject:self.clientInfo forKey:@"client"];
+    [data setObject:self.clientInfo forKey:PCClientKey];
     
     NSMutableArray *eventsData = [NSMutableArray new];
     for (PeachCollectorEvent *event in events) {
         NSMutableDictionary *eventDescription = [NSMutableDictionary new];
-        [eventDescription setObject:event.type forKey:@"type"];
-        [eventDescription setObject:event.eventID forKey:@"id"];
-        [eventDescription setObject:@((int)[event.creationDate timeIntervalSince1970]) forKey:@"event_timestamp"];
+        [eventDescription setObject:event.type forKey:PCEventTypeKey];
+        [eventDescription setObject:event.eventID forKey:PCEventIDKey];
+        [eventDescription setObject:@((int)[event.creationDate timeIntervalSince1970]) forKey:PCEventTimestampKey];
         
-        if (event.context) [eventDescription setObject:event.context forKey:@"context"];
-        if (event.props) [eventDescription setObject:event.props forKey:@"props"];
-        if (event.metadata) [eventDescription setObject:event.metadata forKey:@"metadata"];
+        if (event.context) [eventDescription setObject:event.context forKey:PCEventContextKey];
+        if (event.props) [eventDescription setObject:event.props forKey:PCEventPropertiesKey];
+        if (event.metadata) [eventDescription setObject:event.metadata forKey:PCEventMetadataKey];
         
         [eventsData addObject:eventDescription];
     }
     
-    [data setObject:eventsData forKey:@"events"];
+    [data setObject:eventsData forKey:PCEventsKey];
     
     for (PeachCollectorPublisherEventStatus *eventStatus in eventsStatuses) {
         eventStatus.status = PCEventStatusSentToEndPoint;
@@ -95,7 +95,7 @@
     NSData *requestData = [jsonData dataUsingEncoding:NSUTF8StringEncoding];
     
     NSURLSession *session = [NSURLSession sharedSession];
-    NSURL *url = [NSURL URLWithString:@"https://pipe-collect.ebu.io/v3/collect?s=zzebu00000000017"];
+    NSURL *url = [NSURL URLWithString:[self serviceURL]];
     NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url];
     request.HTTPMethod = @"POST";
     
@@ -113,8 +113,8 @@
     
     // Execute the task
     [task resume];
-     
      */
+     
 }
 
 
@@ -135,15 +135,16 @@
         
         ASIdentifierManager *asi = [ASIdentifierManager sharedManager];
         
-        self.clientInfo = @{@"id":[[asi advertisingIdentifier] UUIDString],
-                            @"type":@"mobileapp",
-                            @"app_id":clientBundleIdentifier,
-                            @"name" : clientAppName,
-                            @"version": clientAppVersion};
+        self.clientInfo = @{PCClientIDKey : [[asi advertisingIdentifier] UUIDString],
+                            PCClientTypeKey : @"mobileapp",
+                            PCClientAppIDKey : clientBundleIdentifier,
+                            PCClientAppNameKey : clientAppName,
+                            PCClientAppVersionKey : clientAppVersion};
     }
     
     NSMutableDictionary *mutableClientInfo = [self.clientInfo mutableCopy];
-    [mutableClientInfo addEntriesFromDictionary:@{@"device":[self deviceInfo], @"os":[self osInfo]}];
+    [mutableClientInfo addEntriesFromDictionary:@{PCClientDeviceKey : [self deviceInfo],
+                                                  PCClientOSKey : [self osInfo]}];
     
     self.clientInfo = [mutableClientInfo copy];
 }
@@ -155,7 +156,7 @@
     
     UIDevice *device = [UIDevice currentDevice];
     
-    NSString *clientDeviceType = PCClientDeviceTypePhone;
+    NSString *clientDeviceType = ([[device model] containsString:@"iPad"]) ? PCClientDeviceTypeTablet : PCClientDeviceTypePhone;
     NSString *clientDeviceVendor = @"Apple";
     NSString *clientDeviceModel = [NSString stringWithCString:systemInfo.machine encoding:NSUTF8StringEncoding]; //device.model
     
@@ -177,12 +178,12 @@
     NSString* languageCode = [NSLocale currentLocale].languageCode;
     languageCode = [languageCode stringByReplacingOccurrencesOfString:@"_" withString:@"-"];
     
-    return @{@"type":clientDeviceType,
-             @"vendor":clientDeviceVendor,
-             @"model":clientDeviceModel,
-             @"screen_size":[NSString stringWithFormat:@"%dx%d", screenWidth, screenHeight],
-             @"language":languageCode,
-             @"timezone":@(currentGMTOffset/60)};
+    return @{PCClientDeviceTypeKey:clientDeviceType,
+             PCClientDeviceVendorKey:clientDeviceVendor,
+             PCClientDeviceModelKey:clientDeviceModel,
+             PCClientDeviceScreenSizeKey:[NSString stringWithFormat:@"%dx%d", screenWidth, screenHeight],
+             PCClientDeviceLanguageKey:languageCode,
+             PCClientDeviceTimezoneKey:@(currentGMTOffset/60)};
 }
 
 //TODO: add setter for language
@@ -196,7 +197,7 @@
     NSString *clientOSName = device.systemName;
     NSString *clientOSVersion = device.systemVersion;
     
-    return @{@"name":clientOSName, @"version":clientOSVersion};
+    return @{PCClientOSNameKey:clientOSName, PCClientOSVersionKey:clientOSVersion};
 }
 
 - (void)setUserID:(NSString *)userID
@@ -204,7 +205,7 @@
     _userID = userID;
     
     NSMutableDictionary *mutableClientInfo = [self.clientInfo mutableCopy];
-    [mutableClientInfo setObject:userID forKey:@"user_id"];
+    [mutableClientInfo setObject:userID forKey:PCClientUserIDKey];
     
     self.clientInfo = [mutableClientInfo copy];
 }

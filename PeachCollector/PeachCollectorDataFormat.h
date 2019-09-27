@@ -87,11 +87,59 @@ OBJC_EXPORT NSString * const PeachCollectorNotificationQueuedEventsKey;
 
 OBJC_EXPORT NSString * const PeachCollectorDefaultPublisherName;
 
-OBJC_EXPORT NSString * const PeachCollectorPlaybackPositionKey;
+#pragma mark - Payload known keys
 
-/*
- * Publisher related constants
- */
+OBJC_EXPORT NSString * const PCMediaPlaybackPositionKey;
+OBJC_EXPORT NSString * const PCMediaPreviousPlaybackPositionKey;
+OBJC_EXPORT NSString * const PCMediaVideoModeKey;
+OBJC_EXPORT NSString * const PCMediaAudioModeKey;
+OBJC_EXPORT NSString * const PCMediaStartModeKey;
+OBJC_EXPORT NSString * const PCMediaPreviousIDKey;
+OBJC_EXPORT NSString * const PCMediaPlaybackRateKey;
+OBJC_EXPORT NSString * const PCMediaVolumeKey;
+OBJC_EXPORT NSString * const PCContextIDKey;
+OBJC_EXPORT NSString * const PCContextItemsKey;
+OBJC_EXPORT NSString * const PCContextItemsDisplayedKey;
+OBJC_EXPORT NSString * const PCContextHitIndexKey;
+OBJC_EXPORT NSString * const PCContextPageURIKey;
+OBJC_EXPORT NSString * const PCContextSourceKey;
+OBJC_EXPORT NSString * const PCContextComponentKey;
+OBJC_EXPORT NSString * const PCContextComponentTypeKey;
+OBJC_EXPORT NSString * const PCContextComponentNameKey;
+OBJC_EXPORT NSString * const PCContextComponentVersionKey;
+
+OBJC_EXPORT NSString * const PCPeachSchemaVersionKey;
+OBJC_EXPORT NSString * const PCPeachImplementationVersionKey;
+OBJC_EXPORT NSString * const PCSentTimestampKey;
+
+OBJC_EXPORT NSString * const PCEventsKey;
+OBJC_EXPORT NSString * const PCEventTypeKey;
+OBJC_EXPORT NSString * const PCEventIDKey;
+OBJC_EXPORT NSString * const PCEventTimestampKey;
+OBJC_EXPORT NSString * const PCEventContextKey;
+OBJC_EXPORT NSString * const PCEventPropertiesKey;
+OBJC_EXPORT NSString * const PCEventMetadataKey;
+
+OBJC_EXPORT NSString * const PCClientKey;
+OBJC_EXPORT NSString * const PCClientKey;
+OBJC_EXPORT NSString * const PCClientIDKey;
+OBJC_EXPORT NSString * const PCClientTypeKey;
+OBJC_EXPORT NSString * const PCClientAppIDKey;
+OBJC_EXPORT NSString * const PCClientAppNameKey;
+OBJC_EXPORT NSString * const PCClientAppVersionKey;
+OBJC_EXPORT NSString * const PCClientDeviceKey;
+OBJC_EXPORT NSString * const PCClientDeviceTypeKey;
+OBJC_EXPORT NSString * const PCClientDeviceVendorKey;
+OBJC_EXPORT NSString * const PCClientDeviceModelKey;
+OBJC_EXPORT NSString * const PCClientDeviceScreenSizeKey;
+OBJC_EXPORT NSString * const PCClientDeviceLanguageKey;
+OBJC_EXPORT NSString * const PCClientDeviceTimezoneKey;
+OBJC_EXPORT NSString * const PCClientOSKey;
+OBJC_EXPORT NSString * const PCClientOSNameKey;
+OBJC_EXPORT NSString * const PCClientOSVersionKey;
+OBJC_EXPORT NSString * const PCClientUserIDKey;
+
+#pragma mark - Publisher related constants
 
 typedef NS_ENUM(NSInteger, PCPublisherGotBackOnlinePolicy) {
     PCPublisherGotBackOnlinePolicySendAll,
