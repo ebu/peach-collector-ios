@@ -15,8 +15,6 @@
 
 @property (nonatomic, strong) PeachCollectorConfiguration *configuration;
 @property (nonatomic, strong) PeachCollectorQueue *queue;
-@property (nonatomic, strong) PeachCollectorEvent *heartbeatEvent;
-@property (nonatomic, strong) NSTimer *heartbeatTimer;
 
 @end
 
@@ -112,36 +110,6 @@
 + (void)addEventToQueue:(PeachCollectorEvent *)event
 {
     [[PeachCollector sharedCollector].queue addEvent:event];
-    if ([PeachCollector sharedCollector].heartbeatEvent) {
-        if (event.type == PCEventTypeMediaPause || event.type == PCEventTypeMediaStop) {
-            [[PeachCollector sharedCollector].heartbeatTimer invalidate];
-            [PeachCollector sharedCollector].heartbeatTimer = nil;
-            [PeachCollector sharedCollector].heartbeatEvent = nil;
-        }
-    }
-}
-
-
-#pragma mark - Heartbeat management
-
-+ (void)startHeartbeatsWithEvent:(PeachCollectorEvent *)event
-{
-    [PeachCollector sharedCollector].heartbeatEvent = event;
-    [PeachCollector sharedCollector].heartbeatTimer = [NSTimer timerWithTimeInterval:5
-                                             target:[PeachCollector sharedCollector]
-                                           selector:@selector(heartbeatTimerFired:)
-                                           userInfo:nil
-                                            repeats:YES];
-    [[NSRunLoop mainRunLoop] addTimer:[PeachCollector sharedCollector].heartbeatTimer forMode:NSRunLoopCommonModes];
-
-}
-- (void)heartbeatTimerFired:(NSTimer *)timer
-{
-    [PeachCollectorEvent sendMediaHeartbeatWithStartEvent:[PeachCollector sharedCollector].heartbeatEvent];
-}
-+ (PeachCollectorEvent *)heartbeatStartEvent
-{
-    return [PeachCollector sharedCollector].heartbeatEvent;
 }
 
 

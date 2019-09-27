@@ -13,7 +13,6 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface PeachCollectorConfiguration : NSObject
 
-@property (nonatomic) NSInteger heartbeatInterval;
 @property (nonatomic) NSInteger recommandedSendingInterval;
 @property (nonatomic) NSInteger recommandedMaxSendingEvents;
 @property (nonatomic) PCPublisherGotBackOnlinePolicy gotBackOnlinePolicy;
@@ -35,13 +34,11 @@ NS_ASSUME_NONNULL_BEGIN
  *  @param interval The interval in second at which events are sent to the server. 0 means no caching. Default is 30 seconds.
  *  @param maxEvents  Maximum number of events that can be sent to the server simultaneously. Default is 20 events.
  *  @param gotBackOnlinePolicy How the publisher should behave after an offline period.
- *  @param heartbeatInterval The interval at which heartbeats are sent after a Media Play event. 0 means no heartbeats.
  */
 - (instancetype)initWithServiceURL:(NSString *)serviceURL
         recommandedSendingInterval:(NSInteger)interval
        recommandedMaxSendingEvents:(NSInteger)maxEvents
-               gotBackOnlinePolicy:(PCPublisherGotBackOnlinePolicy)gotBackOnlinePolicy
-                 heartbeatInterval:(NSInteger)heartbeatInterval;
+               gotBackOnlinePolicy:(PCPublisherGotBackOnlinePolicy)gotBackOnlinePolicy;
 
 
 /**
@@ -58,13 +55,11 @@ NS_ASSUME_NONNULL_BEGIN
  *  @param interval The interval in second at which events are sent to the server. 0 means no caching. Default is 30 seconds.
  *  @param maxEvents  Maximum number of events that can be sent to the server simultaneously. Default is 20 events.
  *  @param gotBackOnlinePolicy How the publisher should behave after an offline period. Default is 'PCPublisherGotBackOnlinePolicySendAll'
- *  @param heartbeatInterval The interval at which heartbeats are sent. 0 means no heartbeats. Default is 5
  */
 - (instancetype)initWithSiteKey:(NSString *)siteKey
      recommandedSendingInterval:(NSInteger)interval
     recommandedMaxSendingEvents:(NSInteger)maxEvents
-            gotBackOnlinePolicy:(PCPublisherGotBackOnlinePolicy)gotBackOnlinePolicy
-              heartbeatInterval:(NSInteger)heartbeatInterval;
+            gotBackOnlinePolicy:(PCPublisherGotBackOnlinePolicy)gotBackOnlinePolicy;
 
 @end
 

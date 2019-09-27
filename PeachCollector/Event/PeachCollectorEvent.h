@@ -16,11 +16,22 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface PeachCollectorEvent (Peach)
 
-- (void)setContextValue:(id)value forKey:(NSString *)key;
-- (void)setPropsValue:(id)value forKey:(NSString *)key;
-- (void)setMetadataValue:(id)value forKey:(NSString *)key;
-
 - (void)send;
+
+
+/**
+ *  Send a new event. Event will be added to the queue and sent accordingly to publishers' configurations.
+ *  @param type    Name of the event's type.
+ *  @param eventID unique identifier related to the event (e.g., data source id for a recommendation hit, media id for a media play)
+ *  @param properties optional properties related to the event
+ *  @param context optional context of the event (usually contains a component, e.g. Carousel, VideoPlayer...)
+ *  @param metadata optional dictionary of metadatas (should be kept as small as possible)
+ */
++ (void)sendEventWithType:(PCEventType)type
+                  eventID:(NSString *)eventID
+               properties:(nullable PeachCollectorProperties *)properties
+                  context:(nullable PeachCollectorContext *)context
+                 metadata:(nullable NSDictionary<NSString *, id<NSCopying>> *)metadata;
 
 + (void)sendRecommendationHitWithID:(NSString *)recommendationID
                               items:(NSArray<NSString *> *)items
@@ -41,8 +52,7 @@ NS_ASSUME_NONNULL_BEGIN
 + (void)sendMediaPlayWithID:(NSString *)mediaID
                  properties:(PeachCollectorProperties *)properties
                     context:(PeachCollectorContext *)context
-                   metadata:(NSDictionary<NSString *, id<NSCopying>> *)metadata
-        automaticHeartbeats:(BOOL)startHeartbeats;
+                   metadata:(NSDictionary<NSString *, id<NSCopying>> *)metadata;
 
 + (void)sendMediaPauseWithID:(NSString *)mediaID
                   properties:(PeachCollectorProperties *)properties
@@ -59,9 +69,10 @@ NS_ASSUME_NONNULL_BEGIN
                     context:(PeachCollectorContext *)context
                    metadata:(NSDictionary<NSString *, id<NSCopying>> *)metadata;
 
-+ (void)sendMediaHeartbeatWithStartEvent:(PeachCollectorEvent *)startEvent;
-
-//+ (NSArray<PeachCollectorEvent *> *)eventsForPublisherNamed:(NSString *)publisherName;
++ (void)sendMediaHeartbeatWithID:(NSString *)mediaID
+                      properties:(PeachCollectorProperties *)properties
+                         context:(PeachCollectorContext *)context
+                        metadata:(NSDictionary<NSString *, id<NSCopying>> *)metadata;
 
 - (BOOL)canBeRemoved;
 

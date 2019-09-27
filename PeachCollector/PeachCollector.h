@@ -24,8 +24,6 @@ FOUNDATION_EXPORT double PeachCollectorVersionNumber;
 //! Project version string for PeachCollector.
 FOUNDATION_EXPORT const unsigned char PeachCollectorVersionString[];
 
-// In this header, you should import all the public headers of your framework using statements like #import <PeachCollector/PublicHeader.h>
-
 NS_ASSUME_NONNULL_BEGIN
 
 @interface PeachCollector : NSObject
@@ -65,9 +63,6 @@ NS_ASSUME_NONNULL_BEGIN
  */
 + (void)addEventToQueue:(PeachCollectorEvent *)event;
 
-
-+ (void)startHeartbeatsWithEvent:(PeachCollectorEvent *)event;
-@property (class, nonatomic, readonly) PeachCollectorEvent *heartbeatStartEvent;
 
 @end
 
