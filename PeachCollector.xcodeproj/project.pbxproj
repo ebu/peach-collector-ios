@@ -51,6 +51,8 @@
 		95354799233B8A5E0096AE60 /* PeachCollectorSwiftDemo.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 95354797233B8A5E0096AE60 /* PeachCollectorSwiftDemo.xcdatamodeld */; };
 		9535479B233B8A5F0096AE60 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9535479A233B8A5F0096AE60 /* Assets.xcassets */; };
 		9535479E233B8A5F0096AE60 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9535479C233B8A5F0096AE60 /* LaunchScreen.storyboard */; };
+		953547A5233CDC850096AE60 /* PeachCollectorDynamicProperties.h in Headers */ = {isa = PBXBuildFile; fileRef = 953547A3233CDC850096AE60 /* PeachCollectorDynamicProperties.h */; };
+		953547A6233CDC850096AE60 /* PeachCollectorDynamicProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = 953547A4233CDC850096AE60 /* PeachCollectorDynamicProperties.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -144,6 +146,8 @@
 		9535479A233B8A5F0096AE60 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		9535479D233B8A5F0096AE60 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		9535479F233B8A5F0096AE60 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		953547A3233CDC850096AE60 /* PeachCollectorDynamicProperties.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PeachCollectorDynamicProperties.h; sourceTree = "<group>"; };
+		953547A4233CDC850096AE60 /* PeachCollectorDynamicProperties.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PeachCollectorDynamicProperties.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -244,6 +248,8 @@
 				953546FA233A16790096AE60 /* PeachCollectorContextComponent.m */,
 				953546ED233A16780096AE60 /* PeachCollectorProperties.h */,
 				953546FC233A16790096AE60 /* PeachCollectorProperties.m */,
+				953547A3233CDC850096AE60 /* PeachCollectorDynamicProperties.h */,
+				953547A4233CDC850096AE60 /* PeachCollectorDynamicProperties.m */,
 				953546F0233A16780096AE60 /* PeachCollectorEvent.h */,
 				953546F9233A16790096AE60 /* PeachCollectorEvent.m */,
 			);
@@ -313,6 +319,7 @@
 				953546E1233A15BD0096AE60 /* PeachCollector.h in Headers */,
 				95354709233A16790096AE60 /* PeachCollectorQueue.h in Headers */,
 				95354713233A16790096AE60 /* PeachCollectorConfiguration.h in Headers */,
+				953547A5233CDC850096AE60 /* PeachCollectorDynamicProperties.h in Headers */,
 				95354700233A16790096AE60 /* PeachCollectorPublisherEventStatus.h in Headers */,
 				95354718233A1FCB0096AE60 /* PeachPersistentContainer.h in Headers */,
 				95354703233A16790096AE60 /* PeachCollectorPublisher.h in Headers */,
@@ -513,6 +520,7 @@
 				9535470D233A16790096AE60 /* PeachCollectorDataFormat.m in Sources */,
 				95354719233A1FCB0096AE60 /* PeachPersistentContainer.m in Sources */,
 				95354715233A194A0096AE60 /* PeachCollector.xcdatamodel in Sources */,
+				953547A6233CDC850096AE60 /* PeachCollectorDynamicProperties.m in Sources */,
 				9535470E233A16790096AE60 /* PeachCollectorEvent.m in Sources */,
 				9535470B233A16790096AE60 /* PeachCollector.m in Sources */,
 				9535470F233A16790096AE60 /* PeachCollectorContextComponent.m in Sources */,
