@@ -20,6 +20,9 @@ NS_ASSUME_NONNULL_BEGIN
                         name:(nullable NSString *)name
                      version:(nullable NSString *)version;
 
+/**
+ * @return a dictionary representation of the component with keys defined in the Peach protocol
+ */
 - (NSDictionary *)dictionaryDescription;
 
 @end

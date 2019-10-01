@@ -39,6 +39,9 @@ NS_ASSUME_NONNULL_BEGIN
                           appSectionID:(nullable NSString *)appSectionID
                                 source:(nullable NSString *)source;
 
+/**
+ * @return a dictionary representation of the context with keys defined in the Peach protocol
+ */
 - (NSDictionary *)dictionaryDescription;
 
 @end

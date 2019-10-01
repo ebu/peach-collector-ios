@@ -60,12 +60,6 @@
     [self checkPublishers];
 }
 
-
-/*
- *  Check queue state for any publisher
- *  If a publisher has enough events in queue, send them.
- *  If there are events but no timer, start the timer with the needed interval
- */
 - (void)checkPublishers
 {
     for (NSString *publisherName in [PeachCollector sharedCollector].publishers.allKeys) {

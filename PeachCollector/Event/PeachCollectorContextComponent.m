@@ -30,7 +30,9 @@
     if (self.type) [mutableDescription setObject:self.type forKey:PCContextComponentTypeKey];
     if (self.name) [mutableDescription setObject:self.name forKey:PCContextComponentNameKey];
     if (self.version) [mutableDescription setObject:self.version forKey:PCContextComponentVersionKey];
-    if ([mutableDescription count] == 0) return nil;
+    if ([mutableDescription count] == 0) {
+        return nil;
+    }
     return [mutableDescription copy];
 }
 

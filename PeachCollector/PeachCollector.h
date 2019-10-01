@@ -36,13 +36,26 @@ NS_ASSUME_NONNULL_BEGIN
 
 /**
  *  List of publishers referenced by a unique ID
- *
- *  A default PeachCollector Publisher is created when the Queue is initialized : "Peach Publisher"
- *  A custom Publisher can be added to send the events to another end point in a different format.
  */
 @property (nonatomic, readonly) NSDictionary<NSString *, PeachCollectorPublisher *>  *publishers;
+
+/**
+ *  A default PeachCollector Publisher, created when the Queue is initialized, named "Peach Publisher"
+ */
 @property (class, nonatomic, readonly) PeachCollectorPublisher *defaultPublisher;
+
+/**
+ *  Retrieves a Publisher by its name
+ *  @param publisherName The name of the publisher.
+ */
 + (PeachCollectorPublisher *)publisherNamed:(NSString *)publisherName;
+
+/**
+ *  Adds a publisher to the list of publishers linked to the queue
+ *  A custom Publisher can send the events to another end point, potentially in a different format.
+ *  @param publisher The publisher to add.
+ *  @param publisherName The name of the publisher.
+ */
 + (void)addPublisher:(PeachCollectorPublisher *)publisher withName:(NSString *)publisherName;
 
 @property (nonatomic, copy) NSString *userID;
