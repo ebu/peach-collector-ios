@@ -51,8 +51,10 @@
 		95354799233B8A5E0096AE60 /* PeachCollectorSwiftDemo.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 95354797233B8A5E0096AE60 /* PeachCollectorSwiftDemo.xcdatamodeld */; };
 		9535479B233B8A5F0096AE60 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9535479A233B8A5F0096AE60 /* Assets.xcassets */; };
 		9535479E233B8A5F0096AE60 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9535479C233B8A5F0096AE60 /* LaunchScreen.storyboard */; };
-		953547A5233CDC850096AE60 /* PeachCollectorDynamicProperties.h in Headers */ = {isa = PBXBuildFile; fileRef = 953547A3233CDC850096AE60 /* PeachCollectorDynamicProperties.h */; };
+		953547A5233CDC850096AE60 /* PeachCollectorDynamicProperties.h in Headers */ = {isa = PBXBuildFile; fileRef = 953547A3233CDC850096AE60 /* PeachCollectorDynamicProperties.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		953547A6233CDC850096AE60 /* PeachCollectorDynamicProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = 953547A4233CDC850096AE60 /* PeachCollectorDynamicProperties.m */; };
+		953547A7234203060096AE60 /* PeachCollector.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 953546D0233A15BD0096AE60 /* PeachCollector.framework */; };
+		953547A8234203060096AE60 /* PeachCollector.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 953546D0233A15BD0096AE60 /* PeachCollector.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -77,6 +79,13 @@
 			remoteGlobalIDString = 953546CF233A15BD0096AE60;
 			remoteInfo = PeachCollector;
 		};
+		953547A9234203060096AE60 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 953546C7233A15BD0096AE60 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 953546CF233A15BD0096AE60;
+			remoteInfo = PeachCollector;
+		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -87,6 +96,17 @@
 			dstSubfolderSpec = 10;
 			files = (
 				9535477A233B68EE0096AE60 /* PeachCollector.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		953547AB234203060096AE60 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				953547A8234203060096AE60 /* PeachCollector.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -178,6 +198,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				953547A7234203060096AE60 /* PeachCollector.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -398,10 +419,12 @@
 				95354788233B8A5E0096AE60 /* Sources */,
 				95354789233B8A5E0096AE60 /* Frameworks */,
 				9535478A233B8A5E0096AE60 /* Resources */,
+				953547AB234203060096AE60 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				953547AA234203060096AE60 /* PBXTargetDependency */,
 			);
 			name = PeachCollectorSwiftDemo;
 			productName = PeachCollectorSwiftDemo;
@@ -581,6 +604,11 @@
 			isa = PBXTargetDependency;
 			target = 953546CF233A15BD0096AE60 /* PeachCollector */;
 			targetProxy = 9535477B233B68EE0096AE60 /* PBXContainerItemProxy */;
+		};
+		953547AA234203060096AE60 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 953546CF233A15BD0096AE60 /* PeachCollector */;
+			targetProxy = 953547A9234203060096AE60 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -828,6 +856,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 95499ZCYFT;
 				INFOPLIST_FILE = PeachCollectorDemo/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -844,6 +873,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 95499ZCYFT;
 				INFOPLIST_FILE = PeachCollectorDemo/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -860,6 +890,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 95499ZCYFT;
 				INFOPLIST_FILE = PeachCollectorSwiftDemo/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -879,6 +910,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 95499ZCYFT;
 				INFOPLIST_FILE = PeachCollectorSwiftDemo/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",

@@ -31,6 +31,8 @@
     [super viewDidLoad];
     
     [NSNotificationCenter.defaultCenter addObserver:self selector:@selector(logNotificationReceived:) name:PeachCollectorNotification object:nil];
+    
+    
 }
 
 
@@ -108,8 +110,7 @@
     [PeachCollectorEvent sendMediaPlayWithID:@"audio0001"
                                   properties:self.audioProperties
                                      context:self.audioContext
-                                    metadata:self.audioMetadata
-                         automaticHeartbeats:YES];
+                                    metadata:self.audioMetadata];
 }
 
 - (void)recordAudioPauseEvent

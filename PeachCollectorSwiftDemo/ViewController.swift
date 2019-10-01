@@ -15,9 +15,9 @@ class ViewController: UIViewController {
     
     @IBOutlet weak var audioButton: UIButton?
     
-    let audioMetadata = ["type": PCMediaMetadataType.audio, "format": PCMediaMetadataFormat.live] as [String : Any]
+    let audioMetadata = ["type": PCMediaMetadataType.audio, "format": PCMediaMetadataFormat.live] as! [String : NSCopying]
     let audioContext = PeachCollectorContext.init(mediaContextWithID: "recoA", component: PeachCollectorContextComponent.init(type: "player", name: "AudioPlayer", version: "1.0"), appSectionID: "Demo/AudioPlayer", source: "Demo.reco")
-    var audioProperties = PeachCollectorProperties.init(playbackPosition: 0, previousPlaybackPosition: nil, videoMode: nil, audioMode: PCMediaAudioMode.normal, start_mode: PCMediaStartMode.normal, previousMediaID: nil, playbackRate: 1.0, volume: nil)
+    var audioProperties = PeachCollectorProperties.init(timeSpent: 0, playbackPosition: 0, previousPlaybackPosition: nil, previousMediaID: nil, playbackRate: 1.0, volume: nil, videoMode: nil, audioMode: .normal, startMode: .normal)
     var isPlaying = false
     
     var player : AVPlayer?
@@ -70,12 +70,14 @@ class ViewController: UIViewController {
         isPlaying = true
         player?.play()
         self.audioButton?.setTitle("Pause Background Audio", for: .normal)
+        PeachCollectorEvent.sendMediaPlay(withID: "audio00", properties: self.audioProperties, context: self.audioContext, metadata: self.audioMetadata)
     }
     
     func pause() {
         isPlaying = false
         player?.pause()
         self.audioButton?.setTitle("Play Background Audio", for: .normal)
+        PeachCollectorEvent.sendMediaPause(withID: "audio00", properties: self.audioProperties, context: self.audioContext, metadata: self.audioMetadata)
     }
 
 }
