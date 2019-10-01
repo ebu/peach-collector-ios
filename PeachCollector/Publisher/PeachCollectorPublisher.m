@@ -88,7 +88,7 @@
 
 - (void)publishData:(NSDictionary*)data withCompletionHandler:(void (^)(NSError * _Nullable error))completionHandler
 {
-    NSLog(@"sent request : \n%@", [data jsonStringFormatted:YES]);
+    NSLog(@"Publish %d event(s)", (int)[[data objectForKey:@"events"] count]);
     completionHandler(nil);
     /*
     NSString *jsonData = [data jsonStringFormatted:NO];
@@ -175,7 +175,7 @@
     NSTimeZone *currentTimeZone = [NSTimeZone localTimeZone];
     NSInteger currentGMTOffset = [currentTimeZone secondsFromGMTForDate:[NSDate date]];
     
-    NSString* languageCode = [NSLocale currentLocale].languageCode;
+    NSString* languageCode = [NSLocale currentLocale].localeIdentifier;
     languageCode = [languageCode stringByReplacingOccurrencesOfString:@"_" withString:@"-"];
     
     return @{PCClientDeviceTypeKey:clientDeviceType,
