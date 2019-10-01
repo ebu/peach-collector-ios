@@ -10,6 +10,7 @@
 #import <Foundation/Foundation.h>
 #import <CoreData/CoreData.h>
 #import <PeachCollector/PeachCollectorConfiguration.h>
+#import <PeachCollector/PeachCollectorDynamicProperties.h>
 #import <PeachCollector/PeachCollectorEvent.h>
 #import <PeachCollector/PeachCollectorPublisher.h>
 #import <PeachCollector/PeachCollectorPublisherEventStatus.h>
@@ -63,6 +64,17 @@ NS_ASSUME_NONNULL_BEGIN
  */
 + (void)addEventToQueue:(PeachCollectorEvent *)event;
 
+/**
+ *  List type of events that should force the queue to be flushed if added while in background state
+ */
+@property (nonatomic, readonly) NSArray<NSString *> *flushableEventTypes;
+
+/**
+ *  Add an event type to list of events that force the queue to be flushed when in background state
+ *
+ *  @param eventType The event type to add to the list.
+ */
++ (void)addFlushableEventType:(NSString *)eventType;
 
 @end
 

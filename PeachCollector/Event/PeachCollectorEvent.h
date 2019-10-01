@@ -74,7 +74,17 @@ NS_ASSUME_NONNULL_BEGIN
                          context:(PeachCollectorContext *)context
                         metadata:(NSDictionary<NSString *, id<NSCopying>> *)metadata;
 
+/**
+ *  @return `YES` if the event has been sent successfully through all registered publishers. `NO` if the event is still queued for any publisher.
+ */
 - (BOOL)canBeRemoved;
+
+
+/**
+ * @return `YES` if the event should be directly sent by publishers if received when the application is not in active state.
+ * When playing a media in background, pausing/stoping the media will freeze the application after 10 seconds.
+*/
+- (BOOL)shouldBeFlushedWhenReceivedInBackgroundState;
 
 @end
 

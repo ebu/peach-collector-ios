@@ -15,6 +15,7 @@
 
 @property (nonatomic, strong) PeachCollectorConfiguration *configuration;
 @property (nonatomic, strong) PeachCollectorQueue *queue;
+@property (nonatomic, strong) NSArray<NSString *> *flushableEventTypes;
 
 @end
 
@@ -34,28 +35,35 @@
 {
     self = [super init];
     if (self) {
-        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(appDidEnterBackground:) name:UIApplicationDidEnterBackgroundNotification object:nil];
+        _flushableEventTypes = @[PCEventTypeMediaStop, PCEventTypeMediaPause];
+        
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(appWillResignActive:) name:UIApplicationWillResignActiveNotification object:nil];
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(appWillTerminate:) name:UIApplicationWillTerminateNotification object:nil];
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(appDidBecomeActive:) name:UIApplicationDidBecomeActiveNotification object:nil];
     }
     return self;
 }
 
-- (void)appDidEnterBackground:(NSNotification *)note
+
+- (void)appDidBecomeActive:(NSNotification *)notification
 {
-    NSLog(@"appDidEnterBackground");
+    NSLog(@"appDidBecomeActive : check publishers");
+    if (self.queue) {
+        [self.queue checkPublishers];
+    }
 }
 
-- (void)appWillResignActive:(NSNotification *)note
+- (void)appWillResignActive:(NSNotification *)notification
 {
-    NSLog(@"appWillResignActive");
+    NSLog(@"appWillResignActive : try to flush publishers");
     [self.queue flush];
 }
 
-- (void)appWillTerminate:(NSNotification *)note
+- (void)appWillTerminate:(NSNotification *)notification
 {
     NSLog(@"appWillTerminate");
     [[NSNotificationCenter defaultCenter] removeObserver:self];
+    [self.queue flush];
 }
 
 
@@ -112,6 +120,10 @@
     [[PeachCollector sharedCollector].queue addEvent:event];
 }
 
++ (void)addFlushableEventType:(NSString *)eventType
+{
+    [PeachCollector sharedCollector].flushableEventTypes = [[PeachCollector sharedCollector].flushableEventTypes arrayByAddingObject:eventType];
+}
 
 #pragma mark - User management
 
@@ -124,9 +136,6 @@
     
     self.clientInfo = [mutableClientInfo copy];*/
 }
-
-
-
 
 
 #pragma mark - Core Data stack

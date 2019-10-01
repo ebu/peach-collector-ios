@@ -10,7 +10,6 @@
 
 @implementation PeachCollectorDynamicProperties
 
-
 - (instancetype)initWithTimeSpentBlock:(nullable NSNumber *(^)(void))timeSpentBlock
                  playbackPositionBlock:(nullable NSNumber *(^)(void))playbackPositionBlock
          previousPlaybackPositionBlock:(nullable NSNumber *(^)(void))previousPlaybackPositionBlock

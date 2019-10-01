@@ -52,6 +52,11 @@
         NSAssert(NO, @"Error saving context: %@\n%@", [error localizedDescription], [error userInfo]);
     }
     
+    if ([[UIApplication sharedApplication] applicationState] != UIApplicationStateActive
+        && [event shouldBeFlushedWhenReceivedInBackgroundState]) {
+        [self flush];
+    }
+    
     [self checkPublishers];
 }
 

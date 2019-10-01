@@ -153,4 +153,12 @@
     [PeachCollector addEventToQueue:self];
 }
 
+- (BOOL)shouldBeFlushedWhenReceivedInBackgroundState
+{
+    if (self.type != nil) {
+        return [[[PeachCollector sharedCollector] flushableEventTypes] containsObject:self.type];
+    }
+    return NO;
+}
+
 @end
