@@ -15,6 +15,8 @@
 @interface PeachCollectorQueue()
 
 @property (nonatomic, strong) NSMutableDictionary *publisherTimers;
+@property (nonatomic) UIBackgroundTaskIdentifier backgroundTask;
+@property (nonatomic) NSInteger ongoingRequests;
 
 @end
 
@@ -26,6 +28,7 @@
     self = [super init];
     if (self) {
         self.publisherTimers = [NSMutableDictionary new];
+        self.backgroundTask = UIBackgroundTaskInvalid;
     }
     return self;
 }
@@ -104,6 +107,9 @@
     if ([[self managedObjectContext] save:&error] == NO) {
         NSAssert(NO, @"Error saving context: %@\n%@", [error localizedDescription], [error userInfo]);
     }
+    
+    [self registerBackgroundTask];
+    
     [publisher sendEvents:eventsStatuses withCompletionHandler:^(NSError * _Nullable error) {
         for (PeachCollectorPublisherEventStatus *eventStatus in eventsStatuses) {
             eventStatus.status = (error) ? PCEventStatusPlublicationFailed : PCEventStatusPublished;
@@ -120,24 +126,27 @@
         if (error) {
             NSTimer *timer = [NSTimer scheduledTimerWithTimeInterval:publisher.interval target:self selector:@selector(sendEventsToPublisherWithTimer:) userInfo:@{@"publisherName":publisherName} repeats:NO];
             [self.publisherTimers setObject:timer forKey:publisherName];
-            return;
         }
-        
-        if ([[UIApplication sharedApplication] applicationState] == UIApplicationStateBackground) {
-            UNMutableNotificationContent *content = [UNMutableNotificationContent new];
-            content.title = @"Peach";
-            content.body = [NSString stringWithFormat:@"%@ : Published %d events", publisherName, (int)eventsStatuses.count];
-            
-            UNNotificationRequest *request = [UNNotificationRequest requestWithIdentifier:[[NSUUID UUID] UUIDString] content:content trigger:nil];
-            
-            [[UNUserNotificationCenter currentNotificationCenter] addNotificationRequest:request withCompletionHandler:^(NSError * _Nullable error) {
+        else {
+            // Debugging & Logging purpose
+            if ([[UIApplication sharedApplication] applicationState] == UIApplicationStateBackground) {
+                UNMutableNotificationContent *content = [UNMutableNotificationContent new];
+                content.title = @"Peach";
+                content.body = [NSString stringWithFormat:@"%@ : Published %d events", publisherName, (int)eventsStatuses.count];
                 
-            }];
+                UNNotificationRequest *request = [UNNotificationRequest requestWithIdentifier:[[NSUUID UUID] UUIDString] content:content trigger:nil];
+                
+                [[UNUserNotificationCenter currentNotificationCenter] addNotificationRequest:request withCompletionHandler:^(NSError * _Nullable error) {
+                    
+                }];
+            }
+            
+            [NSNotificationCenter.defaultCenter postNotificationName:PeachCollectorNotification
+                                                              object:nil
+                                                            userInfo:@{ PeachCollectorNotificationLogKey : [NSString stringWithFormat:@"%@ : Published %d events", publisherName, (int)eventsStatuses.count] }];
         }
         
-        [NSNotificationCenter.defaultCenter postNotificationName:PeachCollectorNotification
-                                                          object:nil
-                                                        userInfo:@{ PeachCollectorNotificationLogKey : [NSString stringWithFormat:@"%@ : Published %d events", publisherName, (int)eventsStatuses.count] }];
+        [self endBackgroundTask];
     }];
 }
 
@@ -148,9 +157,24 @@
     }
 }
 
-- (void)empty
+- (void)registerBackgroundTask
 {
-    
+    self.ongoingRequests++;
+    NSLog(@"+ BGTask (%d)", (int)self.ongoingRequests);
+    if (self.backgroundTask == UIBackgroundTaskInvalid) {
+        self.backgroundTask = [[UIApplication sharedApplication] beginBackgroundTaskWithExpirationHandler:^{
+            [self endBackgroundTask];
+        }];
+    }
+}
+- (void)endBackgroundTask
+{
+    self.ongoingRequests--;
+    NSLog(@"- BGTask (%d)", (int)self.ongoingRequests);
+    if (self.ongoingRequests == 0) {
+        [[UIApplication sharedApplication] endBackgroundTask:self.backgroundTask];
+        self.backgroundTask = UIBackgroundTaskInvalid;
+    }
 }
 
 @end
