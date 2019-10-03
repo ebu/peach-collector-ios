@@ -7,7 +7,7 @@
 //
 
 #import "ViewController.h"
-#import <PeachCollector/PeachCollector.h>
+@import PeachCollector;
 @import AVFoundation;
 @import MediaPlayer;
 

@@ -54,9 +54,9 @@ NS_ASSUME_NONNULL_BEGIN
  *  Adds a publisher to the list of publishers linked to the queue
  *  A custom Publisher can send the events to another end point, potentially in a different format.
  *  @param publisher The publisher to add.
- *  @param publisherName The name of the publisher.
+ *  @param publisherName The unique name of the publisher.
  */
-+ (void)addPublisher:(PeachCollectorPublisher *)publisher withName:(NSString *)publisherName;
++ (void)setPublisher:(PeachCollectorPublisher *)publisher withUniqueName:(NSString *)publisherName;
 
 @property (nonatomic, copy) NSString *userID;
 

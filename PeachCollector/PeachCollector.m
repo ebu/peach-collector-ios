@@ -92,7 +92,7 @@
     return [[PeachCollector sharedCollector].publishers objectForKey:publisherName];
 }
 
-+ (void)addPublisher:(PeachCollectorPublisher *)publisher withName:(NSString *)publisherName
++ (void)setPublisher:(PeachCollectorPublisher *)publisher withUniqueName:(NSString *)publisherName
 {
     [[PeachCollector sharedCollector] setPublisher:publisher forKey:publisherName];
 }

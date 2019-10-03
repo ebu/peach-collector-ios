@@ -7,7 +7,7 @@
 //
 
 #import "AppDelegate.h"
-#import <PeachCollector/PeachCollector.h>
+@import PeachCollector;
 
 @interface AppDelegate ()
 
@@ -25,7 +25,7 @@
                                                                                    maxEvents:10
                                                                          gotBackOnlinePolicy:PCPublisherGotBackOnlinePolicySendAll];
     
-    [PeachCollector addPublisher:publisher withName:@"Custom Publisher"];
+    [PeachCollector setPublisher:publisher withUniqueName:@"Custom Publisher"];
     
     return YES;
 }

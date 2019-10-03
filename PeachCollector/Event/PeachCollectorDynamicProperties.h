@@ -6,7 +6,7 @@
 //  Copyright © 2019 European Broadcasting Union. All rights reserved.
 //
 
-#import <PeachCollector/PeachCollector.h>
+#import "PeachCollector.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
