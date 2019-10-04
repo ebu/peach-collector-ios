@@ -112,7 +112,7 @@ NSString * const PCClientUserIDKey = @"user_id";
 
 NSString * const PeachCollectorDefaultPublisherName = @"Peach Publisher";
 NSInteger const PeachCollectorDefaultPublisherMaxEvents = 20;
-NSInteger const PeachCollectorDefaultPublisherInterval = 30;
+NSInteger const PeachCollectorDefaultPublisherInterval = 20;
 PCPublisherGotBackOnlinePolicy const PeachCollectorDefaultPublisherPolicy = PCPublisherGotBackOnlinePolicySendAll;
 NSInteger const PeachCollectorDefaultPublisherHeartbeatInterval = 5;
 
