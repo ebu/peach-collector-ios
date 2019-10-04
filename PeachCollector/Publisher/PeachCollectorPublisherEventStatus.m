@@ -11,20 +11,6 @@
 
 @implementation PeachCollectorPublisherEventStatus (Peach)
 
-+ (NSArray<PeachCollectorPublisherEventStatus *> *)eventsStatusesForPublisherNamed:(NSString *)publisherName
-{
-    NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"PeachCollectorPublisherEventStatus"];
-    [request setPredicate:[NSPredicate predicateWithFormat:@"publisherName == %@ AND status == 0", publisherName]];
-    
-    NSError *error = nil;
-    NSArray *results = [[PeachCollector managedObjectContext] executeFetchRequest:request error:&error];
-    if (!results) {
-        NSLog(@"Error fetching Employee objects: %@\n%@", [error localizedDescription], [error userInfo]);
-        abort();
-    }
-    return results;
-}
-
 + (NSArray<PeachCollectorPublisherEventStatus *> *)eventsStatusesForPublisherNamed:(NSString *)publisherName withStatus:(NSInteger)status
 {
     NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"PeachCollectorPublisherEventStatus"];
@@ -34,7 +20,7 @@
     NSArray *results = [[PeachCollector managedObjectContext] executeFetchRequest:request error:&error];
     if (!results) {
         NSLog(@"Error fetching Employee objects: %@\n%@", [error localizedDescription], [error userInfo]);
-        abort();
+        return [NSArray array];
     }
     return results;
 }
@@ -48,7 +34,7 @@
     NSArray *results = [[PeachCollector managedObjectContext] executeFetchRequest:request error:&error];
     if (!results) {
         NSLog(@"Error fetching Employee objects: %@\n%@", [error localizedDescription], [error userInfo]);
-        abort();
+        return [NSArray array];
     }
     return results;
 }
