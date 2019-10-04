@@ -17,16 +17,10 @@
 
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-    PeachCollectorConfiguration *config = [[PeachCollectorConfiguration alloc] initWithSiteKey:@"zzebu00000000017"];
-    
-    [PeachCollector startWithConfiguration:config];
-    PeachCollectorPublisher *publisher = [[PeachCollectorPublisher alloc] initWithServiceURL:@""
-                                                                                    interval:10
-                                                                                   maxEvents:10
-                                                                         gotBackOnlinePolicy:PCPublisherGotBackOnlinePolicySendAll];
-    
-    [PeachCollector setPublisher:publisher withUniqueName:@"Custom Publisher"];
-    
+    PeachCollectorPublisher *publisher = [[PeachCollectorPublisher alloc] initWithSiteKey:@"zzebu00000000017"];
+    //publisher.interval = 10;
+    //publisher.maxEvents = 10;
+    [PeachCollector setPublisher:publisher withUniqueName:@"MyPublisher"];
     return YES;
 }
 

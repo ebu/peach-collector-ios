@@ -25,6 +25,8 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        NotificationCenter.default.addObserver(self,selector: #selector(self.logNotificationReceived), name: NSNotification.Name.PeachCollector, object: nil)
+        
         do {
             try AVAudioSession.sharedInstance().setCategory(.playback, mode: .default)
             try AVAudioSession.sharedInstance().setActive(true)
@@ -48,7 +50,12 @@ class ViewController: UIViewController {
         player = AVPlayer.init(playerItem: AVPlayerItem.init(asset: AVURLAsset.init(url: audioUrl!)))
     }
     
-
+    @objc func logNotificationReceived(notification: Notification)
+    {
+        let logString = notification.userInfo![PeachCollectorNotificationLogKey]
+        print(logString ?? "")
+    }
+    
     @IBAction func sendRecommendationHit(sender: UIButton) {
     
         let carouselComponent = PeachCollectorContextComponent.init(type: "Carousel", name: "recoCarousel", version: "1.0")

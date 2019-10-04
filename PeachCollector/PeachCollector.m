@@ -21,6 +21,11 @@
 
 @implementation PeachCollector
 
++ (void)load{
+    [PeachCollector sharedCollector];
+}
+
+
 + (instancetype)sharedCollector
 {
     static PeachCollector *s_sharedInstance = nil;
@@ -36,7 +41,7 @@
     self = [super init];
     if (self) {
         _flushableEventTypes = @[PCEventTypeMediaStop, PCEventTypeMediaPause];
-        
+        self.queue = [[PeachCollectorQueue alloc] init];
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(appWillResignActive:) name:UIApplicationWillResignActiveNotification object:nil];
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(appWillTerminate:) name:UIApplicationWillTerminateNotification object:nil];
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(appDidBecomeActive:) name:UIApplicationDidBecomeActiveNotification object:nil];
@@ -47,7 +52,6 @@
 
 - (void)appDidBecomeActive:(NSNotification *)notification
 {
-    NSLog(@"appDidBecomeActive : check publishers");
     if (self.queue) {
         [self.queue checkPublishers];
     }
@@ -55,38 +59,17 @@
 
 - (void)appWillResignActive:(NSNotification *)notification
 {
-    NSLog(@"appWillResignActive : try to flush publishers");
     [self.queue flush];
 }
 
 - (void)appWillTerminate:(NSNotification *)notification
 {
-    NSLog(@"appWillTerminate");
     [[NSNotificationCenter defaultCenter] removeObserver:self];
     [self.queue flush];
 }
 
 
-+ (void)startWithConfiguration:(PeachCollectorConfiguration *)configuration
-{
-    [PeachCollector sharedCollector].configuration = configuration;
-    [PeachCollector defaultPublisher];
-    [PeachCollector sharedCollector].queue = [[PeachCollectorQueue alloc] init];
-}
-
-
 #pragma mark - Publisher management
-
-+ (PeachCollectorPublisher *)defaultPublisher
-{
-    if ([[PeachCollector sharedCollector].publishers objectForKey:PeachCollectorDefaultPublisherName] == nil) {
-        PeachCollectorConfiguration * config = [PeachCollector sharedCollector].configuration;
-        PeachCollectorPublisher *defaultPublisher = [[PeachCollectorPublisher alloc] initWithServiceURL:config.serviceURL interval:config.recommendedSendingInterval maxEvents:config.recommendedMaxSendingEvents gotBackOnlinePolicy:config.gotBackOnlinePolicy];
-        [[PeachCollector sharedCollector] setPublisher:defaultPublisher forKey:PeachCollectorDefaultPublisherName];
-    }
-    
-    return [[PeachCollector sharedCollector].publishers objectForKey:PeachCollectorDefaultPublisherName];
-}
 
 + (PeachCollectorPublisher *)publisherNamed:(NSString *)publisherName{
     return [[PeachCollector sharedCollector].publishers objectForKey:publisherName];

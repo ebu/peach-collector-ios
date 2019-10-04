@@ -22,11 +22,24 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic) NSInteger maxEvents;
 @property (nonatomic) PCPublisherGotBackOnlinePolicy gotBackPolicy;
 
-- (id)initWithServiceURL:(NSString *)serviceURL
-                interval:(NSInteger)interval
-               maxEvents:(NSInteger)maxEvents
-     gotBackOnlinePolicy:(PCPublisherGotBackOnlinePolicy)gotBackPolicy;
 
+/**
+ *  Create a collector configuration.
+ *  @param serviceURL The service url string to the Peach end point.
+ */
+- (instancetype)initWithServiceURL:(NSString *)serviceURL;
+
+/**
+ *  Create a collector configuration with a default publisher linked to the default service URL.
+ *  @param siteKey The site key used to recognize this app on the Peach server.
+ */
+- (instancetype)initWithSiteKey:(NSString *)siteKey;
+
+/**
+ *  Send event to the configured service URL
+ *  @param events the events to send
+ *  @param completionHandler the block that is called when the process is finished, eventually with an error
+ */
 - (void)sendEvents:(NSArray<PeachCollectorEvent *> *)events withCompletionHandler:(void (^)(NSError * _Nullable error))completionHandler;
 
 

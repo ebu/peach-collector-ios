@@ -13,8 +13,6 @@
 #import "PeachCollectorDataFormat.h"
 #import "PeachCollector.h"
 
-#import "NSDictionary+Peach.h"
-
 @interface PeachCollectorPublisher ()
 
 @property (nonatomic, copy) NSDictionary *clientInfo;
@@ -23,19 +21,22 @@
 
 @implementation PeachCollectorPublisher
 
+
 - (id)initWithServiceURL:(NSString *)serviceURL
-                interval:(NSInteger)interval
-               maxEvents:(NSInteger)maxEvents
-     gotBackOnlinePolicy:(PCPublisherGotBackOnlinePolicy)gotBackPolicy
 {
     self = [super init];
     if (self) {
         self.serviceURL = serviceURL;
-        self.interval = interval;
-        self.maxEvents = maxEvents;
-        self.gotBackPolicy = gotBackPolicy;
+        self.interval = PeachCollectorDefaultPublisherInterval;
+        self.maxEvents = PeachCollectorDefaultPublisherMaxEvents;
+        self.gotBackPolicy = PeachCollectorDefaultPublisherPolicy;
     }
     return self;
+}
+
+- (id)initWithSiteKey:(NSString *)siteKey
+{
+    return [self initWithServiceURL:[NSString stringWithFormat:@"https://pipe-collect.ebu.io/v3/collect?s=%@", siteKey]];
 }
 
 
@@ -88,7 +89,7 @@
 
 - (NSData *)jsonFromDictionary:(NSDictionary *)dictionary{
     NSError *error;
-    NSData *jsonData = [NSJSONSerialization dataWithJSONObject:self options:0 error:&error];
+    NSData *jsonData = [NSJSONSerialization dataWithJSONObject:dictionary options:0 error:&error];
     if (error) {
         return nil;
     }

@@ -31,6 +31,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 /**
  *  The collector singleton.
+ *  Singleton is automatically created at the launch of the application
  */
 @property (class, nonatomic, readonly) PeachCollector *sharedCollector;
 
@@ -38,11 +39,6 @@ NS_ASSUME_NONNULL_BEGIN
  *  List of publishers referenced by a unique ID
  */
 @property (nonatomic, readonly) NSDictionary<NSString *, PeachCollectorPublisher *>  *publishers;
-
-/**
- *  A default PeachCollector Publisher, created when the Queue is initialized, named "Peach Publisher"
- */
-@property (class, nonatomic, readonly) PeachCollectorPublisher *defaultPublisher;
 
 /**
  *  Retrieves a Publisher by its name
@@ -62,13 +58,6 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (readonly, strong) NSPersistentContainer *persistentContainer;
 + (NSManagedObjectContext *)managedObjectContext;
-
-/**
- *  Configure the collector. This is required before starting the collector. If not set, collector will not start
- *
- *  @param configuration The configuration to use. This configuration is copied and cannot be changed afterwards.
- */
-+ (void)startWithConfiguration:(PeachCollectorConfiguration *)configuration;
 
 /**
  *  Add an event to be queued. Event will be added to the queue and sent accordingly to publisher's configuration.
