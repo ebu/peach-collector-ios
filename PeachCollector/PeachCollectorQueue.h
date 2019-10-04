@@ -32,6 +32,7 @@ NS_ASSUME_NONNULL_BEGIN
  */
 - (void)checkPublishers;
 
+- (void)cleanTimers;
 @end
 
 NS_ASSUME_NONNULL_END

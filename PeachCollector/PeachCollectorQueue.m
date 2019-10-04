@@ -67,7 +67,7 @@
 {
     for (NSString *publisherName in [PeachCollector sharedCollector].publishers.allKeys) {
         PeachCollectorPublisher *publisher = [PeachCollector publisherNamed:publisherName];
-        NSArray *eventsStatuses = [PeachCollectorPublisherEventStatus eventsStatusesForPublisherNamed:publisherName withStatus:PCEventStatusQueued];
+        NSArray *eventsStatuses = [PeachCollectorPublisherEventStatus pendingEventsStatusesForPublisherNamed:publisherName];
         
         if (eventsStatuses.count >= publisher.maxEvents || publisher.interval == 0) {
             [self sendEventsToPublisherNamed:publisherName];
@@ -120,26 +120,32 @@
         
         NSError *contextError = nil;
         if ([[PeachCollector managedObjectContext] save:&contextError] == NO) {
-            NSAssert(NO, @"Error saving context: %@\n%@", [contextError localizedDescription], [contextError userInfo]);
+            [[PeachCollector managedObjectContext] rollback];
+            //NSAssert(NO, @"Error saving context: %@\n%@", [contextError localizedDescription], [contextError userInfo]);
         }
         
         if (error) {
             NSTimer *timer = [NSTimer scheduledTimerWithTimeInterval:publisher.interval target:self selector:@selector(sendEventsToPublisherWithTimer:) userInfo:@{@"publisherName":publisherName} repeats:NO];
             [self.publisherTimers setObject:timer forKey:publisherName];
+            
+            [NSNotificationCenter.defaultCenter postNotificationName:PeachCollectorNotification
+              object:nil userInfo:@{PeachCollectorNotificationLogKey : [NSString stringWithFormat:@"%@ : Failed to publish events", publisherName]}];
         }
         else {
             // Debugging & Logging purpose
-            if ([[UIApplication sharedApplication] applicationState] == UIApplicationStateBackground) {
-                UNMutableNotificationContent *content = [UNMutableNotificationContent new];
-                content.title = @"Peach";
-                content.body = [NSString stringWithFormat:@"%@ : Published %d events", publisherName, (int)eventsStatuses.count];
-                
-                UNNotificationRequest *request = [UNNotificationRequest requestWithIdentifier:[[NSUUID UUID] UUIDString] content:content trigger:nil];
-                
-                [[UNUserNotificationCenter currentNotificationCenter] addNotificationRequest:request withCompletionHandler:^(NSError * _Nullable error) {
+            dispatch_async(dispatch_get_main_queue(), ^{
+                if ([[UIApplication sharedApplication] applicationState] == UIApplicationStateBackground) {
+                    UNMutableNotificationContent *content = [UNMutableNotificationContent new];
+                    content.title = @"Peach";
+                    content.body = [NSString stringWithFormat:@"%@ : Published %d events", publisherName, (int)eventsStatuses.count];
                     
-                }];
-            }
+                    UNNotificationRequest *request = [UNNotificationRequest requestWithIdentifier:[[NSUUID UUID] UUIDString] content:content trigger:nil];
+                    
+                    [[UNUserNotificationCenter currentNotificationCenter] addNotificationRequest:request withCompletionHandler:^(NSError * _Nullable error) {
+                        
+                    }];
+                }
+            });
             
             [NSNotificationCenter.defaultCenter postNotificationName:PeachCollectorNotification
                                                               object:nil
@@ -149,6 +155,7 @@
         [self endBackgroundTask];
     }];
 }
+
 
 - (void)flush
 {
@@ -175,6 +182,13 @@
         [[UIApplication sharedApplication] endBackgroundTask:self.backgroundTask];
         self.backgroundTask = UIBackgroundTaskInvalid;
     }
+}
+
+- (void)cleanTimers{
+    for (NSTimer *timer in [self.publisherTimers allValues]) {
+        [timer invalidate];
+    }
+    [self.publisherTimers removeAllObjects];
 }
 
 @end
