@@ -10,7 +10,6 @@
 		953546DA233A15BD0096AE60 /* PeachCollector.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 953546D0233A15BD0096AE60 /* PeachCollector.framework */; };
 		953546DF233A15BD0096AE60 /* PeachCollectorTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 953546DE233A15BD0096AE60 /* PeachCollectorTests.m */; };
 		953546E1233A15BD0096AE60 /* PeachCollector.h in Headers */ = {isa = PBXBuildFile; fileRef = 953546D3233A15BD0096AE60 /* PeachCollector.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		953546FF233A16790096AE60 /* NSDictionary+Peach.h in Headers */ = {isa = PBXBuildFile; fileRef = 953546EA233A16770096AE60 /* NSDictionary+Peach.h */; };
 		95354700233A16790096AE60 /* PeachCollectorPublisherEventStatus.h in Headers */ = {isa = PBXBuildFile; fileRef = 953546EB233A16770096AE60 /* PeachCollectorPublisherEventStatus.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		95354701233A16790096AE60 /* PeachCollectorContextComponent.h in Headers */ = {isa = PBXBuildFile; fileRef = 953546EC233A16780096AE60 /* PeachCollectorContextComponent.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		95354702233A16790096AE60 /* PeachCollectorProperties.h in Headers */ = {isa = PBXBuildFile; fileRef = 953546ED233A16780096AE60 /* PeachCollectorProperties.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -21,7 +20,6 @@
 		95354707233A16790096AE60 /* PeachCollectorConfiguration.m in Sources */ = {isa = PBXBuildFile; fileRef = 953546F2233A16780096AE60 /* PeachCollectorConfiguration.m */; };
 		95354708233A16790096AE60 /* PeachCollectorQueue.m in Sources */ = {isa = PBXBuildFile; fileRef = 953546F3233A16780096AE60 /* PeachCollectorQueue.m */; };
 		95354709233A16790096AE60 /* PeachCollectorQueue.h in Headers */ = {isa = PBXBuildFile; fileRef = 953546F4233A16780096AE60 /* PeachCollectorQueue.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		9535470A233A16790096AE60 /* NSDictionary+Peach.m in Sources */ = {isa = PBXBuildFile; fileRef = 953546F5233A16780096AE60 /* NSDictionary+Peach.m */; };
 		9535470B233A16790096AE60 /* PeachCollector.m in Sources */ = {isa = PBXBuildFile; fileRef = 953546F6233A16780096AE60 /* PeachCollector.m */; };
 		9535470C233A16790096AE60 /* PeachCollectorPublisherEventStatus.m in Sources */ = {isa = PBXBuildFile; fileRef = 953546F7233A16790096AE60 /* PeachCollectorPublisherEventStatus.m */; };
 		9535470D233A16790096AE60 /* PeachCollectorDataFormat.m in Sources */ = {isa = PBXBuildFile; fileRef = 953546F8233A16790096AE60 /* PeachCollectorDataFormat.m */; };
@@ -120,7 +118,6 @@
 		953546D9233A15BD0096AE60 /* PeachCollectorTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PeachCollectorTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		953546DE233A15BD0096AE60 /* PeachCollectorTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PeachCollectorTests.m; sourceTree = "<group>"; };
 		953546E0233A15BD0096AE60 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		953546EA233A16770096AE60 /* NSDictionary+Peach.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDictionary+Peach.h"; sourceTree = "<group>"; };
 		953546EB233A16770096AE60 /* PeachCollectorPublisherEventStatus.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PeachCollectorPublisherEventStatus.h; sourceTree = "<group>"; };
 		953546EC233A16780096AE60 /* PeachCollectorContextComponent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PeachCollectorContextComponent.h; sourceTree = "<group>"; };
 		953546ED233A16780096AE60 /* PeachCollectorProperties.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PeachCollectorProperties.h; sourceTree = "<group>"; };
@@ -131,7 +128,6 @@
 		953546F2233A16780096AE60 /* PeachCollectorConfiguration.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PeachCollectorConfiguration.m; sourceTree = "<group>"; };
 		953546F3233A16780096AE60 /* PeachCollectorQueue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PeachCollectorQueue.m; sourceTree = "<group>"; };
 		953546F4233A16780096AE60 /* PeachCollectorQueue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PeachCollectorQueue.h; sourceTree = "<group>"; };
-		953546F5233A16780096AE60 /* NSDictionary+Peach.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDictionary+Peach.m"; sourceTree = "<group>"; };
 		953546F6233A16780096AE60 /* PeachCollector.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PeachCollector.m; sourceTree = "<group>"; };
 		953546F7233A16790096AE60 /* PeachCollectorPublisherEventStatus.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PeachCollectorPublisherEventStatus.m; sourceTree = "<group>"; };
 		953546F8233A16790096AE60 /* PeachCollectorDataFormat.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PeachCollectorDataFormat.m; sourceTree = "<group>"; };
@@ -241,8 +237,6 @@
 				9535471B233A21610096AE60 /* Publisher */,
 				953546F4233A16780096AE60 /* PeachCollectorQueue.h */,
 				953546F3233A16780096AE60 /* PeachCollectorQueue.m */,
-				953546EA233A16770096AE60 /* NSDictionary+Peach.h */,
-				953546F5233A16780096AE60 /* NSDictionary+Peach.m */,
 				953546D4233A15BD0096AE60 /* Info.plist */,
 				95354714233A194A0096AE60 /* PeachCollector.xcdatamodel */,
 				95354716233A1FCB0096AE60 /* PeachPersistentContainer.h */,
@@ -348,7 +342,6 @@
 				95354705233A16790096AE60 /* PeachCollectorEvent.h in Headers */,
 				95354702233A16790096AE60 /* PeachCollectorProperties.h in Headers */,
 				95354710233A16790096AE60 /* PeachCollectorContext.h in Headers */,
-				953546FF233A16790096AE60 /* NSDictionary+Peach.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -548,7 +541,6 @@
 				9535470B233A16790096AE60 /* PeachCollector.m in Sources */,
 				9535470F233A16790096AE60 /* PeachCollectorContextComponent.m in Sources */,
 				95354706233A16790096AE60 /* PeachCollectorContext.m in Sources */,
-				9535470A233A16790096AE60 /* NSDictionary+Peach.m in Sources */,
 				95354708233A16790096AE60 /* PeachCollectorQueue.m in Sources */,
 				95354712233A16790096AE60 /* PeachCollectorPublisher.m in Sources */,
 				95354711233A16790096AE60 /* PeachCollectorProperties.m in Sources */,

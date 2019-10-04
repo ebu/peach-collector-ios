@@ -86,10 +86,19 @@
 }
 
 
+- (NSData *)jsonFromDictionary:(NSDictionary *)dictionary{
+    NSError *error;
+    NSData *jsonData = [NSJSONSerialization dataWithJSONObject:self options:0 error:&error];
+    if (error) {
+        return nil;
+    }
+    return jsonData;
+}
+
+
 - (void)publishData:(NSDictionary*)data withCompletionHandler:(void (^)(NSError * _Nullable error))completionHandler
 {
-    NSString *jsonData = [data jsonStringFormatted:NO];
-    NSData *requestData = [jsonData dataUsingEncoding:NSUTF8StringEncoding];
+    NSData *jsonData = [self jsonFromDictionary:data];
     
     NSURLSession *session = [NSURLSession sharedSession];
     NSURL *url = [NSURL URLWithString:[self serviceURL]];
@@ -98,8 +107,8 @@
     
     [request setValue:@"application/json" forHTTPHeaderField:@"Accept"];
     [request setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
-    [request setValue:[NSString stringWithFormat:@"%d", (int)[requestData length]] forHTTPHeaderField:@"Content-Length"];
-    [request setHTTPBody: requestData];
+    [request setValue:[NSString stringWithFormat:@"%d", (int)[jsonData length]] forHTTPHeaderField:@"Content-Length"];
+    [request setHTTPBody: jsonData];
     
     // Create the NSURLSessionDataTask post task object.
     NSURLSessionDataTask *task = [session dataTaskWithRequest:request completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
