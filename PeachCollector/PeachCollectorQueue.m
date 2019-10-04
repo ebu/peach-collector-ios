@@ -167,17 +167,17 @@
 - (void)registerBackgroundTask
 {
     self.ongoingRequests++;
-    NSLog(@"+ BGTask (%d)", (int)self.ongoingRequests);
     if (self.backgroundTask == UIBackgroundTaskInvalid) {
         self.backgroundTask = [[UIApplication sharedApplication] beginBackgroundTaskWithExpirationHandler:^{
-            [self endBackgroundTask];
+            [[UIApplication sharedApplication] endBackgroundTask:self.backgroundTask];
+            self.backgroundTask = UIBackgroundTaskInvalid;
+            self.ongoingRequests = 0;
         }];
     }
 }
 - (void)endBackgroundTask
 {
-    self.ongoingRequests--;
-    NSLog(@"- BGTask (%d)", (int)self.ongoingRequests);
+    self.ongoingRequests = MAX(0, self.ongoingRequests-1);
     if (self.ongoingRequests == 0) {
         [[UIApplication sharedApplication] endBackgroundTask:self.backgroundTask];
         self.backgroundTask = UIBackgroundTaskInvalid;
