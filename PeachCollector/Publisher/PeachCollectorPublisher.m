@@ -88,9 +88,6 @@
 
 - (void)publishData:(NSDictionary*)data withCompletionHandler:(void (^)(NSError * _Nullable error))completionHandler
 {
-    NSLog(@"Publish %d event(s)", (int)[[data objectForKey:@"events"] count]);
-    completionHandler(nil);
-    /*
     NSString *jsonData = [data jsonStringFormatted:NO];
     NSData *requestData = [jsonData dataUsingEncoding:NSUTF8StringEncoding];
     
@@ -107,14 +104,10 @@
     // Create the NSURLSessionDataTask post task object.
     NSURLSessionDataTask *task = [session dataTaskWithRequest:request completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
         completionHandler(error);
-        //NSLog(@"%@",[[NSString alloc]initWithData:data encoding:NSUTF8StringEncoding]);
-        NSLog(@"%@", [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:nil]);
     }];
     
     // Execute the task
     [task resume];
-     */
-     
 }
 
 
