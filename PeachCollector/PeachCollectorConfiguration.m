@@ -14,21 +14,21 @@
 - (instancetype)initWithServiceURL:(NSString *)serviceURL
 {
     return [self initWithServiceURL:serviceURL
-         recommandedSendingInterval:PeachCollectorDefaultPublisherInterval
-        recommandedMaxSendingEvents:PeachCollectorDefaultPublisherMaxEvents
+         recommendedSendingInterval:PeachCollectorDefaultPublisherInterval
+        recommendedMaxSendingEvents:PeachCollectorDefaultPublisherMaxEvents
                 gotBackOnlinePolicy:PeachCollectorDefaultPublisherPolicy];
 }
 
 - (instancetype)initWithServiceURL:(NSString *)serviceURL
-        recommandedSendingInterval:(NSInteger)interval
-       recommandedMaxSendingEvents:(NSInteger)maxEvents
+        recommendedSendingInterval:(NSInteger)interval
+       recommendedMaxSendingEvents:(NSInteger)maxEvents
                gotBackOnlinePolicy:(PCPublisherGotBackOnlinePolicy)gotBackOnlinePolicy
 {
     self = [super init];
     if (self) {
         self.serviceURL = serviceURL;
-        self.recommandedMaxSendingEvents = maxEvents;
-        self.recommandedSendingInterval = interval;
+        self.recommendedMaxSendingEvents = maxEvents;
+        self.recommendedSendingInterval = interval;
     }
     return self;
 }
@@ -36,18 +36,18 @@
 - (instancetype)initWithSiteKey:(NSString *)siteKey
 {
     return [self initWithSiteKey:siteKey
-      recommandedSendingInterval:PeachCollectorDefaultPublisherInterval recommandedMaxSendingEvents:PeachCollectorDefaultPublisherMaxEvents
+      recommendedSendingInterval:PeachCollectorDefaultPublisherInterval recommendedMaxSendingEvents:PeachCollectorDefaultPublisherMaxEvents
              gotBackOnlinePolicy:PeachCollectorDefaultPublisherPolicy];
 }
 
 - (instancetype)initWithSiteKey:(NSString *)siteKey
-     recommandedSendingInterval:(NSInteger)interval
-    recommandedMaxSendingEvents:(NSInteger)maxEvents
+     recommendedSendingInterval:(NSInteger)interval
+    recommendedMaxSendingEvents:(NSInteger)maxEvents
             gotBackOnlinePolicy:(PCPublisherGotBackOnlinePolicy)gotBackOnlinePolicy
 {
     return [self initWithServiceURL:[NSString stringWithFormat:@"https://pipe-collect.ebu.io/v3/collect?s=%@", siteKey]
-         recommandedSendingInterval:interval
-        recommandedMaxSendingEvents:maxEvents
+         recommendedSendingInterval:interval
+        recommendedMaxSendingEvents:maxEvents
                 gotBackOnlinePolicy:gotBackOnlinePolicy];
 }
 

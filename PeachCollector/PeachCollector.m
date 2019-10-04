@@ -81,7 +81,7 @@
 {
     if ([[PeachCollector sharedCollector].publishers objectForKey:PeachCollectorDefaultPublisherName] == nil) {
         PeachCollectorConfiguration * config = [PeachCollector sharedCollector].configuration;
-        PeachCollectorPublisher *defaultPublisher = [[PeachCollectorPublisher alloc] initWithServiceURL:config.serviceURL interval:config.recommandedSendingInterval maxEvents:config.recommandedMaxSendingEvents gotBackOnlinePolicy:config.gotBackOnlinePolicy];
+        PeachCollectorPublisher *defaultPublisher = [[PeachCollectorPublisher alloc] initWithServiceURL:config.serviceURL interval:config.recommendedSendingInterval maxEvents:config.recommendedMaxSendingEvents gotBackOnlinePolicy:config.gotBackOnlinePolicy];
         [[PeachCollector sharedCollector] setPublisher:defaultPublisher forKey:PeachCollectorDefaultPublisherName];
     }
     

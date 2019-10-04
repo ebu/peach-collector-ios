@@ -13,8 +13,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface PeachCollectorConfiguration : NSObject
 
-@property (nonatomic) NSInteger recommandedSendingInterval;
-@property (nonatomic) NSInteger recommandedMaxSendingEvents;
+@property (nonatomic) NSInteger recommendedSendingInterval;
+@property (nonatomic) NSInteger recommendedMaxSendingEvents;
 @property (nonatomic) PCPublisherGotBackOnlinePolicy gotBackOnlinePolicy;
 @property (nonatomic, copy) NSString *serviceURL;
 @property (nonatomic, copy) NSString *siteKey;
@@ -36,8 +36,8 @@ NS_ASSUME_NONNULL_BEGIN
  *  @param gotBackOnlinePolicy How the publisher should behave after an offline period.
  */
 - (instancetype)initWithServiceURL:(NSString *)serviceURL
-        recommandedSendingInterval:(NSInteger)interval
-       recommandedMaxSendingEvents:(NSInteger)maxEvents
+        recommendedSendingInterval:(NSInteger)interval
+       recommendedMaxSendingEvents:(NSInteger)maxEvents
                gotBackOnlinePolicy:(PCPublisherGotBackOnlinePolicy)gotBackOnlinePolicy;
 
 
@@ -57,8 +57,8 @@ NS_ASSUME_NONNULL_BEGIN
  *  @param gotBackOnlinePolicy How the publisher should behave after an offline period. Default is 'PCPublisherGotBackOnlinePolicySendAll'
  */
 - (instancetype)initWithSiteKey:(NSString *)siteKey
-     recommandedSendingInterval:(NSInteger)interval
-    recommandedMaxSendingEvents:(NSInteger)maxEvents
+     recommendedSendingInterval:(NSInteger)interval
+    recommendedMaxSendingEvents:(NSInteger)maxEvents
             gotBackOnlinePolicy:(PCPublisherGotBackOnlinePolicy)gotBackOnlinePolicy;
 
 @end
