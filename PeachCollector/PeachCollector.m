@@ -129,6 +129,14 @@
     // The persistent container for the application. This implementation creates and returns a container, having loaded the store for the application to it.
     @synchronized (self) {
         if (_persistentContainer == nil) {
+            NSURL *directoryURL = [[NSPersistentContainer defaultDirectoryURL] URLByAppendingPathComponent:@"PeachCollector"];
+            if (! [NSFileManager.defaultManager fileExistsAtPath:directoryURL.absoluteString]) {
+                NSError *err;
+                if (![NSFileManager.defaultManager createDirectoryAtURL:directoryURL withIntermediateDirectories:YES attributes:nil error:&err]) { //Create folder
+                    NSLog(@"Unable to create folder at %@: %@", directoryURL, err);
+                }
+            }
+            
             _persistentContainer = [[PeachPersistentContainer alloc] initWithName:@"PeachCollector"];
             [_persistentContainer loadPersistentStoresWithCompletionHandler:^(NSPersistentStoreDescription *storeDescription, NSError *error) {
                 if (error != nil) {
