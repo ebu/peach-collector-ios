@@ -128,11 +128,13 @@
             NSTimer *timer = [NSTimer scheduledTimerWithTimeInterval:publisher.interval target:self selector:@selector(sendEventsToPublisherWithTimer:) userInfo:@{@"publisherName":publisherName} repeats:NO];
             [self.publisherTimers setObject:timer forKey:publisherName];
             
-            [NSNotificationCenter.defaultCenter postNotificationName:PeachCollectorNotification
-              object:nil userInfo:@{PeachCollectorNotificationLogKey : [NSString stringWithFormat:@"%@ : Failed to publish events", publisherName]}];
+            if ([[PeachCollector sharedCollector] isUnitTesting]) {
+                [NSNotificationCenter.defaultCenter postNotificationName:PeachCollectorNotification
+                  object:nil userInfo:@{PeachCollectorNotificationLogKey : [NSString stringWithFormat:@"%@ : Failed to publish events", publisherName]}];
+            }
+                
         }
-        else {
-            // Debugging & Logging purpose
+        else if ([[PeachCollector sharedCollector] isUnitTesting]) {
             dispatch_async(dispatch_get_main_queue(), ^{
                 if ([[UIApplication sharedApplication] applicationState] == UIApplicationStateBackground) {
                     UNMutableNotificationContent *content = [UNMutableNotificationContent new];

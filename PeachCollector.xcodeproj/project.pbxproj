@@ -51,6 +51,8 @@
 		953547A6233CDC850096AE60 /* PeachCollectorDynamicProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = 953547A4233CDC850096AE60 /* PeachCollectorDynamicProperties.m */; };
 		953547A7234203060096AE60 /* PeachCollector.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 953546D0233A15BD0096AE60 /* PeachCollector.framework */; };
 		953547A8234203060096AE60 /* PeachCollector.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 953546D0233A15BD0096AE60 /* PeachCollector.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		953547FB234B2A9D0096AE60 /* PeachCollectorNotifications.h in Headers */ = {isa = PBXBuildFile; fileRef = 953547F9234B2A9D0096AE60 /* PeachCollectorNotifications.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		953547FC234B2A9D0096AE60 /* PeachCollectorNotifications.m in Sources */ = {isa = PBXBuildFile; fileRef = 953547FA234B2A9D0096AE60 /* PeachCollectorNotifications.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -160,6 +162,8 @@
 		9535479F233B8A5F0096AE60 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		953547A3233CDC850096AE60 /* PeachCollectorDynamicProperties.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PeachCollectorDynamicProperties.h; sourceTree = "<group>"; };
 		953547A4233CDC850096AE60 /* PeachCollectorDynamicProperties.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PeachCollectorDynamicProperties.m; sourceTree = "<group>"; };
+		953547F9234B2A9D0096AE60 /* PeachCollectorNotifications.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PeachCollectorNotifications.h; sourceTree = "<group>"; };
+		953547FA234B2A9D0096AE60 /* PeachCollectorNotifications.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PeachCollectorNotifications.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -227,6 +231,8 @@
 				953546F6233A16780096AE60 /* PeachCollector.m */,
 				953546EF233A16780096AE60 /* PeachCollectorDataFormat.h */,
 				953546F8233A16790096AE60 /* PeachCollectorDataFormat.m */,
+				953547F9234B2A9D0096AE60 /* PeachCollectorNotifications.h */,
+				953547FA234B2A9D0096AE60 /* PeachCollectorNotifications.m */,
 				9535471A233A20EA0096AE60 /* Event */,
 				9535471B233A21610096AE60 /* Publisher */,
 				953546F4233A16780096AE60 /* PeachCollectorQueue.h */,
@@ -329,6 +335,7 @@
 				95354709233A16790096AE60 /* PeachCollectorQueue.h in Headers */,
 				953547A5233CDC850096AE60 /* PeachCollectorDynamicProperties.h in Headers */,
 				95354700233A16790096AE60 /* PeachCollectorPublisherEventStatus.h in Headers */,
+				953547FB234B2A9D0096AE60 /* PeachCollectorNotifications.h in Headers */,
 				95354718233A1FCB0096AE60 /* PeachPersistentContainer.h in Headers */,
 				95354703233A16790096AE60 /* PeachCollectorPublisher.h in Headers */,
 				95354704233A16790096AE60 /* PeachCollectorDataFormat.h in Headers */,
@@ -530,6 +537,7 @@
 				95354715233A194A0096AE60 /* PeachCollector.xcdatamodel in Sources */,
 				953547A6233CDC850096AE60 /* PeachCollectorDynamicProperties.m in Sources */,
 				9535470E233A16790096AE60 /* PeachCollectorEvent.m in Sources */,
+				953547FC234B2A9D0096AE60 /* PeachCollectorNotifications.m in Sources */,
 				9535470B233A16790096AE60 /* PeachCollector.m in Sources */,
 				9535470F233A16790096AE60 /* PeachCollectorContextComponent.m in Sources */,
 				95354706233A16790096AE60 /* PeachCollectorContext.m in Sources */,

@@ -81,10 +81,6 @@ typedef NS_ENUM(NSInteger, PCEventStatus) {
 
 typedef NSDictionary<NSString *, id<NSCopying>> PeachCollectorMetadata;
 
-OBJC_EXPORT NSString * const PeachCollectorNotification;
-OBJC_EXPORT NSString * const PeachCollectorNotificationLogKey;
-OBJC_EXPORT NSString * const PeachCollectorNotificationQueuedEventsKey;
-
 OBJC_EXPORT NSString * const PeachCollectorDefaultPublisherName;
 
 #pragma mark - Payload known keys
@@ -151,12 +147,5 @@ OBJC_EXPORT NSInteger const PeachCollectorDefaultPublisherMaxEvents;
 OBJC_EXPORT NSInteger const PeachCollectorDefaultPublisherInterval;
 OBJC_EXPORT PCPublisherGotBackOnlinePolicy const PeachCollectorDefaultPublisherPolicy;
 OBJC_EXPORT NSInteger const PeachCollectorDefaultPublisherHeartbeatInterval;
-
-
-
-
-@interface PeachCollectorDataFormat : NSObject
-
-@end
 
 NS_ASSUME_NONNULL_END

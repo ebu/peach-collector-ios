@@ -54,10 +54,6 @@ PCEventType const PCEventTypeArticleStart = @"article_start"; // ARTICLE
 PCEventType const PCEventTypeArticleEnd = @"article_end";
 PCEventType const PCEventTypeReadMore = @"read_more";
 
-NSString * const PeachCollectorNotification = @"PeachCollectorNotification";
-NSString * const PeachCollectorNotificationLogKey = @"PeachCollectorNotificationLogKey";
-NSString * const PeachCollectorNotificationQueuedEventsKey = @"PeachCollectorNotificationQueuedEventsKey";
-
 NSString * const PCMediaPlaybackPositionKey = @"playback_position_s";
 NSString * const PCMediaPreviousPlaybackPositionKey = @"previous_playback_position_s";
 NSString * const PCMediaVideoModeKey = @"video_mode";
@@ -115,7 +111,3 @@ NSInteger const PeachCollectorDefaultPublisherMaxEvents = 20;
 NSInteger const PeachCollectorDefaultPublisherInterval = 20;
 PCPublisherGotBackOnlinePolicy const PeachCollectorDefaultPublisherPolicy = PCPublisherGotBackOnlinePolicySendAll;
 NSInteger const PeachCollectorDefaultPublisherHeartbeatInterval = 5;
-
-@implementation PeachCollectorDataFormat
-
-@end

@@ -9,6 +9,7 @@
 #import <Foundation/Foundation.h>
 #import <Foundation/Foundation.h>
 #import <CoreData/CoreData.h>
+#import <PeachCollector/PeachCollectorNotifications.h>
 #import <PeachCollector/PeachCollectorEvent.h>
 #import <PeachCollector/PeachCollectorPublisher.h>
 #import <PeachCollector/PeachCollectorPublisherEventStatus.h>
@@ -76,6 +77,16 @@ NS_ASSUME_NONNULL_BEGIN
  *  @param eventType The event type to add to the list.
  */
 + (void)addFlushableEventType:(NSString *)eventType;
+
+
+
+/**
+ *  When set to `YES`, notifications will be emitted when events are recorded and when they are sent
+ *  @see PeachColletorNotifications.h
+ *  Default value is `NO`.
+ */
+@property (nonatomic, getter=isUnitTesting) BOOL unitTesting;
+
 
 @end
 
