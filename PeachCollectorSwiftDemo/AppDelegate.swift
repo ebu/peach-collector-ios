@@ -18,7 +18,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
         
-        PeachCollector.shared
         let publisher = PeachCollectorPublisher.init(siteKey: "zzebu00000000017")
         PeachCollector.setPublisher(publisher, withUniqueName: "My Publisher")
         

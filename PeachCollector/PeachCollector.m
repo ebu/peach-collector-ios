@@ -13,7 +13,6 @@
 
 @interface PeachCollector()
 
-@property (nonatomic, strong) PeachCollectorConfiguration *configuration;
 @property (nonatomic, strong) PeachCollectorQueue *queue;
 @property (nonatomic, strong) NSArray<NSString *> *flushableEventTypes;
 

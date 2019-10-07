@@ -9,12 +9,11 @@
 #import <Foundation/Foundation.h>
 #import <Foundation/Foundation.h>
 #import <CoreData/CoreData.h>
-#import <PeachCollector/PeachCollectorConfiguration.h>
-#import <PeachCollector/PeachCollectorDynamicProperties.h>
 #import <PeachCollector/PeachCollectorEvent.h>
 #import <PeachCollector/PeachCollectorPublisher.h>
 #import <PeachCollector/PeachCollectorPublisherEventStatus.h>
 #import <PeachCollector/PeachCollectorProperties.h>
+#import <PeachCollector/PeachCollectorDynamicProperties.h>
 #import <PeachCollector/PeachCollectorContext.h>
 #import <PeachCollector/PeachCollectorDataFormat.h>
 #import <PeachCollector/PeachCollectorQueue.h>

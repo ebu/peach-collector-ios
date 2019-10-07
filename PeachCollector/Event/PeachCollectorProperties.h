@@ -8,7 +8,6 @@
 
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
-#import "PeachCollectorProperties.h"
 #import "PeachCollectorDataFormat.h"
 
 NS_ASSUME_NONNULL_BEGIN
