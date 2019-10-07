@@ -72,11 +72,9 @@ OBJC_EXPORT PCEventType const PCEventTypeArticleEnd;
 OBJC_EXPORT PCEventType const PCEventTypeReadMore;
 
 typedef NS_ENUM(NSInteger, PCEventStatus) {
-    PCEventStatusPlublicationFailed = -1,
     PCEventStatusQueued = 0,
     PCEventStatusSentToPublisher = 1,
-    PCEventStatusSentToEndPoint = 2,
-    PCEventStatusPublished = 3
+    PCEventStatusPublished = 2
 };
 
 typedef NSDictionary<NSString *, id<NSCopying>> PeachCollectorMetadata;

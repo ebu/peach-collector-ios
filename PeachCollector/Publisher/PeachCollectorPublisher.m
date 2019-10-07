@@ -39,14 +39,8 @@
     return [self initWithServiceURL:[NSString stringWithFormat:@"https://pipe-collect.ebu.io/v3/collect?s=%@", siteKey]];
 }
 
-
-- (void)sendEvents:(NSArray<PeachCollectorPublisherEventStatus *> *)eventsStatuses withCompletionHandler:(void (^)(NSError * _Nullable error))completionHandler
+- (void)sendEvents:(NSArray<PeachCollectorEvent *> *)events withCompletionHandler:(void (^)(NSError * _Nullable error))completionHandler
 {
-    NSMutableArray *events = [NSMutableArray new];
-    for (PeachCollectorPublisherEventStatus *status in eventsStatuses) {
-        [events addObject:status.event];
-    }
-    
     NSMutableDictionary *data = [NSMutableDictionary new];
     [data setObject:@"1.0.3" forKey:PCPeachSchemaVersionKey];
     [data setObject:[PeachCollector version] forKey:PCPeachFrameworkVersionKey];
@@ -54,37 +48,13 @@
         [data setObject:[PeachCollector implementationVersion] forKey:PCPeachImplementationVersionKey];
     }
     [data setObject:@((int)[[NSDate date] timeIntervalSince1970]) forKey:PCSentTimestampKey];
-    
     [data setObject:self.clientInfo forKey:PCClientKey];
     
     NSMutableArray *eventsData = [NSMutableArray new];
     for (PeachCollectorEvent *event in events) {
-        NSMutableDictionary *eventDescription = [NSMutableDictionary new];
-        [eventDescription setObject:event.type forKey:PCEventTypeKey];
-        [eventDescription setObject:event.eventID forKey:PCEventIDKey];
-        [eventDescription setObject:@((int)[event.creationDate timeIntervalSince1970]) forKey:PCEventTimestampKey];
-        
-        if (event.context) [eventDescription setObject:event.context forKey:PCEventContextKey];
-        if (event.props) [eventDescription setObject:event.props forKey:PCEventPropertiesKey];
-        if (event.metadata) [eventDescription setObject:event.metadata forKey:PCEventMetadataKey];
-        
-        [eventsData addObject:eventDescription];
+        [eventsData addObject:[event dictionaryRepresentation]];
     }
-    
     [data setObject:eventsData forKey:PCEventsKey];
-    
-    for (PeachCollectorPublisherEventStatus *eventStatus in eventsStatuses) {
-        eventStatus.status = PCEventStatusSentToEndPoint;
-    }
-    
-    NSError *contextError = nil;
-    if ([[PeachCollector managedObjectContext] save:&contextError] == NO) {
-        NSAssert(NO, @"Error saving context: %@\n%@", [contextError localizedDescription], [contextError userInfo]);
-    }
-    NSString *publisherName = [[eventsStatuses objectAtIndex:0] publisherName];
-    [NSNotificationCenter.defaultCenter postNotificationName:PeachCollectorNotification
-                                                      object:nil
-                                                    userInfo:@{ PeachCollectorNotificationLogKey : [NSString stringWithFormat:@"%@ : Processed %d events", publisherName, (int)eventsData.count] }];
     
     [self publishData:[data copy] withCompletionHandler:completionHandler];
 }

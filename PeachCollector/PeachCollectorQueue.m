@@ -107,13 +107,17 @@
     NSError *error = nil;
     if ([[self managedObjectContext] save:&error] == NO) {
         NSAssert(NO, @"Error saving context: %@\n%@", [error localizedDescription], [error userInfo]);
+    
+    NSMutableArray *events = [NSMutableArray new];
+    for (PeachCollectorPublisherEventStatus *status in eventsStatuses) {
+        [events addObject:status.event];
     }
     
     [self registerBackgroundTask];
     
-    [publisher sendEvents:eventsStatuses withCompletionHandler:^(NSError * _Nullable error) {
+    [publisher sendEvents:events withCompletionHandler:^(NSError * _Nullable error) {
         for (PeachCollectorPublisherEventStatus *eventStatus in eventsStatuses) {
-            eventStatus.status = (error) ? PCEventStatusPlublicationFailed : PCEventStatusPublished;
+            eventStatus.status = (error) ? PCEventStatusQueued : PCEventStatusPublished;
             if ([eventStatus.event canBeRemoved]){
                 [[PeachCollector managedObjectContext] deleteObject:eventStatus.event];
             }

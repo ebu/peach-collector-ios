@@ -19,7 +19,6 @@
     NSError *error = nil;
     NSArray *results = [[PeachCollector managedObjectContext] executeFetchRequest:request error:&error];
     if (!results) {
-        NSLog(@"Error fetching Employee objects: %@\n%@", [error localizedDescription], [error userInfo]);
         return [NSArray array];
     }
     return results;
@@ -28,12 +27,11 @@
 + (NSArray<PeachCollectorPublisherEventStatus *> *)pendingEventsStatusesForPublisherNamed:(NSString *)publisherName
 {
     NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"PeachCollectorPublisherEventStatus"];
-    [request setPredicate:[NSPredicate predicateWithFormat:@"publisherName == %@ AND status < %d", publisherName, PCEventStatusSentToEndPoint]];
+    [request setPredicate:[NSPredicate predicateWithFormat:@"publisherName == %@ AND status < %d", publisherName, PCEventStatusPublished]];
     
     NSError *error = nil;
     NSArray *results = [[PeachCollector managedObjectContext] executeFetchRequest:request error:&error];
     if (!results) {
-        NSLog(@"Error fetching Employee objects: %@\n%@", [error localizedDescription], [error userInfo]);
         return [NSArray array];
     }
     return results;
