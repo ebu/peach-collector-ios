@@ -15,6 +15,11 @@ NS_ASSUME_NONNULL_BEGIN
 @interface PeachCollectorQueue : NSObject
 
 /**
+ *  Reset all statuses for queued events to 'queued'. Should be called at launch
+ */
+- (void)resetStatuses;
+
+/**
  *  Add an event to the queue.
  *  @param event the event to add.
  */
@@ -33,6 +38,7 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)checkPublishers;
 
 - (void)cleanTimers;
+
 @end
 
 NS_ASSUME_NONNULL_END

@@ -30,8 +30,6 @@
     if (self) {
         self.publisherTimers = [NSMutableDictionary new];
         self.backgroundTask = UIBackgroundTaskInvalid;
-        
-        [self checkStatuses];
     }
     return self;
 }
@@ -41,7 +39,7 @@
     return [[PeachCollector sharedCollector] persistentContainer].viewContext;
 }
 
-- (void)checkStatuses
+- (void)resetStatuses
 {
     NSArray *eventsStatuses = [PeachCollectorPublisherEventStatus allEventsStatuses];
     for (PeachCollectorPublisherEventStatus *eventStatus in eventsStatuses) {

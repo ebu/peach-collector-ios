@@ -45,6 +45,7 @@ static NSString *_implementationVersion = nil;
 
 + (void)load{
     [PeachCollector sharedCollector];
+    [[PeachCollector sharedCollector].queue resetStatuses];
 }
 
 + (instancetype)sharedCollector
