@@ -7,7 +7,6 @@
 //
 
 #import <Foundation/Foundation.h>
-#import <UIKit/UIKit.h>
 #import "PeachCollectorDataFormat.h"
 
 NS_ASSUME_NONNULL_BEGIN
@@ -84,18 +83,10 @@ NS_ASSUME_NONNULL_BEGIN
  */
 @property (nonatomic, copy) PCMediaStartMode startMode;
 
-
-- (instancetype)initWithTimeSpent:(nullable NSNumber *)timeSpent
-                 playbackPosition:(nullable NSNumber *)playbackPosition
-         previousPlaybackPosition:(nullable NSNumber *)previousPlaybackPosition
-                  previousMediaID:(nullable NSString *)previousMediaID
-                     playbackRate:(nullable NSNumber *)playbackRate
-                           volume:(nullable NSNumber *)volume
-                        videoMode:(nullable PCMediaVideoMode)videoMode
-                        audioMode:(nullable PCMediaAudioMode)audioMode
-                        startMode:(nullable PCMediaStartMode)startMode;
-
-- (NSDictionary *)dictionaryDescription;
+/**
+ * @return a dictionary representation of the component with keys defined in the Peach protocol
+ */
+- (nullable NSDictionary *)dictionaryDescription;
 
 @end
 

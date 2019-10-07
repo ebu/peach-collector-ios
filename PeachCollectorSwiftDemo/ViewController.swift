@@ -16,14 +16,22 @@ class ViewController: UIViewController {
     @IBOutlet weak var audioButton: UIButton?
     
     let audioMetadata = ["type": PCMediaMetadataType.audio, "format": PCMediaMetadataFormat.live] as! [String : NSCopying]
-    let audioContext = PeachCollectorContext.init(mediaContextWithID: "recoA", component: PeachCollectorContextComponent.init(type: "player", name: "AudioPlayer", version: "1.0"), appSectionID: "Demo/AudioPlayer", source: "Demo.reco")
-    var audioProperties = PeachCollectorProperties.init(timeSpent: 0, playbackPosition: 0, previousPlaybackPosition: nil, previousMediaID: nil, playbackRate: 1.0, volume: nil, videoMode: nil, audioMode: .normal, startMode: .normal)
+    var audioContext = PeachCollectorContext.init()
+    var audioProperties = PeachCollectorProperties.init()
     var isPlaying = false
     
     var player : AVPlayer?
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        let component = PeachCollectorContextComponent.init()
+        component.type = "player"
+        component.name = "AudioPlayer"
+        component.version = "1.0"
+        audioContext = PeachCollectorContext.init(mediaContextWithID: "recoA", component: component, appSectionID: "Demo/AudioPlayer", source: "Demo.reco")
+        
+        audioProperties.audioMode = .normal
         
         NotificationCenter.default.addObserver(self,selector: #selector(self.logNotificationReceived), name: NSNotification.Name.PeachCollector, object: nil)
         
@@ -58,7 +66,10 @@ class ViewController: UIViewController {
     
     @IBAction func sendRecommendationHit(sender: UIButton) {
     
-        let carouselComponent = PeachCollectorContextComponent.init(type: "Carousel", name: "recoCarousel", version: "1.0")
+        let carouselComponent = PeachCollectorContextComponent.init()
+        carouselComponent.type = "Carousel"
+        carouselComponent.name = "recoCarousel"
+        carouselComponent.version = "1.0"
         PeachCollectorEvent.sendRecommendationHit(withID: "reco00", items: ["reco00", "reco01", "reco02", "reco03"], itemsDisplayed: 3, hit: 0, appSectionID: "news/videos", source: nil, component: carouselComponent)
       
     }

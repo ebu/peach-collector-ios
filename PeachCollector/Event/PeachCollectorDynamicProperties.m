@@ -10,33 +10,7 @@
 
 @implementation PeachCollectorDynamicProperties
 
-- (instancetype)initWithTimeSpentBlock:(nullable NSNumber *(^)(void))timeSpentBlock
-                 playbackPositionBlock:(nullable NSNumber *(^)(void))playbackPositionBlock
-         previousPlaybackPositionBlock:(nullable NSNumber *(^)(void))previousPlaybackPositionBlock
-                        videoModeBlock:(nullable PCMediaVideoMode(^)(void))videoModeBlock
-                        audioModeBlock:(nullable PCMediaAudioMode(^)(void))audioModeBlock
-                        startModeBlock:(nullable PCMediaStartMode(^)(void))startModeBlock
-                  previousMediaIDBlock:(nullable NSString *(^)(void))previousMediaIDBlock
-                     playbackRateBlock:(nullable NSNumber *(^)(void))playbackRateBlock
-                           volumeBlock:(nullable NSNumber *(^)(void))volumeBlock
-{
-    self = [super init];
-    if (self) {
-        _timeSpentBlock = timeSpentBlock;
-        _playbackPositionBlock = playbackPositionBlock;
-        _previousPlaybackPositionBlock = previousPlaybackPositionBlock;
-        _videoModeBlock = videoModeBlock;
-        _audioModeBlock = audioModeBlock;
-        _startModeBlock = startModeBlock;
-        _previousMediaIDBlock = previousMediaIDBlock;
-        _playbackRateBlock = playbackRateBlock;
-        _volumeBlock = volumeBlock;
-    }
-    return self;
-}
-
-
-- (NSDictionary *)dictionaryDescription
+- (nullable NSDictionary *)dictionaryDescription
 {
     NSMutableDictionary *mutableDescription = [NSMutableDictionary new];
     

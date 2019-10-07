@@ -9,6 +9,7 @@
 #import "PeachCollectorQueue.h"
 #import "PeachCollector.h"
 #import "PeachCollectorDataFormat.h"
+@import UIKit;
 @import UserNotifications;
 
 

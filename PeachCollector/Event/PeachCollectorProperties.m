@@ -10,32 +10,7 @@
 
 @implementation PeachCollectorProperties
 
-- (instancetype)initWithTimeSpent:(nullable NSNumber *)timeSpent
-                 playbackPosition:(nullable NSNumber *)playbackPosition
-         previousPlaybackPosition:(nullable NSNumber *)previousPlaybackPosition
-                  previousMediaID:(nullable NSString *)previousMediaID
-                     playbackRate:(nullable NSNumber *)playbackRate
-                           volume:(nullable NSNumber *)volume
-                        videoMode:(nullable PCMediaVideoMode)videoMode
-                        audioMode:(nullable PCMediaAudioMode)audioMode
-                        startMode:(nullable PCMediaStartMode)startMode
-{
-    self = [super init];
-    if (self) {
-        _timeSpent = timeSpent;
-        _playbackPosition = playbackPosition;
-        _previousPlaybackPosition = previousPlaybackPosition;
-        _videoMode = videoMode;
-        _audioMode = audioMode;
-        _startMode = startMode;
-        _previousMediaID = previousMediaID;
-        _playbackRate = playbackRate;
-        _volume = volume;
-    }
-    return self;
-}
-
-- (NSDictionary *)dictionaryDescription
+- (nullable NSDictionary *)dictionaryDescription
 {
     NSMutableDictionary *mutableDescription = [NSMutableDictionary new];
     

@@ -46,9 +46,10 @@
 - (IBAction)recommendationHit:(id)sender
 {
     NSInteger index = 0;
-    PeachCollectorContextComponent *carouselComponent = [[PeachCollectorContextComponent alloc] initWithType:@"Carousel"
-                                                                                                        name:@"recoCarousel"
-                                                                                                     version:@"1.0"];
+    PeachCollectorContextComponent *carouselComponent = [PeachCollectorContextComponent new];
+    carouselComponent.type = @"Carousel";
+    carouselComponent.name = @"recoCarousel";
+    carouselComponent.version = @"1.0";
     
     [PeachCollectorEvent sendRecommendationHitWithID:[NSString stringWithFormat:@"reco%02d", (int)index]
                                                items:@[@"reco00", @"reco01", @"reco02", @"reco03"]
@@ -79,7 +80,10 @@
         
         self.audioMetadata = @{@"type": PCMediaMetadataTypeAudio, @"format": PCMediaMetadataFormatLive};
         
-        PeachCollectorContextComponent * component = [[PeachCollectorContextComponent alloc] initWithType:@"player" name:@"AudioPlayer" version:@"1.0"];
+        PeachCollectorContextComponent * component = [PeachCollectorContextComponent new];
+        component.type = @"player";
+        component.name = @"AudioPlayer";
+        component.version = @"1.0";
         self.audioContext = [[PeachCollectorContext alloc] initMediaContextWithID:@"recoA"
                                                                    component:component
                                                                 appSectionID:@"Demo/AudioPlayer"

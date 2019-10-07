@@ -16,10 +16,6 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, copy) NSString *name;
 @property (nonatomic, copy) NSString *version;
 
-- (instancetype)initWithType:(nullable NSString *)type
-                        name:(nullable NSString *)name
-                     version:(nullable NSString *)version;
-
 /**
  * @return a dictionary representation of the component with keys defined in the Peach protocol
  */
