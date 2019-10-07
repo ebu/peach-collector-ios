@@ -37,4 +37,15 @@
     return results;
 }
 
++ (NSArray<PeachCollectorPublisherEventStatus *> *)allEventsStatuses
+{
+    NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"PeachCollectorPublisherEventStatus"];
+    NSError *error = nil;
+    NSArray *results = [[PeachCollector managedObjectContext] executeFetchRequest:request error:&error];
+    if (!results) {
+        return [NSArray array];
+    }
+    return results;
+}
+
 @end
