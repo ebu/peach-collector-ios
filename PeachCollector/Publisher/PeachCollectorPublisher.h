@@ -42,7 +42,6 @@ NS_ASSUME_NONNULL_BEGIN
  */
 - (void)sendEvents:(NSArray<PeachCollectorEvent *> *)events withCompletionHandler:(void (^)(NSError * _Nullable error))completionHandler;
 
-
 /**
  *  Return `YES` if the the publisher can process the event. This is used when an event is added to the queue to check
  *  if said event should be added to the publisher's queue.

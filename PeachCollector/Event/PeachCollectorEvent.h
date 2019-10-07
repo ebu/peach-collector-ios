@@ -86,6 +86,11 @@ NS_ASSUME_NONNULL_BEGIN
 */
 - (BOOL)shouldBeFlushedWhenReceivedInBackgroundState;
 
+/**
+* @return a dictionary representation of the event as defined in the Peach documentation
+*/
+- (NSDictionary *)dictionaryRepresentation;
+
 @end
 
 NS_ASSUME_NONNULL_END

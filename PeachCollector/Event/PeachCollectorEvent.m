@@ -28,7 +28,7 @@
     
     PeachCollectorContext *context = [[PeachCollectorContext alloc] initRecommendationContextWithitems:items itemsDisplayedCount:itemsDisplayed appSectionID:appSectionID source:source component:component hitIndex:hitIndex];
     
-    event.context = [context dictionaryDescription];
+    event.context = [context dictionaryRepresentation];
     
     NSError *error = nil;
     if ([[event managedObjectContext] save:&error] == NO) {
@@ -54,7 +54,7 @@
     
     PeachCollectorContext *context = [[PeachCollectorContext alloc] initRecommendationContextWithitems:items itemsDisplayedCount:itemsDisplayedCount appSectionID:appSectionID source:source component:component];
 
-    event.context = [context dictionaryDescription];
+    event.context = [context dictionaryRepresentation];
     
     NSError *error = nil;
     if ([[event managedObjectContext] save:&error] == NO) {
@@ -77,10 +77,10 @@
     event.eventID = eventID;
     event.creationDate = [NSDate date];
     if (context) {
-        event.context = [context dictionaryDescription];
+        event.context = [context dictionaryRepresentation];
     }
     if (properties) {
-        event.props = [properties dictionaryDescription];
+        event.props = [properties dictionaryRepresentation];
     }
     if (metadata) {
         event.metadata = metadata;
@@ -159,6 +159,21 @@
         return [[[PeachCollector sharedCollector] flushableEventTypes] containsObject:self.type];
     }
     return NO;
+}
+
+
+- (NSDictionary *)dictionaryRepresentation
+{
+    NSMutableDictionary *representation = [NSMutableDictionary new];
+    [representation setObject:self.type forKey:PCEventTypeKey];
+    [representation setObject:self.eventID forKey:PCEventIDKey];
+    [representation setObject:@((int)[self.creationDate timeIntervalSince1970]) forKey:PCEventTimestampKey];
+    
+    if (self.context) [representation setObject:self.context forKey:PCEventContextKey];
+    if (self.props) [representation setObject:self.props forKey:PCEventPropertiesKey];
+    if (self.metadata) [representation setObject:self.metadata forKey:PCEventMetadataKey];
+    
+    return representation;
 }
 
 @end

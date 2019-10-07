@@ -63,18 +63,18 @@
 }
 
 
-- (NSDictionary *)dictionaryDescription
+- (nullable NSDictionary *)dictionaryRepresentation
 {
-    NSMutableDictionary *mutableDescription = [NSMutableDictionary new];
+    NSMutableDictionary *representation = [NSMutableDictionary new];
     
-    if (self.contextID) [mutableDescription setObject:self.contextID forKey:PCContextIDKey];
-    if (self.items) [mutableDescription setObject:self.items forKey:PCContextItemsKey];
-    if (self.itemsDisplayedCount) [mutableDescription setObject:self.itemsDisplayedCount forKey:PCContextItemsDisplayedKey];
-    if (self.appSectionID) [mutableDescription setObject:self.appSectionID forKey:PCContextPageURIKey];
-    if (self.source) [mutableDescription setObject:self.source forKey:PCContextSourceKey];
-    if (self.component) [mutableDescription setObject:[self.component dictionaryDescription] forKey:PCContextComponentKey];
-    if ([mutableDescription count] == 0) return nil;
-    return [mutableDescription copy];
+    if (self.contextID) [representation setObject:self.contextID forKey:PCContextIDKey];
+    if (self.items) [representation setObject:self.items forKey:PCContextItemsKey];
+    if (self.itemsDisplayedCount != nil) [representation setObject:self.itemsDisplayedCount forKey:PCContextItemsDisplayedKey];
+    if (self.appSectionID) [representation setObject:self.appSectionID forKey:PCContextPageURIKey];
+    if (self.source) [representation setObject:self.source forKey:PCContextSourceKey];
+    if (self.component) [representation setObject:[self.component dictionaryRepresentation] forKey:PCContextComponentKey];
+    if ([representation count] == 0) return nil;
+    return [representation copy];
 }
 
 @end

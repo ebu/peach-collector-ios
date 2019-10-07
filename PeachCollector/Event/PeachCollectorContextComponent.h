@@ -17,9 +17,9 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, copy) NSString *version;
 
 /**
- * @return a dictionary representation of the component with keys defined in the Peach protocol
+ * @return a dictionary representation of the component as defined in the Peach documentation
  */
-- (NSDictionary *)dictionaryDescription;
+- (nullable NSDictionary *)dictionaryRepresentation;
 
 @end
 

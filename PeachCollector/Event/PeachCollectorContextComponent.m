@@ -24,16 +24,16 @@
     return self;
 }
 
-- (NSDictionary *)dictionaryDescription
+- (nullable NSDictionary *)dictionaryRepresentation
 {
-    NSMutableDictionary *mutableDescription = [NSMutableDictionary new];
-    if (self.type) [mutableDescription setObject:self.type forKey:PCContextComponentTypeKey];
-    if (self.name) [mutableDescription setObject:self.name forKey:PCContextComponentNameKey];
-    if (self.version) [mutableDescription setObject:self.version forKey:PCContextComponentVersionKey];
-    if ([mutableDescription count] == 0) {
+    NSMutableDictionary *representation = [NSMutableDictionary new];
+    if (self.type) [representation setObject:self.type forKey:PCContextComponentTypeKey];
+    if (self.name) [representation setObject:self.name forKey:PCContextComponentNameKey];
+    if (self.version) [representation setObject:self.version forKey:PCContextComponentVersionKey];
+    if ([representation count] == 0) {
         return nil;
     }
-    return [mutableDescription copy];
+    return [representation copy];
 }
 
 @end

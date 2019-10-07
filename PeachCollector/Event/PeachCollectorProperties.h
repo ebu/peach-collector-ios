@@ -84,9 +84,9 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, copy) PCMediaStartMode startMode;
 
 /**
- * @return a dictionary representation of the component with keys defined in the Peach protocol
+ * @return a dictionary representation of the properties as defined in the Peach documentation
  */
-- (nullable NSDictionary *)dictionaryDescription;
+- (nullable NSDictionary *)dictionaryRepresentation;
 
 @end
 

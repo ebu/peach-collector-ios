@@ -40,9 +40,9 @@ NS_ASSUME_NONNULL_BEGIN
                                 source:(nullable NSString *)source;
 
 /**
- * @return a dictionary representation of the context with keys defined in the Peach protocol
+ * @return a dictionary representation of the context as defined in the Peach documentation
  */
-- (NSDictionary *)dictionaryDescription;
+- (nullable NSDictionary *)dictionaryRepresentation;
 
 @end
 

@@ -10,37 +10,37 @@
 
 @implementation PeachCollectorProperties
 
-- (nullable NSDictionary *)dictionaryDescription
+- (nullable NSDictionary *)dictionaryRepresentation
 {
-    NSMutableDictionary *mutableDescription = [NSMutableDictionary new];
+    NSMutableDictionary *representation = [NSMutableDictionary new];
     
-    if (self.playbackPosition) {
-        [mutableDescription setObject:self.playbackPosition forKey:PCMediaPlaybackPositionKey];
+    if (self.playbackPosition != nil) {
+        [representation setObject:self.playbackPosition forKey:PCMediaPlaybackPositionKey];
     }
-    if (self.previousPlaybackPosition) {
-        [mutableDescription setObject:self.previousPlaybackPosition forKey:PCMediaPreviousPlaybackPositionKey];
+    if (self.previousPlaybackPosition != nil) {
+        [representation setObject:self.previousPlaybackPosition forKey:PCMediaPreviousPlaybackPositionKey];
     }
     if (self.videoMode) {
-        [mutableDescription setObject:self.videoMode forKey:PCMediaVideoModeKey];
+        [representation setObject:self.videoMode forKey:PCMediaVideoModeKey];
     }
     if (self.audioMode) {
-        [mutableDescription setObject:self.audioMode forKey:PCMediaAudioModeKey];
+        [representation setObject:self.audioMode forKey:PCMediaAudioModeKey];
     }
     if (self.startMode) {
-        [mutableDescription setObject:self.startMode forKey:PCMediaStartModeKey];
+        [representation setObject:self.startMode forKey:PCMediaStartModeKey];
     }
     if (self.previousMediaID) {
-        [mutableDescription setObject:self.previousMediaID forKey:PCMediaPreviousIDKey];
+        [representation setObject:self.previousMediaID forKey:PCMediaPreviousIDKey];
     }
-    if (self.playbackRate) {
-        [mutableDescription setObject:self.playbackRate forKey:PCMediaPlaybackRateKey];
+    if (self.playbackRate != nil) {
+        [representation setObject:self.playbackRate forKey:PCMediaPlaybackRateKey];
     }
-    if (self.volume) {
-        [mutableDescription setObject:self.volume forKey:PCMediaVolumeKey];
+    if (self.volume != nil) {
+        [representation setObject:self.volume forKey:PCMediaVolumeKey];
     }
     
-    if ([mutableDescription count] == 0) return nil;
-    return [mutableDescription copy];
+    if ([representation count] == 0) return nil;
+    return [representation copy];
 }
 
 

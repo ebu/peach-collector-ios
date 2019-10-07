@@ -10,19 +10,19 @@
 
 @implementation PeachCollectorDynamicProperties
 
-- (nullable NSDictionary *)dictionaryDescription
+- (nullable NSDictionary *)dictionaryRepresentation
 {
     NSMutableDictionary *mutableDescription = [NSMutableDictionary new];
     
     if (self.playbackPositionBlock) {
         NSNumber *playbackPosition = self.playbackPositionBlock();
-        if (playbackPosition) {
+        if (playbackPosition != nil) {
             [mutableDescription setObject:playbackPosition forKey:PCMediaPlaybackPositionKey];
         }
     }
     if (self.previousPlaybackPositionBlock) {
         NSNumber *previousPlaybackPosition = self.previousPlaybackPositionBlock();
-        if (previousPlaybackPosition) {
+        if (previousPlaybackPosition != nil) {
             [mutableDescription setObject:previousPlaybackPosition forKey:PCMediaPreviousPlaybackPositionKey];
         }
     }
@@ -52,13 +52,13 @@
     }
     if (self.playbackRateBlock) {
         NSNumber *playbackRate = self.playbackRateBlock();
-        if (playbackRate) {
+        if (playbackRate != nil) {
             [mutableDescription setObject:playbackRate forKey:PCMediaPlaybackRateKey];
         }
     }
     if (self.volumeBlock) {
         NSNumber *volume = self.volumeBlock();
-        if (volume) {
+        if (volume != nil) {
             [mutableDescription setObject:volume forKey:PCMediaVolumeKey];
         }
     }
