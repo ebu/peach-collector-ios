@@ -135,9 +135,10 @@
 
 - (void)send
 {
-    [NSNotificationCenter.defaultCenter postNotificationName:PeachCollectorNotification
-                                                      object:nil
-                                                    userInfo:@{ PeachCollectorNotificationLogKey : [NSString stringWithFormat:@"+ Event (%@)", self.type] }];
+    if ([[PeachCollector sharedCollector] isUnitTesting]) {
+        [NSNotificationCenter.defaultCenter postNotificationName:PeachCollectorNotification object:nil
+                                                        userInfo:@{PeachCollectorNotificationLogKey:[NSString stringWithFormat:@"+ Event (%@)", self.type]}];
+    }
     [PeachCollector addEventToQueue:self];
 }
 
