@@ -49,7 +49,10 @@
     
     NSMutableDictionary *data = [NSMutableDictionary new];
     [data setObject:@"1.0.3" forKey:PCPeachSchemaVersionKey];
-    [data setObject:@"A.B.3" forKey:PCPeachImplementationVersionKey];
+    [data setObject:[PeachCollector version] forKey:PCPeachFrameworkVersionKey];
+    if ([PeachCollector implementationVersion]) {
+        [data setObject:[PeachCollector implementationVersion] forKey:PCPeachImplementationVersionKey];
+    }
     [data setObject:@((int)[[NSDate date] timeIntervalSince1970]) forKey:PCSentTimestampKey];
     
     [data setObject:self.clientInfo forKey:PCClientKey];
@@ -133,7 +136,7 @@
 {
     if (_clientInfo == nil) {
         NSString *clientBundleIdentifier = [[NSBundle mainBundle] bundleIdentifier];
-        NSString *clientAppName = @"PeachTest"; //[[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleDisplayName"];
+        NSString *clientAppName = [[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleDisplayName"];
         NSString *clientAppVersion = [[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleShortVersionString"];
         
         ASIdentifierManager *asi = [ASIdentifierManager sharedManager];

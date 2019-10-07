@@ -75,6 +75,7 @@ NSString * const PCContextComponentNameKey = @"name";
 NSString * const PCContextComponentVersionKey = @"version";
 
 NSString * const PCPeachSchemaVersionKey = @"peach_schema_version";
+NSString * const PCPeachFrameworkVersionKey = @"peach_framework_version";
 NSString * const PCPeachImplementationVersionKey = @"peach_implementation_version";
 NSString * const PCSentTimestampKey = @"sent_timestamp";
 

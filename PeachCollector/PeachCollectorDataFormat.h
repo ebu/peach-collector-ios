@@ -105,6 +105,7 @@ OBJC_EXPORT NSString * const PCContextComponentNameKey;
 OBJC_EXPORT NSString * const PCContextComponentVersionKey;
 
 OBJC_EXPORT NSString * const PCPeachSchemaVersionKey;
+OBJC_EXPORT NSString * const PCPeachFrameworkVersionKey;
 OBJC_EXPORT NSString * const PCPeachImplementationVersionKey;
 OBJC_EXPORT NSString * const PCSentTimestampKey;
 

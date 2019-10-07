@@ -19,11 +19,33 @@
 @end
 
 @implementation PeachCollector
+static NSString *_implementationVersion = nil;
+
+#pragma mark - Versions
+
++ (NSString *)version
+{
+    NSBundle *bundle = [NSBundle bundleForClass:[PeachCollector class]];
+    NSString *buildNumber = [bundle objectForInfoDictionaryKey:(__bridge NSString*)kCFBundleVersionKey];
+    NSString *version = [bundle objectForInfoDictionaryKey:@"CFBundleShortVersionString"];
+    return [NSString stringWithFormat:@"%@-%@", version, buildNumber];
+}
+
++ (NSString *)implementationVersion
+{
+    return _implementationVersion;
+}
+
++ (void)setImplementationVersion:(NSString *)version
+{
+    _implementationVersion = [version copy];
+}
+
+#pragma mark - Initialization
 
 + (void)load{
     [PeachCollector sharedCollector];
 }
-
 
 + (instancetype)sharedCollector
 {

@@ -30,6 +30,17 @@ NS_ASSUME_NONNULL_BEGIN
 @interface PeachCollector : NSObject
 
 /**
+ *  PeachCollector marketing version followed by build number (for example: "1.1.1-25")
+ */
+@property (class, nonatomic, copy, readonly) NSString *version;
+
+/**
+ *  Implementation version of the framework
+ *  Value is null by default, it will not be sent unless set
+ */
+@property (class, nonatomic, copy, nullable) NSString *implementationVersion;
+
+/**
  *  The collector singleton.
  *  Singleton is automatically created at the launch of the application
  */
