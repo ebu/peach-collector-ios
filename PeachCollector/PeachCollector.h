@@ -69,6 +69,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (readonly, strong) NSPersistentContainer *persistentContainer;
 + (NSManagedObjectContext *)managedObjectContext;
++ (BOOL)save;
 
 /**
  *  Add an event to be queued. Event will be added to the queue and sent accordingly to publisher's configuration.

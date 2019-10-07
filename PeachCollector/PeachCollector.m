@@ -187,6 +187,16 @@ static NSString *_implementationVersion = nil;
     return [PeachCollector sharedCollector].persistentContainer.viewContext;
 }
 
++ (BOOL)save{
+    NSError *contextError = nil;
+    if ([[PeachCollector managedObjectContext] save:&contextError] == NO) {
+        [[PeachCollector managedObjectContext] rollback];
+        //NSAssert(NO, @"Error saving context: %@\n%@", [error localizedDescription], [error userInfo]);
+        return NO;
+    }
+    return YES;
+}
+
 
 
 

@@ -30,11 +30,7 @@
     
     event.context = [context dictionaryRepresentation];
     
-    NSError *error = nil;
-    if ([[event managedObjectContext] save:&error] == NO) {
-        NSAssert(NO, @"Error saving context: %@\n%@", [error localizedDescription], [error userInfo]);
-        return;
-    }
+    [PeachCollector save];
     
     [event send];
 }
@@ -56,11 +52,7 @@
 
     event.context = [context dictionaryRepresentation];
     
-    NSError *error = nil;
-    if ([[event managedObjectContext] save:&error] == NO) {
-        NSAssert(NO, @"Error saving context: %@\n%@", [error localizedDescription], [error userInfo]);
-        return;
-    }
+    [PeachCollector save];
     
     [event send];
 }
@@ -86,11 +78,7 @@
         event.metadata = metadata;
     }
     
-    NSError *error = nil;
-    if ([[event managedObjectContext] save:&error] == NO) {
-        NSAssert(NO, @"Error saving context: %@\n%@", [error localizedDescription], [error userInfo]);
-        return;
-    }
+    [PeachCollector save];
     
     [event send];
 }

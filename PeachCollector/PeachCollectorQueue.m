@@ -51,10 +51,7 @@
         }
     }
     
-    NSError *error = nil;
-    if ([[self managedObjectContext] save:&error] == NO) {
-        NSAssert(NO, @"Error saving context: %@\n%@", [error localizedDescription], [error userInfo]);
-    }
+    [PeachCollector save];
     
     if ([[UIApplication sharedApplication] applicationState] != UIApplicationStateActive
         && [event shouldBeFlushedWhenReceivedInBackgroundState]) {
@@ -104,9 +101,7 @@
     for (PeachCollectorPublisherEventStatus *eventStatus in eventsStatuses) {
         eventStatus.status = PCEventStatusSentToPublisher;
     }
-    NSError *error = nil;
-    if ([[self managedObjectContext] save:&error] == NO) {
-        NSAssert(NO, @"Error saving context: %@\n%@", [error localizedDescription], [error userInfo]);
+    [PeachCollector save];
     
     NSMutableArray *events = [NSMutableArray new];
     for (PeachCollectorPublisherEventStatus *status in eventsStatuses) {
@@ -122,12 +117,7 @@
                 [[PeachCollector managedObjectContext] deleteObject:eventStatus.event];
             }
         }
-        
-        NSError *contextError = nil;
-        if ([[PeachCollector managedObjectContext] save:&contextError] == NO) {
-            [[PeachCollector managedObjectContext] rollback];
-            //NSAssert(NO, @"Error saving context: %@\n%@", [contextError localizedDescription], [contextError userInfo]);
-        }
+        [PeachCollector save];
         
         if (error) {
             NSTimer *timer = [NSTimer scheduledTimerWithTimeInterval:publisher.interval target:self selector:@selector(sendEventsToPublisherWithTimer:) userInfo:@{@"publisherName":publisherName} repeats:NO];
