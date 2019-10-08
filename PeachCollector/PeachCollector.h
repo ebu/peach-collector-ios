@@ -65,7 +65,11 @@ NS_ASSUME_NONNULL_BEGIN
  */
 + (void)setPublisher:(PeachCollectorPublisher *)publisher withUniqueName:(NSString *)publisherName;
 
-@property (nonatomic, copy) NSString *userID;
+/**
+ *  User unique identifier when logged in
+ */
+@property (class, nonatomic, copy, nullable) NSString *userID;
+
 
 @property (readonly, strong) NSPersistentContainer *persistentContainer;
 + (NSManagedObjectContext *)managedObjectContext;
@@ -73,7 +77,6 @@ NS_ASSUME_NONNULL_BEGIN
 
 /**
  *  Add an event to be queued. Event will be added to the queue and sent accordingly to publisher's configuration.
- *
  *  @param event    The event to send.
  */
 + (void)addEventToQueue:(PeachCollectorEvent *)event;

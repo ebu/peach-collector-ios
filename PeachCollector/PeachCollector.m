@@ -20,6 +20,7 @@
 
 @implementation PeachCollector
 static NSString *_implementationVersion = nil;
+static NSString *_userID = nil;
 
 #pragma mark - Versions
 
@@ -132,14 +133,14 @@ static NSString *_implementationVersion = nil;
 
 #pragma mark - User management
 
-- (void)setUserID:(NSString *)userID
++ (NSString *)userID
 {
-    _userID = userID;
-    
-    /*NSMutableDictionary *mutableClientInfo = [self.clientInfo mutableCopy];
-    [mutableClientInfo setObject:userID forKey:@"user_id"];
-    
-    self.clientInfo = [mutableClientInfo copy];*/
+    return _userID;
+}
+
++ (void)setUserID:(NSString *)userID
+{
+    _userID = [userID copy];
 }
 
 

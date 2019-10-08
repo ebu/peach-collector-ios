@@ -122,6 +122,10 @@
     [mutableClientInfo addEntriesFromDictionary:@{PCClientDeviceKey : [self deviceInfo],
                                                   PCClientOSKey : [self osInfo]}];
     
+    if (PeachCollector.userID) {
+        [mutableClientInfo setObject:PeachCollector.userID forKey:PCClientUserIDKey];
+    }
+    
     self.clientInfo = [mutableClientInfo copy];
 }
 
@@ -176,10 +180,8 @@
     return @{PCClientOSNameKey:clientOSName, PCClientOSVersionKey:clientOSVersion};
 }
 
-- (void)setUserID:(NSString *)userID
+- (void)userIDHasBeenUpdated:(NSString *)userID
 {
-    _userID = userID;
-    
     NSMutableDictionary *mutableClientInfo = [self.clientInfo mutableCopy];
     [mutableClientInfo setObject:userID forKey:PCClientUserIDKey];
     
