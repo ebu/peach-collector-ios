@@ -8,12 +8,12 @@
         <attribute name="pageStartDate" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
         <attribute name="props" optional="YES" attributeType="Transformable" valueTransformerName="NSSecureUnarchiveFromData" customClassName="NSDictionary"/>
         <attribute name="type" attributeType="String"/>
-        <relationship name="eventStatuses" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="PeachCollectorPublisherEventStatus" inverseName="event" inverseEntity="PeachCollectorPublisherEventStatus"/>
+        <relationship name="eventStatuses" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="PeachCollectorPublisherEventStatus" inverseName="event" inverseEntity="PeachCollectorPublisherEventStatus"/>
     </entity>
     <entity name="PeachCollectorPublisherEventStatus" representedClassName="PeachCollectorPublisherEventStatus" syncable="YES" codeGenerationType="class" coreSpotlightDisplayNameExpression="PeachCollectorPublisherEventStatus">
         <attribute name="publisherName" optional="YES" attributeType="String"/>
         <attribute name="status" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
-        <relationship name="event" optional="YES" maxCount="1" deletionRule="Cascade" destinationEntity="PeachCollectorEvent" inverseName="eventStatuses" inverseEntity="PeachCollectorEvent"/>
+        <relationship name="event" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="PeachCollectorEvent" inverseName="eventStatuses" inverseEntity="PeachCollectorEvent"/>
     </entity>
     <elements>
         <element name="PeachCollectorEvent" positionX="-63" positionY="-18" width="128" height="163"/>

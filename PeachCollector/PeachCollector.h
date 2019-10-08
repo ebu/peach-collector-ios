@@ -103,6 +103,16 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, getter=isUnitTesting) BOOL unitTesting;
 
 
+/**
+ *  Flush the queue for all publishers (tries to send everything that is queued)
+ */
++ (void)flush;
+
+/**
+ *  Remove all previously queued events
+ */
++ (void)clean;
+
 @end
 
 NS_ASSUME_NONNULL_END

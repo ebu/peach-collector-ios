@@ -19,8 +19,6 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     PeachCollector.implementationVersion = @"1";
     PeachCollectorPublisher *publisher = [[PeachCollectorPublisher alloc] initWithSiteKey:@"zzebu00000000017"];
-    //publisher.interval = 10;
-    //publisher.maxEvents = 10;
     [PeachCollector setPublisher:publisher withUniqueName:@"MyPublisher"];
     return YES;
 }

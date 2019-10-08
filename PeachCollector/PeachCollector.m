@@ -92,6 +92,36 @@ static NSString *_userID = nil;
 }
 
 
+#pragma mark - Queue management
+
++ (void)flush
+{
+    if ([[PeachCollector sharedCollector] queue]) {
+        [[[PeachCollector sharedCollector] queue] flush];
+    }
+}
+
++ (void)clean
+{
+    if ([[PeachCollector sharedCollector] queue]) {
+        [[[PeachCollector sharedCollector] queue] cleanTimers];
+    }
+    [PeachCollector deleteAllEntities:@"PeachCollectorEvent"];
+}
+
++ (void)deleteAllEntities:(NSString *)nameEntity
+{
+    NSFetchRequest *request = [[NSFetchRequest alloc] initWithEntityName:nameEntity];
+    NSBatchDeleteRequest *delete = [[NSBatchDeleteRequest alloc] initWithFetchRequest:request];
+
+    NSError *deleteError;
+    [[PeachCollector managedObjectContext] executeRequest:delete error:&deleteError];
+    [[PeachCollector managedObjectContext] processPendingChanges];
+    [PeachCollector save];
+    
+}
+
+
 #pragma mark - Publisher management
 
 + (PeachCollectorPublisher *)publisherNamed:(NSString *)publisherName{
