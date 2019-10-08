@@ -1,5 +1,4 @@
 
-
 [![Carthage compatible](https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat)](https://github.com/Carthage/Carthage)
 
 ## About
@@ -48,17 +47,21 @@ import PeachCollector
 
 
 ### Initializing the collector
-You need a `PeachCollectorConfiguration` to initialize the `PeachCollector`.
-You either have to provide a __SiteKey__ or a full __URL address__ in order to configure the default publisher that will be created alongside the collector.
+`PeachCollector` is automatically initialized at the launch of the app. You just need a `PeachCollectorPublisher` to start sending the queued events.
+You can either provide a __SiteKey__ or a full __URL address__ in order to configure the publisher.
+Optionally, you can define an implementation version by setting a PeachCollector property
 
 #### Objective-C
 ```objectivec
-[PeachCollector startWithConfiguration:
-[[PeachCollectorConfiguration alloc] initWithSiteKey:@"zzebu00000000017"]];
+PeachCollector.implementationVersion = @"1";
+PeachCollectorPublisher *publisher = [[PeachCollectorPublisher alloc] initWithSiteKey:@"zzebu00000000017"];
+[PeachCollector setPublisher:publisher withUniqueName:@"MyPublisher"];
 ```
 #### Swift
 ```swift
- PeachCollector.start(with: PeachCollectorConfiguration.init(siteKey: "zzebu00000000017"))
+PeachCollector.implementationVersion = "1";
+let publisher = PeachCollectorPublisher.init(siteKey: "zzebu00000000017")
+PeachCollector.setPublisher(publisher, withUniqueName: "My Publisher")
 ```
 
 
