@@ -142,8 +142,9 @@ typedef NS_ENUM(NSInteger, PCPublisherGotBackOnlinePolicy) {
     PCPublisherGotBackOnlinePolicySendAllAfterRandomDelay
 };
 
-OBJC_EXPORT NSInteger const PeachCollectorDefaultPublisherMaxEvents;
 OBJC_EXPORT NSInteger const PeachCollectorDefaultPublisherInterval;
+OBJC_EXPORT NSInteger const PeachCollectorDefaultPublisherRecommendedLimitPerBatch;
+OBJC_EXPORT NSInteger const PeachCollectorDefaultPublisherMaximumLimitPerBatch;
 OBJC_EXPORT PCPublisherGotBackOnlinePolicy const PeachCollectorDefaultPublisherPolicy;
 OBJC_EXPORT NSInteger const PeachCollectorDefaultPublisherHeartbeatInterval;
 

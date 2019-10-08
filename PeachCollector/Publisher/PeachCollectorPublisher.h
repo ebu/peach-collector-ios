@@ -15,9 +15,35 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface PeachCollectorPublisher : NSObject
 
+/**
+ *  End point of the publisher, where all requests should be sent
+ */
 @property (nonatomic, copy) NSString *serviceURL;
+
+/**
+ * The interval in seconds at which events are sent to the server.
+ * 0 means no buffering, every event is sent as soon as it is queued.
+ * Default value is 20 seconds.
+ */
 @property (nonatomic) NSInteger interval;
-@property (nonatomic) NSInteger maxEvents;
+
+/**
+ *  Number of events queued that triggers the publishing process even if the desired interval hasn't been reached.
+ *  1 means no buffering, every event is sent as soon as it is queued.
+ *  Default value is 20 events.
+ */
+@property (nonatomic) NSInteger recommendedLimitPerBatch;
+
+/**
+ *  Maximum number of events that can be sent in a single batch.
+ *  Default value is 1000 events.
+ */
+@property (nonatomic) NSInteger maximumLimitPerBatch;
+
+/**
+ *  How the publisher should behave after an offline period
+ *  Default is PCPublisherGotBackOnlinePolicySendAll
+ */
 @property (nonatomic) PCPublisherGotBackOnlinePolicy gotBackPolicy;
 
 

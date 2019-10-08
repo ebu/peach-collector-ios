@@ -76,10 +76,10 @@
         PeachCollectorPublisher *publisher = [PeachCollector publisherNamed:publisherName];
         NSArray *eventsStatuses = [PeachCollectorPublisherEventStatus pendingEventsStatusesForPublisherNamed:publisherName];
         
-        if (eventsStatuses.count >= publisher.maxEvents || publisher.interval == 0) {
+        if (eventsStatuses.count >= publisher.recommendedLimitPerBatch || publisher.interval == 0) {
             [self sendEventsToPublisherNamed:publisherName];
         }
-        else if ([eventsStatuses count] >= 1 && publisher.maxEvents > 1) {
+        else if ([eventsStatuses count] >= 1 && publisher.recommendedLimitPerBatch > 1) {
             if ([self.publisherTimers objectForKey:publisherName] == nil) {
                 NSTimer *timer = [NSTimer scheduledTimerWithTimeInterval:publisher.interval target:self selector:@selector(sendEventsToPublisherWithTimer:) userInfo:@{@"publisherName":publisherName} repeats:NO];
                 [self.publisherTimers setObject:timer forKey:publisherName];
