@@ -56,6 +56,7 @@
         [eventsData addObject:[event dictionaryRepresentation]];
     }
     [data setObject:eventsData forKey:PCEventsKey];
+    if (PeachCollector.userID) [data setObject:PeachCollector.userID forKey:PCUserIDKey];
     
     [self publishData:[data copy] withCompletionHandler:completionHandler];
 }
@@ -123,10 +124,6 @@
     [mutableClientInfo addEntriesFromDictionary:@{PCClientDeviceKey : [self deviceInfo],
                                                   PCClientOSKey : [self osInfo]}];
     
-    if (PeachCollector.userID) {
-        [mutableClientInfo setObject:PeachCollector.userID forKey:PCClientUserIDKey];
-    }
-    
     self.clientInfo = [mutableClientInfo copy];
 }
 
@@ -180,15 +177,6 @@
     
     return @{PCClientOSNameKey:clientOSName, PCClientOSVersionKey:clientOSVersion};
 }
-
-- (void)userIDHasBeenUpdated:(NSString *)userID
-{
-    NSMutableDictionary *mutableClientInfo = [self.clientInfo mutableCopy];
-    [mutableClientInfo setObject:userID forKey:PCClientUserIDKey];
-    
-    self.clientInfo = [mutableClientInfo copy];
-}
-
 
 - (BOOL)shouldProcessEvent:(PeachCollectorEvent *)event
 {

@@ -74,12 +74,6 @@ NS_ASSUME_NONNULL_BEGIN
  */
 - (BOOL)shouldProcessEvent:(PeachCollectorEvent *)event;
 
-/**
- *  Method called by the collector when the user ID is set or changed
- *  @param userID the user unique identifier
- */
-- (void)userIDHasBeenUpdated:(NSString *)userID;
-
 @end
 
 NS_ASSUME_NONNULL_END

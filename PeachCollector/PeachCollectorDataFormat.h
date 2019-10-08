@@ -106,6 +106,7 @@ OBJC_EXPORT NSString * const PCPeachSchemaVersionKey;
 OBJC_EXPORT NSString * const PCPeachFrameworkVersionKey;
 OBJC_EXPORT NSString * const PCPeachImplementationVersionKey;
 OBJC_EXPORT NSString * const PCSentTimestampKey;
+OBJC_EXPORT NSString * const PCUserIDKey;
 
 OBJC_EXPORT NSString * const PCEventsKey;
 OBJC_EXPORT NSString * const PCEventTypeKey;
@@ -132,7 +133,6 @@ OBJC_EXPORT NSString * const PCClientDeviceTimezoneKey;
 OBJC_EXPORT NSString * const PCClientOSKey;
 OBJC_EXPORT NSString * const PCClientOSNameKey;
 OBJC_EXPORT NSString * const PCClientOSVersionKey;
-OBJC_EXPORT NSString * const PCClientUserIDKey;
 
 #pragma mark - Publisher related constants
 

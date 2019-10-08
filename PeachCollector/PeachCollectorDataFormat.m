@@ -78,6 +78,7 @@ NSString * const PCPeachSchemaVersionKey = @"peach_schema_version";
 NSString * const PCPeachFrameworkVersionKey = @"peach_framework_version";
 NSString * const PCPeachImplementationVersionKey = @"peach_implementation_version";
 NSString * const PCSentTimestampKey = @"sent_timestamp";
+NSString * const PCUserIDKey = @"user_id";
 
 NSString * const PCEventsKey = @"events";
 NSString * const PCEventTypeKey = @"type";
@@ -103,8 +104,6 @@ NSString * const PCClientDeviceTimezoneKey = @"timezone";
 NSString * const PCClientOSKey = @"os";
 NSString * const PCClientOSNameKey = @"name";
 NSString * const PCClientOSVersionKey = @"version";
-
-NSString * const PCClientUserIDKey = @"user_id";
 
 NSString * const PeachCollectorDefaultPublisherName = @"Peach Publisher";
 NSInteger const PeachCollectorDefaultPublisherInterval = 20;
