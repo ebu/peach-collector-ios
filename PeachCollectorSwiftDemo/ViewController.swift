@@ -88,14 +88,24 @@ class ViewController: UIViewController {
         isPlaying = true
         player?.play()
         self.audioButton?.setTitle("Pause Background Audio", for: .normal)
-        PeachCollectorEvent.sendMediaPlay(withID: "audio00", properties: self.audioProperties, context: self.audioContext, metadata: self.audioMetadata)
+        
+        self.audioProperties.playbackPosition = NSNumber(value: (player?.currentTime().seconds)!)
+        PeachCollectorEvent.sendMediaPlay(withID: "audio00",
+                                          properties: self.audioProperties,
+                                          context: self.audioContext,
+                                          metadata: self.audioMetadata)
     }
     
     func pause() {
         isPlaying = false
         player?.pause()
         self.audioButton?.setTitle("Play Background Audio", for: .normal)
-        PeachCollectorEvent.sendMediaPause(withID: "audio00", properties: self.audioProperties, context: self.audioContext, metadata: self.audioMetadata)
+        
+        self.audioProperties.playbackPosition = NSNumber(value: (player?.currentTime().seconds)!)
+        PeachCollectorEvent.sendMediaPause(withID: "audio00",
+                                           properties: self.audioProperties,
+                                           context: self.audioContext,
+                                           metadata: self.audioMetadata)
     }
 
 }
