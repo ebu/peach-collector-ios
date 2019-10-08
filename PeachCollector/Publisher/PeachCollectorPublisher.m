@@ -107,7 +107,7 @@
 {
     if (_clientInfo == nil) {
         NSString *clientBundleIdentifier = [[NSBundle mainBundle] bundleIdentifier];
-        NSString *clientAppName = [[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleDisplayName"];
+        NSString *clientAppName = [[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleName"];
         NSString *clientAppVersion = [[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleShortVersionString"];
         
         ASIdentifierManager *asi = [ASIdentifierManager sharedManager];
