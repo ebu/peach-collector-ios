@@ -63,9 +63,20 @@ PeachCollector.implementationVersion = "1";
 let publisher = PeachCollectorPublisher.init(siteKey: "zzebu00000000017")
 PeachCollector.setPublisher(publisher, withUniqueName: "My Publisher")
 ```
+### Configuring a Publisher
+A publisher needs to be initialized with a __SiteKey__ or a full __URL address__ as seen previously.
+But it has 4 others properties that are worth mentioning :
+
+`interval`: The interval in seconds at which events are sent to the server (interval starts after the first event is queued). Default is 20 seconds.
+
+`recommendedLimitPerBatch`: Number of events queued that triggers the publishing process even if the desired interval hasn't been reached. Default is 20 events.
+
+`maximumLimitPerBatch`: Maximum number of events that can be sent in a single batch. Especially useful after a long offline session. Default is 1000 event.
+
+`gotBackPolicy`: How the publisher should behave after an offline period. Available options are `SendAll`, `SendBatchesRandomly`, `SendBatchesRandomly`.
 
 
-### Recording an event
+### Recording an Event
 
 
 #### Objective-C
@@ -88,6 +99,24 @@ PeachCollectorEvent.sendRecommendationHit(withID: "reco00",
 					  source: nil,
 				       component: carouselComponent)
 ```
+
+
+## Special type of events
+Some events can be queued when the app is in background but still active. For example, when playing an audio media and controlling the playback directly on the device's lock screen. Some of those events that can occur during a playback will trigger a flush of all queued events. This mechanism is implemented to make sure events are published before the app becomes totally inactive.
+
+For now, events that trigger this flush are `media_pause` and `media_stop` events.
+You can add another type of event to this list:
+#### Objective-C
+```objectivec
+[PeachCollector addFlushableEventType:@"media_error"]
+```
+#### Swift
+```swift
+PeachCollector.addFlushableEventType("media_error")
+```
+
+
+
 
 
 ## Demo projects
