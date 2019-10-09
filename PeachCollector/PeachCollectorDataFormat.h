@@ -79,7 +79,6 @@ typedef NS_ENUM(NSInteger, PCEventStatus) {
 
 typedef NSDictionary<NSString *, id<NSCopying>> PeachCollectorMetadata;
 
-OBJC_EXPORT NSString * const PeachCollectorDefaultPublisherName;
 OBJC_EXPORT NSString * const PeachCollectorSessionStartTimestampKey;
 OBJC_EXPORT NSString * const PeachCollectorLastRecordedEventTimestampKey;
 
@@ -147,8 +146,8 @@ typedef NS_ENUM(NSInteger, PCPublisherGotBackOnlinePolicy) {
 
 OBJC_EXPORT NSInteger const PeachCollectorDefaultInactiveSessionInterval;
 OBJC_EXPORT NSInteger const PeachCollectorDefaultPublisherInterval;
-OBJC_EXPORT NSInteger const PeachCollectorDefaultPublisherRecommendedLimitPerBatch;
-OBJC_EXPORT NSInteger const PeachCollectorDefaultPublisherMaximumLimitPerBatch;
+OBJC_EXPORT NSInteger const PeachCollectorDefaultPublisherMaxEventsPerBatch;
+OBJC_EXPORT NSInteger const PeachCollectorDefaultPublisherMaxEventsPerBatchAfterOfflineSession;
 OBJC_EXPORT PCPublisherGotBackOnlinePolicy const PeachCollectorDefaultPublisherPolicy;
 OBJC_EXPORT NSInteger const PeachCollectorDefaultPublisherHeartbeatInterval;
 

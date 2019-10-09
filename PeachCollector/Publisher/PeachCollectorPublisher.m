@@ -28,8 +28,8 @@
     if (self) {
         self.serviceURL = serviceURL;
         self.interval = PeachCollectorDefaultPublisherInterval;
-        self.recommendedLimitPerBatch = PeachCollectorDefaultPublisherRecommendedLimitPerBatch;
-        self.maximumLimitPerBatch = PeachCollectorDefaultPublisherMaximumLimitPerBatch;
+        self.maxEventsPerBatch = PeachCollectorDefaultPublisherMaxEventsPerBatch;
+        self.maxEventsPerBatchAfterOfflineSession = PeachCollectorDefaultPublisherMaxEventsPerBatchAfterOfflineSession;
         self.gotBackPolicy = PeachCollectorDefaultPublisherPolicy;
     }
     return self;

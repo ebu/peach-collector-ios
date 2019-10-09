@@ -32,13 +32,13 @@ NS_ASSUME_NONNULL_BEGIN
  *  1 means no buffering, every event is sent as soon as it is queued.
  *  Default value is 20 events.
  */
-@property (nonatomic) NSInteger recommendedLimitPerBatch;
+@property (nonatomic) NSInteger maxEventsPerBatch;
 
 /**
  *  Maximum number of events that can be sent in a single batch.
  *  Default value is 1000 events.
  */
-@property (nonatomic) NSInteger maximumLimitPerBatch;
+@property (nonatomic) NSInteger maxEventsPerBatchAfterOfflineSession;
 
 /**
  *  How the publisher should behave after an offline period
