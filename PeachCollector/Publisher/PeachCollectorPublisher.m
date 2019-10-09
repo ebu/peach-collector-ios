@@ -57,6 +57,7 @@
     }
     [data setObject:eventsData forKey:PCEventsKey];
     if (PeachCollector.userID) [data setObject:PeachCollector.userID forKey:PCUserIDKey];
+    [data setObject:@(PeachCollector.sessionStartTimestamp) forKey:PCSessionStartTimestampKey];
     
     [self publishData:[data copy] withCompletionHandler:completionHandler];
 }

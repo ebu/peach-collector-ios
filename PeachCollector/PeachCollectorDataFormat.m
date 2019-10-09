@@ -54,6 +54,9 @@ PCEventType const PCEventTypeArticleStart = @"article_start"; // ARTICLE
 PCEventType const PCEventTypeArticleEnd = @"article_end";
 PCEventType const PCEventTypeReadMore = @"read_more";
 
+NSString * const PeachCollectorSessionStartTimestampKey = @"PeachCollectorSessionStartTimestampKey";
+NSString * const PeachCollectorLastRecordedEventTimestampKey = @"PeachCollectorLastRecordedEventTimestampKey";
+
 NSString * const PCMediaPlaybackPositionKey = @"playback_position_s";
 NSString * const PCMediaPreviousPlaybackPositionKey = @"previous_playback_position_s";
 NSString * const PCMediaVideoModeKey = @"video_mode";
@@ -78,6 +81,7 @@ NSString * const PCPeachSchemaVersionKey = @"peach_schema_version";
 NSString * const PCPeachFrameworkVersionKey = @"peach_framework_version";
 NSString * const PCPeachImplementationVersionKey = @"peach_implementation_version";
 NSString * const PCSentTimestampKey = @"sent_timestamp";
+NSString * const PCSessionStartTimestampKey = @"session_start_timestamp";
 NSString * const PCUserIDKey = @"user_id";
 
 NSString * const PCEventsKey = @"events";
@@ -106,6 +110,8 @@ NSString * const PCClientOSNameKey = @"name";
 NSString * const PCClientOSVersionKey = @"version";
 
 NSString * const PeachCollectorDefaultPublisherName = @"Peach Publisher";
+NSInteger const PeachCollectorDefaultInactiveSessionInterval = 1800;
+
 NSInteger const PeachCollectorDefaultPublisherInterval = 20;
 NSInteger const PeachCollectorDefaultPublisherRecommendedLimitPerBatch = 20;
 NSInteger const PeachCollectorDefaultPublisherMaximumLimitPerBatch = 1000;

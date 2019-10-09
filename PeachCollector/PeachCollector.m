@@ -15,12 +15,16 @@
 
 @property (nonatomic, strong) PeachCollectorQueue *queue;
 @property (nonatomic, strong) NSArray<NSString *> *flushableEventTypes;
+@property (nonatomic) NSInteger sessionStartTimestamp;
+@property (nonatomic) NSInteger lastRecordedEventTimestamp;
+@property (nonatomic) NSTimer *sessionHeartbeatTimer;
 
 @end
 
 @implementation PeachCollector
 static NSString *_implementationVersion = nil;
 static NSString *_userID = nil;
+static NSInteger _inactivityInterval = -1;
 
 #pragma mark - Versions
 
@@ -42,7 +46,7 @@ static NSString *_userID = nil;
     _implementationVersion = [version copy];
 }
 
-#pragma mark - Initialization
+#pragma mark - Initialization & Life cycle
 
 + (void)load{
     [PeachCollector sharedCollector];
@@ -65,9 +69,16 @@ static NSString *_userID = nil;
     if (self) {
         _flushableEventTypes = @[PCEventTypeMediaStop, PCEventTypeMediaPause];
         self.queue = [[PeachCollectorQueue alloc] init];
+        
+        self.sessionStartTimestamp = [[NSUserDefaults standardUserDefaults] integerForKey:PeachCollectorSessionStartTimestampKey];
+        self.lastRecordedEventTimestamp = [[NSUserDefaults standardUserDefaults] integerForKey:PeachCollectorLastRecordedEventTimestampKey];
+        [self checkInactivity];
+        
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(appWillResignActive:) name:UIApplicationWillResignActiveNotification object:nil];
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(appWillTerminate:) name:UIApplicationWillTerminateNotification object:nil];
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(appDidBecomeActive:) name:UIApplicationDidBecomeActiveNotification object:nil];
+        
+        
     }
     return self;
 }
@@ -78,11 +89,39 @@ static NSString *_userID = nil;
     if (self.queue) {
         [self.queue checkPublishers];
     }
+    
+    if (self.sessionHeartbeatTimer) {
+        [self.sessionHeartbeatTimer invalidate];
+        self.sessionHeartbeatTimer = nil;
+    }
+    
+    [self checkInactivity];
+}
+
+- (void)checkInactivity
+{
+    NSUserDefaults *userDefault = [NSUserDefaults standardUserDefaults];
+    NSInteger currentTimestamp = (int)[[NSDate date] timeIntervalSince1970];
+    NSInteger inactivityInterval = (PeachCollector.inactivityInterval == -1) ? PeachCollectorDefaultInactiveSessionInterval : PeachCollector.inactivityInterval;
+    if (currentTimestamp - self.lastRecordedEventTimestamp > inactivityInterval) {
+        self.sessionStartTimestamp = currentTimestamp;
+        [userDefault setInteger:self.sessionStartTimestamp forKey:PeachCollectorSessionStartTimestampKey];
+    }
+    self.lastRecordedEventTimestamp = currentTimestamp;
+    [userDefault setInteger:self.lastRecordedEventTimestamp forKey:PeachCollectorLastRecordedEventTimestampKey];
+    
+    [userDefault synchronize];
 }
 
 - (void)appWillResignActive:(NSNotification *)notification
 {
     [self.queue flush];
+    self.sessionHeartbeatTimer = [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(appIsAliveInBackground) userInfo:nil repeats:YES];
+}
+
+- (void)appIsAliveInBackground
+{
+    [self checkInactivity];
 }
 
 - (void)appWillTerminate:(NSNotification *)notification
@@ -91,6 +130,20 @@ static NSString *_userID = nil;
     [self.queue flush];
 }
 
++ (NSInteger)sessionStartTimestamp
+{
+    return [PeachCollector sharedCollector].sessionStartTimestamp;
+}
+
++ (NSInteger)inactivityInterval
+{
+    return _inactivityInterval;
+}
+
++ (void)setInactivityInterval:(NSInteger)inactivityInterval
+{
+    _inactivityInterval = inactivityInterval;
+}
 
 #pragma mark - Queue management
 
@@ -153,6 +206,7 @@ static NSString *_userID = nil;
 
 + (void)addEventToQueue:(PeachCollectorEvent *)event
 {
+    [PeachCollector sharedCollector].lastRecordedEventTimestamp = (int)[[NSDate date] timeIntervalSince1970];
     [[PeachCollector sharedCollector].queue addEvent:event];
 }
 
