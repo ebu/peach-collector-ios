@@ -9,6 +9,7 @@
 #import "PeachCollectorQueue.h"
 #import "PeachCollector.h"
 #import "PeachCollectorDataFormat.h"
+#import "PeachCollectorReachability.h"
 @import UIKit;
 @import UserNotifications;
 
@@ -32,6 +33,9 @@
         self.publisherTimers = [NSMutableDictionary new];
         self.numberOfFailures = [NSMutableDictionary new];
         self.backgroundTask = UIBackgroundTaskInvalid;
+        
+        [[PeachCollectorReachability internetReachability] startNotifier];
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reachabilityChanged) name:PeachCollectorReachabilityChangedNotification object:nil];
     }
     return self;
 }
@@ -39,6 +43,17 @@
 - (NSManagedObjectContext *)managedObjectContext
 {
     return [[PeachCollector sharedCollector] persistentContainer].viewContext;
+}
+
+- (void)reachabilityChanged
+{
+    if ([[PeachCollectorReachability internetReachability] isReachable])
+    {
+        NSMutableArray *publishersToFlush = [[self.numberOfFailures allKeys] copy];
+        for (NSString *publisher in publishersToFlush) {
+            [self sendEventsToPublisherNamed:publisher];
+        }
+    }
 }
 
 - (void)resetStatuses
