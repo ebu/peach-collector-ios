@@ -198,7 +198,7 @@ static NSInteger _inactivityInterval = -1;
     }
     // After adding a publisher, check if there are any events previously added to its queue
     // In case there are events cached, proceed with the publishing process
-    [self.queue checkPublishers];
+    [self.queue checkPublisherNamed:publisherName];
 }
 
 

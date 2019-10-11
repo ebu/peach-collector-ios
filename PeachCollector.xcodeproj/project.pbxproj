@@ -201,6 +201,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		95302148234F86CC0083E29F /* Queue */ = {
+			isa = PBXGroup;
+			children = (
+				953546F4233A16780096AE60 /* PeachCollectorQueue.h */,
+				953546F3233A16780096AE60 /* PeachCollectorQueue.m */,
+			);
+			path = Queue;
+			sourceTree = "<group>";
+		};
 		953546C6233A15BD0096AE60 = {
 			isa = PBXGroup;
 			children = (
@@ -235,8 +244,7 @@
 				953547FA234B2A9D0096AE60 /* PeachCollectorNotifications.m */,
 				9535471A233A20EA0096AE60 /* Event */,
 				9535471B233A21610096AE60 /* Publisher */,
-				953546F4233A16780096AE60 /* PeachCollectorQueue.h */,
-				953546F3233A16780096AE60 /* PeachCollectorQueue.m */,
+				95302148234F86CC0083E29F /* Queue */,
 				953546D4233A15BD0096AE60 /* Info.plist */,
 				95354714233A194A0096AE60 /* PeachCollector.xcdatamodel */,
 				95354716233A1FCB0096AE60 /* PeachPersistentContainer.h */,

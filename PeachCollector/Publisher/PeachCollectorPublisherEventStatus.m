@@ -27,7 +27,7 @@
 + (NSArray<PeachCollectorPublisherEventStatus *> *)pendingEventsStatusesForPublisherNamed:(NSString *)publisherName
 {
     NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"PeachCollectorPublisherEventStatus"];
-    [request setPredicate:[NSPredicate predicateWithFormat:@"publisherName == %@ AND status < %d", publisherName, PCEventStatusPublished]];
+    [request setPredicate:[NSPredicate predicateWithFormat:@"publisherName == %@ AND status == %d", publisherName, PCEventStatusQueued]];
     
     NSError *error = nil;
     NSArray *results = [[PeachCollector managedObjectContext] executeFetchRequest:request error:&error];
