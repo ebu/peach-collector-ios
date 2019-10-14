@@ -53,6 +53,7 @@ PCEventType const PCEventTypeRecommendationDisplayed = @"recommendation_displaye
 PCEventType const PCEventTypeArticleStart = @"article_start"; // ARTICLE
 PCEventType const PCEventTypeArticleEnd = @"article_end";
 PCEventType const PCEventTypeReadMore = @"read_more";
+PCEventType const PCEventTypePageView = @"page_view";
 
 NSString * const PeachCollectorSessionStartTimestampKey = @"PeachCollectorSessionStartTimestampKey";
 NSString * const PeachCollectorLastRecordedEventTimestampKey = @"PeachCollectorLastRecordedEventTimestampKey";
@@ -72,6 +73,7 @@ NSString * const PCContextItemsDisplayedKey = @"items_displayed";
 NSString * const PCContextHitIndexKey = @"hit_index";
 NSString * const PCContextPageURIKey = @"page_uri";
 NSString * const PCContextSourceKey = @"source";
+NSString * const PCContextReferrerKey = @"referrer";
 NSString * const PCContextComponentKey = @"component";
 NSString * const PCContextComponentTypeKey = @"type";
 NSString * const PCContextComponentNameKey = @"name";

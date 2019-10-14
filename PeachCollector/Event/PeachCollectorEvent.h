@@ -53,6 +53,8 @@ NS_ASSUME_NONNULL_BEGIN
                                    source:(nullable NSString *)source
                                 component:(nullable PeachCollectorContextComponent *)component;
 
++ (void)sendPageViewWithURI:(NSString *)pageURI
+                   referrer:(nullable NSString *)referrer;
 
 + (void)sendMediaPlayWithID:(NSString *)mediaID
                  properties:(PeachCollectorProperties *)properties

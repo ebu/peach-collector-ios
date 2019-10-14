@@ -70,6 +70,7 @@ OBJC_EXPORT PCEventType const PCEventTypeRecommendationDisplayed;
 OBJC_EXPORT PCEventType const PCEventTypeArticleStart;
 OBJC_EXPORT PCEventType const PCEventTypeArticleEnd;
 OBJC_EXPORT PCEventType const PCEventTypeReadMore;
+OBJC_EXPORT PCEventType const PCEventTypePageView;
 
 typedef NS_ENUM(NSInteger, PCEventStatus) {
     PCEventStatusQueued = 0,
@@ -98,6 +99,7 @@ OBJC_EXPORT NSString * const PCContextItemsDisplayedKey;
 OBJC_EXPORT NSString * const PCContextHitIndexKey;
 OBJC_EXPORT NSString * const PCContextPageURIKey;
 OBJC_EXPORT NSString * const PCContextSourceKey;
+OBJC_EXPORT NSString * const PCContextReferrerKey;
 OBJC_EXPORT NSString * const PCContextComponentKey;
 OBJC_EXPORT NSString * const PCContextComponentTypeKey;
 OBJC_EXPORT NSString * const PCContextComponentNameKey;
