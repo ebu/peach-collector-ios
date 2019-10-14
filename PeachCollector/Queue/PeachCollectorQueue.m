@@ -139,7 +139,7 @@
     
     [self registerBackgroundTask];
     
-    [publisher sendEvents:events withCompletionHandler:^(NSError * _Nullable error) {
+    [publisher processEvents:events withCompletionHandler:^(NSError * _Nullable error) {
         BOOL shouldContinueSending = NO;
         if (eventsStatuses.count > events.count && error == nil) {
             shouldContinueSending = YES;

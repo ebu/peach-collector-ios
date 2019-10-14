@@ -40,7 +40,7 @@
     return [self initWithServiceURL:[NSString stringWithFormat:@"https://pipe-collect.ebu.io/v3/collect?s=%@", siteKey]];
 }
 
-- (void)sendEvents:(NSArray<PeachCollectorEvent *> *)events withCompletionHandler:(void (^)(NSError * _Nullable error))completionHandler
+- (void)processEvents:(NSArray<PeachCollectorEvent *> *)events withCompletionHandler:(void (^)(NSError * _Nullable error))completionHandler
 {
     NSMutableDictionary *data = [NSMutableDictionary new];
     [data setObject:@"1.0.3" forKey:PCPeachSchemaVersionKey];
@@ -73,7 +73,7 @@
 }
 
 
-- (void)publishData:(NSDictionary*)data withCompletionHandler:(void (^)(NSError * _Nullable error))completionHandler
+- (void)publishData:(NSDictionary *)data withCompletionHandler:(void (^)(NSError * _Nullable error))completionHandler
 {
     NSData *jsonData = [self jsonFromDictionary:data];
     
