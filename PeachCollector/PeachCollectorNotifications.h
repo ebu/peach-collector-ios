@@ -21,4 +21,6 @@ OBJC_EXPORT NSString * const PeachCollectorNotification;
 OBJC_EXPORT NSString * const PeachCollectorNotificationLogKey;
 OBJC_EXPORT NSString * const PeachCollectorNotificationQueuedEventsKey;
 
+OBJC_EXPORT NSString * const PeachCollectorReachabilityChangedNotification;
+
 NS_ASSUME_NONNULL_END

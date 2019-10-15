@@ -11,6 +11,7 @@ import PeachCollector
 import AVFoundation
 import MediaPlayer
 
+
 class ViewController: UIViewController {
     
     @IBOutlet weak var audioButton: UIButton?
@@ -21,6 +22,9 @@ class ViewController: UIViewController {
     var isPlaying = false
     
     var player : AVPlayer?
+    
+    
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -33,7 +37,7 @@ class ViewController: UIViewController {
         
         audioProperties.audioMode = .normal
         
-        NotificationCenter.default.addObserver(self,selector: #selector(self.logNotificationReceived), name: NSNotification.Name.PeachCollector, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(logNotificationReceived(_:)), name: Notification.Name.PeachCollector, object: nil)
         
         do {
             try AVAudioSession.sharedInstance().setCategory(.playback, mode: .default)
@@ -58,7 +62,7 @@ class ViewController: UIViewController {
         player = AVPlayer.init(playerItem: AVPlayerItem.init(asset: AVURLAsset.init(url: audioUrl!)))
     }
     
-    @objc func logNotificationReceived(notification: Notification)
+    @objc func logNotificationReceived(_ notification: NSNotification)
     {
         let logString = notification.userInfo![PeachCollectorNotificationLogKey]
         print(logString ?? "")
@@ -71,7 +75,6 @@ class ViewController: UIViewController {
         carouselComponent.name = "recoCarousel"
         carouselComponent.version = "1.0"
         PeachCollectorEvent.sendRecommendationHit(withID: "reco00", items: ["reco00", "reco01", "reco02", "reco03"], itemsDisplayed: 3, hit: 0, appSectionID: "news/videos", source: nil, component: carouselComponent)
-      
     }
     
     

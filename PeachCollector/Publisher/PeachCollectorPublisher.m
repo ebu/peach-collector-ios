@@ -28,8 +28,8 @@
     if (self) {
         self.serviceURL = serviceURL;
         self.interval = PeachCollectorDefaultPublisherInterval;
-        self.recommendedLimitPerBatch = PeachCollectorDefaultPublisherRecommendedLimitPerBatch;
-        self.maximumLimitPerBatch = PeachCollectorDefaultPublisherMaximumLimitPerBatch;
+        self.maxEventsPerBatch = PeachCollectorDefaultPublisherMaxEventsPerBatch;
+        self.maxEventsPerBatchAfterOfflineSession = PeachCollectorDefaultPublisherMaxEventsPerBatchAfterOfflineSession;
         self.gotBackPolicy = PeachCollectorDefaultPublisherPolicy;
     }
     return self;
@@ -40,7 +40,7 @@
     return [self initWithServiceURL:[NSString stringWithFormat:@"https://pipe-collect.ebu.io/v3/collect?s=%@", siteKey]];
 }
 
-- (void)sendEvents:(NSArray<PeachCollectorEvent *> *)events withCompletionHandler:(void (^)(NSError * _Nullable error))completionHandler
+- (void)processEvents:(NSArray<PeachCollectorEvent *> *)events withCompletionHandler:(void (^)(NSError * _Nullable error))completionHandler
 {
     NSMutableDictionary *data = [NSMutableDictionary new];
     [data setObject:@"1.0.3" forKey:PCPeachSchemaVersionKey];
@@ -53,9 +53,14 @@
     
     NSMutableArray *eventsData = [NSMutableArray new];
     for (PeachCollectorEvent *event in events) {
-        [eventsData addObject:[event dictionaryRepresentation]];
+        NSDictionary *eventDict = [event dictionaryRepresentation];
+        if (eventDict) {
+            [eventsData addObject:eventDict];
+        }
     }
     [data setObject:eventsData forKey:PCEventsKey];
+    if (PeachCollector.userID) [data setObject:PeachCollector.userID forKey:PCUserIDKey];
+    [data setObject:@(PeachCollector.sessionStartTimestamp) forKey:PCSessionStartTimestampKey];
     
     [self publishData:[data copy] withCompletionHandler:completionHandler];
 }
@@ -71,7 +76,7 @@
 }
 
 
-- (void)publishData:(NSDictionary*)data withCompletionHandler:(void (^)(NSError * _Nullable error))completionHandler
+- (void)publishData:(NSDictionary *)data withCompletionHandler:(void (^)(NSError * _Nullable error))completionHandler
 {
     NSData *jsonData = [self jsonFromDictionary:data];
     
@@ -107,8 +112,12 @@
 {
     if (_clientInfo == nil) {
         NSString *clientBundleIdentifier = [[NSBundle mainBundle] bundleIdentifier];
-        NSString *clientAppName = [[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleDisplayName"];
+        NSString *clientAppName = [[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleName"];
         NSString *clientAppVersion = [[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleShortVersionString"];
+        
+        if (clientBundleIdentifier == nil) clientBundleIdentifier = @"unknown";
+        if (clientAppName == nil) clientAppName = @"unknown";
+        if (clientAppVersion == nil) clientAppVersion = @"unknown";
         
         ASIdentifierManager *asi = [ASIdentifierManager sharedManager];
         
@@ -122,10 +131,6 @@
     NSMutableDictionary *mutableClientInfo = [self.clientInfo mutableCopy];
     [mutableClientInfo addEntriesFromDictionary:@{PCClientDeviceKey : [self deviceInfo],
                                                   PCClientOSKey : [self osInfo]}];
-    
-    if (PeachCollector.userID) {
-        [mutableClientInfo setObject:PeachCollector.userID forKey:PCClientUserIDKey];
-    }
     
     self.clientInfo = [mutableClientInfo copy];
 }
@@ -180,15 +185,6 @@
     
     return @{PCClientOSNameKey:clientOSName, PCClientOSVersionKey:clientOSVersion};
 }
-
-- (void)userIDHasBeenUpdated:(NSString *)userID
-{
-    NSMutableDictionary *mutableClientInfo = [self.clientInfo mutableCopy];
-    [mutableClientInfo setObject:userID forKey:PCClientUserIDKey];
-    
-    self.clientInfo = [mutableClientInfo copy];
-}
-
 
 - (BOOL)shouldProcessEvent:(PeachCollectorEvent *)event
 {

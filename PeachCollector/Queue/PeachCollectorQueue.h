@@ -37,6 +37,14 @@ NS_ASSUME_NONNULL_BEGIN
  */
 - (void)checkPublishers;
 
+/**
+ *  Check queue state for given publisher
+ *  If the publisher has enough events in queue, they are sent for processing.
+ *  If there are events but no timer, a timer is started with the needed interval
+ *  @param publisherName The name of the publisher
+ */
+- (void)checkPublisherNamed:(NSString *)publisherName;
+
 - (void)cleanTimers;
 
 @end

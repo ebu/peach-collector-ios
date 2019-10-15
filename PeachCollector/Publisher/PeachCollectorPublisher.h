@@ -32,13 +32,13 @@ NS_ASSUME_NONNULL_BEGIN
  *  1 means no buffering, every event is sent as soon as it is queued.
  *  Default value is 20 events.
  */
-@property (nonatomic) NSInteger recommendedLimitPerBatch;
+@property (nonatomic) NSInteger maxEventsPerBatch;
 
 /**
  *  Maximum number of events that can be sent in a single batch.
  *  Default value is 1000 events.
  */
-@property (nonatomic) NSInteger maximumLimitPerBatch;
+@property (nonatomic) NSInteger maxEventsPerBatchAfterOfflineSession;
 
 /**
  *  How the publisher should behave after an offline period
@@ -60,11 +60,19 @@ NS_ASSUME_NONNULL_BEGIN
 - (instancetype)initWithSiteKey:(NSString *)siteKey;
 
 /**
- *  Send event to the configured service URL
+ *  Process the events and create a formatted dictionary to be sent. Will call `publishData:withCompletionHandler` when finished
  *  @param events the events to send
  *  @param completionHandler the block that is called when the process is finished, eventually with an error
  */
-- (void)sendEvents:(NSArray<PeachCollectorEvent *> *)events withCompletionHandler:(void (^)(NSError * _Nullable error))completionHandler;
+- (void)processEvents:(NSArray<PeachCollectorEvent *> *)events withCompletionHandler:(void (^)(NSError * _Nullable error))completionHandler;
+
+/**
+ *  Converts dictionary to json and send it to the en point
+ *  @param data the dictionnary to send
+ *  @param completionHandler the block that is called when the process is finished, eventually with an error
+ */
+- (void)publishData:(NSDictionary *)data withCompletionHandler:(void (^)(NSError * _Nullable error))completionHandler;
+
 
 /**
  *  Return `YES` if the the publisher can process the event. This is used when an event is added to the queue to check
@@ -73,12 +81,6 @@ NS_ASSUME_NONNULL_BEGIN
  *  @return `YES` if the the publisher can process the event, `NO` otherwise.
  */
 - (BOOL)shouldProcessEvent:(PeachCollectorEvent *)event;
-
-/**
- *  Method called by the collector when the user ID is set or changed
- *  @param userID the user unique identifier
- */
-- (void)userIDHasBeenUpdated:(NSString *)userID;
 
 @end
 

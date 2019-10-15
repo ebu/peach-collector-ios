@@ -18,8 +18,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
         PeachCollector.implementationVersion = "1"
+        PeachCollector.shared.isUnitTesting = true
         let publisher = PeachCollectorPublisher.init(siteKey: "zzebu00000000017")
         PeachCollector.setPublisher(publisher, withUniqueName: "My Publisher")
+        
+        let customPublisher = MyCustomPublisher.init(siteKey: "zzebu00000000017")
+        PeachCollector.setPublisher(customPublisher, withUniqueName: "My Custom Publisher")
+
         
         return true
     }
@@ -85,3 +90,51 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 }
 
+
+
+class MyCustomPublisher: PeachCollectorPublisher {
+    
+    override func processEvents(_ events: [PeachCollectorEvent], withCompletionHandler completionHandler: @escaping (Error?) -> Void) {
+        var dictionary: Dictionary = [String: AnyObject]()
+        dictionary["sessionStart"] = PeachCollector.sessionStartTimestamp as AnyObject
+        dictionary["sentTime"] = Int(Date().timeIntervalSince1970) as AnyObject
+        if (PeachCollector.userID != nil) {
+            dictionary["userID"] = PeachCollector.userID as AnyObject
+        }
+        
+        
+        var eventsArray: [Dictionary<String, AnyObject>] = []
+        for event in events {
+            // default is `event.dictionaryRepresentation()`
+            
+            var eventDictionary: Dictionary = [String: AnyObject]()
+            eventDictionary["type"] = event.type as AnyObject
+            eventDictionary["date"] = Int(event.creationDate!.timeIntervalSince1970) as AnyObject
+            
+            if (event.eventID != nil) {
+                eventDictionary["id"] = event.eventID as AnyObject
+            }
+            if (event.props != nil) {
+                eventDictionary["properties"] = event.props as AnyObject
+            }
+            if (event.metadata != nil) {
+                eventDictionary["metadata"] = event.metadata as AnyObject
+            }
+            if (event.context != nil) {
+                eventDictionary["context"] = event.context as AnyObject
+            }
+            
+            eventsArray.append(eventDictionary)
+        }
+        dictionary["events"] = eventsArray as AnyObject
+        
+        // publishData can also be overriden if need be, default implementation is pretty simple :
+        // It converts the dictionary to a json data and sends it to the configured service URL
+        publishData(dictionary, withCompletionHandler: completionHandler)
+        
+        print(dictionary)
+        
+    }
+
+    
+}

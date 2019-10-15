@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		9530214F235081D80083E29F /* PeachCollectorReachability.h in Headers */ = {isa = PBXBuildFile; fileRef = 9530214D235081D80083E29F /* PeachCollectorReachability.h */; };
+		95302150235081D80083E29F /* PeachCollectorReachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 9530214E235081D80083E29F /* PeachCollectorReachability.m */; };
 		953546DA233A15BD0096AE60 /* PeachCollector.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 953546D0233A15BD0096AE60 /* PeachCollector.framework */; };
 		953546DF233A15BD0096AE60 /* PeachCollectorTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 953546DE233A15BD0096AE60 /* PeachCollectorTests.m */; };
 		953546E1233A15BD0096AE60 /* PeachCollector.h in Headers */ = {isa = PBXBuildFile; fileRef = 953546D3233A15BD0096AE60 /* PeachCollector.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -112,6 +114,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		9530214D235081D80083E29F /* PeachCollectorReachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PeachCollectorReachability.h; sourceTree = "<group>"; };
+		9530214E235081D80083E29F /* PeachCollectorReachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PeachCollectorReachability.m; sourceTree = "<group>"; };
 		953546D0233A15BD0096AE60 /* PeachCollector.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = PeachCollector.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		953546D3233A15BD0096AE60 /* PeachCollector.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PeachCollector.h; sourceTree = "<group>"; };
 		953546D4233A15BD0096AE60 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -201,6 +205,17 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		95302148234F86CC0083E29F /* Queue */ = {
+			isa = PBXGroup;
+			children = (
+				953546F4233A16780096AE60 /* PeachCollectorQueue.h */,
+				953546F3233A16780096AE60 /* PeachCollectorQueue.m */,
+				9530214D235081D80083E29F /* PeachCollectorReachability.h */,
+				9530214E235081D80083E29F /* PeachCollectorReachability.m */,
+			);
+			path = Queue;
+			sourceTree = "<group>";
+		};
 		953546C6233A15BD0096AE60 = {
 			isa = PBXGroup;
 			children = (
@@ -235,8 +250,7 @@
 				953547FA234B2A9D0096AE60 /* PeachCollectorNotifications.m */,
 				9535471A233A20EA0096AE60 /* Event */,
 				9535471B233A21610096AE60 /* Publisher */,
-				953546F4233A16780096AE60 /* PeachCollectorQueue.h */,
-				953546F3233A16780096AE60 /* PeachCollectorQueue.m */,
+				95302148234F86CC0083E29F /* Queue */,
 				953546D4233A15BD0096AE60 /* Info.plist */,
 				95354714233A194A0096AE60 /* PeachCollector.xcdatamodel */,
 				95354716233A1FCB0096AE60 /* PeachPersistentContainer.h */,
@@ -342,6 +356,7 @@
 				95354705233A16790096AE60 /* PeachCollectorEvent.h in Headers */,
 				95354702233A16790096AE60 /* PeachCollectorProperties.h in Headers */,
 				95354710233A16790096AE60 /* PeachCollectorContext.h in Headers */,
+				9530214F235081D80083E29F /* PeachCollectorReachability.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -536,6 +551,7 @@
 				95354719233A1FCB0096AE60 /* PeachPersistentContainer.m in Sources */,
 				95354715233A194A0096AE60 /* PeachCollector.xcdatamodel in Sources */,
 				953547A6233CDC850096AE60 /* PeachCollectorDynamicProperties.m in Sources */,
+				95302150235081D80083E29F /* PeachCollectorReachability.m in Sources */,
 				9535470E233A16790096AE60 /* PeachCollectorEvent.m in Sources */,
 				953547FC234B2A9D0096AE60 /* PeachCollectorNotifications.m in Sources */,
 				9535470B233A16790096AE60 /* PeachCollector.m in Sources */,
@@ -773,7 +789,7 @@
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
-				MARKETING_VERSION = 0.1.1;
+				MARKETING_VERSION = 0.1.2;
 				PRODUCT_BUNDLE_IDENTIFIER = ch.ebu.PeachCollector;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
@@ -801,7 +817,7 @@
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
-				MARKETING_VERSION = 0.1.1;
+				MARKETING_VERSION = 0.1.2;
 				PRODUCT_BUNDLE_IDENTIFIER = ch.ebu.PeachCollector;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;

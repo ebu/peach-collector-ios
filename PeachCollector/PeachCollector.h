@@ -41,6 +41,17 @@ NS_ASSUME_NONNULL_BEGIN
 @property (class, nonatomic, copy, nullable) NSString *implementationVersion;
 
 /**
+ *  Timestamp of the start of the session
+ */
+@property (class, nonatomic, readonly) NSInteger sessionStartTimestamp;
+
+/**
+ *  Minimum duration (in seconds) of inactivity that will cause sessionStartTimestamp to be reset when app becomes active
+ *  Default is 1800 seconds (30 minutes)
+ */
+@property (class, nonatomic) NSInteger inactivityInterval;
+
+/**
  *  The collector singleton.
  *  Singleton is automatically created at the launch of the application
  */
@@ -102,6 +113,16 @@ NS_ASSUME_NONNULL_BEGIN
  */
 @property (nonatomic, getter=isUnitTesting) BOOL unitTesting;
 
+
+/**
+ *  Flush the queue for all publishers (tries to send everything that is queued)
+ */
++ (void)flush;
+
+/**
+ *  Remove all previously queued events
+ */
++ (void)clean;
 
 @end
 

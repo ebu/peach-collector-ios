@@ -57,6 +57,24 @@
     [event send];
 }
 
++ (void)sendPageViewWithID:(NSString *)pageID
+                  referrer:(nullable NSString *)referrer
+{
+    PeachCollectorEvent *event = [NSEntityDescription insertNewObjectForEntityForName:@"PeachCollectorEvent" inManagedObjectContext:[PeachCollector managedObjectContext]];
+    
+    event.type = PCEventTypePageView;
+    event.creationDate = [NSDate date];
+    event.eventID = pageID;
+    
+    NSMutableDictionary *pageViewContext = [NSMutableDictionary new];
+    if (referrer) [pageViewContext setObject:referrer forKey:PCContextReferrerKey];
+    event.context = [pageViewContext copy];
+    
+    [PeachCollector save];
+    
+    [event send];
+}
+
 + (void)sendEventWithType:(PCEventType)type
                   eventID:(NSString *)eventID
                properties:(nullable PeachCollectorProperties *)properties
@@ -133,6 +151,21 @@
     return YES;
 }
 
+- (void)setStatus:(NSInteger)status forPublisherNamed:(NSString *)publisherName
+{
+    for (PeachCollectorPublisherEventStatus *eventStatus in self.eventStatuses) {
+        if ([eventStatus.publisherName isEqualToString:publisherName]) {
+            eventStatus.status = status;
+            return;
+        }
+    }
+    
+    PeachCollectorPublisherEventStatus *eventStatus = [NSEntityDescription insertNewObjectForEntityForName:@"PeachCollectorPublisherEventStatus" inManagedObjectContext:[PeachCollector managedObjectContext]];
+    eventStatus.status = status;
+    eventStatus.event = self;
+    eventStatus.publisherName = publisherName;
+}
+
 - (void)send
 {
     if ([[PeachCollector sharedCollector] isUnitTesting]) {
@@ -153,6 +186,8 @@
 
 - (NSDictionary *)dictionaryRepresentation
 {
+    if (self.type == nil || self.eventID == nil || self.creationDate == nil) return nil;
+    
     NSMutableDictionary *representation = [NSMutableDictionary new];
     [representation setObject:self.type forKey:PCEventTypeKey];
     [representation setObject:self.eventID forKey:PCEventIDKey];

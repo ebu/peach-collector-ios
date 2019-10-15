@@ -70,6 +70,7 @@ OBJC_EXPORT PCEventType const PCEventTypeRecommendationDisplayed;
 OBJC_EXPORT PCEventType const PCEventTypeArticleStart;
 OBJC_EXPORT PCEventType const PCEventTypeArticleEnd;
 OBJC_EXPORT PCEventType const PCEventTypeReadMore;
+OBJC_EXPORT PCEventType const PCEventTypePageView;
 
 typedef NS_ENUM(NSInteger, PCEventStatus) {
     PCEventStatusQueued = 0,
@@ -79,7 +80,8 @@ typedef NS_ENUM(NSInteger, PCEventStatus) {
 
 typedef NSDictionary<NSString *, id<NSCopying>> PeachCollectorMetadata;
 
-OBJC_EXPORT NSString * const PeachCollectorDefaultPublisherName;
+OBJC_EXPORT NSString * const PeachCollectorSessionStartTimestampKey;
+OBJC_EXPORT NSString * const PeachCollectorLastRecordedEventTimestampKey;
 
 #pragma mark - Payload known keys
 
@@ -97,6 +99,7 @@ OBJC_EXPORT NSString * const PCContextItemsDisplayedKey;
 OBJC_EXPORT NSString * const PCContextHitIndexKey;
 OBJC_EXPORT NSString * const PCContextPageURIKey;
 OBJC_EXPORT NSString * const PCContextSourceKey;
+OBJC_EXPORT NSString * const PCContextReferrerKey;
 OBJC_EXPORT NSString * const PCContextComponentKey;
 OBJC_EXPORT NSString * const PCContextComponentTypeKey;
 OBJC_EXPORT NSString * const PCContextComponentNameKey;
@@ -106,6 +109,8 @@ OBJC_EXPORT NSString * const PCPeachSchemaVersionKey;
 OBJC_EXPORT NSString * const PCPeachFrameworkVersionKey;
 OBJC_EXPORT NSString * const PCPeachImplementationVersionKey;
 OBJC_EXPORT NSString * const PCSentTimestampKey;
+OBJC_EXPORT NSString * const PCSessionStartTimestampKey;
+OBJC_EXPORT NSString * const PCUserIDKey;
 
 OBJC_EXPORT NSString * const PCEventsKey;
 OBJC_EXPORT NSString * const PCEventTypeKey;
@@ -132,7 +137,6 @@ OBJC_EXPORT NSString * const PCClientDeviceTimezoneKey;
 OBJC_EXPORT NSString * const PCClientOSKey;
 OBJC_EXPORT NSString * const PCClientOSNameKey;
 OBJC_EXPORT NSString * const PCClientOSVersionKey;
-OBJC_EXPORT NSString * const PCClientUserIDKey;
 
 #pragma mark - Publisher related constants
 
@@ -142,9 +146,10 @@ typedef NS_ENUM(NSInteger, PCPublisherGotBackOnlinePolicy) {
     PCPublisherGotBackOnlinePolicySendAllAfterRandomDelay
 };
 
+OBJC_EXPORT NSInteger const PeachCollectorDefaultInactiveSessionInterval;
 OBJC_EXPORT NSInteger const PeachCollectorDefaultPublisherInterval;
-OBJC_EXPORT NSInteger const PeachCollectorDefaultPublisherRecommendedLimitPerBatch;
-OBJC_EXPORT NSInteger const PeachCollectorDefaultPublisherMaximumLimitPerBatch;
+OBJC_EXPORT NSInteger const PeachCollectorDefaultPublisherMaxEventsPerBatch;
+OBJC_EXPORT NSInteger const PeachCollectorDefaultPublisherMaxEventsPerBatchAfterOfflineSession;
 OBJC_EXPORT PCPublisherGotBackOnlinePolicy const PeachCollectorDefaultPublisherPolicy;
 OBJC_EXPORT NSInteger const PeachCollectorDefaultPublisherHeartbeatInterval;
 

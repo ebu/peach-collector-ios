@@ -16,7 +16,12 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface PeachCollectorEvent (Peach)
 
-- (void)send;
+/**
+ *  Set status of the event for a specific publisher
+ *  @param status The status of the event
+ *  @param publisherName The name of the publisher
+ */
+- (void)setStatus:(NSInteger)status forPublisherNamed:(NSString *)publisherName;
 
 
 /**
@@ -48,6 +53,8 @@ NS_ASSUME_NONNULL_BEGIN
                                    source:(nullable NSString *)source
                                 component:(nullable PeachCollectorContextComponent *)component;
 
++ (void)sendPageViewWithID:(NSString *)pageID
+                  referrer:(nullable NSString *)referrer;
 
 + (void)sendMediaPlayWithID:(NSString *)mediaID
                  properties:(PeachCollectorProperties *)properties
