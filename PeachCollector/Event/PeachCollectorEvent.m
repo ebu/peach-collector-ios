@@ -57,16 +57,16 @@
     [event send];
 }
 
-+ (void)sendPageViewWithURI:(NSString *)pageURI
-                   referrer:(nullable NSString *)referrer
++ (void)sendPageViewWithID:(NSString *)pageID
+                  referrer:(nullable NSString *)referrer
 {
     PeachCollectorEvent *event = [NSEntityDescription insertNewObjectForEntityForName:@"PeachCollectorEvent" inManagedObjectContext:[PeachCollector managedObjectContext]];
     
     event.type = PCEventTypePageView;
     event.creationDate = [NSDate date];
+    event.eventID = pageID;
     
     NSMutableDictionary *pageViewContext = [NSMutableDictionary new];
-    [pageViewContext setObject:pageURI forKey:PCContextPageURIKey];
     if (referrer) [pageViewContext setObject:referrer forKey:PCContextReferrerKey];
     event.context = [pageViewContext copy];
     
