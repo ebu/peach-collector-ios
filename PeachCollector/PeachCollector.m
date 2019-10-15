@@ -22,7 +22,7 @@
 @end
 
 @implementation PeachCollector
-static NSString *_implementationVersion = nil;
+static NSString *_implementationVersion = @"0";
 static NSString *_userID = nil;
 static NSInteger _inactivityInterval = -1;
 

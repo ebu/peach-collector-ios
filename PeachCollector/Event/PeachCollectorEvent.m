@@ -186,6 +186,8 @@
 
 - (NSDictionary *)dictionaryRepresentation
 {
+    if (self.type == nil || self.eventID == nil || self.creationDate == nil) return nil;
+    
     NSMutableDictionary *representation = [NSMutableDictionary new];
     [representation setObject:self.type forKey:PCEventTypeKey];
     [representation setObject:self.eventID forKey:PCEventIDKey];

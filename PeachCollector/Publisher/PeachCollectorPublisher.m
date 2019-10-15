@@ -53,7 +53,10 @@
     
     NSMutableArray *eventsData = [NSMutableArray new];
     for (PeachCollectorEvent *event in events) {
-        [eventsData addObject:[event dictionaryRepresentation]];
+        NSDictionary *eventDict = [event dictionaryRepresentation];
+        if (eventDict) {
+            [eventsData addObject:eventDict];
+        }
     }
     [data setObject:eventsData forKey:PCEventsKey];
     if (PeachCollector.userID) [data setObject:PeachCollector.userID forKey:PCUserIDKey];
@@ -111,6 +114,10 @@
         NSString *clientBundleIdentifier = [[NSBundle mainBundle] bundleIdentifier];
         NSString *clientAppName = [[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleName"];
         NSString *clientAppVersion = [[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleShortVersionString"];
+        
+        if (clientBundleIdentifier == nil) clientBundleIdentifier = @"unknown";
+        if (clientAppName == nil) clientAppName = @"unknown";
+        if (clientAppVersion == nil) clientAppVersion = @"unknown";
         
         ASIdentifierManager *asi = [ASIdentifierManager sharedManager];
         

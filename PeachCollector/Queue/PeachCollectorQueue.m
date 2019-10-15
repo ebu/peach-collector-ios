@@ -40,11 +40,6 @@
     return self;
 }
 
-- (NSManagedObjectContext *)managedObjectContext
-{
-    return [[PeachCollector sharedCollector] persistentContainer].viewContext;
-}
-
 - (void)reachabilityChanged
 {
     if ([[PeachCollectorReachability internetReachability] isReachable])
@@ -70,7 +65,7 @@
     for (NSString *publisherID in [PeachCollector sharedCollector].publishers.allKeys) {
         PeachCollectorPublisher *publisher = [[PeachCollector sharedCollector].publishers objectForKey:publisherID];
         if ([publisher shouldProcessEvent:event]) {
-            PeachCollectorPublisherEventStatus *eventStatus = [NSEntityDescription insertNewObjectForEntityForName:@"PeachCollectorPublisherEventStatus" inManagedObjectContext:[self managedObjectContext]];
+            PeachCollectorPublisherEventStatus *eventStatus = [NSEntityDescription insertNewObjectForEntityForName:@"PeachCollectorPublisherEventStatus" inManagedObjectContext:[PeachCollector managedObjectContext]];
             eventStatus.status = PCEventStatusQueued;
             eventStatus.publisherName = publisherID;
             eventStatus.event = event;
