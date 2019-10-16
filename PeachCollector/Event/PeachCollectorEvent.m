@@ -21,13 +21,11 @@
 {
     PeachCollectorEvent *event = [NSEntityDescription insertNewObjectForEntityForName:@"PeachCollectorEvent" inManagedObjectContext:[PeachCollector managedObjectContext]];
     
-    
     event.type = PCEventTypeRecommendationHit;
     event.eventID = eventID;
     event.creationDate = [NSDate date];
     
     PeachCollectorContext *context = [[PeachCollectorContext alloc] initRecommendationContextWithitems:items itemsDisplayedCount:itemsDisplayed appSectionID:appSectionID source:source component:component hitIndex:hitIndex];
-    
     event.context = [context dictionaryRepresentation];
     
     [PeachCollector save];
