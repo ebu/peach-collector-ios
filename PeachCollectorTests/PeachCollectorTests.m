@@ -146,21 +146,33 @@
     component.version = @"1.0";
     
     PeachCollectorEvent *event = [NSEntityDescription insertNewObjectForEntityForName:@"PeachCollectorEvent" inManagedObjectContext:[PeachCollector managedObjectContext]];;
-    event.type = PCEventTypeRecommendationHit;
+    event.type = PCEventTypeMediaPlay;
     event.eventID = @"media00";
     event.creationDate = now;
-    PeachCollectorContext *context = [[PeachCollectorContext alloc] initMediaContextWithID:@"reco00" component:component appSectionID:nil source:nil];
-    event.context = [context dictionaryRepresentation];
     
-    XCTAssertTrue([[[event context] objectForKey:PCContextItemsDisplayedKey] isEqual:@(3)], @"Items display count is added to the context");
-    XCTAssertEqual([[[event context] objectForKey:PCContextComponentKey] objectForKey:PCContextComponentTypeKey], @"Carousel", @"Component Type is added to the context");
-    XCTAssertEqual([[[event context] objectForKey:PCContextComponentKey] objectForKey:PCContextComponentNameKey], @"recoCarousel", @"Component Name is added to the context");
+    PeachCollectorProperties *props = [PeachCollectorProperties new];
+    props.audioMode = PCMediaAudioModeNormal;
+    props.startMode = PCMediaStartModeNormal;
+    
+    PeachCollectorContext *context = [[PeachCollectorContext alloc] initMediaContextWithID:@"recoA"
+                                                                                 component:component
+                                                                              appSectionID:@"Demo/AudioPlayer"
+                                                                                    source:@"Demo.reco"];
+    event.context = [context dictionaryRepresentation];
+    event.props = [props dictionaryRepresentation];
+    
+    
+    XCTAssertTrue([[[event context] objectForKey:PCContextIDKey] isEqualToString:@"recoA"], @"Context ID is added to the context");
+    XCTAssertTrue([[[event context] objectForKey:PCContextPageURIKey] isEqualToString:@"Demo/AudioPlayer"], @"Context App Section ID is added to the context");
+    XCTAssertTrue([[[event context] objectForKey:PCContextSourceKey] isEqualToString:@"Demo.reco"], @"Context Source is added to the context");
+    XCTAssertEqual([[[event context] objectForKey:PCContextComponentKey] objectForKey:PCContextComponentTypeKey], @"player", @"Component Type is added to the context");
+    XCTAssertEqual([[[event context] objectForKey:PCContextComponentKey] objectForKey:PCContextComponentNameKey], @"AudioPlayer", @"Component Name is added to the context");
     XCTAssertEqual([[[event context] objectForKey:PCContextComponentKey] objectForKey:PCContextComponentVersionKey], @"1.0", @"Component Version is added to the context");
     
     NSDictionary *eventDict = [event dictionaryRepresentation];
     
-    XCTAssertEqual([eventDict objectForKey:PCEventTypeKey], PCEventTypeRecommendationHit);
-    XCTAssertEqual([eventDict objectForKey:PCEventIDKey], @"reco00");
+    XCTAssertEqual([eventDict objectForKey:PCEventTypeKey], PCEventTypeMediaPlay);
+    XCTAssertEqual([eventDict objectForKey:PCEventIDKey], @"media00");
     XCTAssertEqual([eventDict objectForKey:PCEventTimestampKey], @((int)[now timeIntervalSince1970]));
     XCTAssertEqual([eventDict objectForKey:PCEventContextKey], event.context);
     
