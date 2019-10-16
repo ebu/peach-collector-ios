@@ -112,10 +112,14 @@
 
 - (void)sendEventsToPublisherNamed:(NSString *)publisherName
 {
+    // Check if there is events that are being processed by the publisher
+    NSArray *sentEventsStatuses = [PeachCollectorPublisherEventStatus eventsStatusesForPublisherNamed:publisherName withStatus:PCEventStatusSentToPublisher];
+    if (sentEventsStatuses.count > 0) return;
+    // Check if there is events to process for the publisher
     NSArray *eventsStatuses = [PeachCollectorPublisherEventStatus pendingEventsStatusesForPublisherNamed:publisherName];
-    PeachCollectorPublisher *publisher = [PeachCollector publisherNamed:publisherName];
-    
     if (eventsStatuses.count == 0) return;
+
+    PeachCollectorPublisher *publisher = [PeachCollector publisherNamed:publisherName];
     
     NSTimer *timer = [self.publisherTimers objectForKey:publisherName];
     if (timer) {
