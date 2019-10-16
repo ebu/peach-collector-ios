@@ -58,19 +58,25 @@
 + (void)sendPageViewWithID:(NSString *)pageID
                   referrer:(nullable NSString *)referrer
 {
-    PeachCollectorEvent *event = [NSEntityDescription insertNewObjectForEntityForName:@"PeachCollectorEvent" inManagedObjectContext:[PeachCollector managedObjectContext]];
+    __block PeachCollectorEvent *event;
+    [PeachCollector queueOperation:^{
+        event = [NSEntityDescription insertNewObjectForEntityForName:@"PeachCollectorEvent" inManagedObjectContext:[PeachCollector managedObjectContext]];
+        
+        event.type = PCEventTypePageView;
+        event.creationDate = [NSDate date];
+        event.eventID = pageID;
+        
+        NSMutableDictionary *pageViewContext = [NSMutableDictionary new];
+        if (referrer) [pageViewContext setObject:referrer forKey:PCContextReferrerKey];
+        event.context = [pageViewContext copy];
+        
+        [PeachCollector save];
+    } withCompletionHandler:^(NSError * _Nullable error) {
+        [event send];
+    }];
     
-    event.type = PCEventTypePageView;
-    event.creationDate = [NSDate date];
-    event.eventID = pageID;
     
-    NSMutableDictionary *pageViewContext = [NSMutableDictionary new];
-    if (referrer) [pageViewContext setObject:referrer forKey:PCContextReferrerKey];
-    event.context = [pageViewContext copy];
     
-    [PeachCollector save];
-    
-    [event send];
 }
 
 + (void)sendEventWithType:(PCEventType)type

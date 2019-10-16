@@ -124,6 +124,10 @@ NS_ASSUME_NONNULL_BEGIN
  */
 + (void)clean;
 
+
+
++ (void)queueOperation:(void (^)(void))operationBlock withCompletionHandler:(void (^)(NSError * _Nullable error))completionHandler;
+
 @end
 
 NS_ASSUME_NONNULL_END

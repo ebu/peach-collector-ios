@@ -9,6 +9,7 @@
 #import "PeachCollector.h"
 #import "PeachCollectorQueue.h"
 #import "PeachPersistentContainer.h"
+#import "PeachCollectorOperation.h"
 #import <UIKit/UIKit.h>
 
 @interface PeachCollector()
@@ -18,6 +19,8 @@
 @property (nonatomic) NSInteger sessionStartTimestamp;
 @property (nonatomic) NSInteger lastRecordedEventTimestamp;
 @property (nonatomic) NSTimer *sessionHeartbeatTimer;
+
+@property (nonatomic, strong) NSMutableArray *operations;
 
 @end
 
@@ -69,6 +72,7 @@ static NSInteger _inactivityInterval = -1;
     if (self) {
         _flushableEventTypes = @[PCEventTypeMediaStop, PCEventTypeMediaPause];
         self.queue = [[PeachCollectorQueue alloc] init];
+        self.operations = [NSMutableArray array];
         
         self.sessionStartTimestamp = [[NSUserDefaults standardUserDefaults] integerForKey:PeachCollectorSessionStartTimestampKey];
         self.lastRecordedEventTimestamp = [[NSUserDefaults standardUserDefaults] integerForKey:PeachCollectorLastRecordedEventTimestampKey];
@@ -283,6 +287,34 @@ static NSInteger _inactivityInterval = -1;
     return YES;
 }
 
+
++ (void)queueOperation:(void (^)(void))operationBlock withCompletionHandler:(void (^)(NSError * _Nullable error))completionHandler
+{
+    PeachCollectorOperation *operation = [PeachCollectorOperation new];
+    operation.operationBlock = operationBlock;
+    operation.completionBlock = completionHandler;
+    
+
+    [[PeachCollector sharedCollector].operations addObject:operation];
+    if ([PeachCollector sharedCollector].operations.count == 1) {
+        [[PeachCollector sharedCollector] dequeueOperation];
+    }
+}
+
+- (void)dequeueOperation
+{
+    PeachCollectorOperation *operation = [self.operations firstObject];
+    operation.operationBlock();
+    operation.completionBlock(nil);
+    
+    if (self.operations.count > 1) {
+        [self.operations removeObjectAtIndex:0];
+        [self dequeueOperation];
+    }
+    else {
+        [self.operations removeObjectAtIndex:0];
+    }
+}
 
 
 
