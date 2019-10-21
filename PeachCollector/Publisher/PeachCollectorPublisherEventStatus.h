@@ -13,9 +13,9 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface PeachCollectorPublisherEventStatus (Peach)
 
-+ (NSArray<PeachCollectorPublisherEventStatus *> *)eventsStatusesForPublisherNamed:(NSString *)publisherName withStatus:(NSInteger)status;
-+ (NSArray<PeachCollectorPublisherEventStatus *> *)pendingEventsStatusesForPublisherNamed:(NSString *)publisherName;
-+ (NSArray<PeachCollectorPublisherEventStatus *> *)allEventsStatuses;
++ (NSArray<PeachCollectorPublisherEventStatus *> *)eventsStatusesForPublisherNamed:(NSString *)publisherName withStatus:(NSInteger)status inContext:(NSManagedObjectContext *)context;
++ (NSArray<PeachCollectorPublisherEventStatus *> *)pendingEventsStatusesForPublisherNamed:(NSString *)publisherName inContext:(NSManagedObjectContext *)context;
++ (NSArray<PeachCollectorPublisherEventStatus *> *)allEventsStatusesInContext:(NSManagedObjectContext *)context;
 @end
 
 NS_ASSUME_NONNULL_END

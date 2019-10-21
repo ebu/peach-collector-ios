@@ -19,18 +19,19 @@
                              source:(nullable NSString *)source
                           component:(nullable PeachCollectorContextComponent *)component
 {
-    PeachCollectorEvent *event = [NSEntityDescription insertNewObjectForEntityForName:@"PeachCollectorEvent" inManagedObjectContext:[PeachCollector managedObjectContext]];
-    
-    event.type = PCEventTypeRecommendationHit;
-    event.eventID = eventID;
-    event.creationDate = [NSDate date];
-    
-    PeachCollectorContext *context = [[PeachCollectorContext alloc] initRecommendationContextWithitems:items itemsDisplayedCount:itemsDisplayed appSectionID:appSectionID source:source component:component hitIndex:hitIndex];
-    event.context = [context dictionaryRepresentation];
-    
-    [PeachCollector save];
-    
-    [event send];
+    __block PeachCollectorEvent *event;
+    [PeachCollector.dataStore performBackgroundWriteTask:^(NSManagedObjectContext * _Nonnull managedObjectContext) {
+        event = [NSEntityDescription insertNewObjectForEntityForName:@"PeachCollectorEvent" inManagedObjectContext:managedObjectContext];
+        
+        event.type = PCEventTypeRecommendationHit;
+        event.eventID = eventID;
+        event.creationDate = [NSDate date];
+        
+        PeachCollectorContext *context = [[PeachCollectorContext alloc] initRecommendationContextWithitems:items itemsDisplayedCount:itemsDisplayed appSectionID:appSectionID source:source component:component hitIndex:hitIndex];
+        event.context = [context dictionaryRepresentation];
+    } withPriority:NSOperationQueuePriorityNormal completionBlock:^(NSError * _Nullable error) {
+        [event send];
+    }];
 }
 
 + (void)sendRecommendationDisplayedWithID:(NSString *)eventID
@@ -40,27 +41,28 @@
                                    source:(nullable NSString *)source
                                 component:(nullable PeachCollectorContextComponent *)component
 {
-    PeachCollectorEvent *event = [NSEntityDescription insertNewObjectForEntityForName:@"PeachCollectorEvent" inManagedObjectContext:[PeachCollector managedObjectContext]];
-    
-    event.type = PCEventTypeRecommendationDisplayed;
-    event.eventID = eventID;
-    event.creationDate = [NSDate date];
-    
-    PeachCollectorContext *context = [[PeachCollectorContext alloc] initRecommendationContextWithitems:items itemsDisplayedCount:itemsDisplayedCount appSectionID:appSectionID source:source component:component];
+    __block PeachCollectorEvent *event;
+    [PeachCollector.dataStore performBackgroundWriteTask:^(NSManagedObjectContext * _Nonnull managedObjectContext) {
+        event = [NSEntityDescription insertNewObjectForEntityForName:@"PeachCollectorEvent" inManagedObjectContext:managedObjectContext];
+        
+        event.type = PCEventTypeRecommendationDisplayed;
+        event.eventID = eventID;
+        event.creationDate = [NSDate date];
+        
+        PeachCollectorContext *context = [[PeachCollectorContext alloc] initRecommendationContextWithitems:items itemsDisplayedCount:itemsDisplayedCount appSectionID:appSectionID source:source component:component];
 
-    event.context = [context dictionaryRepresentation];
-    
-    [PeachCollector save];
-    
-    [event send];
+        event.context = [context dictionaryRepresentation];
+    } withPriority:NSOperationQueuePriorityNormal completionBlock:^(NSError * _Nullable error) {
+        [event send];
+    }];
 }
 
 + (void)sendPageViewWithID:(NSString *)pageID
                   referrer:(nullable NSString *)referrer
 {
     __block PeachCollectorEvent *event;
-    [PeachCollector queueOperation:^{
-        event = [NSEntityDescription insertNewObjectForEntityForName:@"PeachCollectorEvent" inManagedObjectContext:[PeachCollector managedObjectContext]];
+    [PeachCollector.dataStore performBackgroundWriteTask:^(NSManagedObjectContext * _Nonnull managedObjectContext) {
+        event = [NSEntityDescription insertNewObjectForEntityForName:@"PeachCollectorEvent" inManagedObjectContext:managedObjectContext];
         
         event.type = PCEventTypePageView;
         event.creationDate = [NSDate date];
@@ -69,14 +71,9 @@
         NSMutableDictionary *pageViewContext = [NSMutableDictionary new];
         if (referrer) [pageViewContext setObject:referrer forKey:PCContextReferrerKey];
         event.context = [pageViewContext copy];
-        
-        [PeachCollector save];
-    } withCompletionHandler:^(NSError * _Nullable error) {
+    } withPriority:NSOperationQueuePriorityNormal completionBlock:^(NSError * _Nullable error) {
         [event send];
     }];
-    
-    
-    
 }
 
 + (void)sendEventWithType:(PCEventType)type
@@ -85,24 +82,25 @@
                   context:(nullable PeachCollectorContext *)context
                  metadata:(nullable NSDictionary<NSString *, id<NSCopying>> *)metadata
 {
-    PeachCollectorEvent *event = [NSEntityDescription insertNewObjectForEntityForName:@"PeachCollectorEvent" inManagedObjectContext:[PeachCollector managedObjectContext]];
-    
-    event.type = type;
-    event.eventID = eventID;
-    event.creationDate = [NSDate date];
-    if (context) {
-        event.context = [context dictionaryRepresentation];
-    }
-    if (properties) {
-        event.props = [properties dictionaryRepresentation];
-    }
-    if (metadata) {
-        event.metadata = metadata;
-    }
-    
-    [PeachCollector save];
-    
-    [event send];
+    __block PeachCollectorEvent *event;
+    [PeachCollector.dataStore performBackgroundWriteTask:^(NSManagedObjectContext * _Nonnull managedObjectContext) {
+        event = [NSEntityDescription insertNewObjectForEntityForName:@"PeachCollectorEvent" inManagedObjectContext:managedObjectContext];
+        
+        event.type = type;
+        event.eventID = eventID;
+        event.creationDate = [NSDate date];
+        if (context) {
+            event.context = [context dictionaryRepresentation];
+        }
+        if (properties) {
+            event.props = [properties dictionaryRepresentation];
+        }
+        if (metadata) {
+            event.metadata = metadata;
+        }
+    } withPriority:NSOperationQueuePriorityNormal completionBlock:^(NSError * _Nullable error) {
+        [event send];
+    }];
 }
 
 + (void)sendMediaPlayWithID:(NSString *)mediaID
@@ -153,21 +151,6 @@
         if (publisherStatus.status != PCEventStatusPublished) return NO;
     }
     return YES;
-}
-
-- (void)setStatus:(NSInteger)status forPublisherNamed:(NSString *)publisherName
-{
-    for (PeachCollectorPublisherEventStatus *eventStatus in self.eventStatuses) {
-        if ([eventStatus.publisherName isEqualToString:publisherName]) {
-            eventStatus.status = status;
-            return;
-        }
-    }
-    
-    PeachCollectorPublisherEventStatus *eventStatus = [NSEntityDescription insertNewObjectForEntityForName:@"PeachCollectorPublisherEventStatus" inManagedObjectContext:[PeachCollector managedObjectContext]];
-    eventStatus.status = status;
-    eventStatus.event = self;
-    eventStatus.publisherName = publisherName;
 }
 
 - (void)send

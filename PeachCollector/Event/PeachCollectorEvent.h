@@ -17,14 +17,6 @@ NS_ASSUME_NONNULL_BEGIN
 @interface PeachCollectorEvent (Peach)
 
 /**
- *  Set status of the event for a specific publisher
- *  @param status The status of the event
- *  @param publisherName The name of the publisher
- */
-- (void)setStatus:(NSInteger)status forPublisherNamed:(NSString *)publisherName;
-
-
-/**
  *  Send a new event. Event will be added to the queue and sent accordingly to publishers' configurations.
  *  @param type    Name of the event's type.
  *  @param eventID unique identifier related to the event (e.g., data source id for a recommendation hit, media id for a media play)

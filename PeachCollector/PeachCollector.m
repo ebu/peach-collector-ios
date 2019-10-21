@@ -9,18 +9,16 @@
 #import "PeachCollector.h"
 #import "PeachCollectorQueue.h"
 #import "PeachPersistentContainer.h"
-#import "PeachCollectorOperation.h"
 #import <UIKit/UIKit.h>
 
 @interface PeachCollector()
 
+@property (nonatomic, strong) PeachCollectorDataStore *dataStore;
 @property (nonatomic, strong) PeachCollectorQueue *queue;
 @property (nonatomic, strong) NSArray<NSString *> *flushableEventTypes;
 @property (nonatomic) NSInteger sessionStartTimestamp;
 @property (nonatomic) NSInteger lastRecordedEventTimestamp;
 @property (nonatomic) NSTimer *sessionHeartbeatTimer;
-
-@property (nonatomic, strong) NSMutableArray *operations;
 
 @end
 
@@ -71,8 +69,8 @@ static NSInteger _inactivityInterval = -1;
     self = [super init];
     if (self) {
         _flushableEventTypes = @[PCEventTypeMediaStop, PCEventTypeMediaPause];
+        self.dataStore = [[PeachCollectorDataStore alloc] init];
         self.queue = [[PeachCollectorQueue alloc] init];
-        self.operations = [NSMutableArray array];
         
         self.sessionStartTimestamp = [[NSUserDefaults standardUserDefaults] integerForKey:PeachCollectorSessionStartTimestampKey];
         self.lastRecordedEventTimestamp = [[NSUserDefaults standardUserDefaults] integerForKey:PeachCollectorLastRecordedEventTimestampKey];
@@ -151,6 +149,11 @@ static NSInteger _inactivityInterval = -1;
 
 #pragma mark - Queue management
 
++ (PeachCollectorDataStore *)dataStore
+{
+    return [PeachCollector sharedCollector].dataStore;
+}
+
 + (void)flush
 {
     if ([[PeachCollector sharedCollector] queue]) {
@@ -168,14 +171,14 @@ static NSInteger _inactivityInterval = -1;
 
 + (void)deleteAllEntities:(NSString *)nameEntity
 {
-    NSFetchRequest *request = [[NSFetchRequest alloc] initWithEntityName:nameEntity];
-    NSBatchDeleteRequest *delete = [[NSBatchDeleteRequest alloc] initWithFetchRequest:request];
+    [[PeachCollector dataStore] performBackgroundWriteTask:^(NSManagedObjectContext * _Nonnull managedObjectContext) {
+        NSFetchRequest *request = [[NSFetchRequest alloc] initWithEntityName:nameEntity];
+        NSBatchDeleteRequest *delete = [[NSBatchDeleteRequest alloc] initWithFetchRequest:request];
 
-    NSError *deleteError;
-    [[PeachCollector managedObjectContext] executeRequest:delete error:&deleteError];
-    [[PeachCollector managedObjectContext] processPendingChanges];
-    [PeachCollector save];
-    
+        NSError *deleteError;
+        [managedObjectContext executeRequest:delete error:&deleteError];
+        [managedObjectContext processPendingChanges];
+    } withPriority:NSOperationQueuePriorityVeryHigh completionBlock:nil];
 }
 
 
@@ -231,90 +234,6 @@ static NSInteger _inactivityInterval = -1;
     _userID = [userID copy];
 }
 
-
-#pragma mark - Core Data stack
-
-@synthesize persistentContainer = _persistentContainer;
-
-- (NSPersistentContainer *)persistentContainer {
-    // The persistent container for the application. This implementation creates and returns a container, having loaded the store for the application to it.
-    @synchronized (self) {
-        if (_persistentContainer == nil) {
-            NSURL *directoryURL = [[NSPersistentContainer defaultDirectoryURL] URLByAppendingPathComponent:@"PeachCollector"];
-            if (! [NSFileManager.defaultManager fileExistsAtPath:directoryURL.absoluteString]) {
-                NSError *err;
-                if (![NSFileManager.defaultManager createDirectoryAtURL:directoryURL withIntermediateDirectories:YES attributes:nil error:&err]) { //Create folder
-                    NSLog(@"Unable to create folder at %@: %@", directoryURL, err);
-                }
-            }
-            
-            _persistentContainer = [[PeachPersistentContainer alloc] initWithName:@"PeachCollector"];
-            [_persistentContainer loadPersistentStoresWithCompletionHandler:^(NSPersistentStoreDescription *storeDescription, NSError *error) {
-                if (error != nil) {
-                    // Replace this implementation with code to handle the error appropriately.
-                    // abort() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
-                    
-                    /*
-                     Typical reasons for an error here include:
-                     * The parent directory does not exist, cannot be created, or disallows writing.
-                     * The persistent store is not accessible, due to permissions or data protection when the device is locked.
-                     * The device is out of space.
-                     * The store could not be migrated to the current model version.
-                     Check the error message to determine what the actual problem was.
-                     */
-                    NSLog(@"Unresolved error %@, %@", error, error.userInfo);
-                    abort();
-                }
-            }];
-        }
-    }
-    
-    return _persistentContainer;
-}
-
-+ (NSManagedObjectContext *)managedObjectContext
-{
-    return [PeachCollector sharedCollector].persistentContainer.viewContext;
-}
-
-+ (BOOL)save{
-    NSError *contextError = nil;
-    if ([[PeachCollector managedObjectContext] save:&contextError] == NO) {
-        [[PeachCollector managedObjectContext] rollback];
-        //NSAssert(NO, @"Error saving context: %@\n%@", [error localizedDescription], [error userInfo]);
-        return NO;
-    }
-    return YES;
-}
-
-
-+ (void)queueOperation:(void (^)(void))operationBlock withCompletionHandler:(void (^)(NSError * _Nullable error))completionHandler
-{
-    PeachCollectorOperation *operation = [PeachCollectorOperation new];
-    operation.operationBlock = operationBlock;
-    operation.completionBlock = completionHandler;
-    
-
-    [[PeachCollector sharedCollector].operations addObject:operation];
-    if ([PeachCollector sharedCollector].operations.count == 1) {
-        [[PeachCollector sharedCollector] dequeueOperation];
-    }
-}
-
-- (void)dequeueOperation
-{
-    PeachCollectorOperation *operation = [self.operations firstObject];
-    operation.operationBlock();
-    operation.completionBlock(nil);
-    
-    if (self.operations.count > 1) {
-        [self.operations removeObjectAtIndex:0];
-        [self dequeueOperation];
-    }
-    else {
-        [self.operations removeObjectAtIndex:0];
-    }
-}
 
 
 
