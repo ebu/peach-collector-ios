@@ -14,6 +14,9 @@
 {
     NSMutableDictionary *representation = [NSMutableDictionary new];
     
+    if (self.timeSpent != nil) {
+        [representation setObject:self.timeSpent forKey:PCMediaTimeSpentKey];
+    }
     if (self.playbackPosition != nil) {
         [representation setObject:self.playbackPosition forKey:PCMediaPlaybackPositionKey];
     }

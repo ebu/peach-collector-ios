@@ -14,6 +14,12 @@
 {
     NSMutableDictionary *mutableDescription = [NSMutableDictionary new];
     
+    if (self.timeSpentBlock) {
+        NSNumber *timeSpent = self.timeSpentBlock();
+        if (timeSpent != nil) {
+            [mutableDescription setObject:timeSpent forKey:PCMediaTimeSpentKey];
+        }
+    }
     if (self.playbackPositionBlock) {
         NSNumber *playbackPosition = self.playbackPositionBlock();
         if (playbackPosition != nil) {

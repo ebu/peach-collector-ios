@@ -85,6 +85,7 @@ OBJC_EXPORT NSString * const PeachCollectorLastRecordedEventTimestampKey;
 
 #pragma mark - Payload known keys
 
+OBJC_EXPORT NSString * const PCMediaTimeSpentKey;
 OBJC_EXPORT NSString * const PCMediaPlaybackPositionKey;
 OBJC_EXPORT NSString * const PCMediaPreviousPlaybackPositionKey;
 OBJC_EXPORT NSString * const PCMediaVideoModeKey;
