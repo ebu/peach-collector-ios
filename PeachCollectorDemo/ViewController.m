@@ -53,7 +53,7 @@
     
     [PeachCollectorEvent sendRecommendationHitWithID:[NSString stringWithFormat:@"reco%02d", (int)index]
                                                items:@[@"reco00", @"reco01", @"reco02", @"reco03"]
-                                      itemsDisplayed:3
+                                 itemsDisplayedCount:3
                                             hitIndex:index
                                         appSectionID:@"news/videos"
                                               source:nil

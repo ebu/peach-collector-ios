@@ -30,14 +30,33 @@ NS_ASSUME_NONNULL_BEGIN
                   context:(nullable PeachCollectorContext *)context
                  metadata:(nullable NSDictionary<NSString *, id<NSCopying>> *)metadata;
 
+/**
+ *  Send a recommendation hit event. Event will be added to the queue and sent accordingly to publishers' configurations.
+ *  @param recommendationID    Unique identifier of the recommendation.
+ *  @param items List of unique identifiers for the clips, medias or articles recommended
+ *  @param itemsDisplayedCount Number of items displayed (can be less than the number of items, if the recommendation component is a scroll view for example)
+ *  @param index Index of the item that has been hit
+ *  @param appSectionID Unique identifier of app section where the recommendation is displayed
+ *  @param source Identifier of the element in which the recommendation is displayed (the module, view or popup)
+ *  @param component Description of the element in which the recommendation is displayed
+ */
 + (void)sendRecommendationHitWithID:(NSString *)recommendationID
                               items:(NSArray<NSString *> *)items
-                     itemsDisplayed:(NSInteger)itemsDisplayed
+                itemsDisplayedCount:(NSInteger)itemsDisplayedCount
                            hitIndex:(NSInteger)index
                        appSectionID:(nullable NSString *)appSectionID
                              source:(nullable NSString *)source
                           component:(nullable PeachCollectorContextComponent *)component;
 
+/**
+ *  Send a recommendation displayed event. Event will be added to the queue and sent accordingly to publishers' configurations.
+ *  @param recommendationID Unique identifier of the recommendation.
+ *  @param items List of unique identifiers for the clips, medias or articles recommended
+ *  @param itemsDisplayedCount Number of items displayed (can be less than the number of items, if the recommendation component is a scroll view for example)
+ *  @param appSectionID Unique identifier of app section where the recommendation is displayed
+ *  @param source Identifier of the element in which the recommendation is displayed (the module, view or popup)
+ *  @param component Description of the element in which the recommendation is displayed
+ */
 + (void)sendRecommendationDisplayedWithID:(NSString *)recommendationID
                                     items:(NSArray<NSString *> *)items
                       itemsDisplayedCount:(NSInteger)itemsDisplayedCount
@@ -45,29 +64,83 @@ NS_ASSUME_NONNULL_BEGIN
                                    source:(nullable NSString *)source
                                 component:(nullable PeachCollectorContextComponent *)component;
 
+/**
+ *  Send a recommendation loaded event. Event will be added to the queue and sent accordingly to publishers' configurations.
+ *  @param recommendationID Unique identifier of the recommendation.
+ *  @param items List of unique identifiers for the clips, medias or articles recommended
+ *  @param appSectionID Unique identifier of app section where the recommendation is displayed
+ *  @param source Identifier of the element in which the recommendation is displayed (the module, view or popup)
+ *  @param component Description of the element in which the recommendation is displayed
+ */
++ (void)sendRecommendationLoadedWithID:(NSString *)recommendationID
+                                 items:(NSArray<NSString *> *)items
+                          appSectionID:(nullable NSString *)appSectionID
+                                source:(nullable NSString *)source
+                             component:(nullable PeachCollectorContextComponent *)component;
+
+/**
+ *  Send a page view event. Event will be added to the queue and sent accordingly to publishers' configurations.
+ *  @param pageID Unique identifier of the page.
+ *  @param referrer Identifier of the previous page that led to this page view
+ */
 + (void)sendPageViewWithID:(NSString *)pageID
                   referrer:(nullable NSString *)referrer;
 
+/**
+ *  Send a media play event. Event will be added to the queue and sent accordingly to publishers' configurations.
+ *  @param mediaID Unique identifier of the media
+ *  @param properties Properties of the media and it's current state
+ *  @param context Context of the media (e. g. view where it's displayed, component used to play the media...)
+ *  @param metadata Metadatas (should be kept as small as possible)
+ */
 + (void)sendMediaPlayWithID:(NSString *)mediaID
                  properties:(PeachCollectorProperties *)properties
                     context:(PeachCollectorContext *)context
                    metadata:(NSDictionary<NSString *, id<NSCopying>> *)metadata;
 
+/**
+ *  Send a media pause event. Event will be added to the queue and sent accordingly to publishers' configurations.
+ *  @param mediaID Unique identifier of the media
+ *  @param properties Properties of the media and it's current state
+ *  @param context Context of the media (e. g. view where it's displayed, component used to play the media...)
+ *  @param metadata Metadatas (should be kept as small as possible)
+ */
 + (void)sendMediaPauseWithID:(NSString *)mediaID
                   properties:(PeachCollectorProperties *)properties
                      context:(PeachCollectorContext *)context
                     metadata:(NSDictionary<NSString *, id<NSCopying>> *)metadata;
 
+/**
+ *  Send a media seek event. Event will be added to the queue and sent accordingly to publishers' configurations.
+ *  @param mediaID Unique identifier of the media
+ *  @param properties Properties of the media and it's current state
+ *  @param context Context of the media (e. g. view where it's displayed, component used to play the media...)
+ *  @param metadata Metadatas (should be kept as small as possible)
+ */
 + (void)sendMediaSeekWithID:(NSString *)mediaID
                  properties:(PeachCollectorProperties *)properties
                     context:(PeachCollectorContext *)context
                    metadata:(NSDictionary<NSString *, id<NSCopying>> *)metadata;
 
+/**
+ *  Send a media stop event. Event will be added to the queue and sent accordingly to publishers' configurations.
+ *  @param mediaID Unique identifier of the media
+ *  @param properties Properties of the media and it's current state
+ *  @param context Context of the media (e. g. view where it's displayed, component used to play the media...)
+ *  @param metadata Metadatas (should be kept as small as possible)
+ */
 + (void)sendMediaStopWithID:(NSString *)mediaID
                  properties:(PeachCollectorProperties *)properties
                     context:(PeachCollectorContext *)context
                    metadata:(NSDictionary<NSString *, id<NSCopying>> *)metadata;
 
+/**
+ *  Send a media heartbeat event. Event will be added to the queue and sent accordingly to publishers' configurations.
+ *  @param mediaID Unique identifier of the media
+ *  @param properties Properties of the media and it's current state
+ *  @param context Context of the media (e. g. view where it's displayed, component used to play the media...)
+ *  @param metadata Metadatas (should be kept as small as possible)
+ */
 + (void)sendMediaHeartbeatWithID:(NSString *)mediaID
                       properties:(PeachCollectorProperties *)properties
                          context:(PeachCollectorContext *)context

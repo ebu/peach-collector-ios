@@ -215,10 +215,11 @@
     event.creationDate = now;
     NSArray *items = @[@"reco00", @"reco01", @"reco02", @"reco03"];
     PeachCollectorContext *context = [[PeachCollectorContext alloc] initRecommendationContextWithitems:items
-                                                                                   itemsDisplayedCount:3
                                                                                           appSectionID:@"news/videos"
                                                                                                 source:nil
-                                                                                             component:carouselComponent hitIndex:0];
+                                                                                             component:carouselComponent
+                                                                                             itemsDisplayedCount:3
+                                                                                              hitIndex:0];
     event.context = [context dictionaryRepresentation];
     
     XCTAssertTrue([[[event context] objectForKey:PCContextItemsKey] isEqual:items], @"Items are added to the context");

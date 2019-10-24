@@ -22,14 +22,19 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, copy) PeachCollectorContextComponent *component;
 
 - (instancetype)initRecommendationContextWithitems:(NSArray<NSString *> *)items
-                               itemsDisplayedCount:(NSInteger)itemsDisplayedCount
                                       appSectionID:(nullable NSString *)appSectionID
                                             source:(nullable NSString *)source
                                          component:(nullable PeachCollectorContextComponent *)component
+                               itemsDisplayedCount:(NSInteger)itemsDisplayedCount
                                           hitIndex:(NSInteger)hitIndex;
 
 - (instancetype)initRecommendationContextWithitems:(NSArray<NSString *> *)items
-                               itemsDisplayedCount:(NSInteger)itemsDisplayedCount
+                                      appSectionID:(nullable NSString *)appSectionID
+                                            source:(nullable NSString *)source
+                                         component:(nullable PeachCollectorContextComponent *)component
+                               itemsDisplayedCount:(NSInteger)itemsDisplayedCount;
+
+- (instancetype)initRecommendationContextWithitems:(NSArray<NSString *> *)items
                                       appSectionID:(nullable NSString *)appSectionID
                                             source:(nullable NSString *)source
                                          component:(nullable PeachCollectorContextComponent *)component;

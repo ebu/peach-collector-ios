@@ -13,7 +13,7 @@
 
 + (void)sendRecommendationHitWithID:(NSString *)eventID
                               items:(NSArray<NSString *> *)items
-                     itemsDisplayed:(NSInteger)itemsDisplayed
+                itemsDisplayedCount:(NSInteger)itemsDisplayedCount
                            hitIndex:(NSInteger)hitIndex
                        appSectionID:(nullable NSString *)appSectionID
                              source:(nullable NSString *)source
@@ -27,7 +27,7 @@
         event.eventID = eventID;
         event.creationDate = [NSDate date];
         
-        PeachCollectorContext *context = [[PeachCollectorContext alloc] initRecommendationContextWithitems:items itemsDisplayedCount:itemsDisplayed appSectionID:appSectionID source:source component:component hitIndex:hitIndex];
+        PeachCollectorContext *context = [[PeachCollectorContext alloc] initRecommendationContextWithitems:items appSectionID:appSectionID source:source component:component itemsDisplayedCount:itemsDisplayedCount hitIndex:hitIndex];
         event.context = [context dictionaryRepresentation];
     } withPriority:NSOperationQueuePriorityNormal completionBlock:^(NSError * _Nullable error) {
         [event send];
@@ -49,7 +49,29 @@
         event.eventID = eventID;
         event.creationDate = [NSDate date];
         
-        PeachCollectorContext *context = [[PeachCollectorContext alloc] initRecommendationContextWithitems:items itemsDisplayedCount:itemsDisplayedCount appSectionID:appSectionID source:source component:component];
+        PeachCollectorContext *context = [[PeachCollectorContext alloc] initRecommendationContextWithitems:items appSectionID:appSectionID source:source component:component itemsDisplayedCount:itemsDisplayedCount];
+
+        event.context = [context dictionaryRepresentation];
+    } withPriority:NSOperationQueuePriorityNormal completionBlock:^(NSError * _Nullable error) {
+        [event send];
+    }];
+}
+
++ (void)sendRecommendationLoadedWithID:(NSString *)recommendationID
+                                 items:(NSArray<NSString *> *)items
+                          appSectionID:(nullable NSString *)appSectionID
+                                source:(nullable NSString *)source
+                             component:(nullable PeachCollectorContextComponent *)component
+{
+    __block PeachCollectorEvent *event;
+    [PeachCollector.dataStore performBackgroundWriteTask:^(NSManagedObjectContext * _Nonnull managedObjectContext) {
+        event = [NSEntityDescription insertNewObjectForEntityForName:@"PeachCollectorEvent" inManagedObjectContext:managedObjectContext];
+        
+        event.type = PCEventTypeRecommendationLoaded;
+        event.eventID = recommendationID;
+        event.creationDate = [NSDate date];
+        
+        PeachCollectorContext *context = [[PeachCollectorContext alloc] initRecommendationContextWithitems:items appSectionID:appSectionID source:source component:component];
 
         event.context = [context dictionaryRepresentation];
     } withPriority:NSOperationQueuePriorityNormal completionBlock:^(NSError * _Nullable error) {

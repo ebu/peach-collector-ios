@@ -12,26 +12,33 @@
 @implementation PeachCollectorContext
 
 - (instancetype)initRecommendationContextWithitems:(NSArray<NSString *> *)items
-                               itemsDisplayedCount:(NSInteger)itemsDisplayedCount
                                       appSectionID:(nullable NSString *)appSectionID
                                             source:(nullable NSString *)source
                                          component:(nullable PeachCollectorContextComponent *)component
+                               itemsDisplayedCount:(NSInteger)itemsDisplayedCount
                                           hitIndex:(NSInteger)hitIndex
 {
-    self = [super init];
+    self = [self initRecommendationContextWithitems:items appSectionID:appSectionID source:appSectionID component:component itemsDisplayedCount:itemsDisplayedCount];
     if (self) {
-        _items = items;
-        _itemsDisplayedCount = @(itemsDisplayedCount);
         _hitIndex = @(hitIndex);
-        _appSectionID = appSectionID;
-        _source = source;
-        _component = component;
     }
     return self;
 }
 
 - (instancetype)initRecommendationContextWithitems:(NSArray<NSString *> *)items
+                                      appSectionID:(nullable NSString *)appSectionID
+                                            source:(nullable NSString *)source
+                                         component:(nullable PeachCollectorContextComponent *)component
                                itemsDisplayedCount:(NSInteger)itemsDisplayedCount
+{
+    self = [self initRecommendationContextWithitems:items appSectionID:appSectionID source:appSectionID component:component];
+    if (self) {
+        _itemsDisplayedCount = @(itemsDisplayedCount);
+    }
+    return self;
+}
+
+- (instancetype)initRecommendationContextWithitems:(NSArray<NSString *> *)items
                                       appSectionID:(nullable NSString *)appSectionID
                                             source:(nullable NSString *)source
                                          component:(nullable PeachCollectorContextComponent *)component
@@ -39,7 +46,6 @@
     self = [super init];
     if (self) {
         _items = items;
-        _itemsDisplayedCount = @(itemsDisplayedCount);
         _appSectionID = appSectionID;
         _source = source;
         _component = component;
