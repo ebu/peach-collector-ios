@@ -116,22 +116,25 @@
             int number;
             [scanner scanInt:&number];
             publishedEventsCount = publishedEventsCount + number;
+            
+            if (publishedEventsCount == 3000){
+                [expectation fulfill];
+            }
         }
-        if (publishedEventsCount == 1000){
-            [expectation fulfill];
-        }
+        
         return YES;
     }];
     
-    for (int i=0; i<1000; i++) {
+    for (int i=0; i<3000; i++) {
         [PeachCollectorEvent sendPageViewWithID:[NSString stringWithFormat:@"test%d/news", i] referrer:nil];
     }
     
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         publisher.serviceURL = @"https://pipe-collect.ebu.io/v3/collect?s=zzebu00000000017";
+        [[NSNotificationCenter defaultCenter] postNotificationName: PeachCollectorReachabilityChangedNotification object:nil];
     });
     
-    [self waitForExpectationsWithTimeout:20 handler:nil];
+    [self waitForExpectationsWithTimeout:120 handler:nil];
 }
 
 - (void)test3PublishersWith1000Events {

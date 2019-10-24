@@ -106,11 +106,12 @@
         NSArray *eventsStatuses = result;
         if (result == nil || [result count] == 0) return;
         BOOL lastPublishingHasFailed = [self.numberOfFailures objectForKey:publisherName] != nil;
-        if (!lastPublishingHasFailed && (eventsStatuses.count >= publisher.maxEventsPerBatch || publisher.interval == 0)) {
+        BOOL hasTooManyEvents = eventsStatuses.count >= publisher.maxEventsPerBatchAfterOfflineSession;
+        if (!lastPublishingHasFailed && (eventsStatuses.count >= publisher.maxEventsPerBatch || publisher.interval == 0) && !hasTooManyEvents) {
             [self sendEventsToPublisherNamed:publisherName];
         }
-        else if ([eventsStatuses count] && [self.publisherTimers objectForKey:publisherName] == nil) {
-            [self startTimerForPublisherNamed:publisherName];
+        else if ([self.publisherTimers objectForKey:publisherName] == nil) {
+            [self startTimerForPublisherNamed:publisherName followPolicy:hasTooManyEvents];
         }
     }];
 }
@@ -180,7 +181,7 @@
                     numberOfFailures = (numberOfFailures == nil) ? @(1) : @(numberOfFailures.integerValue + 1);
                     [self.numberOfFailures setObject:numberOfFailures forKey:publisherName];
                     
-                    [self startTimerForPublisherNamed:publisherName];
+                    [self startTimerForPublisherNamed:publisherName followPolicy:NO];
                     
                     if ([[PeachCollector sharedCollector] isUnitTesting]) {
                         [NSNotificationCenter.defaultCenter postNotificationName:PeachCollectorNotification
@@ -224,9 +225,11 @@
     
 }
 
-- (void)startTimerForPublisherNamed:(NSString *)publisherName
+- (void)startTimerForPublisherNamed:(NSString *)publisherName followPolicy:(BOOL)shouldFollowPolicy
 {
-    NSTimer *timer = [NSTimer timerWithTimeInterval:[self intervalForPublisherNamed:publisherName]
+    NSInteger interval = [self intervalForPublisherNamed:publisherName followPolicy:shouldFollowPolicy];
+    
+    NSTimer *timer = [NSTimer timerWithTimeInterval:interval
                                              target:self
                                            selector:@selector(sendEventsToPublisherWithTimer:)
                                            userInfo:@{@"publisherName":publisherName}
@@ -269,13 +272,23 @@
     [self.publisherTimers removeAllObjects];
 }
 
-- (NSInteger)intervalForPublisherNamed:(NSString *)publisherName
+- (NSInteger)intervalForPublisherNamed:(NSString *)publisherName followPolicy:(BOOL)shouldFollowPolicy
 {
     PeachCollectorPublisher *publisher = [PeachCollector publisherNamed:publisherName];
     NSNumber *numberOfFailures = [self.numberOfFailures objectForKey:publisherName];
     if (numberOfFailures != nil){
         return MIN(300, publisher.interval * ([numberOfFailures integerValue] + 1));
     }
+    
+    if (shouldFollowPolicy) {
+        if (publisher.gotBackPolicy == PCPublisherGotBackOnlinePolicySendAll) {
+            return 0;
+        }
+        else {
+            return arc4random_uniform(10);
+        }
+    }
+    
     return publisher.interval;
 }
 
