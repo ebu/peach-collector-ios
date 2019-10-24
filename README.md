@@ -1,3 +1,4 @@
+
 [![Carthage compatible](https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat)](https://github.com/Carthage/Carthage)
 
 ## About
@@ -113,7 +114,7 @@ PeachCollector.addFlushableEventType("media_error")
 ```objectivec
   [PeachCollectorEvent sendRecommendationHitWithID:@"reco01"
 					     items:@[@"reco00", @"reco01", @"reco02"]
-                                    itemsDisplayed:3
+                               itemsDisplayedCount:3
                                           hitIndex:2
                                       appSectionID:@"news/videos"
                                             source:nil
@@ -123,7 +124,7 @@ PeachCollector.addFlushableEventType("media_error")
 ```swift
 PeachCollectorEvent.sendRecommendationHit(withID: "reco00",
 					   items: ["reco00", "reco01", "reco02"],
-				  itemsDisplayed: 3,
+			     itemsDisplayedCount: 3,
 					     hit: 1,
 				    appSectionID: "news/videos",
 					  source: nil,
