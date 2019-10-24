@@ -53,33 +53,38 @@
 
 - (void)resetStatuses
 {
-    NSArray *eventsStatuses = [PeachCollectorPublisherEventStatus allEventsStatuses];
-    for (PeachCollectorPublisherEventStatus *eventStatus in eventsStatuses) {
-        eventStatus.status = PCEventStatusQueued;
-    }
-    [PeachCollector save];
+    [PeachCollector.dataStore performBackgroundWriteTask:^(NSManagedObjectContext * _Nonnull managedObjectContext) {
+        NSArray *eventsStatuses = [PeachCollectorPublisherEventStatus allEventsStatusesInContext:managedObjectContext];
+        for (PeachCollectorPublisherEventStatus *eventStatus in eventsStatuses) {
+            eventStatus.status = PCEventStatusQueued;
+        }
+    } withPriority:NSOperationQueuePriorityHigh completionBlock:nil];
 }
 
 - (void)addEvent:(PeachCollectorEvent *)event
 {
-    for (NSString *publisherID in [PeachCollector sharedCollector].publishers.allKeys) {
-        PeachCollectorPublisher *publisher = [[PeachCollector sharedCollector].publishers objectForKey:publisherID];
-        if ([publisher shouldProcessEvent:event]) {
-            PeachCollectorPublisherEventStatus *eventStatus = [NSEntityDescription insertNewObjectForEntityForName:@"PeachCollectorPublisherEventStatus" inManagedObjectContext:[PeachCollector managedObjectContext]];
-            eventStatus.status = PCEventStatusQueued;
-            eventStatus.publisherName = publisherID;
-            eventStatus.event = event;
+    __block PeachCollectorEvent *addedEvent;
+    [PeachCollector.dataStore performBackgroundWriteTask:^(NSManagedObjectContext * _Nonnull managedObjectContext) {
+        addedEvent = [managedObjectContext objectWithID:event.objectID];
+        for (NSString *publisherID in [PeachCollector sharedCollector].publishers.allKeys) {
+            PeachCollectorPublisher *publisher = [[PeachCollector sharedCollector].publishers objectForKey:publisherID];
+            if ([publisher shouldProcessEvent:addedEvent]) {
+                PeachCollectorPublisherEventStatus *eventStatus = [NSEntityDescription insertNewObjectForEntityForName:@"PeachCollectorPublisherEventStatus" inManagedObjectContext:managedObjectContext];
+                eventStatus.status = PCEventStatusQueued;
+                eventStatus.publisherName = publisherID;
+                eventStatus.event = addedEvent;
+            }
         }
-    }
-    
-    [PeachCollector save];
-    
-    if ([[UIApplication sharedApplication] applicationState] != UIApplicationStateActive
-        && [event shouldBeFlushedWhenReceivedInBackgroundState]) {
-        [self flush];
-    }
-    
-    [self checkPublishers];
+    } withPriority:NSOperationQueuePriorityHigh completionBlock:^(NSError * _Nullable error) {
+        dispatch_async(dispatch_get_main_queue(), ^{
+            if ([[UIApplication sharedApplication] applicationState] != UIApplicationStateActive
+                && [addedEvent shouldBeFlushedWhenReceivedInBackgroundState]) {
+                [self flush];
+            }
+        
+            [self checkPublishers];
+        });
+    }];
 }
 
 - (void)checkPublishers
@@ -92,16 +97,23 @@
 - (void)checkPublisherNamed:(NSString *)publisherName
 {
     PeachCollectorPublisher *publisher = [PeachCollector publisherNamed:publisherName];
-    NSArray *eventsStatuses = [PeachCollectorPublisherEventStatus pendingEventsStatusesForPublisherNamed:publisherName];
     
-    BOOL lastPublishingHasFailed = [self.numberOfFailures objectForKey:publisherName] != nil;
-    
-    if (!lastPublishingHasFailed && (eventsStatuses.count >= publisher.maxEventsPerBatch || publisher.interval == 0)) {
-        [self sendEventsToPublisherNamed:publisherName];
-    }
-    else if ([eventsStatuses count] && [self.publisherTimers objectForKey:publisherName] == nil) {
-        [self startTimerForPublisherNamed:publisherName];
-    }
+    [PeachCollector.dataStore performBackgroundReadTask:^id _Nullable(NSManagedObjectContext * _Nonnull managedObjectContext) {
+        NSArray *pendingEventStatuses = [PeachCollectorPublisherEventStatus eventsStatusesForPublisherNamed:publisherName withStatus:PCEventStatusSentToPublisher inContext:managedObjectContext];
+        if (pendingEventStatuses.count > 0) return nil;
+        return [PeachCollectorPublisherEventStatus pendingEventsStatusesForPublisherNamed:publisherName inContext:managedObjectContext];
+    } withPriority:NSOperationQueuePriorityHigh completionBlock:^(id  _Nullable result, NSError * _Nullable error) {
+        NSArray *eventsStatuses = result;
+        if (result == nil || [result count] == 0) return;
+        BOOL lastPublishingHasFailed = [self.numberOfFailures objectForKey:publisherName] != nil;
+        BOOL hasTooManyEvents = eventsStatuses.count >= publisher.maxEventsPerBatchAfterOfflineSession;
+        if (!lastPublishingHasFailed && (eventsStatuses.count >= publisher.maxEventsPerBatch || publisher.interval == 0) && !hasTooManyEvents) {
+            [self sendEventsToPublisherNamed:publisherName];
+        }
+        else if ([self.publisherTimers objectForKey:publisherName] == nil) {
+            [self startTimerForPublisherNamed:publisherName followPolicy:hasTooManyEvents];
+        }
+    }];
 }
 
 - (void)sendEventsToPublisherWithTimer:(NSTimer *)timer
@@ -112,90 +124,113 @@
 
 - (void)sendEventsToPublisherNamed:(NSString *)publisherName
 {
-    NSArray *eventsStatuses = [PeachCollectorPublisherEventStatus pendingEventsStatusesForPublisherNamed:publisherName];
-    PeachCollectorPublisher *publisher = [PeachCollector publisherNamed:publisherName];
-    
-    if (eventsStatuses.count == 0) return;
-    
-    NSTimer *timer = [self.publisherTimers objectForKey:publisherName];
-    if (timer) {
-        [timer invalidate];
-        [self.publisherTimers removeObjectForKey:publisherName];
-    }
-    
-    NSMutableArray *events = [NSMutableArray new];
-    for (PeachCollectorPublisherEventStatus *eventStatus in eventsStatuses) {
-        if (events.count < publisher.maxEventsPerBatchAfterOfflineSession) {
-            [events addObject:eventStatus.event];
-        }
-        eventStatus.status = PCEventStatusSentToPublisher;
-    }
-    [PeachCollector save];
-    
-    [self registerBackgroundTask];
-    
-    [publisher processEvents:events withCompletionHandler:^(NSError * _Nullable error) {
-        BOOL shouldContinueSending = NO;
-        if (eventsStatuses.count > events.count && error == nil) {
-            shouldContinueSending = YES;
+    [PeachCollector.dataStore performBackgroundWriteTask:^(NSManagedObjectContext * _Nonnull managedObjectContext) {
+        // Check if there is events that are being processed by the publisher
+        NSArray *pendingEventStatuses = [PeachCollectorPublisherEventStatus eventsStatusesForPublisherNamed:publisherName withStatus:PCEventStatusSentToPublisher inContext:managedObjectContext];
+        if (pendingEventStatuses.count > 0) return;
+        
+        // Check if there is events to process for the publisher
+        NSArray *eventsStatuses = [PeachCollectorPublisherEventStatus pendingEventsStatusesForPublisherNamed:publisherName inContext:managedObjectContext];
+        if (eventsStatuses.count == 0) return;
+        
+        PeachCollectorPublisher *publisher = [PeachCollector publisherNamed:publisherName];
+        NSTimer *timer = [self.publisherTimers objectForKey:publisherName];
+        if (timer) {
+            [timer invalidate];
+            [self.publisherTimers removeObjectForKey:publisherName];
         }
         
-        for (PeachCollectorEvent *event in events) {
-            [event setStatus:(error) ? PCEventStatusQueued : PCEventStatusPublished forPublisherNamed:publisherName];
-            if ([event canBeRemoved]){
-                [[PeachCollector managedObjectContext] deleteObject:event];
+        NSMutableArray *events = [NSMutableArray new];
+        for (PeachCollectorPublisherEventStatus *eventStatus in eventsStatuses) {
+            if (events.count < publisher.maxEventsPerBatchAfterOfflineSession) {
+                [events addObject:eventStatus.event];
+                eventStatus.status = PCEventStatusSentToPublisher;
             }
         }
-        [PeachCollector save];
+        [self registerBackgroundTask];
         
-        if (error) {
-            NSNumber *numberOfFailures = [self.numberOfFailures objectForKey:publisherName];
-            numberOfFailures = (numberOfFailures == nil) ? @(1) : @(numberOfFailures.integerValue + 1);
-            [self.numberOfFailures setObject:numberOfFailures forKey:publisherName];
+        [publisher processEvents:events withCompletionHandler:^(NSError * _Nullable processError) {
             
-            [self startTimerForPublisherNamed:publisherName];
-            
-            if ([[PeachCollector sharedCollector] isUnitTesting]) {
-                [NSNotificationCenter.defaultCenter postNotificationName:PeachCollectorNotification
-                  object:nil userInfo:@{PeachCollectorNotificationLogKey : [NSString stringWithFormat:@"%@ : Failed to publish events", publisherName]}];
-            }
-            
+            __block BOOL shouldContinueSending = NO;
+            [PeachCollector.dataStore performBackgroundWriteTask:^(NSManagedObjectContext * _Nonnull managedObjectContext) {
+                // If there are pending events for the publisher, set a flag to run a check (to either send another request or start a timer)
+                NSArray *eventsStatuses = [PeachCollectorPublisherEventStatus pendingEventsStatusesForPublisherNamed:publisherName inContext:managedObjectContext];
+                if (eventsStatuses.count && processError == nil) {
+                    shouldContinueSending = YES;
+                }
                 
-        }
-        else {
-            [self.numberOfFailures removeObjectForKey:publisherName];
-            if (shouldContinueSending) {
-                [self checkPublisherNamed:publisherName];
-            }
-            
-            if ([[PeachCollector sharedCollector] isUnitTesting]) {
-                dispatch_async(dispatch_get_main_queue(), ^{
-                    if ([[UIApplication sharedApplication] applicationState] == UIApplicationStateBackground) {
-                        UNMutableNotificationContent *content = [UNMutableNotificationContent new];
-                        content.title = @"Peach";
-                        content.body = [NSString stringWithFormat:@"%@ : Published %d events", publisherName, (int)eventsStatuses.count];
-                        
-                        UNNotificationRequest *request = [UNNotificationRequest requestWithIdentifier:[[NSUUID UUID] UUIDString] content:content trigger:nil];
-                        
-                        [[UNUserNotificationCenter currentNotificationCenter] addNotificationRequest:request withCompletionHandler:^(NSError * _Nullable error) {
-                            
-                        }];
+                for (PeachCollectorEvent *event in events) {
+                    // Retrieve event in the current context
+                    PeachCollectorEvent *currentEvent = [managedObjectContext objectWithID:event.objectID];
+                    // Check the statuses of the event
+                    for (PeachCollectorPublisherEventStatus *eventStatus in currentEvent.eventStatuses) {
+                        // if the event has a status with the publisher, update it
+                        if ([eventStatus.publisherName isEqualToString:publisherName]) {
+                            eventStatus.status = (processError) ? PCEventStatusQueued : PCEventStatusPublished;
+                            break;
+                        }
                     }
-                });
+                    // Check if all statuses of the event are `Published` and remove it if it is
+                    if ([currentEvent canBeRemoved]) {
+                        [managedObjectContext deleteObject:currentEvent];
+                    }
+                }
                 
-                [NSNotificationCenter.defaultCenter postNotificationName:PeachCollectorNotification
-                                                                  object:nil
-                                                                userInfo:@{ PeachCollectorNotificationLogKey : [NSString stringWithFormat:@"%@ : Published %d events", publisherName, (int)eventsStatuses.count] }];
-            }
-        }
+            } withPriority:NSOperationQueuePriorityHigh completionBlock:^(NSError * _Nullable error) {
+                if (processError) {
+                    NSNumber *numberOfFailures = [self.numberOfFailures objectForKey:publisherName];
+                    numberOfFailures = (numberOfFailures == nil) ? @(1) : @(numberOfFailures.integerValue + 1);
+                    [self.numberOfFailures setObject:numberOfFailures forKey:publisherName];
+                    
+                    [self startTimerForPublisherNamed:publisherName followPolicy:NO];
+                    
+                    if ([[PeachCollector sharedCollector] isUnitTesting]) {
+                        [NSNotificationCenter.defaultCenter postNotificationName:PeachCollectorNotification
+                          object:nil userInfo:@{PeachCollectorNotificationLogKey : [NSString stringWithFormat:@"%@ : Failed to publish events", publisherName]}];
+                    }
+                }
+                else {
+                    [self.numberOfFailures removeObjectForKey:publisherName];
+                    if (shouldContinueSending) {
+                        [self checkPublisherNamed:publisherName];
+                    }
+                    
+                    if ([[PeachCollector sharedCollector] isUnitTesting]) {
+                        dispatch_async(dispatch_get_main_queue(), ^{
+                            if ([[UIApplication sharedApplication] applicationState] == UIApplicationStateBackground) {
+                                UNMutableNotificationContent *content = [UNMutableNotificationContent new];
+                                content.title = @"Peach";
+                                content.body = [NSString stringWithFormat:@"%@ : Published %d events", publisherName, (int)events.count];
+                                
+                                UNNotificationRequest *request = [UNNotificationRequest requestWithIdentifier:[[NSUUID UUID] UUIDString] content:content trigger:nil];
+                                
+                                [[UNUserNotificationCenter currentNotificationCenter] addNotificationRequest:request withCompletionHandler:^(NSError * _Nullable error) {
+                                    
+                                }];
+                            }
+                        });
+                        
+                        [NSNotificationCenter.defaultCenter postNotificationName:PeachCollectorNotification
+                                                                          object:nil
+                                                                        userInfo:@{ PeachCollectorNotificationLogKey : [NSString stringWithFormat:@"%@ : Published %d events", publisherName, (int)events.count] }];
+                    }
+                }
+                
+                [self endBackgroundTask];
+            }];
+            
+        }];
         
-        [self endBackgroundTask];
-    }];
+    } withPriority:NSOperationQueuePriorityHigh completionBlock:nil];
+    
+    
 }
 
-- (void)startTimerForPublisherNamed:(NSString *)publisherName
+- (void)startTimerForPublisherNamed:(NSString *)publisherName followPolicy:(BOOL)shouldFollowPolicy
 {
-    NSTimer *timer = [NSTimer timerWithTimeInterval:[self intervalForPublisherNamed:publisherName]
+    NSInteger interval = [self intervalForPublisherNamed:publisherName followPolicy:shouldFollowPolicy];
+    
+    NSTimer *timer = [NSTimer timerWithTimeInterval:interval
                                              target:self
                                            selector:@selector(sendEventsToPublisherWithTimer:)
                                            userInfo:@{@"publisherName":publisherName}
@@ -238,13 +273,23 @@
     [self.publisherTimers removeAllObjects];
 }
 
-- (NSInteger)intervalForPublisherNamed:(NSString *)publisherName
+- (NSInteger)intervalForPublisherNamed:(NSString *)publisherName followPolicy:(BOOL)shouldFollowPolicy
 {
     PeachCollectorPublisher *publisher = [PeachCollector publisherNamed:publisherName];
     NSNumber *numberOfFailures = [self.numberOfFailures objectForKey:publisherName];
     if (numberOfFailures != nil){
         return MIN(300, publisher.interval * ([numberOfFailures integerValue] + 1));
     }
+    
+    if (shouldFollowPolicy) {
+        if (publisher.gotBackPolicy == PCPublisherGotBackOnlinePolicySendAll) {
+            return 0;
+        }
+        else {
+            return arc4random_uniform(10);
+        }
+    }
+    
     return publisher.interval;
 }
 

@@ -11,37 +11,37 @@
 
 @implementation PeachCollectorPublisherEventStatus (Peach)
 
-+ (NSArray<PeachCollectorPublisherEventStatus *> *)eventsStatusesForPublisherNamed:(NSString *)publisherName withStatus:(NSInteger)status
++ (NSArray<PeachCollectorPublisherEventStatus *> *)eventsStatusesForPublisherNamed:(NSString *)publisherName withStatus:(NSInteger)status inContext:(NSManagedObjectContext *)context
 {
     NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"PeachCollectorPublisherEventStatus"];
     [request setPredicate:[NSPredicate predicateWithFormat:@"publisherName == %@ AND status == %d", publisherName, (int)status]];
     
     NSError *error = nil;
-    NSArray *results = [[PeachCollector managedObjectContext] executeFetchRequest:request error:&error];
+    NSArray *results = [context executeFetchRequest:request error:&error];
     if (!results) {
         return [NSArray array];
     }
     return results;
 }
 
-+ (NSArray<PeachCollectorPublisherEventStatus *> *)pendingEventsStatusesForPublisherNamed:(NSString *)publisherName
++ (NSArray<PeachCollectorPublisherEventStatus *> *)pendingEventsStatusesForPublisherNamed:(NSString *)publisherName inContext:(NSManagedObjectContext *)context
 {
     NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"PeachCollectorPublisherEventStatus"];
     [request setPredicate:[NSPredicate predicateWithFormat:@"publisherName == %@ AND status == %d", publisherName, PCEventStatusQueued]];
     
     NSError *error = nil;
-    NSArray *results = [[PeachCollector managedObjectContext] executeFetchRequest:request error:&error];
+    NSArray *results = [context executeFetchRequest:request error:&error];
     if (!results) {
         return [NSArray array];
     }
     return results;
 }
 
-+ (NSArray<PeachCollectorPublisherEventStatus *> *)allEventsStatuses
++ (NSArray<PeachCollectorPublisherEventStatus *> *)allEventsStatusesInContext:(NSManagedObjectContext *)context
 {
     NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"PeachCollectorPublisherEventStatus"];
     NSError *error = nil;
-    NSArray *results = [[PeachCollector managedObjectContext] executeFetchRequest:request error:&error];
+    NSArray *results = [context executeFetchRequest:request error:&error];
     if (!results) {
         return [NSArray array];
     }

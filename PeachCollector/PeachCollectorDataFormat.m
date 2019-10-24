@@ -58,6 +58,7 @@ PCEventType const PCEventTypePageView = @"page_view";
 NSString * const PeachCollectorSessionStartTimestampKey = @"PeachCollectorSessionStartTimestampKey";
 NSString * const PeachCollectorLastRecordedEventTimestampKey = @"PeachCollectorLastRecordedEventTimestampKey";
 
+NSString * const PCMediaTimeSpentKey = @"time_spent_s";
 NSString * const PCMediaPlaybackPositionKey = @"playback_position_s";
 NSString * const PCMediaPreviousPlaybackPositionKey = @"previous_playback_position_s";
 NSString * const PCMediaVideoModeKey = @"video_mode";
