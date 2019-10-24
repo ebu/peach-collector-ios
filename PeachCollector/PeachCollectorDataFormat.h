@@ -143,8 +143,7 @@ OBJC_EXPORT NSString * const PCClientOSVersionKey;
 
 typedef NS_ENUM(NSInteger, PCPublisherGotBackOnlinePolicy) {
     PCPublisherGotBackOnlinePolicySendAll,
-    PCPublisherGotBackOnlinePolicySendBatchesRandomly,
-    PCPublisherGotBackOnlinePolicySendAllAfterRandomDelay
+    PCPublisherGotBackOnlinePolicySendBatchesRandomly
 };
 
 OBJC_EXPORT NSInteger const PeachCollectorDefaultInactiveSessionInterval;

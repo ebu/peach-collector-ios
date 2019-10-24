@@ -8,7 +8,6 @@
 
 #import <Foundation/Foundation.h>
 #import <Foundation/Foundation.h>
-#import <CoreData/CoreData.h>
 #import <PeachCollector/PeachCollectorNotifications.h>
 #import <PeachCollector/PeachCollectorEvent.h>
 #import <PeachCollector/PeachCollectorPublisher.h>
@@ -18,6 +17,7 @@
 #import <PeachCollector/PeachCollectorContext.h>
 #import <PeachCollector/PeachCollectorDataFormat.h>
 #import <PeachCollector/PeachCollectorQueue.h>
+#import <PeachCollector/PeachCollectorDataStore.h>
 
 //! Project version number for PeachCollector.
 FOUNDATION_EXPORT double PeachCollectorVersionNumber;
@@ -81,11 +81,6 @@ NS_ASSUME_NONNULL_BEGIN
  */
 @property (class, nonatomic, copy, nullable) NSString *userID;
 
-
-@property (readonly, strong) NSPersistentContainer *persistentContainer;
-+ (NSManagedObjectContext *)managedObjectContext;
-+ (BOOL)save;
-
 /**
  *  Add an event to be queued. Event will be added to the queue and sent accordingly to publisher's configuration.
  *  @param event    The event to send.
@@ -113,6 +108,10 @@ NS_ASSUME_NONNULL_BEGIN
  */
 @property (nonatomic, getter=isUnitTesting) BOOL unitTesting;
 
+/**
+ *  CodeData Stack accessor with tools to avoid concurency problems
+ */
+@property (class, readonly) PeachCollectorDataStore *dataStore;
 
 /**
  *  Flush the queue for all publishers (tries to send everything that is queued)

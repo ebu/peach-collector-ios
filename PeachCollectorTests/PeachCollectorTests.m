@@ -34,7 +34,7 @@
 - (void)testFrameworkInitialization {
     XCTAssertNotNil(PeachCollector.sharedCollector, "PeachCollector is not initialized");
     XCTAssertNotEqual(PeachCollector.sessionStartTimestamp, 0, "PeachCollector start timestamp not set");
-    XCTAssertNotNil(PeachCollector.managedObjectContext, "PeachCollector CoreData stack is not initialized");
+    XCTAssertNotNil(PeachCollector.dataStore, "PeachCollector CoreData stack is not initialized");
     XCTAssertNotNil(PeachCollector.sharedCollector.flushableEventTypes, "PeachCollector flushable types are not initialized");
     XCTAssertNotNil(PeachCollector.sharedCollector.publishers, "PeachCollector publishers not initialized");
     XCTAssertNotNil([PeachCollector publisherNamed:PUBLISHER_NAME], "PeachCollector publisher was not added");
@@ -44,49 +44,47 @@
     
     PeachCollectorPublisher *publisher = [PeachCollector publisherNamed:PUBLISHER_NAME];
     publisher.interval = 2;
-    publisher.maxEventsPerBatch = 2;
+    publisher.maxEventsPerBatch = 3;
     
     __weak XCTestExpectation *expectation = [self expectationWithDescription:@"Publisher has published events"];
     
     [self expectationForNotification:PeachCollectorNotification object:nil handler:^BOOL(NSNotification * _Nonnull notification) {
         NSString *logString = notification.userInfo[PeachCollectorNotificationLogKey];
-        //XCTAssertTrue([logString isEqualToString:@"+ Event (page_view)"]);
         if ([logString containsString:@"Published"]){
             [expectation fulfill];
-            XCTAssertTrue([logString containsString:@"2 events"], @"Publisher has published the right amount of events");
+            XCTAssertTrue([logString containsString:@"3 events"], @"Publisher has published the right amount of events");
         }
         return YES;
     }];
     
-    for (int i=0; i<5; i++) {
+    for (int i=0; i<3; i++) {
         [PeachCollectorEvent sendPageViewWithID:[NSString stringWithFormat:@"test%d/news", i] referrer:nil];
     }
     
-    [self waitForExpectationsWithTimeout:4 handler:nil];
+    [self waitForExpectationsWithTimeout:3 handler:nil];
 }
 
-
-/**
- *  Test failing URL with 1000 events and check that everything is sent when URL is changed
- */
-- (void)testFailingPublisherConfiguration {
+- (void)testWorkingPublisherWith1000Events {
     
     PeachCollectorPublisher *publisher = [PeachCollector publisherNamed:PUBLISHER_NAME];
-    publisher.serviceURL = @"";
     publisher.interval = 1;
-    publisher.maxEventsPerBatch = 20;
+    publisher.maxEventsPerBatch = 2;
     
-    __weak XCTestExpectation *expectation = [self expectationWithDescription:@"Publisher has published events"];
-    __weak XCTestExpectation *expectationFailed = [self expectationWithDescription:@"Publisher has failed publishing"];
+    __block int publishedEventsCount = 0;
+    __weak XCTestExpectation *expectation = [self expectationWithDescription:@"Publisher has published the right amount of events"];
+    
     [self expectationForNotification:PeachCollectorNotification object:nil handler:^BOOL(NSNotification * _Nonnull notification) {
         NSString *logString = notification.userInfo[PeachCollectorNotificationLogKey];
-        //XCTAssertTrue([logString isEqualToString:@"+ Event (page_view)"]);
-        if ([logString containsString:@"Failed"]){
-            [expectationFailed fulfill];
-        }
         if ([logString containsString:@"Published"]){
+            NSScanner *scanner = [NSScanner scannerWithString:logString];
+            NSCharacterSet *numbers = [NSCharacterSet characterSetWithCharactersInString:@"0123456789"];
+            [scanner scanUpToCharactersFromSet:numbers intoString:NULL];
+            int number;
+            [scanner scanInt:&number];
+            publishedEventsCount = publishedEventsCount + number;
+        }
+        if (publishedEventsCount == 1000){
             [expectation fulfill];
-            XCTAssertTrue([logString containsString:@"1000 events"], @"Publisher has published the right amount of events");
         }
         return YES;
     }];
@@ -95,9 +93,111 @@
         [PeachCollectorEvent sendPageViewWithID:[NSString stringWithFormat:@"test%d/news", i] referrer:nil];
     }
     
-    publisher.serviceURL = @"https://pipe-collect.ebu.io/v3/collect?s=zzebu00000000017";
+    [self waitForExpectationsWithTimeout:20 handler:nil];
+}
+
+- (void)testFailingPublisherWith1000Events {
     
-    [self waitForExpectationsWithTimeout:5 handler:nil];
+    PeachCollectorPublisher *publisher = [PeachCollector publisherNamed:PUBLISHER_NAME];
+    publisher.serviceURL = @"";
+    publisher.interval = 1;
+    publisher.maxEventsPerBatch = 2;
+    
+    __block int publishedEventsCount = 0;
+    __weak XCTestExpectation *expectation = [self expectationWithDescription:@"Publisher has published the right amount of events"];
+
+    [self expectationForNotification:PeachCollectorNotification object:nil handler:^BOOL(NSNotification * _Nonnull notification) {
+        NSString *logString = notification.userInfo[PeachCollectorNotificationLogKey];
+
+        if ([logString containsString:@"Published"]){
+            NSScanner *scanner = [NSScanner scannerWithString:logString];
+            NSCharacterSet *numbers = [NSCharacterSet characterSetWithCharactersInString:@"0123456789"];
+            [scanner scanUpToCharactersFromSet:numbers intoString:NULL];
+            int number;
+            [scanner scanInt:&number];
+            publishedEventsCount = publishedEventsCount + number;
+            
+            if (publishedEventsCount == 3000){
+                [expectation fulfill];
+            }
+        }
+        
+        return YES;
+    }];
+    
+    for (int i=0; i<3000; i++) {
+        [PeachCollectorEvent sendPageViewWithID:[NSString stringWithFormat:@"test%d/news", i] referrer:nil];
+    }
+    
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        publisher.serviceURL = @"https://pipe-collect.ebu.io/v3/collect?s=zzebu00000000017";
+        [[NSNotificationCenter defaultCenter] postNotificationName: PeachCollectorReachabilityChangedNotification object:nil];
+    });
+    
+    [self waitForExpectationsWithTimeout:120 handler:nil];
+}
+
+- (void)test3PublishersWith1000Events {
+    
+    PeachCollectorPublisher *publisher = [PeachCollector publisherNamed:PUBLISHER_NAME];
+    publisher.interval = 1;
+    publisher.maxEventsPerBatch = 2;
+    
+    PeachCollectorPublisher *publisher2 = [[PeachCollectorPublisher alloc] initWithSiteKey:@"zzebu00000000017"];
+    publisher2.interval = 5;
+    publisher2.maxEventsPerBatch = 5;
+    [PeachCollector setPublisher:publisher2 withUniqueName:@"PublisherB"];
+    
+    PeachCollectorPublisher *publisher3 = [[PeachCollectorPublisher alloc] initWithSiteKey:@"zzebu00000000017"];
+    publisher3.interval = 50;
+    publisher3.maxEventsPerBatch = 1000;
+    [PeachCollector setPublisher:publisher3 withUniqueName:@"PublisherC"];
+    
+    __block int publishedEventsCountPublisher1 = 0;
+    __block int publishedEventsCountPublisher2 = 0;
+    __block int publishedEventsCountPublisher3 = 0;
+    __weak XCTestExpectation *expectation1 = [self expectationWithDescription:@"Publisher has published the right amount of events"];
+    __weak XCTestExpectation *expectation2 = [self expectationWithDescription:@"PublisherB has published the right amount of events"];
+    __weak XCTestExpectation *expectation3 = [self expectationWithDescription:@"PublisherC has published the right amount of events"];
+    
+    [self expectationForNotification:PeachCollectorNotification object:nil handler:^BOOL(NSNotification * _Nonnull notification) {
+        NSString *logString = notification.userInfo[PeachCollectorNotificationLogKey];
+        if ([logString containsString:@"Published"]){
+            NSScanner *scanner = [NSScanner scannerWithString:logString];
+            NSCharacterSet *numbers = [NSCharacterSet characterSetWithCharactersInString:@"0123456789"];
+            [scanner scanUpToCharactersFromSet:numbers intoString:NULL];
+            int number;
+            [scanner scanInt:&number];
+            
+            if ([logString containsString:@"PublisherC"]) {
+                publishedEventsCountPublisher3 = publishedEventsCountPublisher3 + number;
+                if (publishedEventsCountPublisher3 == 1000){
+                    [expectation3 fulfill];
+                }
+            }
+            else if ([logString containsString:@"PublisherB"]) {
+                publishedEventsCountPublisher2 = publishedEventsCountPublisher2 + number;
+                if (publishedEventsCountPublisher2 == 1000){
+                    [expectation2 fulfill];
+                }
+            }
+            else {
+                publishedEventsCountPublisher1 = publishedEventsCountPublisher1 + number;
+                if (publishedEventsCountPublisher1 == 1000){
+                    [expectation1 fulfill];
+                }
+            }
+        }
+        
+        return YES;
+    }];
+    
+    for (int i=0; i<1000; i++) {
+        [PeachCollectorEvent sendPageViewWithID:[NSString stringWithFormat:@"test%d/news", i] referrer:nil];
+    }
+    
+    
+    [self waitForExpectationsWithTimeout:60 handler:nil];
 }
 
 - (void)testRecommendationHitEvent {
@@ -109,7 +209,7 @@
     carouselComponent.name = @"recoCarousel";
     carouselComponent.version = @"1.0";
     
-    PeachCollectorEvent *event = [NSEntityDescription insertNewObjectForEntityForName:@"PeachCollectorEvent" inManagedObjectContext:[PeachCollector managedObjectContext]];;
+    PeachCollectorEvent *event = [NSEntityDescription insertNewObjectForEntityForName:@"PeachCollectorEvent" inManagedObjectContext:[PeachCollector.dataStore managedObjectContext]];;
     event.type = PCEventTypeRecommendationHit;
     event.eventID = @"reco00";
     event.creationDate = now;
@@ -145,7 +245,7 @@
     component.name = @"AudioPlayer";
     component.version = @"1.0";
     
-    PeachCollectorEvent *event = [NSEntityDescription insertNewObjectForEntityForName:@"PeachCollectorEvent" inManagedObjectContext:[PeachCollector managedObjectContext]];;
+    PeachCollectorEvent *event = [NSEntityDescription insertNewObjectForEntityForName:@"PeachCollectorEvent" inManagedObjectContext:[PeachCollector.dataStore managedObjectContext]];;
     event.type = PCEventTypeMediaPlay;
     event.eventID = @"media00";
     event.creationDate = now;
@@ -186,37 +286,6 @@
     [self measureBlock:^{
         // Put the code you want to measure the time of here.
     }];
-}
-
-
-- (XCTestExpectation *)expectationForSingleNotification:(NSNotificationName)notificationName object:(id)objectToObserve handler:(XCNotificationExpectationHandler)handler
-{
-    /*XCTestExpectation * notifExpectation = [self expectationForSingleNotification:PeachCollectorNotification object:nil handler:^BOOL(NSNotification * _Nonnull notification) {
-        NSString *logString = notification.userInfo[PeachCollectorNotificationLogKey];
-        XCTAssertTrue([logString isEqualToString:@"+ Event (page_view)"]);
-        return YES;
-    }];
-    */
-    
-    NSString *description = [NSString stringWithFormat:@"Expectation for notification '%@' from object %@", notificationName, objectToObserve];
-    __weak XCTestExpectation *expectation = [self expectationWithDescription:description];
-    __block id observer = [NSNotificationCenter.defaultCenter addObserverForName:notificationName object:objectToObserve queue:nil usingBlock:^(NSNotification * _Nonnull notification) {
-        void (^fulfill)(void) = ^{
-            [expectation fulfill];
-            [NSNotificationCenter.defaultCenter removeObserver:observer];
-            observer = nil;
-        };
-        
-        if (handler) {
-            if (handler(notification)) {
-                fulfill();
-            }
-        }
-        else {
-            fulfill();
-        }
-    }];
-    return expectation;
 }
 
 

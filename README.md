@@ -1,4 +1,3 @@
-
 [![Carthage compatible](https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat)](https://github.com/Carthage/Carthage)
 
 ## About
@@ -7,7 +6,7 @@ The **Peach Collector** framework for iOS provides simple functionalities to fac
 
 ## Compatibility
 
-The library is suitable for applications running on iOS 10 and above. The project is meant to be opened with the latest Xcode version (currently Xcode 11).
+The library is suitable for applications running on iOS 11 and above. The project is meant to be opened with the latest Xcode version (currently Xcode 11).
 
 ## Installation
 
@@ -23,7 +22,7 @@ $ brew install carthage
 To integrate PeachCollector into your Xcode project using Carthage, specify it in your `Cartfile`:
 
 ```ogdl
-git "https://git.ebu.io/pipe/peach-collector-ios.git"
+git "https://git.ebu.io/peach/peach-collector-ios.git"
 ```
 
 Run `carthage` to build the framework and drag the built `PeachCollector.framework` into your Xcode project.
@@ -55,7 +54,7 @@ Optionally, you can define an implementation version by setting a PeachCollector
 ```objectivec
 PeachCollector.implementationVersion = @"1";
 PeachCollectorPublisher *publisher = [[PeachCollectorPublisher alloc] initWithSiteKey:@"zzebu00000000017"];
-[PeachCollector setPublisher:publisher withUniqueName:@"MyPublisher"];
+[PeachCollector setPublisher:publisher withUniqueName:@"My Publisher"];
 ```
 #### Swift
 ```swift
@@ -69,15 +68,46 @@ But it has 4 others properties that are worth mentioning :
 
 `interval`: The interval in seconds at which events are sent to the server (interval starts after the first event is queued). Default is 20 seconds.
 
-`recommendedLimitPerBatch`: Number of events queued that triggers the publishing process even if the desired interval hasn't been reached. Default is 20 events.
+`maxEventsPerBatch`: Number of events queued that triggers the publishing process even if the desired interval hasn't been reached. Default is 20 events.
 
-`maximumLimitPerBatch`: Maximum number of events that can be sent in a single batch. Especially useful after a long offline session. Default is 1000 event.
+`maxEventsPerBatchAfterOfflineSession`: Maximum number of events that can be sent in a single batch. Especially useful after a long offline session. Default is 1000 events.
 
-`gotBackPolicy`: How the publisher should behave after an offline period. Available options are `SendAll`, `SendBatchesRandomly`, `SendBatchesRandomly`.
+`gotBackPolicy`: How the publisher should behave after an offline period. Available options are `SendAll` (sends requests with `maxEventsPerBatchAfterOfflineSession` continuously), `SendBatchesRandomly` (separates requests by a random delay between 0 and 60 seconds).
 
+### Flushing and Cleaning
+
+`Flush` is called when the application is about to go to background, or if a special type of event is sent while in background (events that will potentially push the application into an inactive state). It will try to send all the queued events (even if the maximum number of events hasn't been reached)
+
+`Clean` will simply remove all current queued events. It is never called in the life cycle of the framework.
+
+`Flush` and `Clean` can be called manually.
+
+#### Objective-C
+```objectivec
+[PeachCollector flush];
+[PeachCollector clean];
+```
+#### Swift
+```swift
+PeachCollector.flush();
+PeachCollector.clean()
+```
+
+## Special type of events
+Some events can be queued when the app is in background but still active. For example, when playing an audio media and controlling the playback directly on the device's lock screen. Some of those events that can occur during a playback will trigger a flush of all queued events. This mechanism is implemented to make sure events are published before the app becomes totally inactive.
+
+For now, events that trigger this flush are `media_pause` and `media_stop` events.
+You can add another type of event to this list:
+#### Objective-C
+```objectivec
+[PeachCollector addFlushableEventType:@"media_error"]
+```
+#### Swift
+```swift
+PeachCollector.addFlushableEventType("media_error")
+```
 
 ### Recording an Event
-
 
 #### Objective-C
 ```objectivec
@@ -98,21 +128,6 @@ PeachCollectorEvent.sendRecommendationHit(withID: "reco00",
 				    appSectionID: "news/videos",
 					  source: nil,
 				       component: carouselComponent)
-```
-
-
-## Special type of events
-Some events can be queued when the app is in background but still active. For example, when playing an audio media and controlling the playback directly on the device's lock screen. Some of those events that can occur during a playback will trigger a flush of all queued events. This mechanism is implemented to make sure events are published before the app becomes totally inactive.
-
-For now, events that trigger this flush are `media_pause` and `media_stop` events.
-You can add another type of event to this list:
-#### Objective-C
-```objectivec
-[PeachCollector addFlushableEventType:@"media_error"]
-```
-#### Swift
-```swift
-PeachCollector.addFlushableEventType("media_error")
 ```
 
 
