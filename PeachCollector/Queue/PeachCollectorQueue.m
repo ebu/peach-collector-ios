@@ -286,7 +286,7 @@
             return 0;
         }
         else {
-            return arc4random_uniform(10);
+            return arc4random_uniform(60);
         }
     }
     
