@@ -81,6 +81,7 @@
 
 + (void)sendPageViewWithID:(NSString *)pageID
                   referrer:(nullable NSString *)referrer
+          recommendationID:(nullable NSString *)recommendationID
 {
     __block PeachCollectorEvent *event;
     [PeachCollector.dataStore performBackgroundWriteTask:^(NSManagedObjectContext * _Nonnull managedObjectContext) {
@@ -92,6 +93,7 @@
         
         NSMutableDictionary *pageViewContext = [NSMutableDictionary new];
         if (referrer) [pageViewContext setObject:referrer forKey:PCContextReferrerKey];
+        if (recommendationID) [pageViewContext setObject:recommendationID forKey:PCContextIDKey];
         event.context = [pageViewContext copy];
     } withPriority:NSOperationQueuePriorityNormal completionBlock:^(NSError * _Nullable error) {
         [event send];
@@ -111,10 +113,10 @@
         event.type = type;
         event.eventID = eventID;
         event.creationDate = [NSDate date];
-        if (context) {
+        if (context && [context dictionaryRepresentation]) {
             event.context = [context dictionaryRepresentation];
         }
-        if (properties) {
+        if (properties && [properties dictionaryRepresentation]) {
             event.props = [properties dictionaryRepresentation];
         }
         if (metadata) {

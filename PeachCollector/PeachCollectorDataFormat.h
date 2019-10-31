@@ -62,6 +62,7 @@ OBJC_EXPORT PCEventType const PCEventTypeMediaPause;
 OBJC_EXPORT PCEventType const PCEventTypeMediaStop;
 OBJC_EXPORT PCEventType const PCEventTypeMediaSeek;
 OBJC_EXPORT PCEventType const PCEventTypeMediaVideoModeChanged;
+OBJC_EXPORT PCEventType const PCEventTypeMediaAudioModeChanged;
 OBJC_EXPORT PCEventType const PCEventTypeMediaAudioChanged;
 OBJC_EXPORT PCEventType const PCEventTypeMediaHeartbeat;
 OBJC_EXPORT PCEventType const PCEventTypeRecommendationLoaded;

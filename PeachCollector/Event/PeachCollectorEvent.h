@@ -82,9 +82,11 @@ NS_ASSUME_NONNULL_BEGIN
  *  Send a page view event. Event will be added to the queue and sent accordingly to publishers' configurations.
  *  @param pageID Unique identifier of the page.
  *  @param referrer Identifier of the previous page that led to this page view
+ *  @param recommendationID recommendation identifier If the page view is initiated by a recommendation hit
  */
 + (void)sendPageViewWithID:(NSString *)pageID
-                  referrer:(nullable NSString *)referrer;
+                  referrer:(nullable NSString *)referrer
+          recommendationID:(nullable NSString *)recommendationID;
 
 /**
  *  Send a media play event. Event will be added to the queue and sent accordingly to publishers' configurations.

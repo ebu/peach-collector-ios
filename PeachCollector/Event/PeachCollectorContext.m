@@ -54,7 +54,7 @@
 }
 
 - (instancetype)initMediaContextWithID:(NSString *)contextID
-                             component:(PeachCollectorContextComponent *)component
+                             component:(nullable PeachCollectorContextComponent *)component
                           appSectionID:(nullable NSString *)appSectionID
                                 source:(nullable NSString *)source
 {
@@ -78,7 +78,7 @@
     if (self.itemsDisplayedCount != nil) [representation setObject:self.itemsDisplayedCount forKey:PCContextItemsDisplayedKey];
     if (self.appSectionID) [representation setObject:self.appSectionID forKey:PCContextPageURIKey];
     if (self.source) [representation setObject:self.source forKey:PCContextSourceKey];
-    if (self.component) [representation setObject:[self.component dictionaryRepresentation] forKey:PCContextComponentKey];
+    if (self.component && [self.component dictionaryRepresentation]) [representation setObject:[self.component dictionaryRepresentation] forKey:PCContextComponentKey];
     if ([representation count] == 0) return nil;
     return [representation copy];
 }

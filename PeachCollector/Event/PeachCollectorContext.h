@@ -40,7 +40,7 @@ NS_ASSUME_NONNULL_BEGIN
                                          component:(nullable PeachCollectorContextComponent *)component;
 
 - (instancetype)initMediaContextWithID:(NSString *)contextID
-                             component:(PeachCollectorContextComponent *)component
+                             component:(nullable PeachCollectorContextComponent *)component
                           appSectionID:(nullable NSString *)appSectionID
                                 source:(nullable NSString *)source;
 
