@@ -58,7 +58,7 @@
     }];
     
     for (int i=0; i<3; i++) {
-        [PeachCollectorEvent sendPageViewWithID:[NSString stringWithFormat:@"test%d/news", i] referrer:nil];
+        [PeachCollectorEvent sendPageViewWithID:[NSString stringWithFormat:@"test%d/news", i] referrer:nil recommendationID:nil];
     }
     
     [self waitForExpectationsWithTimeout:3 handler:nil];
@@ -90,7 +90,7 @@
     }];
     
     for (int i=0; i<1000; i++) {
-        [PeachCollectorEvent sendPageViewWithID:[NSString stringWithFormat:@"test%d/news", i] referrer:nil];
+        [PeachCollectorEvent sendPageViewWithID:[NSString stringWithFormat:@"test%d/news", i] referrer:nil recommendationID:nil];
     }
     
     [self waitForExpectationsWithTimeout:20 handler:nil];
@@ -126,7 +126,7 @@
     }];
     
     for (int i=0; i<3000; i++) {
-        [PeachCollectorEvent sendPageViewWithID:[NSString stringWithFormat:@"test%d/news", i] referrer:nil];
+        [PeachCollectorEvent sendPageViewWithID:[NSString stringWithFormat:@"test%d/news", i] referrer:nil recommendationID:nil];
     }
     
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
@@ -193,7 +193,7 @@
     }];
     
     for (int i=0; i<1000; i++) {
-        [PeachCollectorEvent sendPageViewWithID:[NSString stringWithFormat:@"test%d/news", i] referrer:nil];
+        [PeachCollectorEvent sendPageViewWithID:[NSString stringWithFormat:@"test%d/news", i] referrer:nil recommendationID:nil];
     }
     
     
@@ -219,11 +219,12 @@
                                                                                                 source:nil
                                                                                              component:carouselComponent
                                                                                              itemsDisplayedCount:3
-                                                                                              hitIndex:0];
+                                                                                              hitIndex:1];
     event.context = [context dictionaryRepresentation];
     
     XCTAssertTrue([[[event context] objectForKey:PCContextItemsKey] isEqual:items], @"Items are added to the context");
     XCTAssertTrue([[[event context] objectForKey:PCContextItemsDisplayedKey] isEqual:@(3)], @"Items display count is added to the context");
+    XCTAssertTrue([[[event context] objectForKey:PCContextHitIndexKey] isEqual:@(1)], @"Hit index is added to the context");
     XCTAssertEqual([[[event context] objectForKey:PCContextComponentKey] objectForKey:PCContextComponentTypeKey], @"Carousel", @"Component Type is added to the context");
     XCTAssertEqual([[[event context] objectForKey:PCContextComponentKey] objectForKey:PCContextComponentNameKey], @"recoCarousel", @"Component Name is added to the context");
     XCTAssertEqual([[[event context] objectForKey:PCContextComponentKey] objectForKey:PCContextComponentVersionKey], @"1.0", @"Component Version is added to the context");

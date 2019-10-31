@@ -75,6 +75,7 @@
     
     if (self.contextID) [representation setObject:self.contextID forKey:PCContextIDKey];
     if (self.items) [representation setObject:self.items forKey:PCContextItemsKey];
+    if (self.hitIndex != nil) [representation setObject:self.hitIndex forKey:PCContextHitIndexKey];
     if (self.itemsDisplayedCount != nil) [representation setObject:self.itemsDisplayedCount forKey:PCContextItemsDisplayedKey];
     if (self.appSectionID) [representation setObject:self.appSectionID forKey:PCContextPageURIKey];
     if (self.source) [representation setObject:self.source forKey:PCContextSourceKey];
