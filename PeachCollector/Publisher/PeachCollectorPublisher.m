@@ -112,10 +112,11 @@
 {
     if (_clientInfo == nil) {
         NSString *clientBundleIdentifier = [[NSBundle mainBundle] bundleIdentifier];
-        NSString *clientAppName = [[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleName"];
+        NSString *clientAppName = [[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleDisplayName"];
         NSString *clientAppVersion = [[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleShortVersionString"];
         
         if (clientBundleIdentifier == nil) clientBundleIdentifier = @"unknown";
+        if (clientAppName == nil) clientAppName = [[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleName"];;
         if (clientAppName == nil) clientAppName = @"unknown";
         if (clientAppVersion == nil) clientAppVersion = @"unknown";
         
