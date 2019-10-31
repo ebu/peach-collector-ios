@@ -18,7 +18,7 @@ NS_ASSUME_NONNULL_BEGIN
  *
  *  @return time spent in seconds.
  */
-@property (nonatomic, copy) NSNumber *timeSpent;
+@property (nullable, nonatomic, copy) NSNumber *timeSpent;
 
 /**
  *  Playback position for the media.
@@ -26,7 +26,7 @@ NS_ASSUME_NONNULL_BEGIN
  *
  *  @return playback position in seconds.
  */
-@property (nonatomic, copy) NSNumber *playbackPosition;
+@property (nullable, nonatomic, copy) NSNumber *playbackPosition;
 /**
  *  Previous playback position for the media.
  *  For a live stream 0.0 is the max value. A negative value mean a timeshift in the past
@@ -34,14 +34,14 @@ NS_ASSUME_NONNULL_BEGIN
  *
  *  @return previous playback position in seconds.
  */
-@property (nonatomic, copy) NSNumber *previousPlaybackPosition;
+@property (nullable, nonatomic, copy) NSNumber *previousPlaybackPosition;
 
 /**
  *  In case of "auto continue" start mode, previousMediaID should be defined
  *
  *  @return previous media identifier
  */
-@property (nonatomic, copy) NSString *previousMediaID;
+@property (nullable, nonatomic, copy) NSString *previousMediaID;
 
 /**
  *  Speed of playback. Value is relative to normal playback speed
@@ -51,7 +51,7 @@ NS_ASSUME_NONNULL_BEGIN
  *
  *  @return playback rate
  */
-@property (nonatomic, copy) NSNumber *playbackRate;
+@property (nullable, nonatomic, copy) NSNumber *playbackRate;
 
 /**
  *  Volume of playback in percentage.
@@ -60,28 +60,28 @@ NS_ASSUME_NONNULL_BEGIN
  *
  *  @return volume of playback
  */
-@property (nonatomic, copy) NSNumber *volume;
+@property (nullable, nonatomic, copy) NSNumber *volume;
 
 /**
  *  Mode for a video media : bar, mini, normal, wide, pip, fullscreen, cast, preview
  *
  *  @return media video mode
  */
-@property (nonatomic, copy) PCMediaVideoMode videoMode;
+@property (nullable, nonatomic, copy) PCMediaVideoMode videoMode;
 
 /**
  *  Describes how the media is listenned to : normal, in background or if it is muted
  *
  *  @return media audio mode
  */
-@property (nonatomic, copy) PCMediaAudioMode audioMode;
+@property (nullable, nonatomic, copy) PCMediaAudioMode audioMode;
 
 /**
  *  How the media was started (normal, by "auto play", or by "auto continue")
  *
  *  @return media start mode
  */
-@property (nonatomic, copy) PCMediaStartMode startMode;
+@property (nullable, nonatomic, copy) PCMediaStartMode startMode;
 
 /**
  * @return a dictionary representation of the properties as defined in the Peach documentation

@@ -111,10 +111,10 @@
         event.type = type;
         event.eventID = eventID;
         event.creationDate = [NSDate date];
-        if (context) {
+        if (context && [context dictionaryRepresentation]) {
             event.context = [context dictionaryRepresentation];
         }
-        if (properties) {
+        if (properties && [properties dictionaryRepresentation]) {
             event.props = [properties dictionaryRepresentation];
         }
         if (metadata) {
