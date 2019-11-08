@@ -170,7 +170,7 @@
              PCClientDeviceModelKey:clientDeviceModel,
              PCClientDeviceScreenSizeKey:[NSString stringWithFormat:@"%dx%d", screenWidth, screenHeight],
              PCClientDeviceLanguageKey:languageCode,
-             PCClientDeviceTimezoneKey:@(currentGMTOffset/60)};
+             PCClientDeviceTimezoneKey:@(currentGMTOffset/3600.f)};
 }
 
 //TODO: add setter for language
