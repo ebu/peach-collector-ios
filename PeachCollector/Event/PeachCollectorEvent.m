@@ -202,7 +202,7 @@
     NSMutableDictionary *representation = [NSMutableDictionary new];
     [representation setObject:self.type forKey:PCEventTypeKey];
     [representation setObject:self.eventID forKey:PCEventIDKey];
-    [representation setObject:@((int)[self.creationDate timeIntervalSince1970]) forKey:PCEventTimestampKey];
+    [representation setObject:@((int)([self.creationDate timeIntervalSince1970] * 1000)) forKey:PCEventTimestampKey];
     
     if (self.context) [representation setObject:self.context forKey:PCEventContextKey];
     if (self.props) [representation setObject:self.props forKey:PCEventPropertiesKey];
