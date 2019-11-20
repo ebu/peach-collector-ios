@@ -26,6 +26,15 @@
     return self;
 }
 
+- (id)copyWithZone:(NSZone*)zone
+{
+     PeachCollectorContext *copyObject = [PeachCollectorContext new];
+     copyObject.contextID = [self.contextID copyWithZone:zone];
+     copyObject.appSectionID = [self.appSectionID copyWithZone:zone];
+     copyObject.source = [self.source copyWithZone:zone];
+     copyObject.component = [self.component copyWithZone:zone];
+     return copyObject;
+}
 
 - (nullable NSDictionary *)dictionaryRepresentation
 {

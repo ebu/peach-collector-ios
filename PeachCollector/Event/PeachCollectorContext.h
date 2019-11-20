@@ -11,7 +11,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface PeachCollectorContext : NSObject
+@interface PeachCollectorContext : NSObject <NSCopying> 
 
 @property (nonatomic, copy) NSString *contextID;
 @property (nonatomic, copy) NSString *appSectionID;

@@ -10,7 +10,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface PeachCollectorContextComponent : NSObject
+@interface PeachCollectorContextComponent : NSObject <NSCopying> 
 
 @property (nonatomic, copy) NSString *type;
 @property (nonatomic, copy) NSString *name;

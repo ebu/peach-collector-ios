@@ -10,6 +10,21 @@
 
 @implementation PeachCollectorProperties
 
+- (id)copyWithZone:(NSZone*)zone
+{
+     PeachCollectorProperties *copyObject = [PeachCollectorProperties new];
+     copyObject.timeSpent = [self.timeSpent copyWithZone:zone];
+     copyObject.playbackPosition = [self.playbackPosition copyWithZone:zone];
+     copyObject.previousPlaybackPosition = [self.previousPlaybackPosition copyWithZone:zone];
+     copyObject.videoMode = [self.videoMode copyWithZone:zone];
+     copyObject.audioMode = [self.audioMode copyWithZone:zone];
+     copyObject.startMode = [self.startMode copyWithZone:zone];
+     copyObject.previousMediaID = [self.previousMediaID copyWithZone:zone];
+     copyObject.playbackRate = [self.playbackRate copyWithZone:zone];
+     copyObject.volume = [self.volume copyWithZone:zone];
+     return copyObject;
+}
+
 - (nullable NSDictionary *)dictionaryRepresentation
 {
     NSMutableDictionary *representation = [NSMutableDictionary new];

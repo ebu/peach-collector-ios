@@ -24,6 +24,15 @@
     return self;
 }
 
+- (id)copyWithZone:(NSZone*)zone
+{
+     PeachCollectorContextComponent *copyObject = [PeachCollectorContextComponent new];
+     copyObject.type = [self.type copyWithZone:zone];
+     copyObject.name = [self.name copyWithZone:zone];
+     copyObject.version = [self.version copyWithZone:zone];
+     return copyObject;
+}
+
 - (nullable NSDictionary *)dictionaryRepresentation
 {
     NSMutableDictionary *representation = [NSMutableDictionary new];

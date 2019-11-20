@@ -11,7 +11,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface PeachCollectorProperties : NSObject
+@interface PeachCollectorProperties : NSObject <NSCopying> 
 
 /**
  *  The time spent by the user watching this media
