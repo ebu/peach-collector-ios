@@ -11,33 +11,12 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface PeachCollectorContext : NSObject
+@interface PeachCollectorContext : NSObject <NSCopying> 
 
 @property (nonatomic, copy) NSString *contextID;
-@property (nonatomic, copy) NSArray<NSString *> *items;
-@property (nonatomic, copy) NSNumber *itemsDisplayedCount;
-@property (nonatomic, copy) NSNumber *hitIndex;
 @property (nonatomic, copy) NSString *appSectionID;
 @property (nonatomic, copy) NSString *source;
 @property (nonatomic, copy) PeachCollectorContextComponent *component;
-
-- (instancetype)initRecommendationContextWithitems:(NSArray<NSString *> *)items
-                                      appSectionID:(nullable NSString *)appSectionID
-                                            source:(nullable NSString *)source
-                                         component:(nullable PeachCollectorContextComponent *)component
-                               itemsDisplayedCount:(NSInteger)itemsDisplayedCount
-                                          hitIndex:(NSInteger)hitIndex;
-
-- (instancetype)initRecommendationContextWithitems:(NSArray<NSString *> *)items
-                                      appSectionID:(nullable NSString *)appSectionID
-                                            source:(nullable NSString *)source
-                                         component:(nullable PeachCollectorContextComponent *)component
-                               itemsDisplayedCount:(NSInteger)itemsDisplayedCount;
-
-- (instancetype)initRecommendationContextWithitems:(NSArray<NSString *> *)items
-                                      appSectionID:(nullable NSString *)appSectionID
-                                            source:(nullable NSString *)source
-                                         component:(nullable PeachCollectorContextComponent *)component;
 
 - (instancetype)initMediaContextWithID:(NSString *)contextID
                              component:(nullable PeachCollectorContextComponent *)component

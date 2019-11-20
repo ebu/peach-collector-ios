@@ -97,7 +97,7 @@ class MyCustomPublisher: PeachCollectorPublisher {
     override func processEvents(_ events: [PeachCollectorEvent], withCompletionHandler completionHandler: @escaping (Error?) -> Void) {
         var dictionary: Dictionary = [String: AnyObject]()
         dictionary["sessionStart"] = PeachCollector.sessionStartTimestamp as AnyObject
-        dictionary["sentTime"] = Int(Date().timeIntervalSince1970) as AnyObject
+        dictionary["sentTime"] = Int(Date().timeIntervalSince1970 * 1000) as AnyObject
         if (PeachCollector.userID != nil) {
             dictionary["userID"] = PeachCollector.userID as AnyObject
         }
@@ -109,7 +109,7 @@ class MyCustomPublisher: PeachCollectorPublisher {
             
             var eventDictionary: Dictionary = [String: AnyObject]()
             eventDictionary["type"] = event.type as AnyObject
-            eventDictionary["date"] = Int(event.creationDate!.timeIntervalSince1970) as AnyObject
+            eventDictionary["date"] = Int(event.creationDate!.timeIntervalSince1970 * 1000) as AnyObject
             
             if (event.eventID != nil) {
                 eventDictionary["id"] = event.eventID as AnyObject

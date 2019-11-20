@@ -97,7 +97,7 @@ OBJC_EXPORT NSString * const PCMediaPlaybackRateKey;
 OBJC_EXPORT NSString * const PCMediaVolumeKey;
 OBJC_EXPORT NSString * const PCContextIDKey;
 OBJC_EXPORT NSString * const PCContextItemsKey;
-OBJC_EXPORT NSString * const PCContextItemsDisplayedKey;
+OBJC_EXPORT NSString * const PCContextItemIDKey;
 OBJC_EXPORT NSString * const PCContextHitIndexKey;
 OBJC_EXPORT NSString * const PCContextPageURIKey;
 OBJC_EXPORT NSString * const PCContextSourceKey;

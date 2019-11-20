@@ -74,7 +74,7 @@ class ViewController: UIViewController {
         carouselComponent.type = "Carousel"
         carouselComponent.name = "recoCarousel"
         carouselComponent.version = "1.0"
-        PeachCollectorEvent.sendRecommendationHit(withID: "reco00", items: ["reco00", "reco01", "reco02", "reco03"], itemsDisplayedCount: 3, hit: 0, appSectionID: "news/videos", source: nil, component: carouselComponent)
+        PeachCollectorEvent.sendRecommendationHit(withID: "reco0000", itemID:"media01", hit: 0, appSectionID: "news/videos", source: nil, component: carouselComponent)
     }
     
     

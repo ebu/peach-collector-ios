@@ -71,7 +71,7 @@ NSString * const PCMediaVolumeKey = @"volume";
 
 NSString * const PCContextIDKey = @"id";
 NSString * const PCContextItemsKey = @"items";
-NSString * const PCContextItemsDisplayedKey = @"items_displayed";
+NSString * const PCContextItemIDKey = @"item_id";
 NSString * const PCContextHitIndexKey = @"hit_index";
 NSString * const PCContextPageURIKey = @"page_uri";
 NSString * const PCContextSourceKey = @"source";

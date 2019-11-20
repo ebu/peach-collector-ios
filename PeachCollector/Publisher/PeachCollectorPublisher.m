@@ -48,7 +48,7 @@
     if ([PeachCollector implementationVersion]) {
         [data setObject:[PeachCollector implementationVersion] forKey:PCPeachImplementationVersionKey];
     }
-    [data setObject:@((int)[[NSDate date] timeIntervalSince1970]) forKey:PCSentTimestampKey];
+    [data setObject:@((NSInteger)([[NSDate date] timeIntervalSince1970] * 1000)) forKey:PCSentTimestampKey];
     [data setObject:self.clientInfo forKey:PCClientKey];
     
     NSMutableArray *eventsData = [NSMutableArray new];
@@ -89,6 +89,10 @@
     [request setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
     [request setValue:[NSString stringWithFormat:@"%d", (int)[jsonData length]] forHTTPHeaderField:@"Content-Length"];
     [request setHTTPBody: jsonData];
+    
+    if ([[PeachCollector sharedCollector] isUnitTesting]) {
+        [NSNotificationCenter.defaultCenter postNotificationName:PeachCollectorNotification object:nil userInfo:@{PeachCollectorNotificationPayloadKey : jsonData}];
+    }
     
     // Create the NSURLSessionDataTask post task object.
     NSURLSessionDataTask *task = [session dataTaskWithRequest:request completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {

@@ -50,14 +50,8 @@
     carouselComponent.type = @"Carousel";
     carouselComponent.name = @"recoCarousel";
     carouselComponent.version = @"1.0";
-    
-    [PeachCollectorEvent sendRecommendationHitWithID:[NSString stringWithFormat:@"reco%02d", (int)index]
-                                               items:@[@"reco00", @"reco01", @"reco02", @"reco03"]
-                                 itemsDisplayedCount:3
-                                            hitIndex:index
-                                        appSectionID:@"news/videos"
-                                              source:nil
-                                           component:carouselComponent];
+
+    [PeachCollectorEvent sendRecommendationHitWithID:@"reco000000" itemID:[NSString stringWithFormat:@"media%02d", (int)index] hitIndex:index appSectionID:@"news/videos" source:nil component:carouselComponent];
     
     
 }

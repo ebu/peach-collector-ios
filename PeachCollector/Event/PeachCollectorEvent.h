@@ -33,17 +33,15 @@ NS_ASSUME_NONNULL_BEGIN
 /**
  *  Send a recommendation hit event. Event will be added to the queue and sent accordingly to publishers' configurations.
  *  @param recommendationID    Unique identifier of the recommendation.
- *  @param items List of unique identifiers for the clips, medias or articles recommended
- *  @param itemsDisplayedCount Number of items displayed (can be less than the number of items, if the recommendation component is a scroll view for example)
- *  @param index Index of the item that has been hit
+ *  @param itemID Unique identifier of the clip, media or article selected
+ *  @param hitIndex Index of the item that has been hit
  *  @param appSectionID Unique identifier of app section where the recommendation is displayed
  *  @param source Identifier of the element in which the recommendation is displayed (the module, view or popup)
  *  @param component Description of the element in which the recommendation is displayed
  */
 + (void)sendRecommendationHitWithID:(NSString *)recommendationID
-                              items:(NSArray<NSString *> *)items
-                itemsDisplayedCount:(NSInteger)itemsDisplayedCount
-                           hitIndex:(NSInteger)index
+                             itemID:(NSString *)itemID
+                           hitIndex:(NSInteger)hitIndex
                        appSectionID:(nullable NSString *)appSectionID
                              source:(nullable NSString *)source
                           component:(nullable PeachCollectorContextComponent *)component;
@@ -51,15 +49,13 @@ NS_ASSUME_NONNULL_BEGIN
 /**
  *  Send a recommendation displayed event. Event will be added to the queue and sent accordingly to publishers' configurations.
  *  @param recommendationID Unique identifier of the recommendation.
- *  @param items List of unique identifiers for the clips, medias or articles recommended
- *  @param itemsDisplayedCount Number of items displayed (can be less than the number of items, if the recommendation component is a scroll view for example)
+ *  @param itemsDisplayed List of unique identifiers for the clips, medias or articles that are visible to the user
  *  @param appSectionID Unique identifier of app section where the recommendation is displayed
  *  @param source Identifier of the element in which the recommendation is displayed (the module, view or popup)
  *  @param component Description of the element in which the recommendation is displayed
  */
 + (void)sendRecommendationDisplayedWithID:(NSString *)recommendationID
-                                    items:(NSArray<NSString *> *)items
-                      itemsDisplayedCount:(NSInteger)itemsDisplayedCount
+                           itemsDisplayed:(NSArray<NSString *> *)itemsDisplayed
                              appSectionID:(nullable NSString *)appSectionID
                                    source:(nullable NSString *)source
                                 component:(nullable PeachCollectorContextComponent *)component;
