@@ -336,7 +336,7 @@
     
     XCTAssertEqual([eventDict objectForKey:PCEventTypeKey], PCEventTypeRecommendationHit);
     XCTAssertEqual([eventDict objectForKey:PCEventIDKey], @"reco00");
-    XCTAssertEqual([eventDict objectForKey:PCEventTimestampKey], @((int)([now timeIntervalSince1970] * 1000)));
+    XCTAssertEqual([eventDict objectForKey:PCEventTimestampKey], @((NSInteger)([now timeIntervalSince1970] * 1000)));
     XCTAssertEqual([eventDict objectForKey:PCEventContextKey], event.context);
     
 }
@@ -378,7 +378,7 @@
     
     XCTAssertEqual([eventDict objectForKey:PCEventTypeKey], PCEventTypeMediaPlay);
     XCTAssertEqual([eventDict objectForKey:PCEventIDKey], @"media00");
-    XCTAssertEqual([eventDict objectForKey:PCEventTimestampKey], @((int)([now timeIntervalSince1970] * 1000)));
+    XCTAssertEqual([eventDict objectForKey:PCEventTimestampKey], @((NSInteger)([now timeIntervalSince1970] * 1000)));
     XCTAssertEqual([eventDict objectForKey:PCEventContextKey], event.context);
     
 }
