@@ -120,21 +120,19 @@
                  metadata:(nullable NSDictionary<NSString *, id<NSCopying>> *)metadata
 {
     __block PeachCollectorEvent *event;
+    
+    NSDictionary *propsDictionary = (properties && [properties dictionaryRepresentation]) ? [properties dictionaryRepresentation] : nil;
+    NSDictionary *contextDictionary = (context && [context dictionaryRepresentation]) ? [context dictionaryRepresentation] : nil;
+    NSDictionary *metadataDictionary = (metadata && metadata.allKeys.count > 0) ? [metadata copy] : nil;
+    
     [PeachCollector.dataStore performBackgroundWriteTask:^(NSManagedObjectContext * _Nonnull managedObjectContext) {
         event = [NSEntityDescription insertNewObjectForEntityForName:@"PeachCollectorEvent" inManagedObjectContext:managedObjectContext];
-        
         event.type = type;
         event.eventID = eventID;
         event.creationDate = [NSDate date];
-        if (context && [context dictionaryRepresentation]) {
-            event.context = [context dictionaryRepresentation];
-        }
-        if (properties && [properties dictionaryRepresentation]) {
-            event.props = [properties dictionaryRepresentation];
-        }
-        if (metadata) {
-            event.metadata = metadata;
-        }
+        event.context = contextDictionary;
+        event.props = propsDictionary;
+        event.metadata = metadataDictionary;
     } withPriority:NSOperationQueuePriorityNormal completionBlock:^(NSError * _Nullable error) {
         [event send];
     }];
