@@ -11,6 +11,7 @@
 
 NSString * const PeachCollectorNotification = @"PeachCollectorNotification";
 NSString * const PeachCollectorNotificationLogKey = @"PeachCollectorNotificationLogKey";
+NSString * const PeachCollectorNotificationPayloadKey = @"PeachCollectorNotificationPayloadKey";
 NSString * const PeachCollectorNotificationQueuedEventsKey = @"PeachCollectorNotificationQueuedEventsKey";
 
 NSString * const PeachCollectorReachabilityChangedNotification = @"PeachCollectorReachabilityChangedNotification";

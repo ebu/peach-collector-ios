@@ -90,6 +90,10 @@
     [request setValue:[NSString stringWithFormat:@"%d", (int)[jsonData length]] forHTTPHeaderField:@"Content-Length"];
     [request setHTTPBody: jsonData];
     
+    if ([[PeachCollector sharedCollector] isUnitTesting]) {
+        [NSNotificationCenter.defaultCenter postNotificationName:PeachCollectorNotification object:nil userInfo:@{PeachCollectorNotificationPayloadKey : jsonData}];
+    }
+    
     // Create the NSURLSessionDataTask post task object.
     NSURLSessionDataTask *task = [session dataTaskWithRequest:request completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
         completionHandler(error);
