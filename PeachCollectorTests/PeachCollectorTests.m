@@ -312,34 +312,9 @@
     
     [self waitForExpectationsWithTimeout:10 handler:nil];
 }
-    PeachCollectorEvent *event = [NSEntityDescription insertNewObjectForEntityForName:@"PeachCollectorEvent" inManagedObjectContext:[PeachCollector.dataStore managedObjectContext]];;
-    event.type = PCEventTypeRecommendationHit;
-    event.eventID = @"reco00";
-    event.creationDate = now;
-    NSArray *items = @[@"reco00", @"reco01", @"reco02", @"reco03"];
-    PeachCollectorContext *context = [[PeachCollectorContext alloc] initRecommendationContextWithitems:items
-                                                                                          appSectionID:@"news/videos"
-                                                                                                source:nil
-                                                                                             component:carouselComponent
-                                                                                             itemsDisplayedCount:3
-                                                                                              hitIndex:1];
-    event.context = [context dictionaryRepresentation];
-    
-    XCTAssertTrue([[[event context] objectForKey:PCContextItemsKey] isEqual:items], @"Items are added to the context");
-    XCTAssertTrue([[[event context] objectForKey:PCContextItemsDisplayedKey] isEqual:@(3)], @"Items display count is added to the context");
-    XCTAssertTrue([[[event context] objectForKey:PCContextHitIndexKey] isEqual:@(1)], @"Hit index is added to the context");
-    XCTAssertEqual([[[event context] objectForKey:PCContextComponentKey] objectForKey:PCContextComponentTypeKey], @"Carousel", @"Component Type is added to the context");
-    XCTAssertEqual([[[event context] objectForKey:PCContextComponentKey] objectForKey:PCContextComponentNameKey], @"recoCarousel", @"Component Name is added to the context");
-    XCTAssertEqual([[[event context] objectForKey:PCContextComponentKey] objectForKey:PCContextComponentVersionKey], @"1.0", @"Component Version is added to the context");
-    
-    NSDictionary *eventDict = [event dictionaryRepresentation];
-    
-    XCTAssertEqual([eventDict objectForKey:PCEventTypeKey], PCEventTypeRecommendationHit);
-    XCTAssertEqual([eventDict objectForKey:PCEventIDKey], @"reco00");
-    XCTAssertEqual([eventDict objectForKey:PCEventTimestampKey], @((NSInteger)([now timeIntervalSince1970] * 1000)));
-    XCTAssertEqual([eventDict objectForKey:PCEventContextKey], event.context);
-    
-}
+
+
+
 
 - (void)testMediaStartEvent {
 
@@ -383,6 +358,55 @@
     
 }
 
+
+- (void)testMediaSeekEvent {
+
+    PeachCollectorPublisher *publisher = [PeachCollector publisherNamed:PUBLISHER_NAME];
+    publisher.interval = 1;
+    publisher.maxEventsPerBatch = 1;
+    
+    PeachCollectorContextComponent *playerComponent = [PeachCollectorContextComponent new];
+    playerComponent.type = @"player";
+    playerComponent.name = @"AudioPlayer";
+    playerComponent.version = @"1.0";
+    
+    PeachCollectorProperties *props = [PeachCollectorProperties new];
+    props.audioMode = PCMediaAudioModeNormal;
+    props.playbackPosition = @(10);
+    props.previousPlaybackPosition = @(5);
+    props.startMode = PCMediaStartModeNormal;
+    
+    PeachCollectorContext *playerContext = [[PeachCollectorContext alloc] initMediaContextWithID:@"recoA"
+                                                                                       component:playerComponent
+                                                                                    appSectionID:@"Demo/AudioPlayer"
+                                                                                          source:@"Demo.reco"];
+    
+    [self expectationForNotification:PeachCollectorNotification object:nil handler:^BOOL(NSNotification * _Nonnull notification) {
+        NSData *payload = notification.userInfo[PeachCollectorNotificationPayloadKey];
+        
+        if (payload != nil) {
+            id json = [NSJSONSerialization JSONObjectWithData:payload options:0 error:nil];
+            NSLog(@"%@",json);
+            
+            NSDictionary* properties = [[[json objectForKey:PCEventsKey] objectAtIndex:0] objectForKey:PCEventPropertiesKey];
+            XCTAssertTrue([[properties objectForKey:PCMediaPreviousPlaybackPositionKey] isEqualToNumber:@(5)], @"Previous playback position was added to the context");
+            
+            NSDictionary* context = [[[json objectForKey:PCEventsKey] objectAtIndex:0] objectForKey:PCEventContextKey];
+            NSDictionary *component = [context objectForKey:PCContextComponentKey];
+            XCTAssertTrue([[component objectForKey:PCContextComponentTypeKey] isEqualToString:playerComponent.type], @"Component Type is added to the context");
+            XCTAssertTrue([[component objectForKey:PCContextComponentNameKey] isEqualToString:playerComponent.name], @"Component Name is added to the context");
+            XCTAssertTrue([[component objectForKey:PCContextComponentVersionKey] isEqualToString:playerComponent.version], @"Component Version is added to the context");
+            
+            return YES;
+        }
+        return NO;
+    }];
+    
+    [PeachCollectorEvent sendMediaSeekWithID:@"media01" properties:props context:playerContext metadata:@{}];
+    props.previousPlaybackPosition = nil;
+    
+    [self waitForExpectationsWithTimeout:10 handler:nil];
+}
 
 
 
