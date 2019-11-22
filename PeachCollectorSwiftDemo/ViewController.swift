@@ -65,7 +65,9 @@ class ViewController: UIViewController {
     @objc func logNotificationReceived(_ notification: NSNotification)
     {
         let logString = notification.userInfo![PeachCollectorNotificationLogKey]
-        print(logString ?? "")
+        if (logString != nil) {
+            print(logString!)
+        }
     }
     
     @IBAction func sendRecommendationHit(sender: UIButton) {

@@ -39,8 +39,7 @@
 - (void)logNotificationReceived:(NSNotification *)notification
 {
     NSString *logString = notification.userInfo[PeachCollectorNotificationLogKey];
-    
-    NSLog(@"%@", logString);
+    if (logString) NSLog(@"%@", logString);
 }
 
 - (IBAction)recommendationHit:(id)sender
@@ -52,8 +51,6 @@
     carouselComponent.version = @"1.0";
 
     [PeachCollectorEvent sendRecommendationHitWithID:@"reco000000" itemID:[NSString stringWithFormat:@"media%02d", (int)index] hitIndex:index appSectionID:@"news/videos" source:nil component:carouselComponent];
-    
-    
 }
 
 - (IBAction)playAudio:(id)sender
