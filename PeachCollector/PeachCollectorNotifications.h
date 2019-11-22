@@ -12,7 +12,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 /**
  *  The following notifications can be used if you need to track when events are recorded and when they are sent, for unit testing purposes.
- *  These notifications are only emitted when enabling the `unitTesting` tracker flag
+ *  These notifications are only emitted when enabling the `isUnitTesting` tracker flag
  *  @see `PeachCollector.h`.
  *  @note Notifications may be received on background threads.
 */

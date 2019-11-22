@@ -106,7 +106,7 @@ NS_ASSUME_NONNULL_BEGIN
  *  @see PeachColletorNotifications.h
  *  Default value is `NO`.
  */
-@property (nonatomic, getter=isUnitTesting) BOOL unitTesting;
+@property (nonatomic) BOOL isUnitTesting;
 
 /**
  *  CodeData Stack accessor with tools to avoid concurency problems
