@@ -120,3 +120,5 @@ NSInteger const PeachCollectorDefaultPublisherMaxEventsPerBatch = 20;
 NSInteger const PeachCollectorDefaultPublisherMaxEventsPerBatchAfterOfflineSession = 1000;
 PCPublisherGotBackOnlinePolicy const PeachCollectorDefaultPublisherPolicy = PCPublisherGotBackOnlinePolicySendAll;
 NSInteger const PeachCollectorDefaultPublisherHeartbeatInterval = 5;
+
+NSString * const PeachCollectorDefaultDeviceID = @"Anonymous";

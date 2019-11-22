@@ -18,8 +18,9 @@
                              source:(nullable NSString *)source
                           component:(nullable PeachCollectorContextComponent *)component
 {
-    __block PeachCollectorEvent *event;
+    if (![PeachCollector shouldCollectEvents]) return;
     
+    __block PeachCollectorEvent *event;
     NSMutableDictionary *mutableContext = [NSMutableDictionary new];
     [mutableContext setObject:[itemID copy] forKey:PCContextItemIDKey];
     [mutableContext setObject:@(hitIndex) forKey:PCContextHitIndexKey];
@@ -44,6 +45,8 @@
                                    source:(nullable NSString *)source
                                 component:(nullable PeachCollectorContextComponent *)component
 {
+    if (![PeachCollector shouldCollectEvents]) return;
+    
     __block PeachCollectorEvent *event;
     NSMutableDictionary *mutableContext = [NSMutableDictionary new];
     [mutableContext setObject:[itemsDisplayed copy] forKey:PCContextItemsKey];
@@ -69,6 +72,8 @@
                                 source:(nullable NSString *)source
                              component:(nullable PeachCollectorContextComponent *)component
 {
+    if (![PeachCollector shouldCollectEvents]) return;
+    
     __block PeachCollectorEvent *event;
     NSMutableDictionary *mutableContext = [NSMutableDictionary new];
     [mutableContext setObject:[items copy] forKey:PCContextItemsKey];
@@ -93,6 +98,8 @@
                   referrer:(nullable NSString *)referrer
           recommendationID:(nullable NSString *)recommendationID
 {
+    if (![PeachCollector shouldCollectEvents]) return;
+    
     __block PeachCollectorEvent *event;
     NSDictionary *context;
     if (referrer || recommendationID) {
@@ -119,8 +126,9 @@
                   context:(nullable PeachCollectorContext *)context
                  metadata:(nullable NSDictionary<NSString *, id<NSCopying>> *)metadata
 {
-    __block PeachCollectorEvent *event;
+    if (![PeachCollector shouldCollectEvents]) return;
     
+    __block PeachCollectorEvent *event;
     NSDictionary *propsDictionary = (properties && [properties dictionaryRepresentation]) ? [properties dictionaryRepresentation] : nil;
     NSDictionary *contextDictionary = (context && [context dictionaryRepresentation]) ? [context dictionaryRepresentation] : nil;
     NSDictionary *metadataDictionary = (metadata && metadata.allKeys.count > 0) ? [metadata copy] : nil;

@@ -154,4 +154,6 @@ OBJC_EXPORT NSInteger const PeachCollectorDefaultPublisherMaxEventsPerBatchAfter
 OBJC_EXPORT PCPublisherGotBackOnlinePolicy const PeachCollectorDefaultPublisherPolicy;
 OBJC_EXPORT NSInteger const PeachCollectorDefaultPublisherHeartbeatInterval;
 
+OBJC_EXPORT NSString * const PeachCollectorDefaultDeviceID;
+
 NS_ASSUME_NONNULL_END

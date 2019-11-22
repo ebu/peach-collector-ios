@@ -10,6 +10,7 @@
 #import "PeachCollectorQueue.h"
 #import "PeachPersistentContainer.h"
 #import <UIKit/UIKit.h>
+@import AdSupport;
 
 @interface PeachCollector()
 
@@ -25,6 +26,7 @@
 @implementation PeachCollector
 static NSString *_implementationVersion = @"0";
 static NSString *_userID = nil;
+static NSString *_deviceID = nil;
 static NSInteger _inactivityInterval = -1;
 
 #pragma mark - Versions
@@ -69,6 +71,10 @@ static NSInteger _inactivityInterval = -1;
     self = [super init];
     if (self) {
         _flushableEventTypes = @[PCEventTypeMediaStop, PCEventTypeMediaPause];
+        ASIdentifierManager *asi = [ASIdentifierManager sharedManager];
+        if (asi.advertisingTrackingEnabled) {
+            _deviceID = [[asi advertisingIdentifier] UUIDString];
+        }
         self.dataStore = [[PeachCollectorDataStore alloc] init];
         self.queue = [[PeachCollectorQueue alloc] init];
         
@@ -211,6 +217,11 @@ static NSInteger _inactivityInterval = -1;
 
 #pragma mark - Event management
 
++ (BOOL)shouldCollectEvents
+{
+    return [[PeachCollector sharedCollector] shouldCollectAnonymousEvents] || PeachCollector.deviceID || PeachCollector.userID;
+}
+
 + (void)addEventToQueue:(PeachCollectorEvent *)event
 {
     [PeachCollector sharedCollector].lastRecordedEventTimestamp = (NSInteger)([[NSDate date] timeIntervalSince1970] * 1000);
@@ -223,6 +234,11 @@ static NSInteger _inactivityInterval = -1;
 }
 
 #pragma mark - User management
+
++ (NSString *)deviceID
+{
+    return _deviceID;
+}
 
 + (NSString *)userID
 {

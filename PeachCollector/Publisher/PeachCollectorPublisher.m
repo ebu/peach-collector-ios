@@ -7,7 +7,6 @@
 //
 
 #import "PeachCollectorPublisher.h"
-@import AdSupport;
 #import <sys/utsname.h>
 #import <UIKit/UIKit.h>
 #import "PeachCollectorDataFormat.h"
@@ -118,15 +117,15 @@
         NSString *clientBundleIdentifier = [[NSBundle mainBundle] bundleIdentifier];
         NSString *clientAppName = [[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleDisplayName"];
         NSString *clientAppVersion = [[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleShortVersionString"];
+        NSString *deviceID = PeachCollector.deviceID;
         
         if (clientBundleIdentifier == nil) clientBundleIdentifier = @"unknown";
         if (clientAppName == nil) clientAppName = [[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleName"];;
         if (clientAppName == nil) clientAppName = @"unknown";
         if (clientAppVersion == nil) clientAppVersion = @"unknown";
+        if (deviceID == nil) deviceID = PeachCollectorDefaultDeviceID;
         
-        ASIdentifierManager *asi = [ASIdentifierManager sharedManager];
-        
-        self.clientInfo = @{PCClientIDKey : [[asi advertisingIdentifier] UUIDString],
+        self.clientInfo = @{PCClientIDKey : deviceID,
                             PCClientTypeKey : @"mobileapp",
                             PCClientAppIDKey : clientBundleIdentifier,
                             PCClientAppNameKey : clientAppName,

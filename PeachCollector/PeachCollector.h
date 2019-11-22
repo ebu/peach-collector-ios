@@ -77,6 +77,11 @@ NS_ASSUME_NONNULL_BEGIN
 + (void)setPublisher:(PeachCollectorPublisher *)publisher withUniqueName:(NSString *)publisherName;
 
 /**
+ *  Device unique identifier (advertising identifier when ad tracking is not limited, "Anonymous" otherwise)
+ */
+@property (class, nonatomic, readonly) NSString *deviceID;
+
+/**
  *  User unique identifier when logged in
  */
 @property (class, nonatomic, copy, nullable) NSString *userID;
@@ -99,6 +104,21 @@ NS_ASSUME_NONNULL_BEGIN
  */
 + (void)addFlushableEventType:(NSString *)eventType;
 
+
+/**
+ *  The Device ID used by the framework is the Advertising ID provided by Apple.
+ *  This Id can be reseted or event null. If the Advertising Id is null and the user is not logged in,
+ *  collecting of the events should be stopped unless if it is needed for anonymous analytics.
+ *  When set to `YES`, collection will work even if there is no Device ID and User ID
+ *  Default value is `NO`.
+ */
+@property (nonatomic) BOOL shouldCollectAnonymousEvents;
+
+/**
+ *  Returns `YES` if a `userID` has been defined or if an advertising ID is available.
+ *  If not, it will return the value of `shouldCollectAnonymousEvents`
+*/
++ (BOOL)shouldCollectEvents;
 
 
 /**

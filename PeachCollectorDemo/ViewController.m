@@ -40,6 +40,10 @@
 {
     NSString *logString = notification.userInfo[PeachCollectorNotificationLogKey];
     if (logString) NSLog(@"%@", logString);
+    else {
+        NSDictionary *jsonObject=[NSJSONSerialization JSONObjectWithData:notification.userInfo[PeachCollectorNotificationPayloadKey] options:NSJSONReadingMutableLeaves error:nil];
+        NSLog(@"%@",  jsonObject);
+    }
 }
 
 - (IBAction)recommendationHit:(id)sender
