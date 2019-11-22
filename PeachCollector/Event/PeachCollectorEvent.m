@@ -139,41 +139,41 @@
 }
 
 + (void)sendMediaPlayWithID:(NSString *)mediaID
-                 properties:(PeachCollectorProperties *)properties
-                    context:(PeachCollectorContext *)context
-                   metadata:(NSDictionary<NSString *, id<NSCopying>> *)metadata
+                 properties:(nullable PeachCollectorProperties *)properties
+                    context:(nullable PeachCollectorContext *)context
+                   metadata:(nullable NSDictionary<NSString *, id<NSCopying>> *)metadata
 {
     [PeachCollectorEvent sendEventWithType:PCEventTypeMediaPlay eventID:mediaID properties:properties context:context metadata:metadata];
 }
 
 + (void)sendMediaPauseWithID:(NSString *)mediaID
-                  properties:(PeachCollectorProperties *)properties
-                     context:(PeachCollectorContext *)context
-                    metadata:(NSDictionary<NSString *, id<NSCopying>> *)metadata
+                  properties:(nullable PeachCollectorProperties *)properties
+                     context:(nullable PeachCollectorContext *)context
+                    metadata:(nullable NSDictionary<NSString *, id<NSCopying>> *)metadata
 {
     [PeachCollectorEvent sendEventWithType:PCEventTypeMediaPause eventID:mediaID properties:properties context:context metadata:metadata];
 }
 
 + (void)sendMediaSeekWithID:(NSString *)mediaID
-                 properties:(PeachCollectorProperties *)properties
-                    context:(PeachCollectorContext *)context
-                   metadata:(NSDictionary<NSString *, id<NSCopying>> *)metadata
+                 properties:(nullable PeachCollectorProperties *)properties
+                    context:(nullable PeachCollectorContext *)context
+                   metadata:(nullable NSDictionary<NSString *, id<NSCopying>> *)metadata
 {
     [PeachCollectorEvent sendEventWithType:PCEventTypeMediaSeek eventID:mediaID properties:properties context:context metadata:metadata];
 }
 
 + (void)sendMediaStopWithID:(NSString *)mediaID
-                 properties:(PeachCollectorProperties *)properties
-                    context:(PeachCollectorContext *)context
-                   metadata:(NSDictionary<NSString *, id<NSCopying>> *)metadata
+                 properties:(nullable PeachCollectorProperties *)properties
+                    context:(nullable PeachCollectorContext *)context
+                   metadata:(nullable NSDictionary<NSString *, id<NSCopying>> *)metadata
 {
     [PeachCollectorEvent sendEventWithType:PCEventTypeMediaStop eventID:mediaID properties:properties context:context metadata:metadata];
 }
 
 + (void)sendMediaHeartbeatWithID:(NSString *)mediaID
-                      properties:(PeachCollectorProperties *)properties
-                         context:(PeachCollectorContext *)context
-                        metadata:(NSDictionary<NSString *, id<NSCopying>> *)metadata
+                      properties:(nullable PeachCollectorProperties *)properties
+                         context:(nullable PeachCollectorContext *)context
+                        metadata:(nullable NSDictionary<NSString *, id<NSCopying>> *)metadata
 {
     [PeachCollectorEvent sendEventWithType:PCEventTypeMediaHeartbeat eventID:mediaID properties:properties context:context metadata:metadata];
 }
