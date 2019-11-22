@@ -23,10 +23,10 @@ $ brew install carthage
 To integrate PeachCollector into your Xcode project using Carthage, specify it in your `Cartfile`:
 
 ```ogdl
-git "https://github.com/ebu/peach-collector-ios.git"
+github "ebu/peach-collector-ios"
 ```
 
-Run `carthage` to build the framework and drag the built `PeachCollector.framework` into your Xcode project.
+Run `carthage update` to build the framework and drag the built `PeachCollector.framework` into your Xcode project.
 
 
 
