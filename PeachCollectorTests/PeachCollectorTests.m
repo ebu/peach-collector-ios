@@ -20,7 +20,8 @@
 - (void)setUp {
     // Put setup code here. This method is called before the invocation of each test method in the class.
     [PeachCollector clean];
-    [PeachCollector.sharedCollector setUnitTesting:YES];
+    [PeachCollector sharedCollector].isUnitTesting = YES;
+    [PeachCollector sharedCollector].shouldCollectAnonymousEvents = YES;
     PeachCollectorPublisher *publisher = [[PeachCollectorPublisher alloc] initWithSiteKey:@"zzebu00000000017"];
     publisher.maxEventsPerBatch = 2;
     [PeachCollector setPublisher:publisher withUniqueName:PUBLISHER_NAME];

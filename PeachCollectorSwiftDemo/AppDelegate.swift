@@ -21,6 +21,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         PeachCollector.shared.isUnitTesting = true
         let publisher = PeachCollectorPublisher.init(siteKey: "zzebu00000000017")
         PeachCollector.setPublisher(publisher, withUniqueName: "My Publisher")
+        PeachCollector.shared.shouldCollectAnonymousEvents = true;
         
         let customPublisher = MyCustomPublisher.init(siteKey: "zzebu00000000017")
         PeachCollector.setPublisher(customPublisher, withUniqueName: "My Custom Publisher")

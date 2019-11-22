@@ -18,7 +18,8 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     PeachCollector.implementationVersion = @"1";
-    [PeachCollector sharedCollector].unitTesting = YES;
+    [PeachCollector sharedCollector].isUnitTesting = YES;
+    [PeachCollector sharedCollector].shouldCollectAnonymousEvents = YES;
     PeachCollectorPublisher *publisher = [[PeachCollectorPublisher alloc] initWithSiteKey:@"zzebu00000000017"];
     [PeachCollector setPublisher:publisher withUniqueName:@"MyPublisher"];
     return YES;

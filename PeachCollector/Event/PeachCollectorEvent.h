@@ -92,9 +92,9 @@ NS_ASSUME_NONNULL_BEGIN
  *  @param metadata Metadatas (should be kept as small as possible)
  */
 + (void)sendMediaPlayWithID:(NSString *)mediaID
-                 properties:(PeachCollectorProperties *)properties
-                    context:(PeachCollectorContext *)context
-                   metadata:(NSDictionary<NSString *, id<NSCopying>> *)metadata;
+                 properties:(nullable PeachCollectorProperties *)properties
+                    context:(nullable PeachCollectorContext *)context
+                   metadata:(nullable NSDictionary<NSString *, id<NSCopying>> *)metadata;
 
 /**
  *  Send a media pause event. Event will be added to the queue and sent accordingly to publishers' configurations.
@@ -104,9 +104,9 @@ NS_ASSUME_NONNULL_BEGIN
  *  @param metadata Metadatas (should be kept as small as possible)
  */
 + (void)sendMediaPauseWithID:(NSString *)mediaID
-                  properties:(PeachCollectorProperties *)properties
-                     context:(PeachCollectorContext *)context
-                    metadata:(NSDictionary<NSString *, id<NSCopying>> *)metadata;
+                  properties:(nullable PeachCollectorProperties *)properties
+                     context:(nullable PeachCollectorContext *)context
+                    metadata:(nullable NSDictionary<NSString *, id<NSCopying>> *)metadata;
 
 /**
  *  Send a media seek event. Event will be added to the queue and sent accordingly to publishers' configurations.
@@ -116,9 +116,9 @@ NS_ASSUME_NONNULL_BEGIN
  *  @param metadata Metadatas (should be kept as small as possible)
  */
 + (void)sendMediaSeekWithID:(NSString *)mediaID
-                 properties:(PeachCollectorProperties *)properties
-                    context:(PeachCollectorContext *)context
-                   metadata:(NSDictionary<NSString *, id<NSCopying>> *)metadata;
+                 properties:(nullable PeachCollectorProperties *)properties
+                    context:(nullable PeachCollectorContext *)context
+                   metadata:(nullable NSDictionary<NSString *, id<NSCopying>> *)metadata;
 
 /**
  *  Send a media stop event. Event will be added to the queue and sent accordingly to publishers' configurations.
@@ -128,9 +128,9 @@ NS_ASSUME_NONNULL_BEGIN
  *  @param metadata Metadatas (should be kept as small as possible)
  */
 + (void)sendMediaStopWithID:(NSString *)mediaID
-                 properties:(PeachCollectorProperties *)properties
-                    context:(PeachCollectorContext *)context
-                   metadata:(NSDictionary<NSString *, id<NSCopying>> *)metadata;
+                 properties:(nullable PeachCollectorProperties *)properties
+                    context:(nullable PeachCollectorContext *)context
+                   metadata:(nullable NSDictionary<NSString *, id<NSCopying>> *)metadata;
 
 /**
  *  Send a media heartbeat event. Event will be added to the queue and sent accordingly to publishers' configurations.
@@ -140,9 +140,9 @@ NS_ASSUME_NONNULL_BEGIN
  *  @param metadata Metadatas (should be kept as small as possible)
  */
 + (void)sendMediaHeartbeatWithID:(NSString *)mediaID
-                      properties:(PeachCollectorProperties *)properties
-                         context:(PeachCollectorContext *)context
-                        metadata:(NSDictionary<NSString *, id<NSCopying>> *)metadata;
+                      properties:(nullable PeachCollectorProperties *)properties
+                         context:(nullable PeachCollectorContext *)context
+                        metadata:(nullable NSDictionary<NSString *, id<NSCopying>> *)metadata;
 
 /**
  *  @return `YES` if the event has been sent successfully through all registered publishers. `NO` if the event is still queued for any publisher.
