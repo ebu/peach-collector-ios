@@ -71,10 +71,7 @@ static NSInteger _inactivityInterval = -1;
     self = [super init];
     if (self) {
         _flushableEventTypes = @[PCEventTypeMediaStop, PCEventTypeMediaPause];
-        ASIdentifierManager *asi = [ASIdentifierManager sharedManager];
-        if (asi.advertisingTrackingEnabled) {
-            _deviceID = [[asi advertisingIdentifier] UUIDString];
-        }
+        _deviceID = [PeachCollector persistentIdentifier];
         self.dataStore = [[PeachCollectorDataStore alloc] init];
         self.queue = [[PeachCollectorQueue alloc] init];
         
@@ -89,6 +86,27 @@ static NSInteger _inactivityInterval = -1;
         
     }
     return self;
+}
+
++ (NSString *)persistentIdentifier
+{
+    static NSString * const kKeyChainVendorID = @"ch.ebu.PersistentIdentifier";
+
+    // Check NSUserDefaults
+    NSString *uuidString = [[NSUserDefaults standardUserDefaults] stringForKey:kKeyChainVendorID];
+    BOOL vendorIDMissingFromUserDefaults = (uuidString == nil || uuidString.length == 0);
+
+    // Failed to read the UUID, so create a new UUID and store it
+    if (vendorIDMissingFromUserDefaults) {
+        // Generate the new UIID
+        CFUUIDRef uuidRef = CFUUIDCreate(kCFAllocatorDefault);
+        uuidString = (__bridge_transfer NSString *)CFUUIDCreateString(kCFAllocatorDefault, uuidRef);
+        CFRelease(uuidRef);
+    
+        [[NSUserDefaults standardUserDefaults] setObject:uuidString forKey:kKeyChainVendorID];
+    }
+
+    return uuidString;
 }
 
 
