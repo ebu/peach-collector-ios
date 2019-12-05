@@ -42,8 +42,11 @@ PCMediaMetadataFormat const PCMediaMetadataFormatDVR = @"dvr";
 
 PCEventType const PCEventTypeMediaPlay = @"media_play"; // MEDIA
 PCEventType const PCEventTypeMediaPause = @"media_pause";
-PCEventType const PCEventTypeMediaStop = @"media_stop";
 PCEventType const PCEventTypeMediaSeek = @"media_seek";
+PCEventType const PCEventTypeMediaStop = @"media_stop";
+PCEventType const PCEventTypeMediaEnd = @"media_end";
+PCEventType const PCEventTypeMediaShare = @"media_share";
+PCEventType const PCEventTypeMediaLike = @"media_like";
 PCEventType const PCEventTypeMediaVideoModeChanged = @"media_video_mode_changed";
 PCEventType const PCEventTypeMediaAudioModeChanged = @"media_audio_mode_changed";
 PCEventType const PCEventTypeMediaAudioChanged = @"media_audio_changed";
