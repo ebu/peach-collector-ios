@@ -10,7 +10,6 @@
 #import "PeachCollectorQueue.h"
 #import "PeachPersistentContainer.h"
 #import <UIKit/UIKit.h>
-@import AdSupport;
 
 @interface PeachCollector()
 
