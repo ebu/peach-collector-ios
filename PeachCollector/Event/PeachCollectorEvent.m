@@ -36,6 +36,10 @@
         event.creationDate = [NSDate date];
         event.context = [context copy];
     } withPriority:NSOperationQueuePriorityNormal completionBlock:^(NSError * _Nullable error) {
+        if (error) {
+            if ([[PeachCollector sharedCollector] isUnitTesting]) NSLog(@"PeachCollector DB Error: %@", [error description]);
+            return;
+        }
         [event send];
     }];
 }
@@ -90,6 +94,10 @@
         event.creationDate = [NSDate date];
         event.context = context;
     } withPriority:NSOperationQueuePriorityNormal completionBlock:^(NSError * _Nullable error) {
+        if (error) {
+            if ([[PeachCollector sharedCollector] isUnitTesting]) NSLog(@"PeachCollector DB Error: %@", [error description]);
+            return;
+        }
         [event send];
     }];
 }
@@ -116,6 +124,10 @@
         event.eventID = pageID;
         event.context = context;
     } withPriority:NSOperationQueuePriorityNormal completionBlock:^(NSError * _Nullable error) {
+        if (error) {
+            if ([[PeachCollector sharedCollector] isUnitTesting]) NSLog(@"PeachCollector DB Error: %@", [error description]);
+            return;
+        }
         [event send];
     }];
 }
@@ -142,6 +154,10 @@
         event.props = propsDictionary;
         event.metadata = metadataDictionary;
     } withPriority:NSOperationQueuePriorityNormal completionBlock:^(NSError * _Nullable error) {
+        if (error) {
+            if ([[PeachCollector sharedCollector] isUnitTesting]) NSLog(@"PeachCollector DB Error: %@", [error description]);
+            return;
+        }
         [event send];
     }];
 }

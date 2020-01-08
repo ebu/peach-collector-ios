@@ -76,6 +76,10 @@
             }
         }
     } withPriority:NSOperationQueuePriorityHigh completionBlock:^(NSError * _Nullable error) {
+        if (error){
+            if ([[PeachCollector sharedCollector] isUnitTesting]) NSLog(@"PeachCollector DB Error: %@", [error description]);
+            return;
+        }
         dispatch_async(dispatch_get_main_queue(), ^{
             if ([[UIApplication sharedApplication] applicationState] != UIApplicationStateActive
                 && [addedEvent shouldBeFlushedWhenReceivedInBackgroundState]) {
