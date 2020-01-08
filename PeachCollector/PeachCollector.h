@@ -7,7 +7,6 @@
 //
 
 #import <Foundation/Foundation.h>
-#import <Foundation/Foundation.h>
 #import <PeachCollector/PeachCollectorNotifications.h>
 #import <PeachCollector/PeachCollectorEvent.h>
 #import <PeachCollector/PeachCollectorPublisher.h>
@@ -18,6 +17,7 @@
 #import <PeachCollector/PeachCollectorDataFormat.h>
 #import <PeachCollector/PeachCollectorQueue.h>
 #import <PeachCollector/PeachCollectorDataStore.h>
+#import <PeachCollector/NSDate+PeachCollector.h>
 
 //! Project version number for PeachCollector.
 FOUNDATION_EXPORT double PeachCollectorVersionNumber;

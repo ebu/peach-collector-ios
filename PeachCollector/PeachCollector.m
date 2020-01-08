@@ -109,7 +109,7 @@ static NSInteger _inactivityInterval = -1;
 - (void)checkInactivity
 {
     NSUserDefaults *userDefault = [NSUserDefaults standardUserDefaults];
-    NSInteger currentTimestamp = (NSInteger)([[NSDate date] timeIntervalSince1970] * 1000);
+    NSInteger currentTimestamp = [[NSDate date] gmtMillisecondsTimestamp];
     NSInteger inactivityInterval = ((PeachCollector.inactivityInterval == -1) ? PeachCollectorDefaultInactiveSessionInterval : PeachCollector.inactivityInterval) * 1000;
     if (currentTimestamp - self.lastRecordedEventTimestamp > inactivityInterval) {
         self.sessionStartTimestamp = currentTimestamp;
@@ -224,7 +224,7 @@ static NSInteger _inactivityInterval = -1;
 
 + (void)addEventToQueue:(PeachCollectorEvent *)event
 {
-    [PeachCollector sharedCollector].lastRecordedEventTimestamp = (NSInteger)([[NSDate date] timeIntervalSince1970] * 1000);
+    [PeachCollector sharedCollector].lastRecordedEventTimestamp = [[NSDate date] gmtMillisecondsTimestamp];
     [[PeachCollector sharedCollector].queue addEvent:event];
 }
 
