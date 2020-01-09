@@ -7,8 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		9518212F23C5BD7E00CCB871 /* NSDate+PeachCollector.h in Headers */ = {isa = PBXBuildFile; fileRef = 9518212D23C5BD7E00CCB871 /* NSDate+PeachCollector.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		9518213023C5BD7E00CCB871 /* NSDate+PeachCollector.m in Sources */ = {isa = PBXBuildFile; fileRef = 9518212E23C5BD7E00CCB871 /* NSDate+PeachCollector.m */; };
 		9530214F235081D80083E29F /* PeachCollectorReachability.h in Headers */ = {isa = PBXBuildFile; fileRef = 9530214D235081D80083E29F /* PeachCollectorReachability.h */; };
 		95302150235081D80083E29F /* PeachCollectorReachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 9530214E235081D80083E29F /* PeachCollectorReachability.m */; };
 		9530215B23585D2D0083E29F /* PeachCollectorDataStore.h in Headers */ = {isa = PBXBuildFile; fileRef = 9530215923585D2D0083E29F /* PeachCollectorDataStore.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -118,8 +116,6 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		9518212D23C5BD7E00CCB871 /* NSDate+PeachCollector.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSDate+PeachCollector.h"; sourceTree = "<group>"; };
-		9518212E23C5BD7E00CCB871 /* NSDate+PeachCollector.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSDate+PeachCollector.m"; sourceTree = "<group>"; };
 		9530214D235081D80083E29F /* PeachCollectorReachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PeachCollectorReachability.h; sourceTree = "<group>"; };
 		9530214E235081D80083E29F /* PeachCollectorReachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PeachCollectorReachability.m; sourceTree = "<group>"; };
 		9530215923585D2D0083E29F /* PeachCollectorDataStore.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PeachCollectorDataStore.h; sourceTree = "<group>"; };
@@ -265,8 +261,6 @@
 				95354714233A194A0096AE60 /* PeachCollector.xcdatamodel */,
 				95354716233A1FCB0096AE60 /* PeachPersistentContainer.h */,
 				95354717233A1FCB0096AE60 /* PeachPersistentContainer.m */,
-				9518212D23C5BD7E00CCB871 /* NSDate+PeachCollector.h */,
-				9518212E23C5BD7E00CCB871 /* NSDate+PeachCollector.m */,
 			);
 			path = PeachCollector;
 			sourceTree = "<group>";
@@ -366,7 +360,6 @@
 				95354718233A1FCB0096AE60 /* PeachPersistentContainer.h in Headers */,
 				95354703233A16790096AE60 /* PeachCollectorPublisher.h in Headers */,
 				95354704233A16790096AE60 /* PeachCollectorDataFormat.h in Headers */,
-				9518212F23C5BD7E00CCB871 /* NSDate+PeachCollector.h in Headers */,
 				95354705233A16790096AE60 /* PeachCollectorEvent.h in Headers */,
 				95354702233A16790096AE60 /* PeachCollectorProperties.h in Headers */,
 				95354710233A16790096AE60 /* PeachCollectorContext.h in Headers */,
@@ -563,7 +556,6 @@
 			files = (
 				9535470D233A16790096AE60 /* PeachCollectorDataFormat.m in Sources */,
 				95354719233A1FCB0096AE60 /* PeachPersistentContainer.m in Sources */,
-				9518213023C5BD7E00CCB871 /* NSDate+PeachCollector.m in Sources */,
 				95354715233A194A0096AE60 /* PeachCollector.xcdatamodel in Sources */,
 				9530215C23585D2D0083E29F /* PeachCollectorDataStore.m in Sources */,
 				953547A6233CDC850096AE60 /* PeachCollectorDynamicProperties.m in Sources */,

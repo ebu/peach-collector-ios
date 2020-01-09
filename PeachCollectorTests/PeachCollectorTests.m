@@ -354,7 +354,7 @@
     
     XCTAssertEqual([eventDict objectForKey:PCEventTypeKey], PCEventTypeMediaPlay);
     XCTAssertEqual([eventDict objectForKey:PCEventIDKey], @"media00");
-    XCTAssertEqual([eventDict objectForKey:PCEventTimestampKey], @([now gmtMillisecondsTimestamp]));
+    XCTAssertEqual([eventDict objectForKey:PCEventTimestampKey], @((NSInteger)([now timeIntervalSince1970] * 1000)));
     XCTAssertEqual([eventDict objectForKey:PCEventContextKey], event.context);
     
 }

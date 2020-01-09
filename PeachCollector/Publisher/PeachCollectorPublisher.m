@@ -47,7 +47,7 @@
     if ([PeachCollector implementationVersion]) {
         [data setObject:[PeachCollector implementationVersion] forKey:PCPeachImplementationVersionKey];
     }
-    [data setObject:@([[NSDate date] gmtMillisecondsTimestamp]) forKey:PCSentTimestampKey];
+    [data setObject:@((NSInteger)([[NSDate date] timeIntervalSince1970] * 1000)) forKey:PCSentTimestampKey];
     [data setObject:self.clientInfo forKey:PCClientKey];
     
     NSMutableArray *eventsData = [NSMutableArray new];
