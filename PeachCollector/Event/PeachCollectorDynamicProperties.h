@@ -13,6 +13,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface PeachCollectorDynamicProperties : PeachCollectorProperties
 
+@property (nonatomic, copy, nullable) NSString *(^playlistIDBlock)(void);
 @property (nonatomic, copy, nullable) NSNumber *(^timeSpentBlock)(void);
 @property (nonatomic, copy, nullable) NSNumber *(^playbackPositionBlock)(void);
 @property (nonatomic, copy, nullable) NSNumber *(^previousPlaybackPositionBlock)(void);

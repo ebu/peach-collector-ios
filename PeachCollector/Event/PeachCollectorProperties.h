@@ -14,6 +14,13 @@ NS_ASSUME_NONNULL_BEGIN
 @interface PeachCollectorProperties : NSObject <NSCopying> 
 
 /**
+ *  The playlist ID of the playlist the media is added to or removed from
+ *
+ *  @return Playlist ID
+ */
+@property (nullable, nonatomic, copy) NSString *playlistID;
+
+/**
  *  The time spent by the user watching this media
  *
  *  @return time spent in seconds.

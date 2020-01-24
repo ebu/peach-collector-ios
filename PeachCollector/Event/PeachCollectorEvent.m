@@ -210,6 +210,22 @@
     [PeachCollectorEvent sendEventWithType:PCEventTypeMediaHeartbeat eventID:mediaID properties:properties context:context metadata:metadata];
 }
 
++ (void)sendMediaPlaylistAddWithID:(NSString *)mediaID
+                        properties:(nullable PeachCollectorProperties *)properties
+                           context:(nullable PeachCollectorContext *)context
+                          metadata:(nullable NSDictionary<NSString *, id<NSCopying>> *)metadata
+{
+    [PeachCollectorEvent sendEventWithType:PCEventTypeMediaPlaylistAdd eventID:mediaID properties:properties context:context metadata:metadata];
+}
+
++ (void)sendMediaPlaylistRemoveWithID:(NSString *)mediaID
+                           properties:(nullable PeachCollectorProperties *)properties
+                              context:(nullable PeachCollectorContext *)context
+                             metadata:(nullable NSDictionary<NSString *, id<NSCopying>> *)metadata;
+{
+    [PeachCollectorEvent sendEventWithType:PCEventTypeMediaPlaylistRemove eventID:mediaID properties:properties context:context metadata:metadata];
+}
+
 
 
 - (BOOL)canBeRemoved

@@ -14,6 +14,12 @@
 {
     NSMutableDictionary *mutableDescription = [NSMutableDictionary new];
     
+    if (self.playlistIDBlock) {
+        NSString *playlistID = self.playlistIDBlock();
+        if (playlistID != nil) {
+            [mutableDescription setObject:playlistID forKey:PCMediaPlaylistIDKey];
+        }
+    }
     if (self.timeSpentBlock) {
         NSNumber *timeSpent = self.timeSpentBlock();
         if (timeSpent != nil) {
