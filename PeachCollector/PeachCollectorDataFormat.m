@@ -53,6 +53,8 @@ PCEventType const PCEventTypeMediaAudioChanged = @"media_audio_changed";
 PCEventType const PCEventTypeMediaHeartbeat = @"media_heartbeat";
 PCEventType const PCEventTypeMediaPlaylistAdd = @"media_playlist_add";
 PCEventType const PCEventTypeMediaPlaylistRemove = @"media_playlist_remove";
+PCEventType const PCEventTypeMediaBookmark = @"media_bookmark";
+PCEventType const PCEventTypeMediaUnbookmark = @"media_unbookmark";
 PCEventType const PCEventTypeRecommendationLoaded = @"recommendation_loaded"; // RECOMMENDATION
 PCEventType const PCEventTypeRecommendationHit = @"recommendation_hit";
 PCEventType const PCEventTypeRecommendationDisplayed = @"recommendation_displayed";
@@ -64,6 +66,7 @@ PCEventType const PCEventTypePageView = @"page_view";
 NSString * const PeachCollectorSessionStartTimestampKey = @"PeachCollectorSessionStartTimestampKey";
 NSString * const PeachCollectorLastRecordedEventTimestampKey = @"PeachCollectorLastRecordedEventTimestampKey";
 
+NSString * const PCMediaPlaylistIDKey = @"playlist_id";
 NSString * const PCMediaTimeSpentKey = @"time_spent_s";
 NSString * const PCMediaPlaybackPositionKey = @"playback_position_s";
 NSString * const PCMediaPreviousPlaybackPositionKey = @"previous_playback_position_s";

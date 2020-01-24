@@ -70,6 +70,8 @@ OBJC_EXPORT PCEventType const PCEventTypeMediaAudioChanged;
 OBJC_EXPORT PCEventType const PCEventTypeMediaHeartbeat;
 OBJC_EXPORT PCEventType const PCEventTypeMediaPlaylistAdd;
 OBJC_EXPORT PCEventType const PCEventTypeMediaPlaylistRemove;
+OBJC_EXPORT PCEventType const PCEventTypeMediaBookmark;
+OBJC_EXPORT PCEventType const PCEventTypeMediaUnbookmark;
 OBJC_EXPORT PCEventType const PCEventTypeRecommendationLoaded;
 OBJC_EXPORT PCEventType const PCEventTypeRecommendationHit;
 OBJC_EXPORT PCEventType const PCEventTypeRecommendationDisplayed;
@@ -91,6 +93,7 @@ OBJC_EXPORT NSString * const PeachCollectorLastRecordedEventTimestampKey;
 
 #pragma mark - Payload known keys
 
+OBJC_EXPORT NSString * const PCMediaPlaylistIDKey;
 OBJC_EXPORT NSString * const PCMediaTimeSpentKey;
 OBJC_EXPORT NSString * const PCMediaPlaybackPositionKey;
 OBJC_EXPORT NSString * const PCMediaPreviousPlaybackPositionKey;

@@ -226,6 +226,21 @@
     [PeachCollectorEvent sendEventWithType:PCEventTypeMediaPlaylistRemove eventID:mediaID properties:properties context:context metadata:metadata];
 }
 
++ (void)sendMediaBookmarkWithID:(NSString *)mediaID
+                     properties:(nullable PeachCollectorProperties *)properties
+                        context:(nullable PeachCollectorContext *)context
+                       metadata:(nullable NSDictionary<NSString *, id<NSCopying>> *)metadata;
+{
+    [PeachCollectorEvent sendEventWithType:PCEventTypeMediaBookmark eventID:mediaID properties:properties context:context metadata:metadata];
+}
+
++ (void)sendMediaUnbookmarkWithID:(NSString *)mediaID
+                       properties:(nullable PeachCollectorProperties *)properties
+                          context:(nullable PeachCollectorContext *)context
+                         metadata:(nullable NSDictionary<NSString *, id<NSCopying>> *)metadata;
+{
+    [PeachCollectorEvent sendEventWithType:PCEventTypeMediaUnbookmark eventID:mediaID properties:properties context:context metadata:metadata];
+}
 
 
 - (BOOL)canBeRemoved
