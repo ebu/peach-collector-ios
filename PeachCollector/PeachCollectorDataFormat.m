@@ -42,12 +42,17 @@ PCMediaMetadataFormat const PCMediaMetadataFormatDVR = @"dvr";
 
 PCEventType const PCEventTypeMediaPlay = @"media_play"; // MEDIA
 PCEventType const PCEventTypeMediaPause = @"media_pause";
-PCEventType const PCEventTypeMediaStop = @"media_stop";
 PCEventType const PCEventTypeMediaSeek = @"media_seek";
+PCEventType const PCEventTypeMediaStop = @"media_stop";
+PCEventType const PCEventTypeMediaEnd = @"media_end";
+PCEventType const PCEventTypeMediaShare = @"media_share";
+PCEventType const PCEventTypeMediaLike = @"media_like";
 PCEventType const PCEventTypeMediaVideoModeChanged = @"media_video_mode_changed";
 PCEventType const PCEventTypeMediaAudioModeChanged = @"media_audio_mode_changed";
 PCEventType const PCEventTypeMediaAudioChanged = @"media_audio_changed";
 PCEventType const PCEventTypeMediaHeartbeat = @"media_heartbeat";
+PCEventType const PCEventTypeMediaPlaylistAdd = @"media_playlist_add";
+PCEventType const PCEventTypeMediaPlaylistRemove = @"media_playlist_remove";
 PCEventType const PCEventTypeRecommendationLoaded = @"recommendation_loaded"; // RECOMMENDATION
 PCEventType const PCEventTypeRecommendationHit = @"recommendation_hit";
 PCEventType const PCEventTypeRecommendationDisplayed = @"recommendation_displayed";
@@ -59,6 +64,8 @@ PCEventType const PCEventTypePageView = @"page_view";
 NSString * const PeachCollectorSessionStartTimestampKey = @"PeachCollectorSessionStartTimestampKey";
 NSString * const PeachCollectorLastRecordedEventTimestampKey = @"PeachCollectorLastRecordedEventTimestampKey";
 
+NSString * const PCMediaPlaylistIDKey = @"playlist_id";
+NSString * const PCMediaInsertPositionKey = @"insert_position";
 NSString * const PCMediaTimeSpentKey = @"time_spent_s";
 NSString * const PCMediaPlaybackPositionKey = @"playback_position_s";
 NSString * const PCMediaPreviousPlaybackPositionKey = @"previous_playback_position_s";

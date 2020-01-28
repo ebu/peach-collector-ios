@@ -36,6 +36,10 @@
         event.creationDate = [NSDate date];
         event.context = [context copy];
     } withPriority:NSOperationQueuePriorityNormal completionBlock:^(NSError * _Nullable error) {
+        if (error) {
+            if ([[PeachCollector sharedCollector] isUnitTesting]) NSLog(@"PeachCollector DB Error: %@", [error description]);
+            return;
+        }
         [event send];
     }];
 }
@@ -90,6 +94,10 @@
         event.creationDate = [NSDate date];
         event.context = context;
     } withPriority:NSOperationQueuePriorityNormal completionBlock:^(NSError * _Nullable error) {
+        if (error) {
+            if ([[PeachCollector sharedCollector] isUnitTesting]) NSLog(@"PeachCollector DB Error: %@", [error description]);
+            return;
+        }
         [event send];
     }];
 }
@@ -116,6 +124,10 @@
         event.eventID = pageID;
         event.context = context;
     } withPriority:NSOperationQueuePriorityNormal completionBlock:^(NSError * _Nullable error) {
+        if (error) {
+            if ([[PeachCollector sharedCollector] isUnitTesting]) NSLog(@"PeachCollector DB Error: %@", [error description]);
+            return;
+        }
         [event send];
     }];
 }
@@ -142,6 +154,10 @@
         event.props = propsDictionary;
         event.metadata = metadataDictionary;
     } withPriority:NSOperationQueuePriorityNormal completionBlock:^(NSError * _Nullable error) {
+        if (error) {
+            if ([[PeachCollector sharedCollector] isUnitTesting]) NSLog(@"PeachCollector DB Error: %@", [error description]);
+            return;
+        }
         [event send];
     }];
 }
@@ -178,6 +194,14 @@
     [PeachCollectorEvent sendEventWithType:PCEventTypeMediaStop eventID:mediaID properties:properties context:context metadata:metadata];
 }
 
++ (void)sendMediaEndWithID:(NSString *)mediaID
+                properties:(nullable PeachCollectorProperties *)properties
+                   context:(nullable PeachCollectorContext *)context
+                  metadata:(nullable NSDictionary<NSString *, id<NSCopying>> *)metadata
+{
+    [PeachCollectorEvent sendEventWithType:PCEventTypeMediaEnd eventID:mediaID properties:properties context:context metadata:metadata];
+}
+
 + (void)sendMediaHeartbeatWithID:(NSString *)mediaID
                       properties:(nullable PeachCollectorProperties *)properties
                          context:(nullable PeachCollectorContext *)context
@@ -186,6 +210,21 @@
     [PeachCollectorEvent sendEventWithType:PCEventTypeMediaHeartbeat eventID:mediaID properties:properties context:context metadata:metadata];
 }
 
++ (void)sendMediaPlaylistAddWithID:(NSString *)mediaID
+                        properties:(nullable PeachCollectorProperties *)properties
+                           context:(nullable PeachCollectorContext *)context
+                          metadata:(nullable NSDictionary<NSString *, id<NSCopying>> *)metadata
+{
+    [PeachCollectorEvent sendEventWithType:PCEventTypeMediaPlaylistAdd eventID:mediaID properties:properties context:context metadata:metadata];
+}
+
++ (void)sendMediaPlaylistRemoveWithID:(NSString *)mediaID
+                           properties:(nullable PeachCollectorProperties *)properties
+                              context:(nullable PeachCollectorContext *)context
+                             metadata:(nullable NSDictionary<NSString *, id<NSCopying>> *)metadata;
+{
+    [PeachCollectorEvent sendEventWithType:PCEventTypeMediaPlaylistRemove eventID:mediaID properties:properties context:context metadata:metadata];
+}
 
 
 - (BOOL)canBeRemoved

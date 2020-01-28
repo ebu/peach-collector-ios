@@ -59,12 +59,17 @@ OBJC_EXPORT PCMediaMetadataFormat const PCMediaMetadataFormatDVR;
 typedef NSString * PCEventType NS_TYPED_ENUM;
 OBJC_EXPORT PCEventType const PCEventTypeMediaPlay;
 OBJC_EXPORT PCEventType const PCEventTypeMediaPause;
-OBJC_EXPORT PCEventType const PCEventTypeMediaStop;
 OBJC_EXPORT PCEventType const PCEventTypeMediaSeek;
+OBJC_EXPORT PCEventType const PCEventTypeMediaStop;
+OBJC_EXPORT PCEventType const PCEventTypeMediaEnd;
+OBJC_EXPORT PCEventType const PCEventTypeMediaShare;
+OBJC_EXPORT PCEventType const PCEventTypeMediaLike;
 OBJC_EXPORT PCEventType const PCEventTypeMediaVideoModeChanged;
 OBJC_EXPORT PCEventType const PCEventTypeMediaAudioModeChanged;
 OBJC_EXPORT PCEventType const PCEventTypeMediaAudioChanged;
 OBJC_EXPORT PCEventType const PCEventTypeMediaHeartbeat;
+OBJC_EXPORT PCEventType const PCEventTypeMediaPlaylistAdd;
+OBJC_EXPORT PCEventType const PCEventTypeMediaPlaylistRemove;
 OBJC_EXPORT PCEventType const PCEventTypeRecommendationLoaded;
 OBJC_EXPORT PCEventType const PCEventTypeRecommendationHit;
 OBJC_EXPORT PCEventType const PCEventTypeRecommendationDisplayed;
@@ -86,6 +91,8 @@ OBJC_EXPORT NSString * const PeachCollectorLastRecordedEventTimestampKey;
 
 #pragma mark - Payload known keys
 
+OBJC_EXPORT NSString * const PCMediaPlaylistIDKey;
+OBJC_EXPORT NSString * const PCMediaInsertPositionKey;
 OBJC_EXPORT NSString * const PCMediaTimeSpentKey;
 OBJC_EXPORT NSString * const PCMediaPlaybackPositionKey;
 OBJC_EXPORT NSString * const PCMediaPreviousPlaybackPositionKey;

@@ -121,7 +121,8 @@ NS_ASSUME_NONNULL_BEGIN
                    metadata:(nullable NSDictionary<NSString *, id<NSCopying>> *)metadata;
 
 /**
- *  Send a media stop event. Event will be added to the queue and sent accordingly to publishers' configurations.
+ *  Send a media stop event.
+ *  Event will be added to the queue and sent accordingly to publishers' configurations.
  *  @param mediaID Unique identifier of the media
  *  @param properties Properties of the media and it's current state
  *  @param context Context of the media (e. g. view where it's displayed, component used to play the media...)
@@ -131,6 +132,19 @@ NS_ASSUME_NONNULL_BEGIN
                  properties:(nullable PeachCollectorProperties *)properties
                     context:(nullable PeachCollectorContext *)context
                    metadata:(nullable NSDictionary<NSString *, id<NSCopying>> *)metadata;
+
+/**
+ *  Send a media end event (usually when a media reaches the end of its playback).
+ *  Event will be added to the queue and sent accordingly to publishers' configurations.
+ *  @param mediaID Unique identifier of the media
+ *  @param properties Properties of the media and it's current state
+ *  @param context Context of the media (e. g. view where it's displayed, component used to play the media...)
+ *  @param metadata Metadatas (should be kept as small as possible)
+ */
++ (void)sendMediaEndWithID:(NSString *)mediaID
+                properties:(nullable PeachCollectorProperties *)properties
+                   context:(nullable PeachCollectorContext *)context
+                  metadata:(nullable NSDictionary<NSString *, id<NSCopying>> *)metadata;
 
 /**
  *  Send a media heartbeat event. Event will be added to the queue and sent accordingly to publishers' configurations.
@@ -143,6 +157,34 @@ NS_ASSUME_NONNULL_BEGIN
                       properties:(nullable PeachCollectorProperties *)properties
                          context:(nullable PeachCollectorContext *)context
                         metadata:(nullable NSDictionary<NSString *, id<NSCopying>> *)metadata;
+
+/**
+ *  Send a media playlist add event. Event will be added to the queue and sent accordingly to publishers' configurations.
+ *  Properties should contain the playlist ID to which it is added
+ *  @param mediaID Unique identifier of the media
+ *  @param properties Properties of the media and it's current state
+ *  @param context Context of the media (e. g. view where it's displayed, component used to play the media...)
+ *  @param metadata Metadatas (should be kept as small as possible)
+ */
++ (void)sendMediaPlaylistAddWithID:(NSString *)mediaID
+                        properties:(nullable PeachCollectorProperties *)properties
+                           context:(nullable PeachCollectorContext *)context
+                          metadata:(nullable NSDictionary<NSString *, id<NSCopying>> *)metadata;
+
+/**
+ *  Send a media playlist remove event. Event will be added to the queue and sent accordingly to publishers' configurations.
+ *  Properties should contain the playlist ID from which it is removed
+ *  @param mediaID Unique identifier of the media
+ *  @param properties Properties of the media and it's current state
+ *  @param context Context of the media (e. g. view where it's displayed, component used to play the media...)
+ *  @param metadata Metadatas (should be kept as small as possible)
+ */
++ (void)sendMediaPlaylistRemoveWithID:(NSString *)mediaID
+                           properties:(nullable PeachCollectorProperties *)properties
+                              context:(nullable PeachCollectorContext *)context
+                             metadata:(nullable NSDictionary<NSString *, id<NSCopying>> *)metadata;
+
+
 
 /**
  *  @return `YES` if the event has been sent successfully through all registered publishers. `NO` if the event is still queued for any publisher.

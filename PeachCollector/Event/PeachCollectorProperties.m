@@ -12,23 +12,31 @@
 
 - (id)copyWithZone:(NSZone*)zone
 {
-     PeachCollectorProperties *copyObject = [PeachCollectorProperties new];
-     copyObject.timeSpent = [self.timeSpent copyWithZone:zone];
-     copyObject.playbackPosition = [self.playbackPosition copyWithZone:zone];
-     copyObject.previousPlaybackPosition = [self.previousPlaybackPosition copyWithZone:zone];
-     copyObject.videoMode = [self.videoMode copyWithZone:zone];
-     copyObject.audioMode = [self.audioMode copyWithZone:zone];
-     copyObject.startMode = [self.startMode copyWithZone:zone];
-     copyObject.previousMediaID = [self.previousMediaID copyWithZone:zone];
-     copyObject.playbackRate = [self.playbackRate copyWithZone:zone];
-     copyObject.volume = [self.volume copyWithZone:zone];
-     return copyObject;
+    PeachCollectorProperties *copyObject = [PeachCollectorProperties new];
+    copyObject.playlistID = [self.playlistID copyWithZone:zone];
+    copyObject.insertPosition = [self.insertPosition copyWithZone:zone];
+    copyObject.timeSpent = [self.timeSpent copyWithZone:zone];
+    copyObject.playbackPosition = [self.playbackPosition copyWithZone:zone];
+    copyObject.previousPlaybackPosition = [self.previousPlaybackPosition copyWithZone:zone];
+    copyObject.videoMode = [self.videoMode copyWithZone:zone];
+    copyObject.audioMode = [self.audioMode copyWithZone:zone];
+    copyObject.startMode = [self.startMode copyWithZone:zone];
+    copyObject.previousMediaID = [self.previousMediaID copyWithZone:zone];
+    copyObject.playbackRate = [self.playbackRate copyWithZone:zone];
+    copyObject.volume = [self.volume copyWithZone:zone];
+    return copyObject;
 }
 
 - (nullable NSDictionary *)dictionaryRepresentation
 {
     NSMutableDictionary *representation = [NSMutableDictionary new];
     
+    if (self.playlistID != nil) {
+        [representation setObject:self.playlistID forKey:PCMediaPlaylistIDKey];
+    }
+    if (self.insertPosition != nil) {
+        [representation setObject:self.insertPosition forKey:PCMediaInsertPositionKey];
+    }
     if (self.timeSpent != nil) {
         [representation setObject:self.timeSpent forKey:PCMediaTimeSpentKey];
     }
