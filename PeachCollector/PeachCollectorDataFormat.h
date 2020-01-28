@@ -70,8 +70,6 @@ OBJC_EXPORT PCEventType const PCEventTypeMediaAudioChanged;
 OBJC_EXPORT PCEventType const PCEventTypeMediaHeartbeat;
 OBJC_EXPORT PCEventType const PCEventTypeMediaPlaylistAdd;
 OBJC_EXPORT PCEventType const PCEventTypeMediaPlaylistRemove;
-OBJC_EXPORT PCEventType const PCEventTypeMediaBookmark;
-OBJC_EXPORT PCEventType const PCEventTypeMediaUnbookmark;
 OBJC_EXPORT PCEventType const PCEventTypeRecommendationLoaded;
 OBJC_EXPORT PCEventType const PCEventTypeRecommendationHit;
 OBJC_EXPORT PCEventType const PCEventTypeRecommendationDisplayed;
