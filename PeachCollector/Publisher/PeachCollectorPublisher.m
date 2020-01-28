@@ -36,6 +36,7 @@
 
 - (id)initWithSiteKey:(NSString *)siteKey
 {
+    NSAssert(siteKey != nil && ![siteKey isEqualToString:@""], @"SiteKey is not valid");
     return [self initWithServiceURL:[NSString stringWithFormat:@"https://pipe-collect.ebu.io/v3/collect?s=%@", siteKey]];
 }
 
