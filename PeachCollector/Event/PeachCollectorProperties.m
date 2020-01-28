@@ -14,6 +14,7 @@
 {
     PeachCollectorProperties *copyObject = [PeachCollectorProperties new];
     copyObject.playlistID = [self.playlistID copyWithZone:zone];
+    copyObject.insertPosition = [self.insertPosition copyWithZone:zone];
     copyObject.timeSpent = [self.timeSpent copyWithZone:zone];
     copyObject.playbackPosition = [self.playbackPosition copyWithZone:zone];
     copyObject.previousPlaybackPosition = [self.previousPlaybackPosition copyWithZone:zone];
@@ -32,6 +33,9 @@
     
     if (self.playlistID != nil) {
         [representation setObject:self.playlistID forKey:PCMediaPlaylistIDKey];
+    }
+    if (self.insertPosition != nil) {
+        [representation setObject:self.insertPosition forKey:PCMediaInsertPositionKey];
     }
     if (self.timeSpent != nil) {
         [representation setObject:self.timeSpent forKey:PCMediaTimeSpentKey];

@@ -21,6 +21,14 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nullable, nonatomic, copy) NSString *playlistID;
 
 /**
+ *  The position of the item in the playlist refered py `playlistID`
+ *  Can be either "top" or "end"
+ *
+ *  @return Playlist insert position
+ */
+@property (nullable, nonatomic, copy) NSString *insertPosition;
+
+/**
  *  The time spent by the user watching this media
  *
  *  @return time spent in seconds.
