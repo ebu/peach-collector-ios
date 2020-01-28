@@ -2,6 +2,15 @@
 # Change Log
 All notable changes to this project will be documented in this file.
 
+## [1.0.6] - 2020-01-24
+
+### Added
+- **`playlistID`** and **`inserPosition`** properties in `PeachCollectorProperties`, for media events related to a playlist addition or removal
+- `media_playlist_add` and `media_playlist_remove` events helpers
+
+### Changed
+- made database saving more secure
+
 
 ## [1.0.5] - 2019-11-22
 
