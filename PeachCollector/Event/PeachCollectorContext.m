@@ -9,6 +9,12 @@
 #import "PeachCollectorContext.h"
 #import "PeachCollectorDataFormat.h"
 
+@interface PeachCollectorContext()
+
+@property (nonatomic, strong) NSDictionary *customFields;
+
+@end
+
 @implementation PeachCollectorContext
 
 - (instancetype)initMediaContextWithID:(NSString *)contextID
@@ -48,10 +54,62 @@
     copyObject.appSectionID = [self.appSectionID copyWithZone:zone];
     copyObject.source = [self.source copyWithZone:zone];
     copyObject.component = [self.component copyWithZone:zone];
+    copyObject.customFields = [self.customFields copyWithZone:zone];
     return copyObject;
 }
 
+
+#pragma mark - Custom fields
+
+- (void)addObject:(id)object forKey:(nonnull NSString *)key
+{
+    if (object == nil) {
+        [self removeCustomField:key];
+    }
+    else if (self.customFields != nil) {
+        NSMutableDictionary *mutableCustomFields = [self.customFields mutableCopy];
+        [mutableCustomFields setObject:object forKey:key];
+        self.customFields = [mutableCustomFields copy];
+    }
+    else {
+        self.customFields = @{key: object};
+    }
 }
+
+- (void)addNumber:(NSNumber *)number forKey:(nonnull NSString *)key
+{
+    [self addObject:number forKey:key];
+}
+
+- (void)addString:(NSString *)string forKey:(nonnull NSString *)key
+{
+    [self addObject:string forKey:key];
+}
+
+- (void)removeCustomField:(nonnull NSString *)key
+{
+    if(self.customFields != nil) {
+        if ([[self.customFields allKeys] containsObject:key]) {
+            NSMutableDictionary *mutableCustomFields = [self.customFields mutableCopy];
+            [mutableCustomFields removeObjectForKey:key];
+            self.customFields = [mutableCustomFields copy];
+        }
+        if (self.customFields.count == 0) {
+            self.customFields = nil;
+        }
+    }
+}
+
+- (nullable id)valueForCustomField:(nonnull NSString *)key
+{
+    if (self.customFields != nil) {
+        return [self.customFields valueForKey:key];
+    }
+    return nil;
+}
+
+#pragma mark - JSON Format
+
 
 - (nullable NSDictionary *)dictionaryRepresentation
 {

@@ -107,6 +107,29 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nullable, nonatomic, copy) PCMediaStartMode startMode;
 
 /**
+ * Add a custom number field to the properties (can be a number or a boolean)
+ */
+- (void)addNumber:(NSNumber *)number forKey:(nonnull NSString *)key;
+
+/**
+ * Add a custom string field to the properties
+ */
+- (void)addString:(NSString *)string forKey:(nonnull NSString *)key;
+
+/**
+ * Remove a custom string or number added previously
+ * @param key the name of the custom field
+ */
+- (void)removeCustomField:(nonnull NSString *)key;
+
+/**
+ * Retrieve the value of a custom field previously set
+ * @param key the name of the custom field
+ * @return nil if the key was not found
+ */
+- (nullable id)valueForCustomField:(nonnull NSString *)key;
+
+/**
  * @return a dictionary representation of the properties as defined in the Peach documentation
  */
 - (nullable NSDictionary *)dictionaryRepresentation;
