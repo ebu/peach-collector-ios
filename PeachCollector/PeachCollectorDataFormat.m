@@ -78,6 +78,7 @@ NSString * const PCMediaPlaybackRateKey = @"playback_rate";
 NSString * const PCMediaVolumeKey = @"volume";
 
 NSString * const PCContextIDKey = @"id";
+NSString * const PCContextTypeKey = @"type";
 NSString * const PCContextItemsKey = @"items";
 NSString * const PCContextItemIDKey = @"item_id";
 NSString * const PCContextHitIndexKey = @"hit_index";
