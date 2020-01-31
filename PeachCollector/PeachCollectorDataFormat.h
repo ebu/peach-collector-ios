@@ -96,6 +96,7 @@ OBJC_EXPORT NSString * const PCMediaInsertPositionKey;
 OBJC_EXPORT NSString * const PCMediaTimeSpentKey;
 OBJC_EXPORT NSString * const PCMediaPlaybackPositionKey;
 OBJC_EXPORT NSString * const PCMediaPreviousPlaybackPositionKey;
+OBJC_EXPORT NSString * const PCMediaIsPlayingKey;
 OBJC_EXPORT NSString * const PCMediaVideoModeKey;
 OBJC_EXPORT NSString * const PCMediaAudioModeKey;
 OBJC_EXPORT NSString * const PCMediaStartModeKey;

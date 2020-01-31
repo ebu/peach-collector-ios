@@ -52,6 +52,14 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nullable, nonatomic, copy) NSNumber *previousPlaybackPosition;
 
 /**
+ *  Boolean value to know if media is playing at the moment of the event
+ *  Usefull for the `media_seek` event
+ *
+ *  @return a boolean value wrapped in an NSNumber. YES is the media is playing, NO otherwise
+ */
+@property (nullable, nonatomic, copy) NSNumber *isPlaying;
+
+/**
  *  In case of "auto continue" start mode, previousMediaID should be defined
  *
  *  @return previous media identifier

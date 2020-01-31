@@ -18,6 +18,7 @@
     copyObject.timeSpent = [self.timeSpent copyWithZone:zone];
     copyObject.playbackPosition = [self.playbackPosition copyWithZone:zone];
     copyObject.previousPlaybackPosition = [self.previousPlaybackPosition copyWithZone:zone];
+    copyObject.isPlaying = [self.isPlaying copyWithZone:zone];
     copyObject.videoMode = [self.videoMode copyWithZone:zone];
     copyObject.audioMode = [self.audioMode copyWithZone:zone];
     copyObject.startMode = [self.startMode copyWithZone:zone];
@@ -45,6 +46,9 @@
     }
     if (self.previousPlaybackPosition != nil) {
         [representation setObject:self.previousPlaybackPosition forKey:PCMediaPreviousPlaybackPositionKey];
+    }
+    if (self.isPlaying != nil) {
+        [representation setObject:self.isPlaying forKey:PCMediaIsPlayingKey];
     }
     if (self.videoMode) {
         [representation setObject:self.videoMode forKey:PCMediaVideoModeKey];
