@@ -359,6 +359,65 @@
     
 }
 
+- (void)testMediaSeekEventWithCustomFields {
+
+    PeachCollectorPublisher *publisher = [PeachCollector publisherNamed:PUBLISHER_NAME];
+    publisher.interval = 1;
+    publisher.maxEventsPerBatch = 1;
+    
+    PeachCollectorContextComponent *playerComponent = [PeachCollectorContextComponent new];
+    playerComponent.type = @"player";
+    playerComponent.name = @"AudioPlayer";
+    playerComponent.version = @"1.0";
+    
+    PeachCollectorProperties *props = [PeachCollectorProperties new];
+    props.audioMode = PCMediaAudioModeNormal;
+    props.playbackPosition = @(10);
+    props.previousPlaybackPosition = @(5);
+    props.startMode = PCMediaStartModeNormal;
+    props.isPlaying = @NO;
+    [props addString:@"top" forKey:@"insert_position"];
+    
+    PeachCollectorContext *playerContext = [[PeachCollectorContext alloc] initMediaContextWithID:@"recoA"
+                                                                                            type:@"recommendation"
+                                                                                       component:playerComponent
+                                                                                    appSectionID:@"Demo/AudioPlayer"
+                                                                                          source:@"Demo.reco"];
+    
+    
+    [self expectationForNotification:PeachCollectorNotification object:nil handler:^BOOL(NSNotification * _Nonnull notification) {
+        NSData *payload = notification.userInfo[PeachCollectorNotificationPayloadKey];
+        
+        if (payload != nil) {
+            id json = [NSJSONSerialization JSONObjectWithData:payload options:0 error:nil];
+            NSLog(@"%@",json);
+            
+            NSDictionary* properties = [[[json objectForKey:PCEventsKey] objectAtIndex:0] objectForKey:PCEventPropertiesKey];
+            XCTAssertTrue([[properties objectForKey:PCMediaPreviousPlaybackPositionKey] isEqualToNumber:@(5)], @"Previous playback position was added to the context");
+            XCTAssertTrue([[properties objectForKey:@"insert_position"] isEqualToString:@"top"], @"insertPosition was added to the context");
+            XCTAssertTrue([[properties objectForKey:@"is_playing"] isEqualToNumber:@(NO)], @"isPlaying was added to the context");
+            
+            NSDictionary* context = [[[json objectForKey:PCEventsKey] objectAtIndex:0] objectForKey:PCEventContextKey];
+            XCTAssertTrue([[context objectForKey:PCContextTypeKey] isEqualToString:@"recommendation"], @"Context Type is added to the context");
+            NSDictionary *component = [context objectForKey:PCContextComponentKey];
+            XCTAssertTrue([[component objectForKey:PCContextComponentTypeKey] isEqualToString:playerComponent.type], @"Component Type is added to the context");
+            XCTAssertTrue([[component objectForKey:PCContextComponentNameKey] isEqualToString:playerComponent.name], @"Component Name is added to the context");
+            XCTAssertTrue([[component objectForKey:PCContextComponentVersionKey] isEqualToString:playerComponent.version], @"Component Version is added to the context");
+            
+            return YES;
+        }
+        return NO;
+    }];
+    
+    [PeachCollectorEvent sendMediaSeekWithID:@"media01" properties:props context:playerContext metadata:@{}];
+    props.previousPlaybackPosition = nil;
+    
+    [props removeCustomField:@"insert_position"];
+    
+    [self waitForExpectationsWithTimeout:10 handler:nil];
+    
+}
+
 
 - (void)testMediaSeekEvent {
 
