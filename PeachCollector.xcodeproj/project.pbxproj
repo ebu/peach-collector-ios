@@ -172,6 +172,8 @@
 		953547A4233CDC850096AE60 /* PeachCollectorDynamicProperties.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PeachCollectorDynamicProperties.m; sourceTree = "<group>"; };
 		953547F9234B2A9D0096AE60 /* PeachCollectorNotifications.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PeachCollectorNotifications.h; sourceTree = "<group>"; };
 		953547FA234B2A9D0096AE60 /* PeachCollectorNotifications.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PeachCollectorNotifications.m; sourceTree = "<group>"; };
+		955EB1CA23E4592A004B30DF /* CHANGELOG.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = CHANGELOG.md; sourceTree = "<group>"; };
+		955EB1CC23E45948004B30DF /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -225,6 +227,8 @@
 		953546C6233A15BD0096AE60 = {
 			isa = PBXGroup;
 			children = (
+				955EB1CC23E45948004B30DF /* README.md */,
+				955EB1CA23E4592A004B30DF /* CHANGELOG.md */,
 				953546D2233A15BD0096AE60 /* PeachCollector */,
 				953546DD233A15BD0096AE60 /* PeachCollectorTests */,
 				9535475B233B67AA0096AE60 /* PeachCollectorDemo */,
