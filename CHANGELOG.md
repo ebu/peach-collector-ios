@@ -2,6 +2,15 @@
 # Change Log
 All notable changes to this project will be documented in this file.
 
+
+## [1.0.7] - 2020-01-31
+
+### Added
+- **`isPlaying`** field in `PeachCollectorProperties`, for media_seek events
+- **`type`**  field in `PeachCollectorContext`
+- possibility to add, retrieve and remove custom fields from `PeachCollectorProperties` and `PeachCollectorContext`
+
+
 ## [1.0.6] - 2020-01-24
 
 ### Added
