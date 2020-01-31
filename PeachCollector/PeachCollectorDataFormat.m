@@ -69,6 +69,7 @@ NSString * const PCMediaInsertPositionKey = @"insert_position";
 NSString * const PCMediaTimeSpentKey = @"time_spent_s";
 NSString * const PCMediaPlaybackPositionKey = @"playback_position_s";
 NSString * const PCMediaPreviousPlaybackPositionKey = @"previous_playback_position_s";
+NSString * const PCMediaIsPlayingKey = @"is_playing";
 NSString * const PCMediaVideoModeKey = @"video_mode";
 NSString * const PCMediaAudioModeKey = @"audio_mode";
 NSString * const PCMediaStartModeKey = @"start_mode";
@@ -77,6 +78,7 @@ NSString * const PCMediaPlaybackRateKey = @"playback_rate";
 NSString * const PCMediaVolumeKey = @"volume";
 
 NSString * const PCContextIDKey = @"id";
+NSString * const PCContextTypeKey = @"type";
 NSString * const PCContextItemsKey = @"items";
 NSString * const PCContextItemIDKey = @"item_id";
 NSString * const PCContextHitIndexKey = @"hit_index";

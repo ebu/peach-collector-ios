@@ -18,6 +18,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, copy, nullable) NSNumber *(^timeSpentBlock)(void);
 @property (nonatomic, copy, nullable) NSNumber *(^playbackPositionBlock)(void);
 @property (nonatomic, copy, nullable) NSNumber *(^previousPlaybackPositionBlock)(void);
+@property (nonatomic, copy, nullable) NSNumber *(^isPlayingBlock)(void);
 @property (nonatomic, copy, nullable) NSString *(^previousMediaIDBlock)(void);
 @property (nonatomic, copy, nullable) NSNumber *(^playbackRateBlock)(void);
 @property (nonatomic, copy, nullable) NSNumber *(^volumeBlock)(void);

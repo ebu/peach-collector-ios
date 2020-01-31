@@ -44,6 +44,12 @@
             [mutableDescription setObject:previousPlaybackPosition forKey:PCMediaPreviousPlaybackPositionKey];
         }
     }
+    if (self.isPlayingBlock) {
+        NSNumber *isPlaying = self.isPlayingBlock();
+        if (isPlaying != nil) {
+            [mutableDescription setObject:isPlaying forKey:PCMediaIsPlayingKey];
+        }
+    }
     if (self.videoModeBlock) {
         PCMediaVideoMode videoMode = self.videoModeBlock();
         if (videoMode) {
