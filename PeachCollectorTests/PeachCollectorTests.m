@@ -38,6 +38,7 @@
     XCTAssertNotNil(PeachCollector.dataStore, "PeachCollector CoreData stack is not initialized");
     XCTAssertNotNil(PeachCollector.sharedCollector.flushableEventTypes, "PeachCollector flushable types are not initialized");
     XCTAssertNotNil(PeachCollector.sharedCollector.publishers, "PeachCollector publishers not initialized");
+    XCTAssertNotNil(PeachCollector.deviceID, "PeachCollector deviceID not initialized");
     XCTAssertNotNil([PeachCollector publisherNamed:PUBLISHER_NAME], "PeachCollector publisher was not added");
 }
 
