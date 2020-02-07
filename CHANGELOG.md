@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 
 
+## [1.0.8] - 2020-02-07
+
+### Changed
+- Used **`idenfierForVendor`** instead of **`advertisingIdentifier`**
+- Removed import of AdSupport framework
+
 ## [1.0.7] - 2020-01-31
 
 ### Added
