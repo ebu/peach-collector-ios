@@ -10,7 +10,6 @@
 #import "PeachCollectorQueue.h"
 #import "PeachPersistentContainer.h"
 #import <UIKit/UIKit.h>
-@import AdSupport;
 
 @interface PeachCollector()
 
@@ -71,10 +70,7 @@ static NSInteger _inactivityInterval = -1;
     self = [super init];
     if (self) {
         _flushableEventTypes = @[PCEventTypeMediaStop, PCEventTypeMediaPause];
-        ASIdentifierManager *asi = [ASIdentifierManager sharedManager];
-        if (asi.advertisingTrackingEnabled) {
-            _deviceID = [[asi advertisingIdentifier] UUIDString];
-        }
+        _deviceID = [[[UIDevice currentDevice] identifierForVendor] UUIDString];
         self.dataStore = [[PeachCollectorDataStore alloc] init];
         self.queue = [[PeachCollectorQueue alloc] init];
         
