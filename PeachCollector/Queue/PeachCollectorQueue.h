@@ -20,6 +20,11 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)resetStatuses;
 
 /**
+ *  Check if maximum stored events has been reached, or if events stored are too old
+ */
+- (void)checkStorage;
+
+/**
  *  Add an event to the queue.
  *  @param event the event to add.
  */
