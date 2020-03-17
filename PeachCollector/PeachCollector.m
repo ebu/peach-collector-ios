@@ -27,6 +27,8 @@ static NSString *_implementationVersion = @"0";
 static NSString *_userID = nil;
 static NSString *_deviceID = nil;
 static NSInteger _inactivityInterval = -1;
+static NSInteger _maxStoredEvents = -1;
+static NSInteger _maxStoredDays = -1;
 
 #pragma mark - Versions
 
@@ -92,6 +94,7 @@ static NSInteger _inactivityInterval = -1;
 {
     if (self.queue) {
         [self.queue checkPublishers];
+        [self.queue checkStorage];
     }
     
     if (self.sessionHeartbeatTimer) {
@@ -147,6 +150,28 @@ static NSInteger _inactivityInterval = -1;
 + (void)setInactivityInterval:(NSInteger)inactivityInterval
 {
     _inactivityInterval = inactivityInterval;
+}
+
++ (NSInteger)maximumStoredEvents
+{
+    return _maxStoredEvents;
+}
+
++ (void)setMaximumStoredEvents:(NSInteger)maximumStoredEvents
+{
+    _maxStoredEvents = maximumStoredEvents;
+    [[PeachCollector sharedCollector].queue checkStorage];
+}
+
++ (NSInteger)maximumStorageDays
+{
+    return _maxStoredDays;
+}
+
++ (void)setMaximumStorageDays:(NSInteger)maximumStorageDays
+{
+    _maxStoredDays = maximumStorageDays;
+    [[PeachCollector sharedCollector].queue checkStorage];
 }
 
 #pragma mark - Queue management

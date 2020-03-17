@@ -61,6 +61,34 @@
     } withPriority:NSOperationQueuePriorityHigh completionBlock:nil];
 }
 
+- (void)checkStorage
+{
+    NSInteger maxStoredEvents = (PeachCollector.maximumStoredEvents == -1) ? PeachCollectorDefaultMaxStoredEvents : PeachCollector.maximumStoredEvents;
+    [[PeachCollector dataStore] performBackgroundWriteTask:^(NSManagedObjectContext * _Nonnull managedObjectContext) {
+        NSFetchRequest *request = [[NSFetchRequest alloc] initWithEntityName:@"PeachCollectorEvent"];
+        NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"creationDate" ascending:NO];
+        [request setSortDescriptors:@[sortDescriptor]];
+        request.fetchOffset = maxStoredEvents;
+        NSBatchDeleteRequest *delete = [[NSBatchDeleteRequest alloc] initWithFetchRequest:request];
+
+        NSError *deleteError;
+        [managedObjectContext executeRequest:delete error:&deleteError];
+        [managedObjectContext processPendingChanges];
+    } withPriority:NSOperationQueuePriorityHigh completionBlock:nil];
+    
+    [[PeachCollector dataStore] performBackgroundWriteTask:^(NSManagedObjectContext * _Nonnull managedObjectContext) {
+        NSInteger maxStorageDays = (PeachCollector.maximumStorageDays == -1) ? PeachCollectorDefaultMaxStorageDays : PeachCollector.maximumStorageDays;
+        NSDate *limitDate = [[NSDate date] dateByAddingTimeInterval: - (maxStorageDays * 60 * 60 * 24)];
+        NSFetchRequest *request = [[NSFetchRequest alloc] initWithEntityName:@"PeachCollectorEvent"];
+        [request setPredicate:[NSPredicate predicateWithFormat:@"creationDate <= %@", limitDate]];
+        NSBatchDeleteRequest *delete = [[NSBatchDeleteRequest alloc] initWithFetchRequest:request];
+
+        NSError *deleteError;
+        [managedObjectContext executeRequest:delete error:&deleteError];
+        [managedObjectContext processPendingChanges];
+    } withPriority:NSOperationQueuePriorityHigh completionBlock:nil];
+}
+
 - (void)addEvent:(PeachCollectorEvent *)event
 {
     __block PeachCollectorEvent *addedEvent;

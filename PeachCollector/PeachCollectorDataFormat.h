@@ -165,4 +165,7 @@ OBJC_EXPORT NSInteger const PeachCollectorDefaultPublisherHeartbeatInterval;
 
 OBJC_EXPORT NSString * const PeachCollectorDefaultDeviceID;
 
+OBJC_EXPORT NSInteger const PeachCollectorDefaultMaxStoredEvents;
+OBJC_EXPORT NSInteger const PeachCollectorDefaultMaxStorageDays;
+
 NS_ASSUME_NONNULL_END
