@@ -475,14 +475,14 @@
     PeachCollectorPublisher *publisher = [PeachCollector publisherNamed:PUBLISHER_NAME];
     publisher.serviceURL = @"";
     publisher.interval = 1;
-    publisher.maxEventsPerBatch = 2;
+    publisher.maxEventsPerBatch = 1000;
     
     __block int publishedEventsCount = 0;
     __weak XCTestExpectation *expectation = [self expectationWithDescription:@"Publisher has published the right amount of events"];
 
     [self expectationForNotification:PeachCollectorNotification object:nil handler:^BOOL(NSNotification * _Nonnull notification) {
         NSString *logString = notification.userInfo[PeachCollectorNotificationLogKey];
-
+        
         if ([logString containsString:@"Published"]){
             NSScanner *scanner = [NSScanner scannerWithString:logString];
             NSCharacterSet *numbers = [NSCharacterSet characterSetWithCharactersInString:@"0123456789"];
@@ -491,7 +491,7 @@
             [scanner scanInt:&number];
             publishedEventsCount = publishedEventsCount + number;
             
-            if (publishedEventsCount == 1){
+            if (publishedEventsCount == 500){
                 [expectation fulfill];
             }
         }

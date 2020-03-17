@@ -66,6 +66,8 @@
     NSInteger maxStoredEvents = (PeachCollector.maximumStoredEvents == -1) ? PeachCollectorDefaultMaxStoredEvents : PeachCollector.maximumStoredEvents;
     [[PeachCollector dataStore] performBackgroundWriteTask:^(NSManagedObjectContext * _Nonnull managedObjectContext) {
         NSFetchRequest *request = [[NSFetchRequest alloc] initWithEntityName:@"PeachCollectorEvent"];
+        NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"creationDate" ascending:NO];
+        [request setSortDescriptors:@[sortDescriptor]];
         request.fetchOffset = maxStoredEvents;
         NSBatchDeleteRequest *delete = [[NSBatchDeleteRequest alloc] initWithFetchRequest:request];
 
