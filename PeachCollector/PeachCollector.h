@@ -51,6 +51,9 @@ NS_ASSUME_NONNULL_BEGIN
  */
 @property (class, nonatomic) NSInteger inactivityInterval;
 
+@property (class, nonatomic) NSInteger maximumStorageDays;
+@property (class, nonatomic) NSInteger maximumStoredEvents;
+
 /**
  *  The collector singleton.
  *  Singleton is automatically created at the launch of the application

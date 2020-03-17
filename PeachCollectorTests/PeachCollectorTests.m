@@ -470,6 +470,53 @@
 }
 
 
+- (void)testMaxEventsStored {
+    
+    PeachCollectorPublisher *publisher = [PeachCollector publisherNamed:PUBLISHER_NAME];
+    publisher.serviceURL = @"";
+    publisher.interval = 1;
+    publisher.maxEventsPerBatch = 1000;
+    
+    __block int publishedEventsCount = 0;
+    __weak XCTestExpectation *expectation = [self expectationWithDescription:@"Publisher has published the right amount of events"];
+
+    [self expectationForNotification:PeachCollectorNotification object:nil handler:^BOOL(NSNotification * _Nonnull notification) {
+        NSString *logString = notification.userInfo[PeachCollectorNotificationLogKey];
+        
+        if ([logString containsString:@"Published"]){
+            NSScanner *scanner = [NSScanner scannerWithString:logString];
+            NSCharacterSet *numbers = [NSCharacterSet characterSetWithCharactersInString:@"0123456789"];
+            [scanner scanUpToCharactersFromSet:numbers intoString:NULL];
+            int number;
+            [scanner scanInt:&number];
+            publishedEventsCount = publishedEventsCount + number;
+            
+            if (publishedEventsCount == 500){
+                [expectation fulfill];
+            }
+        }
+        
+        return YES;
+    }];
+    
+    for (int i=0; i<1000; i++) {
+        [PeachCollectorEvent sendPageViewWithID:[NSString stringWithFormat:@"test%d/news", i] referrer:nil recommendationID:nil];
+    }
+    
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(3 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        [PeachCollectorEvent sendPageViewWithID:@"testRetarded/news" referrer:nil recommendationID:nil];
+    });
+    
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        PeachCollector.maximumStorageDays = 5;
+        PeachCollector.maximumStoredEvents = 500;
+        publisher.serviceURL = @"https://pipe-collect.ebu.io/v3/collect?s=zzebu00000000017";
+        [[NSNotificationCenter defaultCenter] postNotificationName: PeachCollectorReachabilityChangedNotification object:nil];
+    });
+    
+    [self waitForExpectationsWithTimeout:120 handler:nil];
+}
+
 
 - (void)testPerformanceExample {
     // This is an example of a performance test case.
