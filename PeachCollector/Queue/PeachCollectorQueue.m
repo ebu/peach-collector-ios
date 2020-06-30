@@ -227,6 +227,8 @@
                         [self checkPublisherNamed:publisherName];
                     }
                     
+                    #if TARGET_OS_IOS
+
                     if ([[PeachCollector sharedCollector] isUnitTesting]) {
                         dispatch_async(dispatch_get_main_queue(), ^{
                             if ([[UIApplication sharedApplication] applicationState] == UIApplicationStateBackground) {
@@ -246,6 +248,7 @@
                                                                           object:nil
                                                                         userInfo:@{ PeachCollectorNotificationLogKey : [NSString stringWithFormat:@"%@ : Published %d events", publisherName, (int)events.count] }];
                     }
+                    #endif
                 }
                 
                 [self endBackgroundTask];
