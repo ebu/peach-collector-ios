@@ -8,7 +8,7 @@ The **Peach Collector** framework for iOS provides simple functionalities to fac
 
 # Compatibility
 
-The library is suitable for applications running on iOS 10 and above. The project is meant to be opened with the latest Xcode version (currently Xcode 11).
+The library is suitable for applications running on iOS 10 and above or tvOS 12 and above. The project is meant to be opened with the latest Xcode version (currently Xcode 11.6).
 
 # Installation
 
@@ -163,4 +163,4 @@ PeachCollectorEvent.sendRecommendationHit(withID: "reco00",
 
 ## Demo projects
 
-To see examples of how the framework works, two demo projects (in Objective-C and Swift) are available in the Xcode project.
+To see examples of how the framework works, two demo projects (in Objective-C and Swift) for iOS and one demo for tvOS are available in the Xcode project.
