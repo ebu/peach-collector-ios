@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder.AppleTV.Storyboard" version="3.0" toolsVersion="16097.2" targetRuntime="AppleTV" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+    <device id="appleTV" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--View Controller-->
+        <scene sceneID="tne-QT-ifu">
+            <objects>
+                <viewController id="BYZ-38-t0r" customClass="ViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
+                        <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
+                        <rect key="frame" x="0.0" y="0.0" width="1920" height="1080"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Y2N-11-I6g">
+                                <rect key="frame" x="165" y="397" width="630" height="86"/>
+                                <inset key="contentEdgeInsets" minX="40" minY="20" maxX="40" maxY="20"/>
+                                <state key="normal" title="Send Recommendation Hit Event"/>
+                                <connections>
+                                    <action selector="recommendationHit:" destination="BYZ-38-t0r" eventType="primaryActionTriggered" id="4GQ-ry-vMM"/>
+                                </connections>
+                            </button>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FXS-VT-m0Z">
+                                <rect key="frame" x="1050" y="0.0" width="870" height="1080"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <color key="textColor" systemColor="labelColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <fontDescription key="fontDescription" style="UICTFontTextStyleFootnote"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="b4T-FA-HcX">
+                                <rect key="frame" x="246.5" y="597" width="467" height="86"/>
+                                <inset key="contentEdgeInsets" minX="40" minY="20" maxX="40" maxY="20"/>
+                                <state key="normal" title="Play Background Audio"/>
+                                <connections>
+                                    <action selector="playAudio:" destination="BYZ-38-t0r" eventType="primaryActionTriggered" id="UAa-Na-iJa"/>
+                                    <action selector="playAudio:" destination="BYZ-38-t0r" eventType="touchUpInside" id="fQr-fG-5XK"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstAttribute="top" secondItem="FXS-VT-m0Z" secondAttribute="top" id="5OJ-pW-84U"/>
+                            <constraint firstItem="FXS-VT-m0Z" firstAttribute="trailing" secondItem="8bC-Xf-vdC" secondAttribute="trailing" id="90V-MK-603"/>
+                            <constraint firstItem="FXS-VT-m0Z" firstAttribute="width" secondItem="wu6-TO-1qx" secondAttribute="width" multiplier="0.5" id="BcA-Dk-KWy"/>
+                            <constraint firstItem="FXS-VT-m0Z" firstAttribute="bottom" secondItem="8bC-Xf-vdC" secondAttribute="bottom" id="Eyx-Lm-Ad1"/>
+                            <constraint firstItem="b4T-FA-HcX" firstAttribute="centerX" secondItem="wu6-TO-1qx" secondAttribute="centerX" multiplier="0.5" id="N64-Bh-apw"/>
+                            <constraint firstItem="b4T-FA-HcX" firstAttribute="centerY" secondItem="wu6-TO-1qx" secondAttribute="centerY" constant="100" id="YjQ-pP-dsZ"/>
+                            <constraint firstItem="Y2N-11-I6g" firstAttribute="centerY" secondItem="wu6-TO-1qx" secondAttribute="centerY" constant="-100" id="ZwD-Hg-CtE"/>
+                            <constraint firstItem="Y2N-11-I6g" firstAttribute="centerX" secondItem="wu6-TO-1qx" secondAttribute="centerX" multiplier="0.5" id="bdJ-Uo-ASW"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="wu6-TO-1qx"/>
+                    </view>
+                    <connections>
+                        <outlet property="playAudioButton" destination="b4T-FA-HcX" id="JE0-VT-eyE"/>
+                        <outlet property="textView" destination="FXS-VT-m0Z" id="pFJ-51-ucD"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="69" y="69"/>
+        </scene>
+    </scenes>
+</document>

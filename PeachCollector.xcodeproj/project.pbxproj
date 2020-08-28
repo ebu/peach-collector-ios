@@ -36,6 +36,12 @@
 		486DFF4824AB950700CBF530 /* PeachCollectorNotifications.m in Sources */ = {isa = PBXBuildFile; fileRef = 953547FA234B2A9D0096AE60 /* PeachCollectorNotifications.m */; };
 		486DFF4924AB955900CBF530 /* PeachPersistentContainer.m in Sources */ = {isa = PBXBuildFile; fileRef = 95354717233A1FCB0096AE60 /* PeachPersistentContainer.m */; };
 		486DFF4A24AB955C00CBF530 /* PeachPersistentContainer.h in Headers */ = {isa = PBXBuildFile; fileRef = 95354716233A1FCB0096AE60 /* PeachPersistentContainer.h */; };
+		95211ADD24EBB243002F77D4 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 95211ADC24EBB243002F77D4 /* AppDelegate.m */; };
+		95211AE024EBB243002F77D4 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 95211ADF24EBB243002F77D4 /* ViewController.m */; };
+		95211AE324EBB243002F77D4 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 95211AE124EBB243002F77D4 /* Main.storyboard */; };
+		95211AE524EBB245002F77D4 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 95211AE424EBB245002F77D4 /* Assets.xcassets */; };
+		95211AE824EBB245002F77D4 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 95211AE624EBB245002F77D4 /* LaunchScreen.storyboard */; };
+		95211AEB24EBB245002F77D4 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 95211AEA24EBB245002F77D4 /* main.m */; };
 		9530214F235081D80083E29F /* PeachCollectorReachability.h in Headers */ = {isa = PBXBuildFile; fileRef = 9530214D235081D80083E29F /* PeachCollectorReachability.h */; };
 		95302150235081D80083E29F /* PeachCollectorReachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 9530214E235081D80083E29F /* PeachCollectorReachability.m */; };
 		9530215B23585D2D0083E29F /* PeachCollectorDataStore.h in Headers */ = {isa = PBXBuildFile; fileRef = 9530215923585D2D0083E29F /* PeachCollectorDataStore.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -86,6 +92,8 @@
 		953547A8234203060096AE60 /* PeachCollector.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 953546D0233A15BD0096AE60 /* PeachCollector.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		953547FB234B2A9D0096AE60 /* PeachCollectorNotifications.h in Headers */ = {isa = PBXBuildFile; fileRef = 953547F9234B2A9D0096AE60 /* PeachCollectorNotifications.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		953547FC234B2A9D0096AE60 /* PeachCollectorNotifications.m in Sources */ = {isa = PBXBuildFile; fileRef = 953547FA234B2A9D0096AE60 /* PeachCollectorNotifications.m */; };
+		95B0C8F524EBBDBC00AB9522 /* PeachCollector.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 486DFEF524AB935700CBF530 /* PeachCollector.framework */; };
+		95B0C8F624EBBDBC00AB9522 /* PeachCollector.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 486DFEF524AB935700CBF530 /* PeachCollector.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -142,10 +150,31 @@
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		95B0C8F724EBBDBC00AB9522 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				95B0C8F624EBBDBC00AB9522 /* PeachCollector.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		486DFEF524AB935700CBF530 /* PeachCollector.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = PeachCollector.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		95211AD924EBB243002F77D4 /* PeachCollectorTVDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PeachCollectorTVDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		95211ADB24EBB243002F77D4 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		95211ADC24EBB243002F77D4 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		95211ADE24EBB243002F77D4 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
+		95211ADF24EBB243002F77D4 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		95211AE224EBB243002F77D4 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		95211AE424EBB245002F77D4 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		95211AE724EBB245002F77D4 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		95211AE924EBB245002F77D4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		95211AEA24EBB245002F77D4 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		9530214D235081D80083E29F /* PeachCollectorReachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PeachCollectorReachability.h; sourceTree = "<group>"; };
 		9530214E235081D80083E29F /* PeachCollectorReachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PeachCollectorReachability.m; sourceTree = "<group>"; };
 		9530215923585D2D0083E29F /* PeachCollectorDataStore.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PeachCollectorDataStore.h; sourceTree = "<group>"; };
@@ -214,6 +243,14 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		95211AD624EBB243002F77D4 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				95B0C8F524EBBDBC00AB9522 /* PeachCollector.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		953546CD233A15BD0096AE60 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -248,6 +285,22 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		95211ADA24EBB243002F77D4 /* PeachCollectorTVDemo */ = {
+			isa = PBXGroup;
+			children = (
+				95211ADB24EBB243002F77D4 /* AppDelegate.h */,
+				95211ADC24EBB243002F77D4 /* AppDelegate.m */,
+				95211ADE24EBB243002F77D4 /* ViewController.h */,
+				95211ADF24EBB243002F77D4 /* ViewController.m */,
+				95211AE124EBB243002F77D4 /* Main.storyboard */,
+				95211AE424EBB245002F77D4 /* Assets.xcassets */,
+				95211AE624EBB245002F77D4 /* LaunchScreen.storyboard */,
+				95211AE924EBB245002F77D4 /* Info.plist */,
+				95211AEA24EBB245002F77D4 /* main.m */,
+			);
+			path = PeachCollectorTVDemo;
+			sourceTree = "<group>";
+		};
 		95302148234F86CC0083E29F /* Queue */ = {
 			isa = PBXGroup;
 			children = (
@@ -270,6 +323,7 @@
 				953546DD233A15BD0096AE60 /* PeachCollectorTests */,
 				9535475B233B67AA0096AE60 /* PeachCollectorDemo */,
 				9535478D233B8A5E0096AE60 /* PeachCollectorSwiftDemo */,
+				95211ADA24EBB243002F77D4 /* PeachCollectorTVDemo */,
 				953546D1233A15BD0096AE60 /* Products */,
 				95354778233B68EE0096AE60 /* Frameworks */,
 			);
@@ -283,6 +337,7 @@
 				9535475A233B67AA0096AE60 /* PeachCollectorDemo.app */,
 				9535478C233B8A5E0096AE60 /* PeachCollectorSwiftDemo.app */,
 				486DFEF524AB935700CBF530 /* PeachCollector.framework */,
+				95211AD924EBB243002F77D4 /* PeachCollectorTVDemo.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -452,6 +507,24 @@
 			productReference = 486DFEF524AB935700CBF530 /* PeachCollector.framework */;
 			productType = "com.apple.product-type.framework";
 		};
+		95211AD824EBB243002F77D4 /* PeachCollectorTVDemo */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 95211AEE24EBB245002F77D4 /* Build configuration list for PBXNativeTarget "PeachCollectorTVDemo" */;
+			buildPhases = (
+				95211AD524EBB243002F77D4 /* Sources */,
+				95211AD624EBB243002F77D4 /* Frameworks */,
+				95211AD724EBB243002F77D4 /* Resources */,
+				95B0C8F724EBBDBC00AB9522 /* Embed Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = PeachCollectorTVDemo;
+			productName = PeachCollectorTVDemo;
+			productReference = 95211AD924EBB243002F77D4 /* PeachCollectorTVDemo.app */;
+			productType = "com.apple.product-type.application";
+		};
 		953546CF233A15BD0096AE60 /* PeachCollector */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 953546E4233A15BD0096AE60 /* Build configuration list for PBXNativeTarget "PeachCollector" */;
@@ -541,6 +614,9 @@
 					486DFEF424AB935700CBF530 = {
 						CreatedOnToolsVersion = 11.5;
 					};
+					95211AD824EBB243002F77D4 = {
+						CreatedOnToolsVersion = 11.3.1;
+					};
 					953546CF233A15BD0096AE60 = {
 						CreatedOnToolsVersion = 11.0;
 						LastSwiftMigration = 1100;
@@ -574,6 +650,7 @@
 				953546D8233A15BD0096AE60 /* PeachCollectorTests */,
 				95354759233B67AA0096AE60 /* PeachCollectorDemo */,
 				9535478B233B8A5E0096AE60 /* PeachCollectorSwiftDemo */,
+				95211AD824EBB243002F77D4 /* PeachCollectorTVDemo */,
 			);
 		};
 /* End PBXProject section */
@@ -583,6 +660,16 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		95211AD724EBB243002F77D4 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				95211AE824EBB245002F77D4 /* LaunchScreen.storyboard in Resources */,
+				95211AE524EBB245002F77D4 /* Assets.xcassets in Resources */,
+				95211AE324EBB243002F77D4 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -683,6 +770,16 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		95211AD524EBB243002F77D4 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				95211AE024EBB243002F77D4 /* ViewController.m in Sources */,
+				95211AEB24EBB245002F77D4 /* main.m in Sources */,
+				95211ADD24EBB243002F77D4 /* AppDelegate.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		953546CC233A15BD0096AE60 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -762,6 +859,22 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
+		95211AE124EBB243002F77D4 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				95211AE224EBB243002F77D4 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		95211AE624EBB245002F77D4 /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				95211AE724EBB245002F77D4 /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
 		95354765233B67AA0096AE60 /* Main.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -846,6 +959,44 @@
 				SKIP_INSTALL = YES;
 				TARGETED_DEVICE_FAMILY = 3;
 				TVOS_DEPLOYMENT_TARGET = 13.0;
+			};
+			name = Release;
+		};
+		95211AEC24EBB245002F77D4 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = "App Icon & Top Shelf Image";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 95499ZCYFT;
+				INFOPLIST_FILE = PeachCollectorTVDemo/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = ch.ebu.PeachCollectorTVDemo;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = appletvos;
+				TARGETED_DEVICE_FAMILY = 3;
+				TVOS_DEPLOYMENT_TARGET = 13.2;
+			};
+			name = Debug;
+		};
+		95211AED24EBB245002F77D4 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = "App Icon & Top Shelf Image";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 95499ZCYFT;
+				INFOPLIST_FILE = PeachCollectorTVDemo/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = ch.ebu.PeachCollectorTVDemo;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = appletvos;
+				TARGETED_DEVICE_FAMILY = 3;
+				TVOS_DEPLOYMENT_TARGET = 13.2;
 			};
 			name = Release;
 		};
@@ -1137,6 +1288,15 @@
 			buildConfigurations = (
 				486DFEFA24AB935700CBF530 /* Debug */,
 				486DFEFB24AB935700CBF530 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		95211AEE24EBB245002F77D4 /* Build configuration list for PBXNativeTarget "PeachCollectorTVDemo" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				95211AEC24EBB245002F77D4 /* Debug */,
+				95211AED24EBB245002F77D4 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
