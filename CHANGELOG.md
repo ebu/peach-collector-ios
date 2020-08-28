@@ -2,6 +2,12 @@
 # Change Log
 All notable changes to this project will be documented in this file.
 
+
+## [1.1.0] - 2020-08-28
+
+### Added
+- Ccompatibility with tvOS
+
 ## [1.0.9] - 2020-03-16
 
 ### Added
