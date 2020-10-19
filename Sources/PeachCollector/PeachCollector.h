@@ -8,16 +8,16 @@
 
 #import <Foundation/Foundation.h>
 #import <Foundation/Foundation.h>
-#import <PeachCollector/PeachCollectorNotifications.h>
-#import <PeachCollector/PeachCollectorEvent.h>
-#import <PeachCollector/PeachCollectorPublisher.h>
-#import <PeachCollector/PeachCollectorPublisherEventStatus.h>
-#import <PeachCollector/PeachCollectorProperties.h>
-#import <PeachCollector/PeachCollectorDynamicProperties.h>
-#import <PeachCollector/PeachCollectorContext.h>
-#import <PeachCollector/PeachCollectorDataFormat.h>
-#import <PeachCollector/PeachCollectorQueue.h>
-#import <PeachCollector/PeachCollectorDataStore.h>
+#import "PeachCollectorNotifications.h"
+#import "PeachCollectorEvent.h"
+#import "PeachCollectorPublisher.h"
+#import "PeachCollectorPublisherEventStatus.h"
+#import "PeachCollectorProperties.h"
+#import "PeachCollectorDynamicProperties.h"
+#import "PeachCollectorContext.h"
+#import "PeachCollectorDataFormat.h"
+#import "PeachCollectorQueue.h"
+#import "PeachCollectorDataStore.h"
 
 //! Project version number for PeachCollector.
 FOUNDATION_EXPORT double PeachCollectorVersionNumber;
