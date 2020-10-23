@@ -14,10 +14,38 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "953546CF233A15BD0096AE60"
-               BuildableName = "PeachCollector.framework"
+               BlueprintIdentifier = "PeachCollector_PeachCollector"
+               BuildableName = "PeachCollector_PeachCollector"
+               BlueprintName = "PeachCollector_PeachCollector"
+               ReferencedContainer = "container:">
+            </BuildableReference>
+         </BuildActionEntry>
+         <BuildActionEntry
+            buildForTesting = "YES"
+            buildForRunning = "YES"
+            buildForProfiling = "YES"
+            buildForArchiving = "YES"
+            buildForAnalyzing = "YES">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "PeachCollector"
+               BuildableName = "PeachCollector"
                BlueprintName = "PeachCollector"
-               ReferencedContainer = "container:PeachCollector.xcodeproj">
+               ReferencedContainer = "container:">
+            </BuildableReference>
+         </BuildActionEntry>
+         <BuildActionEntry
+            buildForTesting = "YES"
+            buildForRunning = "YES"
+            buildForProfiling = "NO"
+            buildForArchiving = "NO"
+            buildForAnalyzing = "YES">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "PeachCollectorTests"
+               BuildableName = "PeachCollectorTests"
+               BlueprintName = "PeachCollectorTests"
+               ReferencedContainer = "container:">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -32,10 +60,10 @@
             skipped = "NO">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "953546D8233A15BD0096AE60"
-               BuildableName = "PeachCollectorTests.xctest"
+               BlueprintIdentifier = "PeachCollectorTests"
+               BuildableName = "PeachCollectorTests"
                BlueprintName = "PeachCollectorTests"
-               ReferencedContainer = "container:PeachCollector.xcodeproj">
+               ReferencedContainer = "container:">
             </BuildableReference>
          </TestableReference>
       </Testables>
@@ -60,10 +88,10 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "953546CF233A15BD0096AE60"
-            BuildableName = "PeachCollector.framework"
-            BlueprintName = "PeachCollector"
-            ReferencedContainer = "container:PeachCollector.xcodeproj">
+            BlueprintIdentifier = "PeachCollector_PeachCollector"
+            BuildableName = "PeachCollector_PeachCollector"
+            BlueprintName = "PeachCollector_PeachCollector"
+            ReferencedContainer = "container:">
          </BuildableReference>
       </MacroExpansion>
    </ProfileAction>
