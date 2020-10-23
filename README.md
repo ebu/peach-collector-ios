@@ -1,6 +1,7 @@
 
 
 [![Carthage compatible](https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat)](https://github.com/Carthage/Carthage)
+[![Swift Package Manager compatible](https://img.shields.io/badge/SPM-compatible-4BC51D.svg?style=flat)](https://swift.org/package-manager/)
 
 # About
 
@@ -8,9 +9,11 @@ The **Peach Collector** framework for iOS provides simple functionalities to fac
 
 # Compatibility
 
-The library is suitable for applications running on iOS 10 and above or tvOS 12 and above. The project is meant to be opened with the latest Xcode version (currently Xcode 11.6).
+The library is suitable for applications running on iOS 12 and above or tvOS 12 and above. The project is meant to be opened with the latest Xcode version (currently Xcode 12).
 
 # Installation
+
+## Install via Carthage
 
 [Carthage](https://github.com/Carthage/Carthage) is a decentralized dependency manager that builds your dependencies and provides you with binary frameworks.
 
@@ -29,6 +32,14 @@ github "ebu/peach-collector-ios"
 
 Run `carthage update` to build the framework and drag the built `PeachCollector.framework` into your Xcode project.
 
+## Install via Swift Package Manager
+
+SPM integration is available since version 1.2.0
+
+- In XCode menu, click on `File` > `Swift Packages` > `Add Package Dependency...`
+- Enter the project url: `https://github.com/ebu/peach-collector-ios.git` and click on the `Next` button.
+- Select the `master` branch and click on the `Next` button.
+- Click on the `Finish` button.
 
 
 # Usage
