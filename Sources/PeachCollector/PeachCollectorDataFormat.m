@@ -111,6 +111,7 @@ NSString * const PCClientTypeKey = @"type";
 NSString * const PCClientAppIDKey = @"app_id";
 NSString * const PCClientAppNameKey = @"name";
 NSString * const PCClientAppVersionKey = @"version";
+NSString * const PCClientIsLoggedInKey = @"user_logged_in";
 NSString * const PCClientDeviceKey = @"device";
 NSString * const PCClientDeviceTypeKey = @"type";
 NSString * const PCClientDeviceVendorKey = @"vendor";

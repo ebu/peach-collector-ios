@@ -138,6 +138,7 @@ OBJC_EXPORT NSString * const PCClientTypeKey;
 OBJC_EXPORT NSString * const PCClientAppIDKey;
 OBJC_EXPORT NSString * const PCClientAppNameKey;
 OBJC_EXPORT NSString * const PCClientAppVersionKey;
+OBJC_EXPORT NSString * const PCClientIsLoggedInKey;
 OBJC_EXPORT NSString * const PCClientDeviceKey;
 OBJC_EXPORT NSString * const PCClientDeviceTypeKey;
 OBJC_EXPORT NSString * const PCClientDeviceVendorKey;
