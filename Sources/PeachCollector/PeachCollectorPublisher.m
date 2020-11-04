@@ -130,7 +130,9 @@
                             PCClientTypeKey : @"mobileapp",
                             PCClientAppIDKey : clientBundleIdentifier,
                             PCClientAppNameKey : clientAppName,
-                            PCClientAppVersionKey : clientAppVersion};
+                            PCClientAppVersionKey : clientAppVersion,
+                            PCClientIsLoggedInKey: [NSNumber numberWithBool:[PeachCollector userIsLoggedIn]]
+        };
     }
     
     NSMutableDictionary *mutableClientInfo = [self.clientInfo mutableCopy];

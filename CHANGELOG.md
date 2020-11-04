@@ -3,6 +3,11 @@
 All notable changes to this project will be documented in this file.
 
 
+## [1.2.1] - 2020-11-03
+
+### Added
+- `userIsLoggedIn` flag in `PeachCollector` to help when userIDs are generated automatically for anonymous users
+
 ## [1.2.0] - 2020-10-23
 
 ### Added

@@ -66,6 +66,34 @@
     [self waitForExpectationsWithTimeout:3 handler:nil];
 }
 
+- (void)testUserLoggedIn {
+    //userIsLoggedIn
+    [PeachCollector setUserIsLoggedIn:YES];
+    
+    PeachCollectorPublisher *publisher = [PeachCollector publisherNamed:PUBLISHER_NAME];
+    publisher.interval = 1;
+    publisher.maxEventsPerBatch = 1;
+    
+    [self expectationForNotification:PeachCollectorNotification object:nil handler:^BOOL(NSNotification * _Nonnull notification) {
+        NSData *payload = notification.userInfo[PeachCollectorNotificationPayloadKey];
+        
+        if (payload != nil) {
+            id json = [NSJSONSerialization JSONObjectWithData:payload options:0 error:nil];
+            
+            NSDictionary* client = [json objectForKey:PCClientKey];
+            XCTAssertTrue([[client objectForKey:PCClientIsLoggedInKey] boolValue], @"User Logged in Flag not set properly");
+           
+            
+            return YES;
+        }
+        return NO;
+    }];
+    
+    [PeachCollectorEvent sendPageViewWithID:@"testPage" referrer:nil recommendationID:nil];
+    
+    [self waitForExpectationsWithTimeout:10 handler:nil];
+}
+
 - (void)testWorkingPublisherWith1000Events {
     
     PeachCollectorPublisher *publisher = [PeachCollector publisherNamed:PUBLISHER_NAME];
@@ -229,6 +257,9 @@
             XCTAssertTrue([[component objectForKey:PCContextComponentTypeKey] isEqualToString:carouselComponent.type], @"Component Type is added to the context");
             XCTAssertTrue([[component objectForKey:PCContextComponentNameKey] isEqualToString:carouselComponent.name], @"Component Name is added to the context");
             XCTAssertTrue([[component objectForKey:PCContextComponentVersionKey] isEqualToString:carouselComponent.version], @"Component Version is added to the context");
+            
+            NSDictionary* client = [json objectForKey:PCClientKey];
+            XCTAssertTrue(![[client objectForKey:PCClientIsLoggedInKey] boolValue], @"User Logged in Flag not set properly");
             
             return YES;
         }

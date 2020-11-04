@@ -90,6 +90,12 @@ NS_ASSUME_NONNULL_BEGIN
 @property (class, nonatomic, copy, nullable) NSString *userID;
 
 /**
+ *  A userID can be generated automatically for anonymous user. You can use this flag to define if the user is logged in or not when there is a userID.
+ */
+@property (class, nonatomic, assign) BOOL userIsLoggedIn;
+
+
+/**
  *  Add an event to be queued. Event will be added to the queue and sent accordingly to publisher's configuration.
  *  @param event    The event to send.
  */
