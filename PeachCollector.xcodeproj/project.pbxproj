@@ -191,6 +191,7 @@
 		95211AE724EBB245002F77D4 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		95211AE924EBB245002F77D4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		95211AEA24EBB245002F77D4 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		9522A62A2580BFBD00832087 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = Info.plist; path = Sources/PeachCollector/Resources/Info.plist; sourceTree = "<group>"; };
 		9530214D235081D80083E29F /* PeachCollectorReachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PeachCollectorReachability.h; sourceTree = "<group>"; };
 		9530214E235081D80083E29F /* PeachCollectorReachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PeachCollectorReachability.m; sourceTree = "<group>"; };
 		9530215923585D2D0083E29F /* PeachCollectorDataStore.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PeachCollectorDataStore.h; sourceTree = "<group>"; };
@@ -330,6 +331,7 @@
 			children = (
 				955EB1CC23E45948004B30DF /* README.md */,
 				955EB1CA23E4592A004B30DF /* CHANGELOG.md */,
+				9522A62A2580BFBD00832087 /* Info.plist */,
 				95AB3BAD253D922D00D241A5 /* Sources */,
 				95AB3BBB253D945600D241A5 /* Tests */,
 				9535475B233B67AA0096AE60 /* PeachCollectorDemo */,
