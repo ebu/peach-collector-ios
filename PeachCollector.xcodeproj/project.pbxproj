@@ -553,7 +553,6 @@
 				953546CC233A15BD0096AE60 /* Sources */,
 				953546CD233A15BD0096AE60 /* Frameworks */,
 				953546CE233A15BD0096AE60 /* Resources */,
-				95354754233A45620096AE60 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -747,23 +746,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "#set -o xtrace\nfind \"${DERIVED_SOURCES_DIR}/CoreDataGenerated/PeachCollector\" -type f -name \"*.h\" -exec cp {} \"${BUILT_PRODUCTS_DIR}/${PUBLIC_HEADERS_FOLDER_PATH}\" \\;\n";
-		};
-		95354754233A45620096AE60 /* ShellScript */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-			);
-			outputFileListPaths = (
-			);
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "#set -o xtrace\nfind \"${DERIVED_SOURCES_DIR}/CoreDataGenerated/PeachCollector\" -type f -name \"*.h\" -exec cp {} \"${BUILT_PRODUCTS_DIR}/${PUBLIC_HEADERS_FOLDER_PATH}\" \\;\n\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 
