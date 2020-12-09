@@ -2,6 +2,10 @@
 # Change Log
 All notable changes to this project will be documented in this file.
 
+## [1.2.2] - 2020-12-09
+
+### Fixed
+- Carthage integration
 
 ## [1.2.1] - 2020-11-03
 
