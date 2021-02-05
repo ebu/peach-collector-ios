@@ -7,6 +7,9 @@ All notable changes to this project will be documented in this file.
 ### Added
 - `appID` can be defined in the `PeachCollector`. The default value is the bundle ID of your app.
 
+### Updated
+- Documentation avout previuously used Advertising Identifier (now identifierForVendor)
+
 ## [1.2.2] - 2020-12-09
 
 ### Fixed
