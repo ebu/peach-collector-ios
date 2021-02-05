@@ -83,6 +83,7 @@ PeachCollector.setPublisher(publisher, withUniqueName: "My Publisher")
 - Optionally, you can define an **`implementationVersion`** by setting a PeachCollector property.
 - **`maximumStorageDays`** is the maximum number of days an event should be kept in the queue (if it could not be sent).
 - **`maximumStoredEvents`** is the maximum number of events that should be kept in the queue. 
+- An **`appID`** can be defined if you don't want to use the default value (which is the bundle ID of the app).
 
 #### Objective-C
 ```objectivec

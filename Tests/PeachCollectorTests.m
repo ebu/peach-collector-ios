@@ -94,6 +94,35 @@
     [self waitForExpectationsWithTimeout:10 handler:nil];
 }
 
+
+- (void)testAppID {
+    //userIsLoggedIn
+    [PeachCollector setAppID:@"testAppID"];
+    
+    PeachCollectorPublisher *publisher = [PeachCollector publisherNamed:PUBLISHER_NAME];
+    publisher.interval = 1;
+    publisher.maxEventsPerBatch = 1;
+    
+    [self expectationForNotification:PeachCollectorNotification object:nil handler:^BOOL(NSNotification * _Nonnull notification) {
+        NSData *payload = notification.userInfo[PeachCollectorNotificationPayloadKey];
+        
+        if (payload != nil) {
+            id json = [NSJSONSerialization JSONObjectWithData:payload options:0 error:nil];
+            
+            NSDictionary* client = [json objectForKey:PCClientKey];
+            XCTAssertNotNil([client objectForKey:PCClientAppIDKey], @"App ID empty");
+            XCTAssertTrue([[client objectForKey:PCClientAppIDKey] isEqualToString:@"testAppID"], @"App ID not set properly");
+            
+            return YES;
+        }
+        return NO;
+    }];
+    
+    [PeachCollectorEvent sendPageViewWithID:@"testPage" referrer:nil recommendationID:nil];
+    
+    [self waitForExpectationsWithTimeout:10 handler:nil];
+}
+
 - (void)testWorkingPublisherWith1000Events {
     
     PeachCollectorPublisher *publisher = [PeachCollector publisherNamed:PUBLISHER_NAME];

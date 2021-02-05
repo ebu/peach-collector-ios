@@ -90,6 +90,12 @@ NS_ASSUME_NONNULL_BEGIN
 @property (class, nonatomic, copy, nullable) NSString *userID;
 
 /**
+ *  Optionnal App ID that will be sent in the `client` payload. The default value is the bundle ID of the app.
+ */
+@property (class, nonatomic, copy, nullable) NSString *appID;
+
+
+/**
  *  A userID can be generated automatically for anonymous user. You can use this flag to define if the user is logged in or not when there is a userID.
  */
 @property (class, nonatomic, assign) BOOL userIsLoggedIn;
