@@ -80,7 +80,7 @@ NS_ASSUME_NONNULL_BEGIN
 + (void)setPublisher:(PeachCollectorPublisher *)publisher withUniqueName:(NSString *)publisherName;
 
 /**
- *  Device unique identifier (advertising identifier when ad tracking is not limited, "Anonymous" otherwise)
+ *  Device unique identifier (identifierForVendor value, will default to "Anonymous" if identifierForVendor is nil)
  */
 @property (class, nonatomic, readonly) NSString *deviceID;
 
@@ -88,6 +88,12 @@ NS_ASSUME_NONNULL_BEGIN
  *  User unique identifier when logged in
  */
 @property (class, nonatomic, copy, nullable) NSString *userID;
+
+/**
+ *  Optionnal App ID that will be sent in the `client` payload. The default value is the bundle ID of the app.
+ */
+@property (class, nonatomic, copy, nullable) NSString *appID;
+
 
 /**
  *  A userID can be generated automatically for anonymous user. You can use this flag to define if the user is logged in or not when there is a userID.
@@ -115,16 +121,16 @@ NS_ASSUME_NONNULL_BEGIN
 
 
 /**
- *  The Device ID used by the framework is the Advertising ID provided by Apple.
- *  This Id can be reseted or event null. If the Advertising Id is null and the user is not logged in,
- *  collecting of the events should be stopped unless if it is needed for anonymous analytics.
+ *  The Device ID used by the framework is the identifierForVendor provided by Apple.
+ *  If theidentifierForVendor is null and the user is not logged in, collecting of the events
+ *  should be stopped unless if it is needed for anonymous analytics.
  *  When set to `YES`, collection will work even if there is no Device ID and User ID
  *  Default value is `NO`.
  */
 @property (nonatomic) BOOL shouldCollectAnonymousEvents;
 
 /**
- *  Returns `YES` if a `userID` has been defined or if an advertising ID is available.
+ *  Returns `YES` if a `userID` has been defined or if the `identifierForVendor` is not nil.
  *  If not, it will return the value of `shouldCollectAnonymousEvents`
 */
 + (BOOL)shouldCollectEvents;

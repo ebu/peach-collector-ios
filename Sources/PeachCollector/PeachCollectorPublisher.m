@@ -120,6 +120,7 @@
         NSString *clientAppVersion = [[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleShortVersionString"];
         NSString *deviceID = PeachCollector.deviceID;
         
+        if (PeachCollector.appID) clientBundleIdentifier = PeachCollector.appID;
         if (clientBundleIdentifier == nil) clientBundleIdentifier = @"unknown";
         if (clientAppName == nil) clientAppName = [[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleName"];;
         if (clientAppName == nil) clientAppName = @"unknown";

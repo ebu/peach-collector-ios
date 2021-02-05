@@ -25,6 +25,7 @@
 @implementation PeachCollector
 static NSString *_implementationVersion = @"0";
 static NSString *_userID = nil;
+static NSString *_appID = nil;
 static BOOL _userIsLoggedIn = false;
 static NSString *_deviceID = nil;
 static NSInteger _inactivityInterval = -1;
@@ -280,6 +281,19 @@ static NSInteger _maxStoredDays = -1;
 + (void)setUserIsLoggedIn:(BOOL)userIsLoggedIn
 {
     _userIsLoggedIn = userIsLoggedIn;
+}
+
+#pragma mark - AppID management
+
+
++ (NSString *)appID
+{
+    return _appID;
+}
+
++ (void)setAppID:(NSString *)appID
+{
+    _appID = [appID copy];
 }
 
 
