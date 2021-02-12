@@ -90,7 +90,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (class, nonatomic, copy, nullable) NSString *userID;
 
 /**
- *  Optionnal App ID that will be sent in the `client` payload. The default value is the bundle ID of the app.
+ *  Optional App ID that will be sent in the `client` payload. The default value is the bundle ID of the app.
  */
 @property (class, nonatomic, copy, nullable) NSString *appID;
 
