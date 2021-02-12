@@ -12,6 +12,9 @@
 
 - (instancetype)initWithName:(NSString *)name{
 #if SWIFT_PACKAGE
+    if (NSClassFromString(@"XCTest") != nil) {
+        return [super initWithName:name];
+    }
     if (SWIFTPM_MODULE_BUNDLE) {
         NSBundle* bundle = SWIFTPM_MODULE_BUNDLE;
         NSLog(@"bundle2 : %@", bundle.bundlePath);
