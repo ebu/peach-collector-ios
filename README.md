@@ -88,6 +88,7 @@ PeachCollector.setPublisher(publisher, withUniqueName: "My Publisher")
 #### Objective-C
 ```objectivec
 PeachCollector.userID = @"123e4567-e89b-12d3-a456-426655440000";
+PeachCollector.appID = @"test.app.id";
 [PeachCollector sharedCollector].isUnitTesting = YES;
 [PeachCollector sharedCollector].shouldCollectAnonymousEvents = YES;
 PeachCollector.implementationVersion = @"1";
@@ -98,6 +99,7 @@ PeachCollector.maximumStoredEvents = 1000;
 #### Swift
 ```swift
 PeachCollector.userID = "123e4567-e89b-12d3-a456-426655440000";
+PeachCollector.appID = "test.app.id";
 PeachCollector.shared.isUnitTesting = true;
 PeachCollector.shared.shouldCollectAnonymousEvents = true;
 PeachCollector.implementationVersion = "1";

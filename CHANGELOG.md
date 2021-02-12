@@ -2,6 +2,11 @@
 # Change Log
 All notable changes to this project will be documented in this file.
 
+## [1.2.4] - 2021-02-12
+
+### Changed
+- Swift Package type from `dynamic` to `static`
+
 ## [1.2.3] - 2021-02-05
 
 ### Added
