@@ -2,6 +2,11 @@
 # Change Log
 All notable changes to this project will be documented in this file.
 
+## [1.2.5] - 2021-03-23
+
+### Added
+- Speculative fix for invalid memory access when app is in background
+
 ## [1.2.4] - 2021-02-12
 
 ### Changed
