@@ -91,9 +91,9 @@
 
 - (void)addEvent:(PeachCollectorEvent *)event
 {
-    __block PeachCollectorEvent *addedEvent;
+    __block BOOL shouldBeFlushedWhenReceivedInBackgroundState;
     [PeachCollector.dataStore performBackgroundWriteTask:^(NSManagedObjectContext * _Nonnull managedObjectContext) {
-        addedEvent = [managedObjectContext objectWithID:event.objectID];
+        PeachCollectorEvent *addedEvent = [managedObjectContext objectWithID:event.objectID];
         for (NSString *publisherID in [PeachCollector sharedCollector].publishers.allKeys) {
             PeachCollectorPublisher *publisher = [[PeachCollector sharedCollector].publishers objectForKey:publisherID];
             if ([publisher shouldProcessEvent:addedEvent]) {
@@ -103,6 +103,7 @@
                 eventStatus.event = addedEvent;
             }
         }
+        shouldBeFlushedWhenReceivedInBackgroundState = [addedEvent shouldBeFlushedWhenReceivedInBackgroundState];
     } withPriority:NSOperationQueuePriorityHigh completionBlock:^(NSError * _Nullable error) {
         if (error){
             if ([[PeachCollector sharedCollector] isUnitTesting]) NSLog(@"PeachCollector DB Error: %@", [error description]);
@@ -110,7 +111,7 @@
         }
         dispatch_async(dispatch_get_main_queue(), ^{
             if ([[UIApplication sharedApplication] applicationState] != UIApplicationStateActive
-                && [addedEvent shouldBeFlushedWhenReceivedInBackgroundState]) {
+                && shouldBeFlushedWhenReceivedInBackgroundState) {
                 [self flush];
             }
         
