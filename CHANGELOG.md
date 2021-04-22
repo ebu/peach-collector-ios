@@ -2,6 +2,11 @@
 # Change Log
 All notable changes to this project will be documented in this file.
 
+## [1.2.6] - 2021-04-22
+
+### Changed
+- How event is managed when app is in background to fix the invalid memory access
+
 ## [1.2.5] - 2021-03-23
 
 ### Added
