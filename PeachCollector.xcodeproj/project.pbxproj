@@ -397,6 +397,7 @@
 		95AB3BAD253D922D00D241A5 /* Sources */ = {
 			isa = PBXGroup;
 			children = (
+				95AB3BAF253D928400D241A5 /* Resources */,
 				95AB3BB7253D935500D241A5 /* PeachCollector */,
 			);
 			path = Sources;
@@ -414,7 +415,6 @@
 		95AB3BB7253D935500D241A5 /* PeachCollector */ = {
 			isa = PBXGroup;
 			children = (
-				95AB3BAF253D928400D241A5 /* Resources */,
 				953546D3233A15BD0096AE60 /* PeachCollector.h */,
 				953546F6233A16780096AE60 /* PeachCollector.m */,
 				953546EF233A16780096AE60 /* PeachCollectorDataFormat.h */,
