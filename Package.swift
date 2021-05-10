@@ -23,7 +23,7 @@ let package = Package(
             name: "PeachCollector",
             dependencies: [],
             path: "Sources/",
-            exclude: ["PeachCollector/Resources/Info.plist",],
+            exclude: ["Resources/Info.plist",],
             resources: [.process("Resources")],
             publicHeadersPath: "PeachCollector"),
         .testTarget(
