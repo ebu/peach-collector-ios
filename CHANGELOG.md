@@ -2,6 +2,11 @@
 # Change Log
 All notable changes to this project will be documented in this file.
 
+## [1.2.7] - 2021-05-10
+
+### Fixed
+- Swift Package file tree to work with XCode 12.5
+
 ## [1.2.6] - 2021-04-22
 
 ### Changed
