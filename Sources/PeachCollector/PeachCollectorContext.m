@@ -17,6 +17,112 @@
 
 @implementation PeachCollectorContext
 
+- (void)setExperimentID:(NSString *)experimentID {
+    if (experimentID == nil) {
+        _experimentID = @"default";
+    }
+    else {
+        _experimentID = experimentID;
+    }
+}
+
+- (void)setExperimentComponent:(NSString *)experimentComponent {
+    if (experimentComponent == nil) {
+        _experimentComponent = @"main";
+    }
+    else {
+        _experimentComponent = experimentComponent;
+    }
+}
+
+- (instancetype)initCollectionContextWithHitIndex:(NSNumber *)hitIndex
+                                           itemID:(NSString *)itemID
+                                     experimentID:(nullable NSString *)experimentID
+                              experimentComponent:(nullable NSString *)experimentComponent
+                                     appSectionID:(nullable NSString *)appSectionID
+                                           source:(nullable NSString *)source
+                                        component:(nullable PeachCollectorContextComponent *)component
+                                        contextID:(nullable NSString *)contextID
+                                             type:(nullable NSString *)type
+{
+    self = [super init];
+    if (self) {
+        _hitIndex = hitIndex;
+        _itemID = itemID;
+        _source = source;
+        _appSectionID = appSectionID;
+        _component = component;
+        _contextID = contextID;
+        _type = type;
+        [self setExperimentID:experimentID];
+        [self setExperimentComponent:experimentComponent];
+    }
+    return self;
+}
+                                   
+- (instancetype)initCollectionContextWithItems:(NSArray<NSString *> *)items
+                                  experimentID:(nullable NSString *)experimentID
+                           experimentComponent:(nullable NSString *)experimentComponent
+                                  appSectionID:(nullable NSString *)appSectionID
+                                        source:(nullable NSString *)source
+                                     component:(nullable PeachCollectorContextComponent *)component
+                                     contextID:(nullable NSString *)contextID
+                                          type:(nullable NSString *)type
+{
+    self = [super init];
+    if (self) {
+        _items = items;
+        _source = source;
+        _appSectionID = appSectionID;
+        _component = component;
+        _contextID = contextID;
+        _type = type;
+        [self setExperimentID:experimentID];
+        [self setExperimentComponent:experimentComponent];
+    }
+    return self;
+}
+
+- (instancetype)initRecommendationContextWithHitIndex:(NSNumber *)hitIndex
+                                               itemID:(NSString *)itemID
+                                         appSectionID:(nullable NSString *)appSectionID
+                                               source:(nullable NSString *)source
+                                            component:(nullable PeachCollectorContextComponent *)component
+                                            contextID:(nullable NSString *)contextID
+                                                 type:(nullable NSString *)type
+{
+    self = [super init];
+    if (self) {
+        _hitIndex = hitIndex;
+        _itemID = itemID;
+        _source = source;
+        _appSectionID = appSectionID;
+        _component = component;
+        _contextID = contextID;
+        _type = type;
+    }
+    return self;
+}
+                                   
+- (instancetype)initRecommendationContextWithItems:(NSArray<NSString *> *)items
+                                      appSectionID:(nullable NSString *)appSectionID
+                                            source:(nullable NSString *)source
+                                         component:(nullable PeachCollectorContextComponent *)component
+                                         contextID:(nullable NSString *)contextID
+                                              type:(nullable NSString *)type
+{
+    self = [super init];
+    if (self) {
+        _items = items;
+        _source = source;
+        _appSectionID = appSectionID;
+        _component = component;
+        _contextID = contextID;
+        _type = type;
+    }
+    return self;
+}
+
 - (instancetype)initMediaContextWithID:(NSString *)contextID
                              component:(nullable PeachCollectorContextComponent *)component
                           appSectionID:(nullable NSString *)appSectionID
@@ -120,6 +226,11 @@
     if (self.appSectionID) [representation setObject:self.appSectionID forKey:PCContextPageURIKey];
     if (self.source) [representation setObject:self.source forKey:PCContextSourceKey];
     if (self.component && [self.component dictionaryRepresentation]) [representation setObject:[self.component dictionaryRepresentation] forKey:PCContextComponentKey];
+    if (self.hitIndex) [representation setObject:self.hitIndex forKey:PCContextHitIndexKey];
+    if (self.itemID) [representation setObject:self.itemID forKey:PCContextItemIDKey];
+    if (self.items) [representation setObject:self.items forKey:PCContextItemsKey];
+    if (self.experimentID) [representation setObject:self.experimentID forKey:PCContextExperimentIDKey];
+    if (self.experimentComponent) [representation setObject:self.experimentComponent forKey:PCContextExperimentComponentKey];
     if ([representation count] == 0) return nil;
     return [representation copy];
 }

@@ -259,6 +259,89 @@
     [self waitForExpectationsWithTimeout:60 handler:nil];
 }
 
+- (void)testCollectionHitEvent {
+
+    PeachCollectorPublisher *publisher = [PeachCollector publisherNamed:PUBLISHER_NAME];
+    publisher.interval = 1;
+    publisher.maxEventsPerBatch = 1;
+    
+    PeachCollectorContextComponent *carouselComponent = [PeachCollectorContextComponent new];
+    carouselComponent.type = @"Carousel";
+    carouselComponent.name = @"recoCarousel";
+    carouselComponent.version = @"1.0";
+    
+    [self expectationForNotification:PeachCollectorNotification object:nil handler:^BOOL(NSNotification * _Nonnull notification) {
+        NSData *payload = notification.userInfo[PeachCollectorNotificationPayloadKey];
+        
+        if (payload != nil) {
+            id json = [NSJSONSerialization JSONObjectWithData:payload options:0 error:nil];
+            
+            NSDictionary* context = [[[json objectForKey:PCEventsKey] objectAtIndex:0] objectForKey:PCEventContextKey];
+            XCTAssertTrue([[context objectForKey:PCContextItemIDKey] isEqualToString:@"media001"], @"ItemID was added to the context");
+            XCTAssertTrue([[context objectForKey:PCContextHitIndexKey] isEqualToNumber:@(2)], @"Hit index was added to the context");
+            XCTAssertTrue([[context objectForKey:PCContextPageURIKey] isEqualToString:@"newsSection01"], @"AppSectionID was added to the context");
+            XCTAssertTrue([[context objectForKey:PCContextSourceKey] isEqualToString:@"homePage"], @"Source was added to the context");
+            XCTAssertTrue([[context objectForKey:PCContextExperimentIDKey] isEqualToString:@"default"], @"ExperimentID was added to the context");
+            XCTAssertTrue([[context objectForKey:PCContextExperimentComponentKey] isEqualToString:@"main"], @"ExperimentComponent was added to the context");
+            
+            NSDictionary *component = [context objectForKey:PCContextComponentKey];
+            XCTAssertTrue([[component objectForKey:PCContextComponentTypeKey] isEqualToString:carouselComponent.type], @"Component Type is added to the context");
+            XCTAssertTrue([[component objectForKey:PCContextComponentNameKey] isEqualToString:carouselComponent.name], @"Component Name is added to the context");
+            XCTAssertTrue([[component objectForKey:PCContextComponentVersionKey] isEqualToString:carouselComponent.version], @"Component Version is added to the context");
+            
+            NSDictionary* client = [json objectForKey:PCClientKey];
+            XCTAssertTrue(![[client objectForKey:PCClientIsLoggedInKey] boolValue], @"User Logged in Flag not set properly");
+            
+            return YES;
+        }
+        return NO;
+    }];
+    [PeachCollectorEvent sendCollectionHitWithID:@"collection000000" itemID:@"media001" hitIndex:2 experimentID:nil experimentComponent:nil appSectionID:@"newsSection01" source:@"homePage" component:carouselComponent];
+    
+    [self waitForExpectationsWithTimeout:10 handler:nil];
+}
+
+- (void)testCollectionDisplayedEvent {
+
+    PeachCollectorPublisher *publisher = [PeachCollector publisherNamed:PUBLISHER_NAME];
+    publisher.interval = 1;
+    publisher.maxEventsPerBatch = 1;
+    
+    PeachCollectorContextComponent *carouselComponent = [PeachCollectorContextComponent new];
+    carouselComponent.type = @"Carousel";
+    carouselComponent.name = @"recoCarousel";
+    carouselComponent.version = @"1.0";
+    
+    [self expectationForNotification:PeachCollectorNotification object:nil handler:^BOOL(NSNotification * _Nonnull notification) {
+        NSData *payload = notification.userInfo[PeachCollectorNotificationPayloadKey];
+        
+        if (payload != nil) {
+            id json = [NSJSONSerialization JSONObjectWithData:payload options:0 error:nil];
+            
+            NSDictionary* context = [[[json objectForKey:PCEventsKey] objectAtIndex:0] objectForKey:PCEventContextKey];
+            XCTAssertTrue([[context objectForKey:PCContextItemsKey] isEqualToArray:(@[@"media001", @"media002"])], @"Items was added to the context");
+            XCTAssertTrue([[context objectForKey:PCContextPageURIKey] isEqualToString:@"newsSection01"], @"AppSectionID was added to the context");
+            XCTAssertTrue([[context objectForKey:PCContextSourceKey] isEqualToString:@"homePage"], @"Source was added to the context");
+            XCTAssertTrue([[context objectForKey:PCContextExperimentIDKey] isEqualToString:@"default"], @"ExperimentID was added to the context");
+            XCTAssertTrue([[context objectForKey:PCContextExperimentComponentKey] isEqualToString:@"main"], @"ExperimentComponent was added to the context");
+            
+            NSDictionary *component = [context objectForKey:PCContextComponentKey];
+            XCTAssertTrue([[component objectForKey:PCContextComponentTypeKey] isEqualToString:carouselComponent.type], @"Component Type is added to the context");
+            XCTAssertTrue([[component objectForKey:PCContextComponentNameKey] isEqualToString:carouselComponent.name], @"Component Name is added to the context");
+            XCTAssertTrue([[component objectForKey:PCContextComponentVersionKey] isEqualToString:carouselComponent.version], @"Component Version is added to the context");
+            
+            NSDictionary* client = [json objectForKey:PCClientKey];
+            XCTAssertTrue(![[client objectForKey:PCClientIsLoggedInKey] boolValue], @"User Logged in Flag not set properly");
+            
+            return YES;
+        }
+        return NO;
+    }];
+    [PeachCollectorEvent sendCollectionDisplayedWithID:@"collection000000" items:@[@"media001", @"media002"] experimentID:nil experimentComponent:nil appSectionID:@"newsSection01" source:@"homePage" component:carouselComponent];
+    
+    [self waitForExpectationsWithTimeout:10 handler:nil];
+}
+
 - (void)testRecommendationHitEvent {
 
     PeachCollectorPublisher *publisher = [PeachCollector publisherNamed:PUBLISHER_NAME];

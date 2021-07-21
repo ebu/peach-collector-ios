@@ -73,6 +73,9 @@ OBJC_EXPORT PCEventType const PCEventTypeMediaPlaylistRemove;
 OBJC_EXPORT PCEventType const PCEventTypeRecommendationLoaded;
 OBJC_EXPORT PCEventType const PCEventTypeRecommendationHit;
 OBJC_EXPORT PCEventType const PCEventTypeRecommendationDisplayed;
+OBJC_EXPORT PCEventType const PCEventTypeCollectionLoaded;
+OBJC_EXPORT PCEventType const PCEventTypeCollectionHit;
+OBJC_EXPORT PCEventType const PCEventTypeCollectionDisplayed;
 OBJC_EXPORT PCEventType const PCEventTypeArticleStart;
 OBJC_EXPORT PCEventType const PCEventTypeArticleEnd;
 OBJC_EXPORT PCEventType const PCEventTypeReadMore;
@@ -115,6 +118,8 @@ OBJC_EXPORT NSString * const PCContextComponentKey;
 OBJC_EXPORT NSString * const PCContextComponentTypeKey;
 OBJC_EXPORT NSString * const PCContextComponentNameKey;
 OBJC_EXPORT NSString * const PCContextComponentVersionKey;
+OBJC_EXPORT NSString * const PCContextExperimentIDKey;
+OBJC_EXPORT NSString * const PCContextExperimentComponentKey;
 
 OBJC_EXPORT NSString * const PCPeachSchemaVersionKey;
 OBJC_EXPORT NSString * const PCPeachFrameworkVersionKey;
