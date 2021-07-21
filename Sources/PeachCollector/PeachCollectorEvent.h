@@ -31,6 +31,127 @@ NS_ASSUME_NONNULL_BEGIN
                  metadata:(nullable NSDictionary<NSString *, id<NSCopying>> *)metadata;
 
 /**
+ *  Send a collection hit event. Event will be added to the queue and sent accordingly to publishers' configurations.
+ *  @param collectionID    Unique identifier of the recommendation.
+ *  @param itemID Unique identifier of the clip, media or article selected
+ *  @param hitIndex Index of the item that has been hit
+ *  @param experimentID Experiment identifier (default value is "default")
+ *  @param experimentComponent Component of the experiment (default value is "main")
+ *  @param appSectionID Unique identifier of app section where the recommendation is displayed
+ *  @param source Identifier of the element in which the recommendation is displayed (the module, view or popup)
+ *  @param component Description of the element in which the recommendation is displayed
+ */
++ (void)sendCollectionHitWithID:(NSString *)collectionID
+                         itemID:(NSString *)itemID
+                       hitIndex:(NSInteger)hitIndex
+                   experimentID:(nullable NSString *)experimentID
+            experimentComponent:(nullable NSString *)experimentComponent
+                   appSectionID:(nullable NSString *)appSectionID
+                         source:(nullable NSString *)source
+                      component:(nullable PeachCollectorContextComponent *)component;
+/**
+ *  Send a collection hit event. Event will be added to the queue and sent accordingly to publishers' configurations.
+ *  @param collectionID    Unique identifier of the recommendation.
+ *  @param itemID Unique identifier of the clip, media or article selected
+ *  @param hitIndex Index of the item that has been hit
+ *  @param experimentID Experiment identifier (default value is "default")
+ *  @param experimentComponent Component of the experiment (default value is "main")
+ *  @param appSectionID Unique identifier of app section where the recommendation is displayed
+ *  @param source Identifier of the element in which the recommendation is displayed (the module, view or popup)
+ *  @param component Description of the element in which the recommendation is displayed
+ *  @param contextID Identifier for the context
+ *  @param contextType Context type
+ */
++ (void)sendCollectionHitWithID:(NSString *)collectionID
+                         itemID:(NSString *)itemID
+                       hitIndex:(NSInteger)hitIndex
+                   experimentID:(nullable NSString *)experimentID
+            experimentComponent:(nullable NSString *)experimentComponent
+                   appSectionID:(nullable NSString *)appSectionID
+                         source:(nullable NSString *)source
+                      component:(nullable PeachCollectorContextComponent *)component
+                      contextID:(nullable NSString *)contextID
+                    contextType:(nullable NSString *)contextType;
+
+/**
+ *  Send a collection displayed event. Event will be added to the queue and sent accordingly to publishers' configurations.
+ *  @param collectionID    Unique identifier of the recommendation.
+ *  @param items Array of strings (identifiers for items)
+ *  @param experimentID Experiment identifier (default value is "default")
+ *  @param experimentComponent Component of the experiment (default value is "main")
+ *  @param appSectionID Unique identifier of app section where the recommendation is displayed
+ *  @param source Identifier of the element in which the recommendation is displayed (the module, view or popup)
+ *  @param component Description of the element in which the recommendation is displayed
+ */
++ (void)sendCollectionDisplayedWithID:(NSString *)collectionID
+                                items:(NSArray<NSString *> *)items
+                         experimentID:(nullable NSString *)experimentID
+                  experimentComponent:(nullable NSString *)experimentComponent
+                         appSectionID:(nullable NSString *)appSectionID
+                               source:(nullable NSString *)source
+                            component:(nullable PeachCollectorContextComponent *)component;
+/**
+ *  Send a collection displayed event. Event will be added to the queue and sent accordingly to publishers' configurations.
+ *  @param collectionID    Unique identifier of the recommendation.
+ *  @param items Array of strings (identifiers for items)
+ *  @param experimentID Experiment identifier (default value is "default")
+ *  @param experimentComponent Component of the experiment (default value is "main")
+ *  @param appSectionID Unique identifier of app section where the recommendation is displayed
+ *  @param source Identifier of the element in which the recommendation is displayed (the module, view or popup)
+ *  @param component Description of the element in which the recommendation is displayed
+ *  @param contextID Identifier for the context
+ *  @param contextType Context type
+ */
++ (void)sendCollectionDisplayedWithID:(NSString *)collectionID
+                                items:(NSArray<NSString *> *)items
+                         experimentID:(nullable NSString *)experimentID
+                  experimentComponent:(nullable NSString *)experimentComponent
+                         appSectionID:(nullable NSString *)appSectionID
+                               source:(nullable NSString *)source
+                            component:(nullable PeachCollectorContextComponent *)component
+                            contextID:(nullable NSString *)contextID
+                          contextType:(nullable NSString *)contextType;
+
+/**
+ *  Send a collection loaded event. Event will be added to the queue and sent accordingly to publishers' configurations.
+ *  @param collectionID Unique identifier of the recommendation.
+ *  @param items Array of strings (identifiers for items)
+ *  @param experimentID Experiment identifier (default value is "default")
+ *  @param experimentComponent Component of the experiment (default value is "main")
+ *  @param appSectionID Unique identifier of app section where the recommendation is displayed
+ *  @param source Identifier of the element in which the recommendation is displayed (the module, view or popup)
+ *  @param component Description of the element in which the recommendation is displayed
+ */
++ (void)sendCollectionLoadedWithID:(NSString *)collectionID
+                             items:(NSArray<NSString *> *)items
+                      experimentID:(nullable NSString *)experimentID
+               experimentComponent:(nullable NSString *)experimentComponent
+                      appSectionID:(nullable NSString *)appSectionID
+                            source:(nullable NSString *)source
+                         component:(nullable PeachCollectorContextComponent *)component;
+/**
+ *  Send a collection loaded event. Event will be added to the queue and sent accordingly to publishers' configurations.
+ *  @param collectionID Unique identifier of the recommendation.
+ *  @param items Array of strings (identifiers for items)
+ *  @param experimentID Experiment identifier (default value is "default")
+ *  @param experimentComponent Component of the experiment (default value is "main")
+ *  @param appSectionID Unique identifier of app section where the recommendation is displayed
+ *  @param source Identifier of the element in which the recommendation is displayed (the module, view or popup)
+ *  @param component Description of the element in which the recommendation is displayed
+ *  @param contextID Identifier for the context
+ *  @param contextType Context type
+ */
++ (void)sendCollectionLoadedWithID:(NSString *)collectionID
+                             items:(NSArray<NSString *> *)items
+                      experimentID:(nullable NSString *)experimentID
+               experimentComponent:(nullable NSString *)experimentComponent
+                      appSectionID:(nullable NSString *)appSectionID
+                            source:(nullable NSString *)source
+                         component:(nullable PeachCollectorContextComponent *)component
+                         contextID:(nullable NSString *)contextID
+                       contextType:(nullable NSString *)contextType;
+
+/**
  *  Send a recommendation hit event. Event will be added to the queue and sent accordingly to publishers' configurations.
  *  @param recommendationID    Unique identifier of the recommendation.
  *  @param itemID Unique identifier of the clip, media or article selected

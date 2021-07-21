@@ -2,6 +2,11 @@
 # Change Log
 All notable changes to this project will be documented in this file.
 
+## [1.2.8] - 2021-07-21
+
+### Added
+- Collection hit, displayed and loaded events with specific context
+
 ## [1.2.7] - 2021-05-10
 
 ### Fixed

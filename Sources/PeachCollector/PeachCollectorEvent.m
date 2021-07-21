@@ -43,6 +43,118 @@
         [event send];
     }];
 }
+
++ (void)sendCollectionHitWithID:(NSString *)collectionID
+                         itemID:(NSString *)itemID
+                       hitIndex:(NSInteger)hitIndex
+                   experimentID:(nullable NSString *)experimentID
+            experimentComponent:(nullable NSString *)experimentComponent
+                   appSectionID:(nullable NSString *)appSectionID
+                         source:(nullable NSString *)source
+                      component:(nullable PeachCollectorContextComponent *)component
+{
+    [PeachCollectorEvent sendCollectionHitWithID:collectionID itemID:itemID hitIndex:hitIndex experimentID:experimentID experimentComponent:experimentComponent appSectionID:appSectionID source:source component:component contextID:nil contextType:nil];
+}
++ (void)sendCollectionHitWithID:(NSString *)collectionID
+                         itemID:(NSString *)itemID
+                       hitIndex:(NSInteger)hitIndex
+                   experimentID:(nullable NSString *)experimentID
+            experimentComponent:(nullable NSString *)experimentComponent
+                   appSectionID:(nullable NSString *)appSectionID
+                         source:(nullable NSString *)source
+                      component:(nullable PeachCollectorContextComponent *)component
+                      contextID:(nullable NSString *)contextID
+                    contextType:(nullable NSString *)contextType
+{
+    if (![PeachCollector shouldCollectEvents]) return;
+    
+    __block PeachCollectorEvent *event;
+    PeachCollectorContext *context = [[PeachCollectorContext alloc] initCollectionContextWithHitIndex:@(hitIndex) itemID:itemID experimentID:experimentID experimentComponent:experimentComponent appSectionID:appSectionID source:source component:component contextID:contextID type:contextType];
+    
+    [PeachCollector.dataStore performBackgroundWriteTask:^(NSManagedObjectContext * _Nonnull managedObjectContext) {
+        event = [NSEntityDescription insertNewObjectForEntityForName:@"PeachCollectorEvent" inManagedObjectContext:managedObjectContext];
+        event.type = PCEventTypeCollectionHit;
+        event.eventID = collectionID;
+        event.creationDate = [NSDate date];
+        event.context = (context && [context dictionaryRepresentation]) ? [context dictionaryRepresentation] : nil;
+    } withPriority:NSOperationQueuePriorityNormal completionBlock:^(NSError * _Nullable error) {
+        [event send];
+    }];
+}
+
++ (void)sendCollectionDisplayedWithID:(NSString *)collectionID
+                                items:(NSArray<NSString *> *)items
+                         experimentID:(nullable NSString *)experimentID
+                  experimentComponent:(nullable NSString *)experimentComponent
+                         appSectionID:(nullable NSString *)appSectionID
+                               source:(nullable NSString *)source
+                            component:(nullable PeachCollectorContextComponent *)component
+{
+    [PeachCollectorEvent sendCollectionDisplayedWithID:collectionID items:items experimentID:experimentID experimentComponent:experimentComponent appSectionID:appSectionID source:source component:component contextID:nil contextType:nil];
+}
++ (void)sendCollectionDisplayedWithID:(NSString *)collectionID
+                                items:(NSArray<NSString *> *)items
+                         experimentID:(nullable NSString *)experimentID
+                  experimentComponent:(nullable NSString *)experimentComponent
+                         appSectionID:(nullable NSString *)appSectionID
+                               source:(nullable NSString *)source
+                            component:(nullable PeachCollectorContextComponent *)component
+                            contextID:(nullable NSString *)contextID
+                          contextType:(nullable NSString *)contextType
+{
+    if (![PeachCollector shouldCollectEvents]) return;
+    
+    __block PeachCollectorEvent *event;
+    PeachCollectorContext *context = [[PeachCollectorContext alloc] initCollectionContextWithItems:items experimentID:experimentID experimentComponent:experimentComponent appSectionID:appSectionID source:source component:component contextID:contextID type:contextType];
+    
+    [PeachCollector.dataStore performBackgroundWriteTask:^(NSManagedObjectContext * _Nonnull managedObjectContext) {
+        event = [NSEntityDescription insertNewObjectForEntityForName:@"PeachCollectorEvent" inManagedObjectContext:managedObjectContext];
+        event.type = PCEventTypeCollectionDisplayed;
+        event.eventID = collectionID;
+        event.creationDate = [NSDate date];
+        event.context = (context && [context dictionaryRepresentation]) ? [context dictionaryRepresentation] : nil;
+    } withPriority:NSOperationQueuePriorityNormal completionBlock:^(NSError * _Nullable error) {
+        [event send];
+    }];
+}
+
++ (void)sendCollectionLoadedWithID:(NSString *)collectionID
+                             items:(NSArray<NSString *> *)items
+                      experimentID:(nullable NSString *)experimentID
+               experimentComponent:(nullable NSString *)experimentComponent
+                      appSectionID:(nullable NSString *)appSectionID
+                            source:(nullable NSString *)source
+                         component:(nullable PeachCollectorContextComponent *)component
+{
+    [PeachCollectorEvent sendCollectionDisplayedWithID:collectionID items:items experimentID:experimentID experimentComponent:experimentComponent appSectionID:appSectionID source:source component:component contextID:nil contextType:nil];
+}
++ (void)sendCollectionLoadedWithID:(NSString *)collectionID
+                             items:(NSArray<NSString *> *)items
+                      experimentID:(nullable NSString *)experimentID
+               experimentComponent:(nullable NSString *)experimentComponent
+                      appSectionID:(nullable NSString *)appSectionID
+                            source:(nullable NSString *)source
+                         component:(nullable PeachCollectorContextComponent *)component
+                         contextID:(nullable NSString *)contextID
+                       contextType:(nullable NSString *)contextType
+{
+    if (![PeachCollector shouldCollectEvents]) return;
+    
+    __block PeachCollectorEvent *event;
+    PeachCollectorContext *context = [[PeachCollectorContext alloc] initCollectionContextWithItems:items experimentID:experimentID experimentComponent:experimentComponent appSectionID:appSectionID source:source component:component contextID:contextID type:contextType];
+    
+    [PeachCollector.dataStore performBackgroundWriteTask:^(NSManagedObjectContext * _Nonnull managedObjectContext) {
+        event = [NSEntityDescription insertNewObjectForEntityForName:@"PeachCollectorEvent" inManagedObjectContext:managedObjectContext];
+        event.type = PCEventTypeCollectionLoaded;
+        event.eventID = collectionID;
+        event.creationDate = [NSDate date];
+        event.context = (context && [context dictionaryRepresentation]) ? [context dictionaryRepresentation] : nil;
+    } withPriority:NSOperationQueuePriorityNormal completionBlock:^(NSError * _Nullable error) {
+        [event send];
+    }];
+}
+
+
 + (void)sendRecommendationDisplayedWithID:(NSString *)recommendationID
                            itemsDisplayed:(NSArray<NSString *> *)itemsDisplayed
                              appSectionID:(nullable NSString *)appSectionID
