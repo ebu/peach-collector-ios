@@ -17,7 +17,49 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, copy) NSString *type;
 @property (nonatomic, copy) NSString *appSectionID;
 @property (nonatomic, copy) NSString *source;
+@property (nonatomic, copy) NSString *referrer;
 @property (nonatomic, copy) PeachCollectorContextComponent *component;
+
+@property (nonatomic, copy) NSString *itemID;
+@property (nonatomic, copy) NSArray<NSString *> *items;
+@property (nonatomic, copy) NSNumber *hitIndex;
+
+@property (nonatomic, copy) NSString *experimentID;
+@property (nonatomic, copy) NSString *experimentComponent;
+
+- (instancetype)initCollectionContextWithHitIndex:(NSNumber *)hitIndex
+                                           itemID:(NSString *)itemID
+                                     experimentID:(nullable NSString *)experimentID
+                              experimentComponent:(nullable NSString *)experimentComponent
+                                     appSectionID:(nullable NSString *)appSectionID
+                                           source:(nullable NSString *)source
+                                        component:(nullable PeachCollectorContextComponent *)component
+                                        contextID:(nullable NSString *)contextID
+                                             type:(nullable NSString *)type;
+                                   
+- (instancetype)initCollectionContextWithItems:(NSArray<NSString *> *)items
+                                  experimentID:(nullable NSString *)experimentID
+                           experimentComponent:(nullable NSString *)experimentComponent
+                                  appSectionID:(nullable NSString *)appSectionID
+                                        source:(nullable NSString *)source
+                                     component:(nullable PeachCollectorContextComponent *)component
+                                     contextID:(nullable NSString *)contextID
+                                          type:(nullable NSString *)type;
+
+- (instancetype)initRecommendationContextWithHitIndex:(NSNumber *)hitIndex
+                                               itemID:(NSString *)itemID
+                                         appSectionID:(nullable NSString *)appSectionID
+                                               source:(nullable NSString *)source
+                                            component:(nullable PeachCollectorContextComponent *)component
+                                            contextID:(nullable NSString *)contextID
+                                                 type:(nullable NSString *)type;
+                                   
+- (instancetype)initRecommendationContextWithItems:(NSArray<NSString *> *)items
+                                      appSectionID:(nullable NSString *)appSectionID
+                                            source:(nullable NSString *)source
+                                         component:(nullable PeachCollectorContextComponent *)component
+                                         contextID:(nullable NSString *)contextID
+                                              type:(nullable NSString *)type;
 
 - (instancetype)initMediaContextWithID:(NSString *)contextID
                              component:(nullable PeachCollectorContextComponent *)component
