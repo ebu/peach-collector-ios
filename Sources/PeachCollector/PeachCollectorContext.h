@@ -23,6 +23,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, copy) NSString *itemID;
 @property (nonatomic, copy) NSArray<NSString *> *items;
 @property (nonatomic, copy) NSNumber *hitIndex;
+@property (nonatomic, copy) NSNumber *itemIndex;
+@property (nonatomic, copy) NSNumber *itemsCount;
 
 @property (nonatomic, copy) NSString *experimentID;
 @property (nonatomic, copy) NSString *experimentComponent;
@@ -45,6 +47,17 @@ NS_ASSUME_NONNULL_BEGIN
                                      component:(nullable PeachCollectorContextComponent *)component
                                      contextID:(nullable NSString *)contextID
                                           type:(nullable NSString *)type;
+
+- (instancetype)initCollectionContextWithItemID:(NSString *)itemID
+                                     itemsCount:(NSNumber *)itemsCount
+                                      itemIndex:(NSNumber *)itemIndex
+                                  experimentID:(nullable NSString *)experimentID
+                            experimentComponent:(nullable NSString *)experimentComponent
+                                   appSectionID:(nullable NSString *)appSectionID
+                                         source:(nullable NSString *)source
+                                      component:(nullable PeachCollectorContextComponent *)component
+                                      contextID:(nullable NSString *)contextID
+                                           type:(nullable NSString *)type;
 
 - (instancetype)initRecommendationContextWithHitIndex:(NSNumber *)hitIndex
                                                itemID:(NSString *)itemID
