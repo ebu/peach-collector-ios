@@ -11,38 +11,46 @@
 
 @implementation PeachCollectorEvent (Peach)
 
-+ (void)sendRecommendationHitWithID:(NSString *)recommendationID
-                             itemID:(NSString *)itemID
-                           hitIndex:(NSInteger)hitIndex
-                       appSectionID:(nullable NSString *)appSectionID
-                             source:(nullable NSString *)source
-                          component:(nullable PeachCollectorContextComponent *)component
++ (void)sendCollectionItemDisplayedWithID:(NSString *)collectionID
+                                   itemID:(NSString *)itemID
+                               itemsCount:(NSInteger)itemsCount
+                                itemIndex:(NSInteger)itemIndex
+                             experimentID:(nullable NSString *)experimentID
+                      experimentComponent:(nullable NSString *)experimentComponent
+                             appSectionID:(nullable NSString *)appSectionID
+                                   source:(nullable NSString *)source
+                                component:(nullable PeachCollectorContextComponent *)component
+{
+    [PeachCollectorEvent sendCollectionItemDisplayedWithID:collectionID itemID:itemID itemsCount:itemsCount itemIndex:itemIndex experimentID:experimentID experimentComponent:experimentComponent appSectionID:appSectionID source:source component:component contextID:nil contextType:nil];
+}
++ (void)sendCollectionItemDisplayedWithID:(NSString *)collectionID
+                                   itemID:(NSString *)itemID
+                               itemsCount:(NSInteger)itemsCount
+                                itemIndex:(NSInteger)itemIndex
+                             experimentID:(nullable NSString *)experimentID
+                      experimentComponent:(nullable NSString *)experimentComponent
+                             appSectionID:(nullable NSString *)appSectionID
+                                   source:(nullable NSString *)source
+                                component:(nullable PeachCollectorContextComponent *)component
+                                contextID:(nullable NSString *)contextID
+                              contextType:(nullable NSString *)contextType
 {
     if (![PeachCollector shouldCollectEvents]) return;
     
     __block PeachCollectorEvent *event;
-    NSMutableDictionary *mutableContext = [NSMutableDictionary new];
-    [mutableContext setObject:[itemID copy] forKey:PCContextItemIDKey];
-    [mutableContext setObject:@(hitIndex) forKey:PCContextHitIndexKey];
-    if (appSectionID) [mutableContext setObject:[appSectionID copy] forKey:PCContextPageURIKey];
-    if (source) [mutableContext setObject:[source copy] forKey:PCContextSourceKey];
-    if (component && [component dictionaryRepresentation]) [mutableContext setObject:[component dictionaryRepresentation] forKey:PCContextComponentKey];
-    NSDictionary *context = [mutableContext copy];
+    PeachCollectorContext *context = [[PeachCollectorContext alloc] initCollectionContextWithItemID:itemID itemsCount:@(itemsCount) itemIndex:@(itemIndex) experimentID:experimentID experimentComponent:experimentComponent appSectionID:appSectionID source:source component:component contextID:contextID type:contextType];
     
     [PeachCollector.dataStore performBackgroundWriteTask:^(NSManagedObjectContext * _Nonnull managedObjectContext) {
         event = [NSEntityDescription insertNewObjectForEntityForName:@"PeachCollectorEvent" inManagedObjectContext:managedObjectContext];
-        event.type = PCEventTypeRecommendationHit;
-        event.eventID = recommendationID;
+        event.type = PCEventTypeCollectionItemDisplayed;
+        event.eventID = collectionID;
         event.creationDate = [NSDate date];
-        event.context = [context copy];
+        event.context = (context && [context dictionaryRepresentation]) ? [context dictionaryRepresentation] : nil;
     } withPriority:NSOperationQueuePriorityNormal completionBlock:^(NSError * _Nullable error) {
-        if (error) {
-            if ([[PeachCollector sharedCollector] isUnitTesting]) NSLog(@"PeachCollector DB Error: %@", [error description]);
-            return;
-        }
         [event send];
     }];
 }
+
 
 + (void)sendCollectionHitWithID:(NSString *)collectionID
                          itemID:(NSString *)itemID
@@ -154,6 +162,38 @@
     }];
 }
 
++ (void)sendRecommendationHitWithID:(NSString *)recommendationID
+                             itemID:(NSString *)itemID
+                           hitIndex:(NSInteger)hitIndex
+                       appSectionID:(nullable NSString *)appSectionID
+                             source:(nullable NSString *)source
+                          component:(nullable PeachCollectorContextComponent *)component
+{
+    if (![PeachCollector shouldCollectEvents]) return;
+    
+    __block PeachCollectorEvent *event;
+    NSMutableDictionary *mutableContext = [NSMutableDictionary new];
+    [mutableContext setObject:[itemID copy] forKey:PCContextItemIDKey];
+    [mutableContext setObject:@(hitIndex) forKey:PCContextHitIndexKey];
+    if (appSectionID) [mutableContext setObject:[appSectionID copy] forKey:PCContextPageURIKey];
+    if (source) [mutableContext setObject:[source copy] forKey:PCContextSourceKey];
+    if (component && [component dictionaryRepresentation]) [mutableContext setObject:[component dictionaryRepresentation] forKey:PCContextComponentKey];
+    NSDictionary *context = [mutableContext copy];
+    
+    [PeachCollector.dataStore performBackgroundWriteTask:^(NSManagedObjectContext * _Nonnull managedObjectContext) {
+        event = [NSEntityDescription insertNewObjectForEntityForName:@"PeachCollectorEvent" inManagedObjectContext:managedObjectContext];
+        event.type = PCEventTypeRecommendationHit;
+        event.eventID = recommendationID;
+        event.creationDate = [NSDate date];
+        event.context = [context copy];
+    } withPriority:NSOperationQueuePriorityNormal completionBlock:^(NSError * _Nullable error) {
+        if (error) {
+            if ([[PeachCollector sharedCollector] isUnitTesting]) NSLog(@"PeachCollector DB Error: %@", [error description]);
+            return;
+        }
+        [event send];
+    }];
+}
 
 + (void)sendRecommendationDisplayedWithID:(NSString *)recommendationID
                            itemsDisplayed:(NSArray<NSString *> *)itemsDisplayed
