@@ -2,6 +2,11 @@
 # Change Log
 All notable changes to this project will be documented in this file.
 
+## [1.2.9] - 2021-08-11
+
+### Added
+- Collection item displayed event with specific context
+
 ## [1.2.8] - 2021-07-21
 
 ### Added
