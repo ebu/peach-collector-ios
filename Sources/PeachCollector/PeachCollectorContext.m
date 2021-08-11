@@ -83,6 +83,34 @@
     return self;
 }
 
+
+- (instancetype)initCollectionContextWithItemID:(NSString *)itemID
+                                     itemsCount:(NSNumber *)itemsCount
+                                      itemIndex:(NSNumber *)itemIndex
+                                   experimentID:(nullable NSString *)experimentID
+                            experimentComponent:(nullable NSString *)experimentComponent
+                                   appSectionID:(nullable NSString *)appSectionID
+                                         source:(nullable NSString *)source
+                                      component:(nullable PeachCollectorContextComponent *)component
+                                      contextID:(nullable NSString *)contextID
+                                           type:(nullable NSString *)type
+{
+    self = [super init];
+    if (self) {
+        _itemID = itemID;
+        _itemsCount = itemsCount;
+        _itemIndex = itemIndex;
+        _source = source;
+        _appSectionID = appSectionID;
+        _component = component;
+        _contextID = contextID;
+        _type = type;
+        [self setExperimentID:experimentID];
+        [self setExperimentComponent:experimentComponent];
+    }
+    return self;
+}
+
 - (instancetype)initRecommendationContextWithHitIndex:(NSNumber *)hitIndex
                                                itemID:(NSString *)itemID
                                          appSectionID:(nullable NSString *)appSectionID
@@ -229,6 +257,9 @@
     if (self.hitIndex) [representation setObject:self.hitIndex forKey:PCContextHitIndexKey];
     if (self.itemID) [representation setObject:self.itemID forKey:PCContextItemIDKey];
     if (self.items) [representation setObject:self.items forKey:PCContextItemsKey];
+    if (self.itemsCount) [representation setObject:self.itemsCount forKey:PCContextItemsCountKey];
+    if (self.itemIndex) [representation setObject:self.itemIndex forKey:PCContextItemIndexKey];
+    if (self.hitIndex) [representation setObject:self.hitIndex forKey:PCContextHitIndexKey];
     if (self.experimentID) [representation setObject:self.experimentID forKey:PCContextExperimentIDKey];
     if (self.experimentComponent) [representation setObject:self.experimentComponent forKey:PCContextExperimentComponentKey];
     if ([representation count] == 0) return nil;
