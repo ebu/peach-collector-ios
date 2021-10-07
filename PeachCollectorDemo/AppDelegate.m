@@ -20,7 +20,7 @@
     PeachCollector.implementationVersion = @"1";
     [PeachCollector sharedCollector].isUnitTesting = YES;
     [PeachCollector sharedCollector].shouldCollectAnonymousEvents = YES;
-    PeachCollectorPublisher *publisher = [[PeachCollectorPublisher alloc] initWithSiteKey:@"zzebu00000000017"];
+    PeachCollectorPublisher *publisher = [[PeachCollectorPublisher alloc] initWithSiteKey:@"zzebu00000000017" remoteConfiguration:@"https://peach-static.ebu.io/zzebu/config_example.json"];
     [PeachCollector setPublisher:publisher withUniqueName:@"MyPublisher"];
     return YES;
 }

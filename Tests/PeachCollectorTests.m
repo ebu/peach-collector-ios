@@ -66,6 +66,14 @@
     [self waitForExpectationsWithTimeout:3 handler:nil];
 }
 
+- (void)testPublisherRemoteConfiguration {
+    PeachCollectorPublisher *publisher2 = [[PeachCollectorPublisher alloc] initWithSiteKey:@"zzebu00000000017" remoteConfiguration:@"https://ant-peach-static.ebu.io/sesr/iOs.json"];//@"https://peach-static.ebu.io/zzebu/config_example.json"];
+    [PeachCollector setPublisher:publisher2 withUniqueName:@"PublisherB"];
+    sleep(2);
+    XCTAssertTrue(publisher2.interval == 60);
+    XCTAssertTrue(publisher2.maxEventsPerBatch == 120);
+}
+
 - (void)testUserLoggedIn {
     //userIsLoggedIn
     [PeachCollector setUserIsLoggedIn:YES];
