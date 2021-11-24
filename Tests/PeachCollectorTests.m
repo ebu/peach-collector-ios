@@ -67,7 +67,7 @@
 }
 
 - (void)testPublisherRemoteConfiguration {
-    PeachCollectorPublisher *publisher2 = [[PeachCollectorPublisher alloc] initWithSiteKey:@"zzebu00000000017" remoteConfiguration:@"http://peach-bucket.ebu.io/zzebu/config-test.json"];
+    PeachCollectorPublisher *publisher2 = [[PeachCollectorPublisher alloc] initWithSiteKey:@"zzebu00000000017" remoteConfiguration:@"https://peach-bucket.ebu.io/zzebu/config-test.json"];
     [PeachCollector setPublisher:publisher2 withUniqueName:@"PublisherB"];
     sleep(2);
     XCTAssertTrue(publisher2.interval == 10);
