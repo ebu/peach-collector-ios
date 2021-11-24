@@ -54,10 +54,24 @@ NS_ASSUME_NONNULL_BEGIN
 - (instancetype)initWithServiceURL:(NSString *)serviceURL;
 
 /**
+ *  Create a collector configuration using a remote configuration URL.
+ *  @param serviceURL The service url string to the Peach end point.
+ *  @param url The remote configuration URL.
+ */
+- (instancetype)initWithServiceURL:(NSString *)serviceURL remoteConfiguration:(NSString *)url;
+
+/**
  *  Create a collector configuration with a default publisher linked to the default service URL.
  *  @param siteKey The site key used to recognize this app on the Peach server.
  */
 - (instancetype)initWithSiteKey:(NSString *)siteKey;
+
+/**
+ *  Create a collector configuration with a default publisher linked to the default service URL.
+ *  @param siteKey The site key used to recognize this app on the Peach server.
+ *  @param url The remote configuration URL.
+ */
+- (instancetype)initWithSiteKey:(NSString *)siteKey remoteConfiguration:(NSString *)url;
 
 /**
  *  Process the events and create a formatted dictionary to be sent. Will call `publishData:withCompletionHandler` when finished

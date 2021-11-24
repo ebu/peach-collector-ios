@@ -15,6 +15,8 @@
 @interface PeachCollectorPublisher ()
 
 @property (nonatomic, copy) NSDictionary *clientInfo;
+@property (nonatomic, copy) NSString *remoteConfigurationURL;
+@property (nonatomic, copy) NSDictionary *config;
 
 @end
 
@@ -34,11 +36,70 @@
     return self;
 }
 
+- (id)initWithServiceURL:(NSString *)serviceURL remoteConfiguration:(nonnull NSString *)url
+{
+    self = [self initWithServiceURL:serviceURL];
+    if (self) {
+        self.remoteConfigurationURL = url;
+        self.config = [[NSUserDefaults standardUserDefaults] dictionaryForKey:url];
+        [self checkConfig];
+    }
+    return self;
+}
+
 - (id)initWithSiteKey:(NSString *)siteKey
 {
     NSAssert(siteKey != nil && ![siteKey isEqualToString:@""], @"SiteKey is not valid");
     return [self initWithServiceURL:[NSString stringWithFormat:@"https://pipe-collect.ebu.io/v3/collect?s=%@", siteKey]];
 }
+
+- (instancetype)initWithSiteKey:(NSString *)siteKey remoteConfiguration:(NSString *)url
+{
+    NSAssert(siteKey != nil && ![siteKey isEqualToString:@""], @"SiteKey is not valid");
+    return [self initWithServiceURL:[NSString stringWithFormat:@"https://pipe-collect.ebu.io/v3/collect?s=%@", siteKey] remoteConfiguration:url];
+}
+
+- (void)checkConfig {
+    NSString *expiryDateKey = [NSString stringWithFormat:@"%@_date", self.remoteConfigurationURL];
+    
+    NSDate *expiryDate = (NSDate *)[[NSUserDefaults standardUserDefaults] objectForKey:expiryDateKey];
+    if ([[NSDate date] compare:expiryDate] == NSOrderedDescending) {
+        self.config = nil;
+    }
+    
+    if (self.config != nil) {
+        NSNumber *intervalNumber = (NSNumber *)[self.config objectForKey:@"flush_interval_sec"];
+        NSInteger interval = (intervalNumber != nil) ? [intervalNumber integerValue] : -1;
+        self.interval = (interval > -1) ? interval : PeachCollectorDefaultPublisherInterval;
+        
+        NSNumber *eventBatchSizeNumber = (NSNumber *)[self.config objectForKey:@"max_batch_size"];
+        NSInteger eventBatchSize = (eventBatchSizeNumber != nil) ? [eventBatchSizeNumber integerValue] : 0;
+        
+        self.maxEventsPerBatch = (eventBatchSize > 0) ? eventBatchSize : PeachCollectorDefaultPublisherMaxEventsPerBatch;
+        
+        NSNumber *eventMaxBatchSizeNumber = (NSNumber *)[self.config objectForKey:@"max_events_per_request"];
+        NSInteger eventMaxBatchSize = (eventMaxBatchSizeNumber != nil) ? [eventMaxBatchSizeNumber integerValue] : 0;
+        
+        self.maxEventsPerBatchAfterOfflineSession = (eventMaxBatchSize > 0) ? eventMaxBatchSize : PeachCollectorDefaultPublisherMaxEventsPerBatchAfterOfflineSession;
+    }
+    else {
+        NSError *error;
+        NSData *data = [NSData dataWithContentsOfURL: [NSURL URLWithString:self.remoteConfigurationURL]];
+        NSMutableDictionary *json = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:&error];
+        
+        self.config = json;
+        
+        NSNumber *maxCacheNumber = (NSNumber *)[self.config objectForKey:@"max_cache_hours"];
+        NSInteger maxCache = (maxCacheNumber != nil) ? [maxCacheNumber integerValue] : 0;
+        
+        NSDate *expiryDate = [[NSDate date] dateByAddingTimeInterval:(maxCache*60*60)+10];
+        [[NSUserDefaults standardUserDefaults] setObject:expiryDate forKey:expiryDateKey];
+        [[NSUserDefaults standardUserDefaults] synchronize];
+        
+        [self checkConfig];
+    }
+}
+
 
 - (void)processEvents:(NSArray<PeachCollectorEvent *> *)events withCompletionHandler:(void (^)(NSError * _Nullable error))completionHandler
 {
@@ -196,6 +257,13 @@
 
 - (BOOL)shouldProcessEvent:(PeachCollectorEvent *)event
 {
+    if (self.config != nil && [self.config objectForKey:@"filter"] != nil ) {
+        NSArray *events = [self.config objectForKey:@"filter"];
+        if ([events containsObject:event.type]) {
+            return YES;
+        }
+        return NO;
+    }
     return YES;
 }
 
