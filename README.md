@@ -118,6 +118,21 @@ But it has 4 others properties that are worth mentioning :
 
 **`gotBackPolicy`**: How the publisher should behave after an offline period. Available options are `SendAll` (sends requests with **`maxEventsPerBatchAfterOfflineSession`** continuously), `SendBatchesRandomly` (separates requests by a random delay between 0 and 60 seconds).
 
+## Setting up a remote configuration
+`PeachCollector` allows you to set up a remote configuration URL. Remote configurations are simple JSON files with different fields to configure the publisher. For that, you need to provide the URL at the initialisation stage of the publisher.
+
+#### Objective-C
+```objectivec
+PeachCollectorPublisher *publisher = [[PeachCollectorPublisher alloc] initWithSiteKey:@"zzebu00000000017" remoteConfiguration:@"https://peach-static.ebu.io/zzebu/config_example.json"];
+[PeachCollector setPublisher:publisher withUniqueName:@"My Publisher"];
+```
+#### Swift
+```swift
+let publisher = PeachCollectorPublisher.init(siteKey: "zzebu00000000017", remoteConfiguration: "https://peach-static.ebu.io/zzebu/config_example.json")
+PeachCollector.setPublisher(publisher, withUniqueName: "My Publisher")
+```
+In this remote configuration, you can for example define the interval (at which events are sent), the batch size (number of events per request) or the type of events that should be sent by the publisher.
+
 ### Flushing and Cleaning
 
 **`Flush`** is called when the application is about to go to background, or if a special type of event is sent while in background (events that will potentially push the application into an inactive state). It will try to send all the queued events (even if the maximum number of events hasn't been reached)

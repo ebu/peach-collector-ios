@@ -92,7 +92,7 @@
         NSNumber *maxCacheNumber = (NSNumber *)[self.config objectForKey:@"max_cache_hours"];
         NSInteger maxCache = (maxCacheNumber != nil) ? [maxCacheNumber integerValue] : 0;
         
-        NSDate *expiryDate = [[NSDate date] dateByAddingTimeInterval:(maxCache*60*60)];
+        NSDate *expiryDate = [[NSDate date] dateByAddingTimeInterval:(maxCache*60*60)+10];
         [[NSUserDefaults standardUserDefaults] setObject:expiryDate forKey:expiryDateKey];
         [[NSUserDefaults standardUserDefaults] synchronize];
         

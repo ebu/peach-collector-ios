@@ -67,11 +67,11 @@
 }
 
 - (void)testPublisherRemoteConfiguration {
-    PeachCollectorPublisher *publisher2 = [[PeachCollectorPublisher alloc] initWithSiteKey:@"zzebu00000000017" remoteConfiguration:@"https://ant-peach-static.ebu.io/sesr/iOs.json"];//@"https://peach-static.ebu.io/zzebu/config_example.json"];
+    PeachCollectorPublisher *publisher2 = [[PeachCollectorPublisher alloc] initWithSiteKey:@"zzebu00000000017" remoteConfiguration:@"http://peach-bucket.ebu.io/zzebu/config-test.json"];
     [PeachCollector setPublisher:publisher2 withUniqueName:@"PublisherB"];
     sleep(2);
-    XCTAssertTrue(publisher2.interval == 60);
-    XCTAssertTrue(publisher2.maxEventsPerBatch == 120);
+    XCTAssertTrue(publisher2.interval == 10);
+    XCTAssertTrue(publisher2.maxEventsPerBatch == 5);
 }
 
 - (void)testUserLoggedIn {
