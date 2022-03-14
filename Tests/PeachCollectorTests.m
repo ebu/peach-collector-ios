@@ -102,6 +102,97 @@
     [self waitForExpectationsWithTimeout:10 handler:nil];
 }
 
+- (void)testUserLoginStateChanged {
+    PeachCollectorPublisher *publisher = [PeachCollector publisherNamed:PUBLISHER_NAME];
+    publisher.interval = 1;
+    publisher.maxEventsPerBatch = 1;
+    
+    [PeachCollector setUserIsLoggedIn:YES];
+    
+    [self expectationForNotification:PeachCollectorNotification object:nil handler:^BOOL(NSNotification * _Nonnull notification) {
+        NSData *payload = notification.userInfo[PeachCollectorNotificationPayloadKey];
+        
+        if (payload != nil) {
+            id json = [NSJSONSerialization JSONObjectWithData:payload options:0 error:nil];
+            
+            NSDictionary* client = [json objectForKey:PCClientKey];
+            XCTAssertTrue([[client objectForKey:PCClientIsLoggedInKey] boolValue], @"User Logged in Flag not set properly");
+           
+            return YES;
+        }
+        return NO;
+    }];
+    
+    [PeachCollectorEvent sendPageViewWithID:@"testPage" referrer:nil recommendationID:nil];
+    
+    [self waitForExpectationsWithTimeout:10 handler:nil];
+    
+    [PeachCollector setUserIsLoggedIn:NO];
+    
+    [self expectationForNotification:PeachCollectorNotification object:nil handler:^BOOL(NSNotification * _Nonnull notification) {
+        NSData *payload = notification.userInfo[PeachCollectorNotificationPayloadKey];
+        
+        if (payload != nil) {
+            id json = [NSJSONSerialization JSONObjectWithData:payload options:0 error:nil];
+            
+            NSDictionary* client = [json objectForKey:PCClientKey];
+            XCTAssertTrue(![[client objectForKey:PCClientIsLoggedInKey] boolValue], @"User Logged in Flag not updated properly");
+           
+            return YES;
+        }
+        return NO;
+    }];
+    
+    [PeachCollectorEvent sendPageViewWithID:@"testPage2" referrer:nil recommendationID:nil];
+    
+    [self waitForExpectationsWithTimeout:10 handler:nil];
+}
+
+- (void)testUserIDChanged {
+    PeachCollectorPublisher *publisher = [PeachCollector publisherNamed:PUBLISHER_NAME];
+    publisher.interval = 1;
+    publisher.maxEventsPerBatch = 1;
+    
+    [PeachCollector setUserID:@"test"];
+    
+    [self expectationForNotification:PeachCollectorNotification object:nil handler:^BOOL(NSNotification * _Nonnull notification) {
+        NSData *payload = notification.userInfo[PeachCollectorNotificationPayloadKey];
+        
+        if (payload != nil) {
+            id json = [NSJSONSerialization JSONObjectWithData:payload options:0 error:nil];
+            
+            NSString* userID = [json objectForKey:PCUserIDKey];
+            XCTAssertTrue([userID isEqualToString:@"test"], @"User Logged in Flag not set properly");
+           
+            return YES;
+        }
+        return NO;
+    }];
+    
+    [PeachCollectorEvent sendPageViewWithID:@"testPage" referrer:nil recommendationID:nil];
+    
+    [self waitForExpectationsWithTimeout:10 handler:nil];
+    
+    [PeachCollector setUserID:@"test2"];
+    
+    [self expectationForNotification:PeachCollectorNotification object:nil handler:^BOOL(NSNotification * _Nonnull notification) {
+        NSData *payload = notification.userInfo[PeachCollectorNotificationPayloadKey];
+        
+        if (payload != nil) {
+            id json = [NSJSONSerialization JSONObjectWithData:payload options:0 error:nil];
+            
+            NSString* userID = [json objectForKey:PCUserIDKey];
+            XCTAssertTrue([userID isEqualToString:@"test2"], @"User Logged in Flag not updated properly");
+           
+            return YES;
+        }
+        return NO;
+    }];
+    
+    [PeachCollectorEvent sendPageViewWithID:@"testPage2" referrer:nil recommendationID:nil];
+    
+    [self waitForExpectationsWithTimeout:10 handler:nil];
+}
 
 - (void)testAppID {
     //userIsLoggedIn

@@ -237,6 +237,16 @@ static NSInteger _maxStoredDays = -1;
     [self.queue checkPublisherNamed:publisherName];
 }
 
++ (void)refreshPublishersCientInfo
+{
+    if ([PeachCollector sharedCollector] == nil || [PeachCollector sharedCollector].publishers == nil) {
+        return;
+    }
+    for (NSString *publisherName in [PeachCollector sharedCollector].publishers) {
+        [[[PeachCollector sharedCollector].publishers objectForKey:publisherName] refreshClientInfo];
+    }
+}
+
 
 #pragma mark - Event management
 
@@ -281,6 +291,7 @@ static NSInteger _maxStoredDays = -1;
 + (void)setUserIsLoggedIn:(BOOL)userIsLoggedIn
 {
     _userIsLoggedIn = userIsLoggedIn;
+    [PeachCollector refreshPublishersCientInfo];
 }
 
 #pragma mark - AppID management
@@ -294,6 +305,7 @@ static NSInteger _maxStoredDays = -1;
 + (void)setAppID:(NSString *)appID
 {
     _appID = [appID copy];
+    [PeachCollector refreshPublishersCientInfo];
 }
 
 
