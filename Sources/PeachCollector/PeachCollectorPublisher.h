@@ -96,6 +96,12 @@ NS_ASSUME_NONNULL_BEGIN
  */
 - (BOOL)shouldProcessEvent:(PeachCollectorEvent *)event;
 
+/**
+ *   Force the update of client information in the payload of the events
+ *   This method is called anytime the userID is changed and the user login state changes
+ */
+- (void)refreshClientInfo;
+
 @end
 
 NS_ASSUME_NONNULL_END
