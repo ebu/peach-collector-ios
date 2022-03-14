@@ -2,6 +2,11 @@
 # Change Log
 All notable changes to this project will be documented in this file.
 
+## [1.3.1] - 2022-03-11
+
+### Fixed
+- Updating of `userIsLoggedIn` value in the client payload anytime the value is changed
+
 ## [1.3.0] - 2021-11-24
 
 ### Added

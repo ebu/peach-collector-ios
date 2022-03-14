@@ -173,6 +173,11 @@
     return _clientInfo;
 }
 
+- (void)refreshClientInfo
+{
+    _clientInfo = nil;
+}
+
 - (void)updateClientInfo
 {
     if (_clientInfo == nil) {
