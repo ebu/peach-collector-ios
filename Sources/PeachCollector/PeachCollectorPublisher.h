@@ -102,6 +102,30 @@ NS_ASSUME_NONNULL_BEGIN
  */
 - (void)refreshClientInfo;
 
+/**
+ * Add a custom number field to the client payload (can be a number or a boolean)
+ */
+- (void)addCustomClientNumber:(NSNumber *)number forKey:(nonnull NSString *)key;
+
+/**
+ * Add a custom string field to the client payload
+ */
+- (void)addCustomClientString:(NSString *)string forKey:(nonnull NSString *)key;
+
+/**
+ * Remove a custom client string or number added previously
+ * @param key the name of the custom field
+ */
+- (void)removeCustomClientField:(nonnull NSString *)key;
+
+/**
+ * Retrieve the value of a custom client field previously set
+ * @param key the name of the custom field
+ * @return nil if the key was not found
+ */
+- (nullable id)valueForCustomClientField:(nonnull NSString *)key;
+
+
 @end
 
 NS_ASSUME_NONNULL_END
