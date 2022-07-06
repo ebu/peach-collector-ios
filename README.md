@@ -118,6 +118,21 @@ But it has 4 others properties that are worth mentioning :
 
 **`gotBackPolicy`**: How the publisher should behave after an offline period. Available options are `SendAll` (sends requests with **`maxEventsPerBatchAfterOfflineSession`** continuously), `SendBatchesRandomly` (separates requests by a random delay between 0 and 60 seconds).
 
+### Adding custom data to a Publisher's client information
+Everytime events are sent to the defined sitekey or server, the payload (containing the JSON description of the events) has a single description of the client used. You can add any custom fields to this client description and it will be sent in every request.
+#### Objective-C
+```objectivec
+[publisher addCustomClientString:@"France" forKey:@"country"];
+[publisher addCustomClientNumber:@(YES) forKey:@"is_geolocalized"];
+```
+#### Swift
+```swift
+publisher.addCustomClientString("France", forKey: "country")
+publisher.addCustomClientNumber(true, forKey: "is_geolocalized")
+```
+Functions are also available to retrieve a custom field value and remove a custom field.
+
+
 ## Setting up a remote configuration
 `PeachCollector` allows you to set up a remote configuration URL. Remote configurations are simple JSON files with different fields to configure the publisher. For that, you need to provide the URL at the initialisation stage of the publisher.
 
