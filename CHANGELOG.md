@@ -2,6 +2,11 @@
 # Change Log
 All notable changes to this project will be documented in this file.
 
+## [1.3.2] - 2022-07-06
+
+### Added
+- Possibility to add custom fields to the payload's client description. It can be done by configuring the `PeachCollectorPublisher`
+
 ## [1.3.1] - 2022-03-11
 
 ### Fixed
