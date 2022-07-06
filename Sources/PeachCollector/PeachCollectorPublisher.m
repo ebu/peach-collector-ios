@@ -17,6 +17,7 @@
 @property (nonatomic, copy) NSDictionary *clientInfo;
 @property (nonatomic, copy) NSString *remoteConfigurationURL;
 @property (nonatomic, copy) NSDictionary *config;
+@property (nonatomic, strong) NSDictionary *clientCustomInfo;
 
 @end
 
@@ -170,6 +171,11 @@
     if (_clientInfo == nil) {
         [self updateClientInfo];
     }
+    if (_clientCustomInfo != nil) {
+        NSMutableDictionary* mutableClient = [_clientInfo mutableCopy];
+        [mutableClient addEntriesFromDictionary:_clientCustomInfo];
+        return [mutableClient copy];
+    }
     return _clientInfo;
 }
 
@@ -271,5 +277,56 @@
     }
     return YES;
 }
+
+
+#pragma mark - Client custom fields management
+
+- (void)addClientObject:(id)object forKey:(nonnull NSString *)key
+{
+    if (object == nil) {
+        [self removeCustomClientField:key];
+    }
+    else if (self.clientCustomInfo != nil) {
+        NSMutableDictionary *mutableCustomFields = [self.clientCustomInfo mutableCopy];
+        [mutableCustomFields setObject:object forKey:key];
+        self.clientCustomInfo = [mutableCustomFields copy];
+    }
+    else {
+        self.clientCustomInfo = @{key: object};
+    }
+}
+
+- (void)addCustomClientNumber:(NSNumber *)number forKey:(nonnull NSString *)key
+{
+    [self addClientObject:number forKey:key];
+}
+
+- (void)addCustomClientString:(NSString *)string forKey:(nonnull NSString *)key
+{
+    [self addClientObject:string forKey:key];
+}
+
+- (void)removeCustomClientField:(nonnull NSString *)key
+{
+    if(self.clientCustomInfo != nil) {
+        if ([[self.clientCustomInfo allKeys] containsObject:key]) {
+            NSMutableDictionary *mutableCustomFields = [self.clientCustomInfo mutableCopy];
+            [mutableCustomFields removeObjectForKey:key];
+            self.clientCustomInfo = [mutableCustomFields copy];
+        }
+        if (self.clientCustomInfo.count == 0) {
+            self.clientCustomInfo = nil;
+        }
+    }
+}
+
+- (nullable id)valueForCustomClientField:(nonnull NSString *)key
+{
+    if (self.clientCustomInfo != nil) {
+        return [self.clientCustomInfo valueForKey:key];
+    }
+    return nil;
+}
+
 
 @end
