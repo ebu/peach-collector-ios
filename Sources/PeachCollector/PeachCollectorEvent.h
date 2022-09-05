@@ -327,6 +327,20 @@ NS_ASSUME_NONNULL_BEGIN
                         metadata:(nullable NSDictionary<NSString *, id<NSCopying>> *)metadata;
 
 /**
+ *  Send a media heartbeat event to a specific publisher. Event will be added to the queue and sent accordingly to publishers' configurations.
+ *  @param mediaID Unique identifier of the media
+ *  @param properties Properties of the media and it's current state
+ *  @param context Context of the media (e. g. view where it's displayed, component used to play the media...)
+ *  @param metadata Metadatas (should be kept as small as possible)
+ *  @param publisherName The name of the publisher
+ */
++ (void)sendMediaHeartbeatWithID:(NSString *)mediaID
+                      properties:(nullable PeachCollectorProperties *)properties
+                         context:(nullable PeachCollectorContext *)context
+                        metadata:(nullable NSDictionary<NSString *, id<NSCopying>> *)metadata
+                     toPublisher:(nullable NSString *)publisherName;
+
+/**
  *  Send a media playlist add event. Event will be added to the queue and sent accordingly to publishers' configurations.
  *  Properties should contain the playlist ID to which it is added
  *  @param mediaID Unique identifier of the media

@@ -261,6 +261,12 @@ static NSInteger _maxStoredDays = -1;
     [[PeachCollector sharedCollector].queue addEvent:event];
 }
 
++ (void)addEventToQueue:(PeachCollectorEvent *)event forPublisher:(NSString *)publisherName
+{
+    [PeachCollector sharedCollector].lastRecordedEventTimestamp = (NSInteger)([[NSDate date] timeIntervalSince1970] * 1000);
+    [[PeachCollector sharedCollector].queue addEvent:event toPublisher:publisherName];
+}
+
 + (void)addFlushableEventType:(NSString *)eventType
 {
     [PeachCollector sharedCollector].flushableEventTypes = [[PeachCollector sharedCollector].flushableEventTypes arrayByAddingObject:eventType];

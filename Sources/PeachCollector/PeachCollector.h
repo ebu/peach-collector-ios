@@ -18,6 +18,7 @@
 #import "PeachCollectorDataFormat.h"
 #import "PeachCollectorQueue.h"
 #import "PeachCollectorDataStore.h"
+#import "PeachPlayerTracker.h"
 
 //! Project version number for PeachCollector.
 FOUNDATION_EXPORT double PeachCollectorVersionNumber;
@@ -106,6 +107,13 @@ NS_ASSUME_NONNULL_BEGIN
  *  @param event    The event to send.
  */
 + (void)addEventToQueue:(PeachCollectorEvent *)event;
+
+/**
+ *  Add an event to be queued for a specific publisher. Event will be added to the queue and sent only by the designated publisher
+ *  @param event    The event to send.
+ *  @param publisherName The name of the publisher.
+ */
++ (void)addEventToQueue:(PeachCollectorEvent *)event forPublisher:(NSString *)publisherName;
 
 /**
  *  List type of events that should force the queue to be flushed if added while in background state

@@ -202,6 +202,27 @@ PeachCollectorEvent.sendRecommendationHit(withID: "reco00",
 				       component: nil)
 ```
 
+### Setting up a player tracker
+
+To track a player automatically, you just need to provide the AVPlayer instance and information about the item that is being played.
+You can provide information about the item or leave empty. The tracker will only update (or create if not provided) the `props` part of the events with data from the player
+You can also stop tracking an item manually.
+
+#### Objective-C
+```objectivec
+[PeachPlayerTracker setPlayer:self.videoPlayer];
+[PeachPlayerTracker trackItemWithID:@"video0001"
+                            context:nil
+                              props:nil
+                           metadata:nil];
+[PeachPlayerTracker clearCurrentItem];                           
+```
+#### Swift
+```swift
+PeachPlayerTracker.setPlayer(videoPlayer)
+PeachPlayerTracker.trackItem(withID:@"video0001", context:nil, props:nil, metadata:nil)
+PeachPlayerTracker.clearCurrentItem()
+```
 
 
 
