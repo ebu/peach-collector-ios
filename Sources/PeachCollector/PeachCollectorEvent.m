@@ -289,6 +289,7 @@
                properties:(nullable PeachCollectorProperties *)properties
                   context:(nullable PeachCollectorContext *)context
                  metadata:(nullable NSDictionary<NSString *, id<NSCopying>> *)metadata
+              toPublisher:(nullable NSString *)publisherName
 {
     if (![PeachCollector shouldCollectEvents]) return;
     
@@ -310,7 +311,12 @@
             if ([[PeachCollector sharedCollector] isUnitTesting]) NSLog(@"PeachCollector DB Error: %@", [error description]);
             return;
         }
-        [event send];
+        if (publisherName != nil) {
+            [event sendToPublisher:publisherName];
+        }
+        else {
+            [event send];
+        }
     }];
 }
 
@@ -319,7 +325,7 @@
                     context:(nullable PeachCollectorContext *)context
                    metadata:(nullable NSDictionary<NSString *, id<NSCopying>> *)metadata
 {
-    [PeachCollectorEvent sendEventWithType:PCEventTypeMediaPlay eventID:mediaID properties:properties context:context metadata:metadata];
+    [PeachCollectorEvent sendEventWithType:PCEventTypeMediaPlay eventID:mediaID properties:properties context:context metadata:metadata toPublisher:nil];
 }
 
 + (void)sendMediaPauseWithID:(NSString *)mediaID
@@ -327,7 +333,7 @@
                      context:(nullable PeachCollectorContext *)context
                     metadata:(nullable NSDictionary<NSString *, id<NSCopying>> *)metadata
 {
-    [PeachCollectorEvent sendEventWithType:PCEventTypeMediaPause eventID:mediaID properties:properties context:context metadata:metadata];
+    [PeachCollectorEvent sendEventWithType:PCEventTypeMediaPause eventID:mediaID properties:properties context:context metadata:metadata toPublisher:nil];
 }
 
 + (void)sendMediaSeekWithID:(NSString *)mediaID
@@ -335,7 +341,7 @@
                     context:(nullable PeachCollectorContext *)context
                    metadata:(nullable NSDictionary<NSString *, id<NSCopying>> *)metadata
 {
-    [PeachCollectorEvent sendEventWithType:PCEventTypeMediaSeek eventID:mediaID properties:properties context:context metadata:metadata];
+    [PeachCollectorEvent sendEventWithType:PCEventTypeMediaSeek eventID:mediaID properties:properties context:context metadata:metadata toPublisher:nil];
 }
 
 + (void)sendMediaStopWithID:(NSString *)mediaID
@@ -343,7 +349,7 @@
                     context:(nullable PeachCollectorContext *)context
                    metadata:(nullable NSDictionary<NSString *, id<NSCopying>> *)metadata
 {
-    [PeachCollectorEvent sendEventWithType:PCEventTypeMediaStop eventID:mediaID properties:properties context:context metadata:metadata];
+    [PeachCollectorEvent sendEventWithType:PCEventTypeMediaStop eventID:mediaID properties:properties context:context metadata:metadata toPublisher:nil];
 }
 
 + (void)sendMediaEndWithID:(NSString *)mediaID
@@ -351,7 +357,7 @@
                    context:(nullable PeachCollectorContext *)context
                   metadata:(nullable NSDictionary<NSString *, id<NSCopying>> *)metadata
 {
-    [PeachCollectorEvent sendEventWithType:PCEventTypeMediaEnd eventID:mediaID properties:properties context:context metadata:metadata];
+    [PeachCollectorEvent sendEventWithType:PCEventTypeMediaEnd eventID:mediaID properties:properties context:context metadata:metadata toPublisher:nil];
 }
 
 + (void)sendMediaHeartbeatWithID:(NSString *)mediaID
@@ -359,7 +365,15 @@
                          context:(nullable PeachCollectorContext *)context
                         metadata:(nullable NSDictionary<NSString *, id<NSCopying>> *)metadata
 {
-    [PeachCollectorEvent sendEventWithType:PCEventTypeMediaHeartbeat eventID:mediaID properties:properties context:context metadata:metadata];
+    [PeachCollectorEvent sendEventWithType:PCEventTypeMediaHeartbeat eventID:mediaID properties:properties context:context metadata:metadata toPublisher:nil];
+}
++ (void)sendMediaHeartbeatWithID:(NSString *)mediaID
+                      properties:(nullable PeachCollectorProperties *)properties
+                         context:(nullable PeachCollectorContext *)context
+                        metadata:(nullable NSDictionary<NSString *, id<NSCopying>> *)metadata
+                     toPublisher:(nullable NSString *)publisherName
+{
+    [PeachCollectorEvent sendEventWithType:PCEventTypeMediaHeartbeat eventID:mediaID properties:properties context:context metadata:metadata toPublisher:publisherName];
 }
 
 + (void)sendMediaPlaylistAddWithID:(NSString *)mediaID
@@ -367,7 +381,7 @@
                            context:(nullable PeachCollectorContext *)context
                           metadata:(nullable NSDictionary<NSString *, id<NSCopying>> *)metadata
 {
-    [PeachCollectorEvent sendEventWithType:PCEventTypeMediaPlaylistAdd eventID:mediaID properties:properties context:context metadata:metadata];
+    [PeachCollectorEvent sendEventWithType:PCEventTypeMediaPlaylistAdd eventID:mediaID properties:properties context:context metadata:metadata toPublisher:nil];
 }
 
 + (void)sendMediaPlaylistRemoveWithID:(NSString *)mediaID
@@ -375,7 +389,7 @@
                               context:(nullable PeachCollectorContext *)context
                              metadata:(nullable NSDictionary<NSString *, id<NSCopying>> *)metadata;
 {
-    [PeachCollectorEvent sendEventWithType:PCEventTypeMediaPlaylistRemove eventID:mediaID properties:properties context:context metadata:metadata];
+    [PeachCollectorEvent sendEventWithType:PCEventTypeMediaPlaylistRemove eventID:mediaID properties:properties context:context metadata:metadata toPublisher:nil];
 }
 
 
@@ -394,6 +408,15 @@
                                                         userInfo:@{PeachCollectorNotificationLogKey:[NSString stringWithFormat:@"+ Event (%@)", self.type]}];
     }
     [PeachCollector addEventToQueue:self];
+}
+
+- (void)sendToPublisher:(NSString *)publisherName
+{
+    if ([[PeachCollector sharedCollector] isUnitTesting]) {
+        [NSNotificationCenter.defaultCenter postNotificationName:PeachCollectorNotification object:nil
+                                                        userInfo:@{PeachCollectorNotificationLogKey:[NSString stringWithFormat:@"+ Event (%@) for [%@]", self.type, publisherName]}];
+    }
+    [PeachCollector addEventToQueue:self forPublisher:publisherName];
 }
 
 - (BOOL)shouldBeFlushedWhenReceivedInBackgroundState

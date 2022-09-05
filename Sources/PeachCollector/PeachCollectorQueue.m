@@ -120,6 +120,35 @@
     }];
 }
 
+- (void)addEvent:(PeachCollectorEvent *)event toPublisher:(NSString *)publisherName
+{
+    __block BOOL shouldBeFlushedWhenReceivedInBackgroundState;
+    [PeachCollector.dataStore performBackgroundWriteTask:^(NSManagedObjectContext * _Nonnull managedObjectContext) {
+        PeachCollectorEvent *addedEvent = [managedObjectContext objectWithID:event.objectID];
+        PeachCollectorPublisher *publisher = [[PeachCollector sharedCollector].publishers objectForKey:publisherName];
+        if ([publisher shouldProcessEvent:addedEvent]) {
+            PeachCollectorPublisherEventStatus *eventStatus = [NSEntityDescription insertNewObjectForEntityForName:@"PeachCollectorPublisherEventStatus" inManagedObjectContext:managedObjectContext];
+            eventStatus.status = PCEventStatusQueued;
+            eventStatus.publisherName = publisherName;
+            eventStatus.event = addedEvent;
+        }
+        shouldBeFlushedWhenReceivedInBackgroundState = [addedEvent shouldBeFlushedWhenReceivedInBackgroundState];
+    } withPriority:NSOperationQueuePriorityHigh completionBlock:^(NSError * _Nullable error) {
+        if (error){
+            if ([[PeachCollector sharedCollector] isUnitTesting]) NSLog(@"PeachCollector DB Error: %@", [error description]);
+            return;
+        }
+        dispatch_async(dispatch_get_main_queue(), ^{
+            if ([[UIApplication sharedApplication] applicationState] != UIApplicationStateActive
+                && shouldBeFlushedWhenReceivedInBackgroundState) {
+                [self flush];
+            }
+        
+            [self checkPublisherNamed:publisherName];
+        });
+    }];
+}
+
 - (void)checkPublishers
 {
     for (NSString *publisherName in [PeachCollector sharedCollector].publishers.allKeys) {
