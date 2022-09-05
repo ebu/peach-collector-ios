@@ -33,6 +33,7 @@
         self.maxEventsPerBatch = PeachCollectorDefaultPublisherMaxEventsPerBatch;
         self.maxEventsPerBatchAfterOfflineSession = PeachCollectorDefaultPublisherMaxEventsPerBatchAfterOfflineSession;
         self.gotBackPolicy = PeachCollectorDefaultPublisherPolicy;
+        self.playerTrackerHeartbeatInterval = PeachCollectorDefaultPublisherHeartbeatInterval;
     }
     return self;
 }
@@ -82,6 +83,11 @@
         NSInteger eventMaxBatchSize = (eventMaxBatchSizeNumber != nil) ? [eventMaxBatchSizeNumber integerValue] : 0;
         
         self.maxEventsPerBatchAfterOfflineSession = (eventMaxBatchSize > 0) ? eventMaxBatchSize : PeachCollectorDefaultPublisherMaxEventsPerBatchAfterOfflineSession;
+        
+        NSNumber *heartbeatIntervalNumber = (NSNumber *)[self.config objectForKey:@"heartbeat_frequency_sec"];
+        NSInteger heartbeatInterval = (heartbeatIntervalNumber != nil) ? [heartbeatIntervalNumber integerValue] : -1;
+        
+        self.playerTrackerHeartbeatInterval = (heartbeatInterval > -1) ? heartbeatInterval : PeachCollectorDefaultPublisherHeartbeatInterval;
     }
     else {
         NSError *error;
@@ -172,8 +178,8 @@
         [self updateClientInfo];
     }
     if (_clientCustomInfo != nil) {
-        NSMutableDictionary* mutableClient = [_clientInfo mutableCopy];
-        [mutableClient addEntriesFromDictionary:_clientCustomInfo];
+        NSMutableDictionary* mutableClient = [_clientCustomInfo mutableCopy];
+        [mutableClient addEntriesFromDictionary:_clientInfo];
         return [mutableClient copy];
     }
     return _clientInfo;
@@ -277,7 +283,6 @@
     }
     return YES;
 }
-
 
 #pragma mark - Client custom fields management
 

@@ -41,6 +41,13 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic) NSInteger maxEventsPerBatchAfterOfflineSession;
 
 /**
+ *  Interval between heartbeats when tracking a media.
+ *  Default value is 5 seconds.
+ */
+@property (nonatomic) NSInteger playerTrackerHeartbeatInterval;
+
+
+/**
  *  How the publisher should behave after an offline period
  *  Default is PCPublisherGotBackOnlinePolicySendAll
  */

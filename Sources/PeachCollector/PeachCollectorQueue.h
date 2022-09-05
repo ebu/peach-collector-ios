@@ -31,6 +31,13 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)addEvent:(PeachCollectorEvent *)event;
 
 /**
+ *  Add an event to the queue of a specific publisher.
+ *  @param event the event to add.
+ *  @param publisherName the unique ID of the publisher.
+ */
+- (void)addEvent:(PeachCollectorEvent *)event toPublisher:(NSString *)publisherName;
+
+/**
  *  Flush the queue for all publishers (tries to send everything that is queued)
  */
 - (void)flush;

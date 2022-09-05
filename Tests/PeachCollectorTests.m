@@ -156,6 +156,7 @@
     publisher.interval = 1;
     publisher.maxEventsPerBatch = 1;
     [publisher addCustomClientString:@"Test" forKey:@"test_custom_field"];
+    [publisher addCustomClientString:@"badVersionText" forKey:@"version"];
     [publisher addCustomClientNumber:@(1) forKey:@"test_custom_number"];
     
     [self expectationForNotification:PeachCollectorNotification object:nil handler:^BOOL(NSNotification * _Nonnull notification) {
@@ -165,6 +166,7 @@
             id json = [NSJSONSerialization JSONObjectWithData:payload options:0 error:nil];
             
             NSDictionary* client = [json objectForKey:PCClientKey];
+            XCTAssertTrue([[client objectForKey:@"version"] isEqualToString:@"badVersionText"], @"Custom Field not set properly");
             XCTAssertTrue([[client objectForKey:@"test_custom_field"] isEqualToString:@"Test"], @"Custom Field not set properly");
             XCTAssertTrue([[client objectForKey:@"test_custom_number"] isEqualToNumber:@(1)], @"Custom Number not set properly");
             

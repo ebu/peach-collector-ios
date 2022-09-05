@@ -100,6 +100,10 @@
 		953547A8234203060096AE60 /* PeachCollector.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 953546D0233A15BD0096AE60 /* PeachCollector.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		953547FB234B2A9D0096AE60 /* PeachCollectorNotifications.h in Headers */ = {isa = PBXBuildFile; fileRef = 953547F9234B2A9D0096AE60 /* PeachCollectorNotifications.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		953547FC234B2A9D0096AE60 /* PeachCollectorNotifications.m in Sources */ = {isa = PBXBuildFile; fileRef = 953547FA234B2A9D0096AE60 /* PeachCollectorNotifications.m */; };
+		955E3E66287B590500328C6E /* PeachPlayerTracker.h in Headers */ = {isa = PBXBuildFile; fileRef = 955E3E64287B590500328C6E /* PeachPlayerTracker.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		955E3E67287B590500328C6E /* PeachPlayerTracker.h in Headers */ = {isa = PBXBuildFile; fileRef = 955E3E64287B590500328C6E /* PeachPlayerTracker.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		955E3E68287B590500328C6E /* PeachPlayerTracker.m in Sources */ = {isa = PBXBuildFile; fileRef = 955E3E65287B590500328C6E /* PeachPlayerTracker.m */; };
+		955E3E69287B590500328C6E /* PeachPlayerTracker.m in Sources */ = {isa = PBXBuildFile; fileRef = 955E3E65287B590500328C6E /* PeachPlayerTracker.m */; };
 		95AB3BE9253DC0A700D241A5 /* PeachCollectorEvent+CoreDataClass.m in Sources */ = {isa = PBXBuildFile; fileRef = 95AB3BE1253DC0A600D241A5 /* PeachCollectorEvent+CoreDataClass.m */; };
 		95AB3BEA253DC0A700D241A5 /* PeachCollectorPublisherEventStatus+CoreDataClass.m in Sources */ = {isa = PBXBuildFile; fileRef = 95AB3BE2253DC0A600D241A5 /* PeachCollectorPublisherEventStatus+CoreDataClass.m */; };
 		95AB3BEB253DC0A700D241A5 /* PeachCollectorPublisherEventStatus+CoreDataProperties.h in Headers */ = {isa = PBXBuildFile; fileRef = 95AB3BE3253DC0A600D241A5 /* PeachCollectorPublisherEventStatus+CoreDataProperties.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -247,6 +251,8 @@
 		953547A4233CDC850096AE60 /* PeachCollectorDynamicProperties.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PeachCollectorDynamicProperties.m; sourceTree = "<group>"; };
 		953547F9234B2A9D0096AE60 /* PeachCollectorNotifications.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PeachCollectorNotifications.h; sourceTree = "<group>"; };
 		953547FA234B2A9D0096AE60 /* PeachCollectorNotifications.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PeachCollectorNotifications.m; sourceTree = "<group>"; };
+		955E3E64287B590500328C6E /* PeachPlayerTracker.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PeachPlayerTracker.h; sourceTree = "<group>"; };
+		955E3E65287B590500328C6E /* PeachPlayerTracker.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PeachPlayerTracker.m; sourceTree = "<group>"; };
 		955EB1CA23E4592A004B30DF /* CHANGELOG.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = CHANGELOG.md; sourceTree = "<group>"; };
 		955EB1CC23E45948004B30DF /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		95AB3BE1253DC0A600D241A5 /* PeachCollectorEvent+CoreDataClass.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "PeachCollectorEvent+CoreDataClass.m"; sourceTree = "<group>"; };
@@ -451,6 +457,8 @@
 				9530215A23585D2D0083E29F /* PeachCollectorDataStore.m */,
 				95354716233A1FCB0096AE60 /* PeachPersistentContainer.h */,
 				95354717233A1FCB0096AE60 /* PeachPersistentContainer.m */,
+				955E3E64287B590500328C6E /* PeachPlayerTracker.h */,
+				955E3E65287B590500328C6E /* PeachPlayerTracker.m */,
 			);
 			path = PeachCollector;
 			sourceTree = "<group>";
@@ -483,6 +491,7 @@
 				486DFF4124AB950300CBF530 /* PeachCollectorEvent.h in Headers */,
 				486DFF4724AB950700CBF530 /* PeachCollectorNotifications.h in Headers */,
 				486DFF4A24AB955C00CBF530 /* PeachPersistentContainer.h in Headers */,
+				955E3E67287B590500328C6E /* PeachPlayerTracker.h in Headers */,
 				486DFF3D24AB950300CBF530 /* PeachCollectorProperties.h in Headers */,
 				486DFF3F24AB950300CBF530 /* PeachCollectorDynamicProperties.h in Headers */,
 				486DFF3324AB94F900CBF530 /* PeachCollectorDataStore.h in Headers */,
@@ -506,6 +515,7 @@
 				953547FB234B2A9D0096AE60 /* PeachCollectorNotifications.h in Headers */,
 				95AB3BEC253DC0A700D241A5 /* PeachCollectorPublisherEventStatus+CoreDataClass.h in Headers */,
 				95354718233A1FCB0096AE60 /* PeachPersistentContainer.h in Headers */,
+				955E3E66287B590500328C6E /* PeachPlayerTracker.h in Headers */,
 				95354703233A16790096AE60 /* PeachCollectorPublisher.h in Headers */,
 				95354704233A16790096AE60 /* PeachCollectorDataFormat.h in Headers */,
 				95354705233A16790096AE60 /* PeachCollectorEvent.h in Headers */,
@@ -753,6 +763,7 @@
 				486DFF4224AB950300CBF530 /* PeachCollectorEvent.m in Sources */,
 				486DFF4824AB950700CBF530 /* PeachCollectorNotifications.m in Sources */,
 				486DFF3024AB94F900CBF530 /* PeachCollectorQueue.m in Sources */,
+				955E3E69287B590500328C6E /* PeachPlayerTracker.m in Sources */,
 				9522A6042580BC7B00832087 /* PeachCollectorEvent+CoreDataProperties.m in Sources */,
 				486DFF4424AB950700CBF530 /* PeachCollector.m in Sources */,
 				486DFF3424AB94F900CBF530 /* PeachCollectorDataStore.m in Sources */,
@@ -789,6 +800,7 @@
 				9535470E233A16790096AE60 /* PeachCollectorEvent.m in Sources */,
 				953547FC234B2A9D0096AE60 /* PeachCollectorNotifications.m in Sources */,
 				9535470B233A16790096AE60 /* PeachCollector.m in Sources */,
+				955E3E68287B590500328C6E /* PeachPlayerTracker.m in Sources */,
 				9535470F233A16790096AE60 /* PeachCollectorContextComponent.m in Sources */,
 				95AB3BED253DC0A700D241A5 /* PeachCollectorEvent+CoreDataProperties.m in Sources */,
 				95354706233A16790096AE60 /* PeachCollectorContext.m in Sources */,
@@ -914,7 +926,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 26;
+				CURRENT_PROJECT_VERSION = 27;
 				DEFINES_MODULE = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
@@ -926,7 +938,7 @@
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.3.2;
+				MARKETING_VERSION = "1.4,0";
 				PRODUCT_BUNDLE_IDENTIFIER = ch.ebu.PeachCollector;
 				PRODUCT_NAME = PeachCollector;
 				SDKROOT = appletvos;
@@ -940,7 +952,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 26;
+				CURRENT_PROJECT_VERSION = 27;
 				DEFINES_MODULE = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
@@ -952,7 +964,7 @@
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.3.2;
+				MARKETING_VERSION = "1.4,0";
 				PRODUCT_BUNDLE_IDENTIFIER = ch.ebu.PeachCollector;
 				PRODUCT_NAME = PeachCollector;
 				SDKROOT = appletvos;
@@ -1124,7 +1136,7 @@
 			buildSettings = {
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 26;
+				CURRENT_PROJECT_VERSION = 27;
 				DEFINES_MODULE = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
@@ -1137,7 +1149,7 @@
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.3.2;
+				MARKETING_VERSION = 1.4.0;
 				PRODUCT_BUNDLE_IDENTIFIER = ch.ebu.PeachCollector;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
@@ -1153,7 +1165,7 @@
 			buildSettings = {
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 26;
+				CURRENT_PROJECT_VERSION = 27;
 				DEFINES_MODULE = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
@@ -1166,7 +1178,7 @@
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.3.2;
+				MARKETING_VERSION = 1.4.0;
 				PRODUCT_BUNDLE_IDENTIFIER = ch.ebu.PeachCollector;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
