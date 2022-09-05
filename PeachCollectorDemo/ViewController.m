@@ -14,11 +14,14 @@
 @interface ViewController ()
 
 @property (nonatomic, weak) IBOutlet UIButton *playAudioButton;
+@property (nonatomic, weak) IBOutlet UIButton *playPauseButton;
 
 @property (nonatomic) BOOL audioInitialized;
 @property (nonatomic) BOOL audioPlaying;
 
 @property (nonatomic, strong) AVPlayer *player;
+@property (nonatomic, strong) AVPlayer *videoPlayer;
+@property (nonatomic, weak) IBOutlet UISlider *seekBar;
 @property (nonatomic, strong) PeachCollectorProperties *audioProperties;
 @property (nonatomic, strong) PeachCollectorContext *audioContext;
 @property (nonatomic, strong) PeachCollectorMetadata *audioMetadata;
@@ -32,9 +35,44 @@
     
     [NSNotificationCenter.defaultCenter addObserver:self selector:@selector(logNotificationReceived:) name:PeachCollectorNotification object:nil];
     
+    AVURLAsset *videoAsset = [AVURLAsset assetWithURL:[NSURL URLWithString:@"https://storage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4"]];
+    AVPlayerItem *videoPlayerItem = [AVPlayerItem playerItemWithAsset:videoAsset];
+    self.videoPlayer = [[AVPlayer alloc] initWithPlayerItem:videoPlayerItem];
+    //self.videoPlayer = [[AVPlayer alloc] initWithURL:localURL];
+    AVPlayerLayer *playerLayer = [AVPlayerLayer playerLayerWithPlayer:self.videoPlayer];
+    playerLayer.frame = CGRectMake(10, 260, 340, 200);
+    [self.view.layer addSublayer:playerLayer];
     
+    self.seekBar.maximumValue = 60.0;
+    self.seekBar.value = 0.0;
+    [self.seekBar setContinuous:NO];
+
+    
+    [PeachPlayerTracker setPlayer:self.videoPlayer];
+    
+    [PeachPlayerTracker trackItemWithID:@"testVideoPeach1"
+                                context:nil
+                                  props:nil
+                               metadata:nil];
+    
+    [self.videoPlayer addPeriodicTimeObserverForInterval:CMTimeMake(1, 1) queue:dispatch_get_main_queue() usingBlock:^(CMTime time) {
+        self.seekBar.value = CMTimeGetSeconds(self.videoPlayer.currentTime);
+    }];
 }
 
+- (IBAction)playPause:(id)sender
+{
+    if (self.videoPlayer.rate == 0.0) {
+        [self.videoPlayer play];
+    }
+    else {
+        [self.videoPlayer pause];
+    }
+}
+- (IBAction)seekBarChange
+ {
+     [self.videoPlayer seekToTime:CMTimeMakeWithSeconds((int)self.seekBar.value, 1)];
+ }
 
 - (void)logNotificationReceived:(NSNotification *)notification
 {
