@@ -2,6 +2,11 @@
 # Change Log
 All notable changes to this project will be documented in this file.
 
+## [1.4.0] - 2022-11-05
+
+### Added
+- `PeachPlayerTracker` to automaticaly send events related to an AVPlayer
+
 ## [1.3.2] - 2022-07-06
 
 ### Added
