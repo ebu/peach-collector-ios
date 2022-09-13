@@ -220,7 +220,7 @@ You can also stop tracking an item manually.
 #### Swift
 ```swift
 PeachPlayerTracker.setPlayer(videoPlayer)
-PeachPlayerTracker.trackItem(withID:@"video0001", context:nil, props:nil, metadata:nil)
+PeachPlayerTracker.trackItem(withID:"video0001", context:nil, props:nil, metadata:nil)
 PeachPlayerTracker.clearCurrentItem()
 ```
 

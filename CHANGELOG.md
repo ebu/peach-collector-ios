@@ -2,7 +2,13 @@
 # Change Log
 All notable changes to this project will be documented in this file.
 
-## [1.4.0] - 2022-11-05
+## [1.4.1] - 2022-09-13
+
+### Fixed 
+- Unrecognized selector crash [#5](https://github.com/ebu/peach-collector-ios/issues/5)
+
+
+## [1.4.0] - 2022-09-05
 
 ### Added
 - `PeachPlayerTracker` to automaticaly send events related to an AVPlayer
