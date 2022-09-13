@@ -289,6 +289,15 @@
                properties:(nullable PeachCollectorProperties *)properties
                   context:(nullable PeachCollectorContext *)context
                  metadata:(nullable NSDictionary<NSString *, id<NSCopying>> *)metadata
+{
+    [PeachCollectorEvent sendEventWithType:type eventID:eventID properties:properties context:context metadata:metadata toPublisher:nil];
+}
+
++ (void)sendEventWithType:(PCEventType)type
+                  eventID:(NSString *)eventID
+               properties:(nullable PeachCollectorProperties *)properties
+                  context:(nullable PeachCollectorContext *)context
+                 metadata:(nullable NSDictionary<NSString *, id<NSCopying>> *)metadata
               toPublisher:(nullable NSString *)publisherName
 {
     if (![PeachCollector shouldCollectEvents]) return;
