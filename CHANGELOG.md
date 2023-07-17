@@ -2,6 +2,11 @@
 # Change Log
 All notable changes to this project will be documented in this file.
 
+## [1.4.2] - 2023-07-17
+
+### Fixed 
+- Custom fields in context objects are now added to the final payload.
+
 ## [1.4.1] - 2022-09-13
 
 ### Fixed 

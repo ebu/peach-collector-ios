@@ -262,6 +262,11 @@
     if (self.hitIndex) [representation setObject:self.hitIndex forKey:PCContextHitIndexKey];
     if (self.experimentID) [representation setObject:self.experimentID forKey:PCContextExperimentIDKey];
     if (self.experimentComponent) [representation setObject:self.experimentComponent forKey:PCContextExperimentComponentKey];
+    if (self.customFields != nil) {
+        for (NSString *key in self.customFields.allKeys) {
+            [representation setObject:[self.customFields objectForKey:key] forKey:key];
+        }
+    }
     if ([representation count] == 0) return nil;
     return [representation copy];
 }
