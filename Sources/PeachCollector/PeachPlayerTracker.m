@@ -48,6 +48,7 @@
     __weak AVPlayer *periodicPlayer = PeachPlayerTracker.sharedTracker.player;
     __weak PeachPlayerTracker *tracker = PeachPlayerTracker.sharedTracker;
     [PeachPlayerTracker.sharedTracker.player addPeriodicTimeObserverForInterval:interval queue:mainQueue usingBlock:^(CMTime time) {
+        if (periodicPlayer == nil || isnan(CMTimeGetSeconds(periodicPlayer.currentTime))) return;
         [tracker updateLastRecordedPlaybackTime:CMTimeGetSeconds(periodicPlayer.currentTime)];
     }];
 }

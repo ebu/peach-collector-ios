@@ -20,6 +20,7 @@
 - (void)setUp {
     // Put setup code here. This method is called before the invocation of each test method in the class.
     [PeachCollector clean];
+    [PeachCollector setDeviceID:@"0"];
     [PeachCollector sharedCollector].isUnitTesting = YES;
     [PeachCollector sharedCollector].shouldCollectAnonymousEvents = YES;
     PeachCollectorPublisher *publisher = [[PeachCollectorPublisher alloc] initWithSiteKey:@"zzebu00000000017"];
@@ -62,6 +63,30 @@
     for (int i=0; i<3; i++) {
         [PeachCollectorEvent sendPageViewWithID:[NSString stringWithFormat:@"test%d/news", i] referrer:nil recommendationID:nil];
     }
+    
+    [self waitForExpectationsWithTimeout:3 handler:nil];
+}
+
+- (void)testOverritenDeviceID {
+    
+    PeachCollectorPublisher *publisher = [PeachCollector publisherNamed:PUBLISHER_NAME];
+    publisher.interval = 1;
+    publisher.maxEventsPerBatch = 3;
+    
+    [self expectationForNotification:PeachCollectorNotification object:nil handler:^BOOL(NSNotification * _Nonnull notification) {
+        NSData *payload = notification.userInfo[PeachCollectorNotificationPayloadKey];
+        
+        if (payload != nil) {
+            id json = [NSJSONSerialization JSONObjectWithData:payload options:0 error:nil];
+            
+            NSDictionary* client = [json objectForKey:PCClientKey];
+            XCTAssertTrue([[client objectForKey:PCClientIDKey] isEqualToString:@"0"], @"Device ID not set properly");
+            return YES;
+        }
+        return NO;
+    }];
+    
+    [PeachCollectorEvent sendPageViewWithID:@"testPage" referrer:nil recommendationID:nil];
     
     [self waitForExpectationsWithTimeout:3 handler:nil];
 }
