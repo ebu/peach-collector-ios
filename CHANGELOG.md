@@ -2,6 +2,14 @@
 # Change Log
 All notable changes to this project will be documented in this file.
 
+## [1.4.3] - 2023-07-17
+
+### Added 
+- `setDeviceID` method to override any device ID generation
+
+### Fixed
+- Crash happening in the player tracker when 
+
 ## [1.4.2] - 2023-07-17
 
 ### Fixed 
