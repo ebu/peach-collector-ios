@@ -76,6 +76,7 @@ PeachCollector.setPublisher(publisher, withUniqueName: "My Publisher")
 
 ## Configuring the collector
 
+- A device ID can be defined using the **`deviceID`** PeachCollector property. If set, it will override the default value (vendor ID)
 - A user ID can be defined using the **`userID`** PeachCollector property.
 - If userIDs are generated automatically for anonymous user. You can use the `userIsLoggedIn` flag to define if the user is logged in or not
 - For debugging purpose, a **`isUnitTesting`** flag is available. If true, notifications will be sent by the collector (see `PeachColletorNotifications.h`)
