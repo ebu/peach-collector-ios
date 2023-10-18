@@ -274,6 +274,11 @@ static NSInteger _maxStoredDays = -1;
 
 #pragma mark - User management
 
++ (void)setDeviceID:(NSString *)deviceID
+{
+    _deviceID = deviceID;
+}
+
 + (NSString *)deviceID
 {
     return _deviceID;

@@ -83,7 +83,7 @@ NS_ASSUME_NONNULL_BEGIN
 /**
  *  Device unique identifier (identifierForVendor value, will default to "Anonymous" if identifierForVendor is nil)
  */
-@property (class, nonatomic, readonly) NSString *deviceID;
+@property (class, nonatomic) NSString *deviceID;
 
 /**
  *  User unique identifier when logged in
