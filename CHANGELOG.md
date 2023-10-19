@@ -2,6 +2,11 @@
 # Change Log
 All notable changes to this project will be documented in this file.
 
+## [1.4.4] - 2023-07-18
+
+### Fixed
+- Playback rate tracking in player tracker
+
 ## [1.4.3] - 2023-07-17
 
 ### Added 
