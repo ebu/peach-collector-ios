@@ -82,7 +82,7 @@
 - (void)updateLastRecordedPlaybackTime:(CGFloat)value {
     [self updateTimeSpent];
     [self.props setPlaybackPosition:@(value)];
-    if (fabs(value - [self.lastRecordedPlaybackTime floatValue]) > fabs(0.6*[self.props.playbackRate floatValue])) {
+    if (fabs(value - [self.lastRecordedPlaybackTime floatValue]) > 0.6) {
         [PeachCollectorEvent sendMediaSeekWithID:self.itemID
                                      properties:self.props
                                         context:self.context
@@ -154,8 +154,8 @@
                                                  metadata:self.metadata];
             }
             else {
-                if (self.player.rate != 1.0 && self.props != nil) {
-                    [self.props setPlaybackRate:@(1.0)];
+                if (self.props != nil) {
+                    [self.props setPlaybackRate:[NSNumber numberWithFloat:self.player.rate]];
                 }
                 if (self.currentState == nil || ![self.currentState isEqualToString:@"playing"]) {
                     [self updateTimeSpent];
