@@ -2,6 +2,12 @@
 # Change Log
 All notable changes to this project will be documented in this file.
 
+## [1.4.5] - 2023-07-23
+
+### Updated
+- client app version to add build version after short version name
+- framework version to a hardcoded value to avoid retrieving the app version in some cases
+
 ## [1.4.4] - 2023-07-18
 
 ### Fixed

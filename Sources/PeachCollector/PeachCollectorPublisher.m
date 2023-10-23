@@ -107,12 +107,11 @@
     }
 }
 
-
 - (void)processEvents:(NSArray<PeachCollectorEvent *> *)events withCompletionHandler:(void (^)(NSError * _Nullable error))completionHandler
 {
     NSMutableDictionary *data = [NSMutableDictionary new];
     [data setObject:@"1.0.3" forKey:PCPeachSchemaVersionKey];
-    [data setObject:[PeachCollector version] forKey:PCPeachFrameworkVersionKey];
+    [data setObject:@"1.4.5-32" forKey:PCPeachFrameworkVersionKey];
     if ([PeachCollector implementationVersion]) {
         [data setObject:[PeachCollector implementationVersion] forKey:PCPeachImplementationVersionKey];
     }
@@ -190,12 +189,22 @@
     _clientInfo = nil;
 }
 
+
+
++ (NSString *)clientAppVersion
+{
+    NSBundle *bundle = [NSBundle mainBundle];
+    NSString *buildNumber = [bundle objectForInfoDictionaryKey:(__bridge NSString*)kCFBundleVersionKey];
+    NSString *version = [bundle objectForInfoDictionaryKey:@"CFBundleShortVersionString"];
+    return [NSString stringWithFormat:@"%@-%@", version, buildNumber];
+}
+
 - (void)updateClientInfo
 {
     if (_clientInfo == nil) {
         NSString *clientBundleIdentifier = [[NSBundle mainBundle] bundleIdentifier];
         NSString *clientAppName = [[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleDisplayName"];
-        NSString *clientAppVersion = [[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleShortVersionString"];
+        NSString *clientAppVersion = [PeachCollectorPublisher clientAppVersion];
         NSString *deviceID = PeachCollector.deviceID;
         
         if (PeachCollector.appID) clientBundleIdentifier = PeachCollector.appID;
