@@ -2,6 +2,11 @@
 # Change Log
 All notable changes to this project will be documented in this file.
 
+## [1.4.6] - 2024-01-08
+
+### Updated
+- PlayerTracker to manage case of item's "startTracking" called multiple times
+
 ## [1.4.5] - 2023-07-23
 
 ### Updated
