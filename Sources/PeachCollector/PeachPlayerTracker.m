@@ -51,9 +51,13 @@
         if (periodicPlayer == nil || isnan(CMTimeGetSeconds(periodicPlayer.currentTime))) return;
         [tracker updateLastRecordedPlaybackTime:CMTimeGetSeconds(periodicPlayer.currentTime)];
     }];
+    if (PeachPlayerTracker.sharedTracker.props != nil) {
+        [PeachPlayerTracker.sharedTracker.props setPlaybackRate:[NSNumber numberWithFloat:PeachPlayerTracker.sharedTracker.player.rate]];
+    }
 }
 
 + (void)trackItemWithID:(NSString *)itemID context:(nullable PeachCollectorContext *)context props:(nullable PeachCollectorProperties *)props metadata:(nullable PeachCollectorMetadata *)metadata {
+    BOOL isNewItem = PeachPlayerTracker.sharedTracker.itemID == nil || ![itemID isEqualToString:PeachPlayerTracker.sharedTracker.itemID];
     PeachPlayerTracker.sharedTracker.itemID = itemID;
     PeachPlayerTracker.sharedTracker.context = context;
     PeachPlayerTracker.sharedTracker.props = props;
@@ -63,9 +67,17 @@
     if (PeachPlayerTracker.sharedTracker.props == nil) {
         PeachPlayerTracker.sharedTracker.props = [[PeachCollectorProperties alloc] init];
     }
-    [PeachPlayerTracker.sharedTracker.props setPlaybackRate:@(1.0)];
-    [PeachPlayerTracker.sharedTracker.props setPlaybackPosition:@(0.0)];
-    [PeachPlayerTracker.sharedTracker.props setTimeSpent:@(0.0)];
+    if (isNewItem) {
+        [PeachPlayerTracker.sharedTracker.props setPlaybackPosition:@(0.0)];
+        [PeachPlayerTracker.sharedTracker.props setTimeSpent:@(0.0)];
+    }
+    if (PeachPlayerTracker.sharedTracker.player != nil) {
+        [PeachPlayerTracker.sharedTracker.props setPlaybackRate:[NSNumber numberWithFloat:PeachPlayerTracker.sharedTracker.player.rate]];
+    }
+    else {
+        [PeachPlayerTracker.sharedTracker.props setPlaybackRate:@(1.0)];
+    }
+    
 }
 
 + (void)clearCurrentItem{
