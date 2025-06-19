@@ -91,6 +91,7 @@ typedef NS_ENUM(NSInteger, PCEventStatus) {
 typedef NSDictionary<NSString *, id<NSCopying>> PeachCollectorMetadata;
 
 OBJC_EXPORT NSString * const PeachCollectorSessionStartTimestampKey;
+OBJC_EXPORT NSString * const PeachCollectorSessionIDKey;
 OBJC_EXPORT NSString * const PeachCollectorLastRecordedEventTimestampKey;
 
 #pragma mark - Payload known keys
@@ -129,6 +130,7 @@ OBJC_EXPORT NSString * const PCPeachFrameworkVersionKey;
 OBJC_EXPORT NSString * const PCPeachImplementationVersionKey;
 OBJC_EXPORT NSString * const PCSentTimestampKey;
 OBJC_EXPORT NSString * const PCSessionStartTimestampKey;
+OBJC_EXPORT NSString * const PCSessionIDKey;
 OBJC_EXPORT NSString * const PCUserIDKey;
 
 OBJC_EXPORT NSString * const PCEventsKey;

@@ -66,6 +66,7 @@ PCEventType const PCEventTypeReadMore = @"read_more";
 PCEventType const PCEventTypePageView = @"page_view";
 
 NSString * const PeachCollectorSessionStartTimestampKey = @"PeachCollectorSessionStartTimestampKey";
+NSString * const PeachCollectorSessionIDKey = @"PeachCollectorSessionIDKey";
 NSString * const PeachCollectorLastRecordedEventTimestampKey = @"PeachCollectorLastRecordedEventTimestampKey";
 
 NSString * const PCMediaPlaylistIDKey = @"playlist_id";
@@ -103,6 +104,7 @@ NSString * const PCPeachFrameworkVersionKey = @"peach_framework_version";
 NSString * const PCPeachImplementationVersionKey = @"peach_implementation_version";
 NSString * const PCSentTimestampKey = @"sent_timestamp";
 NSString * const PCSessionStartTimestampKey = @"session_start_timestamp";
+NSString * const PCSessionIDKey = @"session_id";
 NSString * const PCUserIDKey = @"user_id";
 
 NSString * const PCEventsKey = @"events";

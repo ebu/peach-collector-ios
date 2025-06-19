@@ -24,6 +24,7 @@
 
 @implementation PeachCollector
 static NSString *_implementationVersion = @"0";
+static NSString *_sessionID = nil;
 static NSString *_userID = nil;
 static NSString *_appID = nil;
 static BOOL _userIsLoggedIn = false;
@@ -79,6 +80,7 @@ static NSInteger _maxStoredDays = -1;
         self.queue = [[PeachCollectorQueue alloc] init];
         
         self.sessionStartTimestamp = [[NSUserDefaults standardUserDefaults] integerForKey:PeachCollectorSessionStartTimestampKey];
+        PeachCollector.sessionID = [[NSUserDefaults standardUserDefaults] stringForKey:PeachCollectorSessionIDKey];
         self.lastRecordedEventTimestamp = [[NSUserDefaults standardUserDefaults] integerForKey:PeachCollectorLastRecordedEventTimestampKey];
         [self checkInactivity];
         
@@ -114,7 +116,9 @@ static NSInteger _maxStoredDays = -1;
     NSInteger inactivityInterval = ((PeachCollector.inactivityInterval == -1) ? PeachCollectorDefaultInactiveSessionInterval : PeachCollector.inactivityInterval) * 1000;
     if (currentTimestamp - self.lastRecordedEventTimestamp > inactivityInterval) {
         self.sessionStartTimestamp = currentTimestamp;
+        PeachCollector.sessionID = [[NSUUID UUID] UUIDString];
         [userDefault setInteger:self.sessionStartTimestamp forKey:PeachCollectorSessionStartTimestampKey];
+        [userDefault setObject:PeachCollector.sessionID forKey:PeachCollectorSessionIDKey];
     }
     self.lastRecordedEventTimestamp = currentTimestamp;
     [userDefault setInteger:self.lastRecordedEventTimestamp forKey:PeachCollectorLastRecordedEventTimestampKey];
@@ -142,6 +146,14 @@ static NSInteger _maxStoredDays = -1;
 + (NSInteger)sessionStartTimestamp
 {
     return [PeachCollector sharedCollector].sessionStartTimestamp;
+}
+
++ (NSString *)sessionID {
+    return _sessionID;
+}
+
++ (void)setSessionID:(NSString *)sessionID {
+    _sessionID = [sessionID copy];
 }
 
 + (NSInteger)inactivityInterval
