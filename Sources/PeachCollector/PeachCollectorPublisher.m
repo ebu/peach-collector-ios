@@ -110,8 +110,8 @@
 - (void)processEvents:(NSArray<PeachCollectorEvent *> *)events withCompletionHandler:(void (^)(NSError * _Nullable error))completionHandler
 {
     NSMutableDictionary *data = [NSMutableDictionary new];
-    [data setObject:@"1.0.3" forKey:PCPeachSchemaVersionKey];
-    [data setObject:@"1.4.6-33" forKey:PCPeachFrameworkVersionKey];
+    [data setObject:@"1.0.4" forKey:PCPeachSchemaVersionKey];
+    [data setObject:@"1.5.0-34" forKey:PCPeachFrameworkVersionKey];
     if ([PeachCollector implementationVersion]) {
         [data setObject:[PeachCollector implementationVersion] forKey:PCPeachImplementationVersionKey];
     }
@@ -128,6 +128,7 @@
     [data setObject:eventsData forKey:PCEventsKey];
     if (PeachCollector.userID) [data setObject:PeachCollector.userID forKey:PCUserIDKey];
     [data setObject:@(PeachCollector.sessionStartTimestamp) forKey:PCSessionStartTimestampKey];
+    if (PeachCollector.sessionID) [data setObject:PeachCollector.sessionID forKey:PCSessionIDKey];
     
     [self publishData:[data copy] withCompletionHandler:completionHandler];
 }

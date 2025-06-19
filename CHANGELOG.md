@@ -2,6 +2,12 @@
 # Change Log
 All notable changes to this project will be documented in this file.
 
+## [1.5.0] - 2025-06-19
+
+### Added
+- `session_id` at the root of the payload (generated UUID), follows `session_start_timestamp` logic
+
+
 ## [1.4.6] - 2024-01-08
 
 ### Updated

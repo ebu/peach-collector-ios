@@ -47,6 +47,11 @@ NS_ASSUME_NONNULL_BEGIN
 @property (class, nonatomic, readonly) NSInteger sessionStartTimestamp;
 
 /**
+ *  Session ID (reset for every new start of a session)
+ */
+@property (class, nonatomic, copy, nullable) NSString *sessionID;
+
+/**
  *  Minimum duration (in seconds) of inactivity that will cause sessionStartTimestamp to be reset when app becomes active
  *  Default is 1800 seconds (30 minutes)
  */
