@@ -2,6 +2,11 @@
 # Change Log
 All notable changes to this project will be documented in this file.
 
+## [1.5.1] - 2025-07-11
+
+### Updated
+- DataStore logic to avoid crashes when data store can't be loaded
+
 ## [1.5.0] - 2025-06-19
 
 ### Added
