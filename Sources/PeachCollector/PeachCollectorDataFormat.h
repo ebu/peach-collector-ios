@@ -73,6 +73,7 @@ OBJC_EXPORT PCEventType const PCEventTypeMediaPlaylistRemove;
 OBJC_EXPORT PCEventType const PCEventTypeRecommendationLoaded;
 OBJC_EXPORT PCEventType const PCEventTypeRecommendationHit;
 OBJC_EXPORT PCEventType const PCEventTypeRecommendationDisplayed;
+OBJC_EXPORT PCEventType const PCEventTypeRecommendationItemDisplayed;
 OBJC_EXPORT PCEventType const PCEventTypeCollectionLoaded;
 OBJC_EXPORT PCEventType const PCEventTypeCollectionHit;
 OBJC_EXPORT PCEventType const PCEventTypeCollectionDisplayed;

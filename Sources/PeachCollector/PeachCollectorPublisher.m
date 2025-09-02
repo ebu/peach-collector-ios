@@ -111,7 +111,7 @@
 {
     NSMutableDictionary *data = [NSMutableDictionary new];
     [data setObject:@"1.0.4" forKey:PCPeachSchemaVersionKey];
-    [data setObject:@"1.5.1-35" forKey:PCPeachFrameworkVersionKey];
+    [data setObject:@"1.5.2-36" forKey:PCPeachFrameworkVersionKey];
     if ([PeachCollector implementationVersion]) {
         [data setObject:[PeachCollector implementationVersion] forKey:PCPeachImplementationVersionKey];
     }
