@@ -56,6 +56,7 @@ PCEventType const PCEventTypeMediaPlaylistRemove = @"media_playlist_remove";
 PCEventType const PCEventTypeRecommendationLoaded = @"recommendation_loaded"; // RECOMMENDATION
 PCEventType const PCEventTypeRecommendationHit = @"recommendation_hit";
 PCEventType const PCEventTypeRecommendationDisplayed = @"recommendation_displayed";
+PCEventType const PCEventTypeRecommendationItemDisplayed = @"recommendation_item_displayed";
 PCEventType const PCEventTypeCollectionLoaded = @"collection_loaded"; // COLLECTION
 PCEventType const PCEventTypeCollectionHit = @"collection_hit";
 PCEventType const PCEventTypeCollectionDisplayed = @"collection_displayed";

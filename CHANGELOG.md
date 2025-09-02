@@ -2,6 +2,11 @@
 # Change Log
 All notable changes to this project will be documented in this file.
 
+## [1.5.2] - 2025-09-02
+
+### Added
+- `recommendation_item_displayed` event type
+
 ## [1.5.1] - 2025-07-11
 
 ### Updated
