@@ -7,8 +7,6 @@
  */
 
 #import <Foundation/Foundation.h>
-#import <SystemConfiguration/SystemConfiguration.h>
-#import <netinet/in.h>
 #import "PeachCollectorNotifications.h"
 
 @interface PeachCollectorReachability : NSObject

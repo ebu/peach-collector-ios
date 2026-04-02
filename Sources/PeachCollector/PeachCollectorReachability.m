@@ -13,6 +13,7 @@
 #import <netinet/in.h>
 
 #import <CoreFoundation/CoreFoundation.h>
+#import <SystemConfiguration/SystemConfiguration.h>
 
 #import "PeachCollectorReachability.h"
 
