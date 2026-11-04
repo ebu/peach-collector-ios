@@ -12,6 +12,7 @@
 @interface PeachCollectorDataStore ()
 
 @property (nonatomic) PeachPersistentContainer *persistentContainer;
+@property (nonatomic, nullable) NSError *storeLoadError;
 
 @property (nonatomic) NSOperationQueue *serialOperationQueue;
 @property (nonatomic) NSMapTable<NSString *, NSOperation *> *operations;
@@ -53,6 +54,7 @@
                  */
                 NSLog(@"Unresolved error %@, %@", error, error.userInfo);
                 // abort();
+                self.storeLoadError = error;
             }
         }];
         
@@ -81,6 +83,16 @@
 {
     NSString *handle = NSUUID.UUID.UUIDString;
     NSOperation *operation = [NSBlockOperation blockOperationWithBlock:^{
+        NSError *unavailableStoreError = [self unavailableStoreError];
+        if (unavailableStoreError) {
+            completionBlock(nil, unavailableStoreError);
+            dispatch_barrier_async(self.concurrentQueue, ^{
+                [self.operations removeObjectForKey:handle];
+                [self.readCompletionBlocks removeObjectForKey:handle];
+            });
+            return;
+        }
+        
         NSManagedObjectContext *managedObjectContext = self.persistentContainer.newBackgroundContext;
         managedObjectContext.undoManager = nil;
         
@@ -114,6 +126,16 @@
 {
     NSString *handle = NSUUID.UUID.UUIDString;
     NSOperation *operation = [NSBlockOperation blockOperationWithBlock:^{
+        NSError *unavailableStoreError = [self unavailableStoreError];
+        if (unavailableStoreError) {
+            completionBlock ? completionBlock(unavailableStoreError) : nil;
+            dispatch_barrier_async(self.concurrentQueue, ^{
+                [self.operations removeObjectForKey:handle];
+                [self.writeCompletionBlocks removeObjectForKey:handle];
+            });
+            return;
+        }
+        
         NSManagedObjectContext *managedObjectContext = self.persistentContainer.newBackgroundContext;
         if (@available(iOS 10, *)) {
             managedObjectContext.automaticallyMergesChangesFromParent = YES;
@@ -156,6 +178,19 @@
         [self.operations setObject:operation forKey:handle];
         [self.serialOperationQueue addOperation:operation];
     });
+}
+
+
+#pragma mark Store availability
+
+// Saving through a coordinator without any persistent store raises an uncaught NSInternalInconsistencyException,
+// which happens when the store failed to load (e.g. the device is out of disk space).
+- (nullable NSError *)unavailableStoreError
+{
+    if (self.persistentContainer.persistentStoreCoordinator.persistentStores.count > 0) {
+        return nil;
+    }
+    return self.storeLoadError ?: [NSError errorWithDomain:NSCocoaErrorDomain code:NSPersistentStoreOperationError userInfo:nil];
 }
 
 

@@ -2,6 +2,11 @@
 # Change Log
 All notable changes to this project will be documented in this file.
 
+## [1.5.3] - 2026-11-04
+
+### Fixed
+- Crash at launch when the persistent store can't be loaded (e.g. the device is out of disk space). Events are now dropped while the store is unavailable
+
 ## [1.5.2] - 2025-09-02
 
 ### Added
